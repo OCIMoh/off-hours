@@ -1,7 +1,10 @@
 /**
- * OFF HOURS — Avant-Garde Production Controller
- * Directed via: awwwards / cinematic-ui / design-spells
- * Engine: Lenis Smooth Scroll + GSAP ScrollTrigger + Web Audio Room Tone
+ * OFF HOURS — Production Motion Engine & Experience Controller
+ * Built strictly according to GSAP Official Skills:
+ * - gsap-core: transforms, autoAlpha, gsap.matchMedia(), proper eases
+ * - gsap-scrolltrigger: pinned containers, containerAnimation, invalidateOnRefresh, Lenis sync
+ * - gsap-performance: gsap.quickTo() for 60fps mouse follower, composited transforms
+ * - gsap-vanilla: lifecycle, font-ready refresh, clean responsive adaptation
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGSAPTimelines(lenis);
 });
 
-// 1. Lenis Smooth Momentum Scroll Engine (Awwwards 60fps standard)
+// 1. Lenis Smooth Momentum Scroll Engine (Official GSAP ScrollTrigger Integration)
 function initSmoothScroll() {
   if (typeof Lenis === 'undefined') {
     console.warn('Lenis not loaded, falling back to native scroll');
@@ -24,26 +27,29 @@ function initSmoothScroll() {
   }
 
   const lenis = new Lenis({
-    duration: 1.25,
+    duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     orientation: 'vertical',
     gestureOrientation: 'vertical',
     smoothWheel: true,
-    wheelMultiplier: 0.9,
+    wheelMultiplier: 0.95,
     touchMultiplier: 1.5,
   });
 
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    // Notify ScrollTrigger on every scroll event
     lenis.on('scroll', ScrollTrigger.update);
 
+    // Sync Lenis RAF with GSAP ticker
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
 
+    // Disable lag smoothing to prevent visual jumps during heavy RAF
     gsap.ticker.lagSmoothing(0);
   }
 
-  // Velocity-Skew Physics: Elements dynamically lean into fast scroll
+  // Velocity-Skew Physics (GPU-composited via transforms)
   let skewTarget = 0;
   let currentSkew = 0;
 
@@ -53,7 +59,7 @@ function initSmoothScroll() {
 
   if (typeof gsap !== 'undefined') {
     gsap.ticker.add(() => {
-      currentSkew += (skewTarget - currentSkew) * 0.08;
+      currentSkew += (skewTarget - currentSkew) * 0.1;
       skewTarget *= 0.88;
 
       const skewEls = document.querySelectorAll('.velocity-skew');
@@ -66,7 +72,7 @@ function initSmoothScroll() {
   return lenis;
 }
 
-// 2. Magnetic Follower Cursor with Context HUD (Design Spells)
+// 2. High-Performance Follower Cursor via gsap.quickTo() (Official gsap-performance skill)
 function initCursorFollower() {
   const dot = document.querySelector('.cursor-dot');
   const follower = document.querySelector('.cursor-follower');
@@ -75,35 +81,28 @@ function initCursorFollower() {
 
   if (!dot || !follower) return;
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let followerX = mouseX;
-  let followerY = mouseY;
+  // Use gsap.quickTo() to completely eliminate layout thrashing
+  const setDotX = gsap.quickTo(dot, "x", { duration: 0.08, ease: "power3" });
+  const setDotY = gsap.quickTo(dot, "y", { duration: 0.08, ease: "power3" });
+  const setFollowerX = gsap.quickTo(follower, "x", { duration: 0.35, ease: "power3" });
+  const setFollowerY = gsap.quickTo(follower, "y", { duration: 0.35, ease: "power3" });
+  const setTorchX = torch ? gsap.quickTo(torch, "x", { duration: 0.22, ease: "power2" }) : null;
+  const setTorchY = torch ? gsap.quickTo(torch, "y", { duration: 0.22, ease: "power2" }) : null;
 
   window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    const x = e.clientX;
+    const y = e.clientY;
 
-    dot.style.left = `${mouseX}px`;
-    dot.style.top = `${mouseY}px`;
+    setDotX(x);
+    setDotY(y);
+    setFollowerX(x);
+    setFollowerY(y);
 
-    if (torch) {
-      torch.style.left = `${mouseX}px`;
-      torch.style.top = `${mouseY}px`;
+    if (setTorchX && setTorchY) {
+      setTorchX(x);
+      setTorchY(y);
     }
   });
-
-  // Smooth lerp for follower
-  function renderCursor() {
-    followerX += (mouseX - followerX) * 0.16;
-    followerY += (mouseY - followerY) * 0.16;
-
-    follower.style.left = `${followerX}px`;
-    follower.style.top = `${followerY}px`;
-
-    requestAnimationFrame(renderCursor);
-  }
-  requestAnimationFrame(renderCursor);
 
   // Contextual cursor triggers
   document.querySelectorAll('[data-cursor]').forEach((el) => {
@@ -129,7 +128,6 @@ function initCursorFollower() {
     });
   });
 
-  // Standard interactive links
   document.querySelectorAll('a, button, input').forEach((el) => {
     if (!el.hasAttribute('data-cursor')) {
       el.addEventListener('mouseenter', () => follower.classList.add('is-hovering'));
@@ -259,7 +257,7 @@ function initHeroMarquee() {
   });
 }
 
-// 6. Timetable Schedule Day Switcher
+// 6. Timetable Schedule Day Switcher (Using autoAlpha to prevent click blocks)
 function initScheduleSwitcher() {
   const day1Btn = document.getElementById('day1Btn');
   const day2Btn = document.getElementById('day2Btn');
@@ -283,7 +281,7 @@ function initScheduleSwitcher() {
     if (typeof gsap === 'undefined') return;
 
     gsap.to(slots, {
-      opacity: 0,
+      autoAlpha: 0,
       y: 10,
       duration: 0.2,
       stagger: 0.02,
@@ -299,12 +297,14 @@ function initScheduleSwitcher() {
         });
 
         gsap.to(slots, {
-          opacity: 1,
+          autoAlpha: 1,
           y: 0,
           duration: 0.35,
           stagger: 0.03,
           ease: 'power2.out'
         });
+
+        ScrollTrigger.refresh();
       }
     });
   }
@@ -356,7 +356,7 @@ function initModal() {
   });
 }
 
-// 9. Master GSAP ScrollTrigger Choreography (Award Standard)
+// 9. Master GSAP ScrollTrigger Choreography (Using matchMedia & context)
 function initGSAPTimelines(lenis) {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
     console.warn('GSAP or ScrollTrigger not loaded');
@@ -365,13 +365,20 @@ function initGSAPTimelines(lenis) {
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // Refresh ScrollTrigger when custom fonts (Syne, Space Grotesk) finish rendering
+  if (document.fonts) {
+    document.fonts.ready.then(() => {
+      ScrollTrigger.refresh();
+    });
+  }
+
   // 9.1 Hero Headline Line-Mask Reveal
   gsap.fromTo(
     '.mask-line-inner',
-    { y: '115%', opacity: 0 },
+    { y: '115%', autoAlpha: 0 },
     {
       y: '0%',
-      opacity: 1,
+      autoAlpha: 1,
       duration: 1.4,
       stagger: 0.12,
       ease: 'power4.out',
@@ -397,83 +404,92 @@ function initGSAPTimelines(lenis) {
     });
 
     atlasTl
-      // Background Grid blurs & pushes back
       .to('.atlas-layer-bg-grid', {
         scale: 1.6,
-        opacity: 0.15,
+        autoAlpha: 0.25,
         ease: 'none'
       }, 0)
-      // Schematic Map zooms into the central river-and-rail corridor (Kraftwerk depth)
       .to('#atlasSchematicMap', {
         scale: 3.4,
         transformOrigin: '52% 46%',
         ease: 'power2.inOut'
       }, 0)
-      // River spine strokes expand with optical proximity
       .to('.atlas-svg path', {
         strokeWidth: '+=2',
         ease: 'none'
       }, 0)
-      // Foreground reticle fades in as camera locks
       .from('.atlas-hud', {
         y: 20,
-        opacity: 0.8,
+        autoAlpha: 0.6,
         duration: 0.5
       }, 0.2);
   }
 
-  // 9.3 Scene 03: Pinned Four Civic Spaces Full-Viewport Lateral Parallax Rail
-  const venuesStrip = document.getElementById('venuesStrip');
-  const venuesPinWrapper = document.getElementById('venuesPin');
+  // 9.3 Responsive MatchMedia Setup (Official GSAP Responsive Pattern)
+  const mm = gsap.matchMedia();
 
-  if (venuesStrip && venuesPinWrapper) {
-    const panels = gsap.utils.toArray('.venue-chamber-panel');
-    const totalPanels = panels.length;
+  // DESKTOP: Horizontal Pinned Parallax Rail
+  mm.add('(min-width: 1025px)', () => {
+    const venuesStrip = document.getElementById('venuesStrip');
+    const venuesPinWrapper = document.getElementById('venuesPin');
 
-    // Lateral translate
-    const railTl = gsap.to(venuesStrip, {
-      xPercent: -100 * (totalPanels - 1),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#venuesPin',
-        start: 'top top',
-        end: () => `+=${window.innerWidth * (totalPanels - 0.5)}`,
-        pin: '.venues-track-viewport',
-        scrub: 1.2,
-        invalidateOnRefresh: true
-      }
-    });
+    if (venuesStrip && venuesPinWrapper) {
+      const panels = gsap.utils.toArray('.venue-chamber-panel');
+      const totalPanels = panels.length;
 
-    // Sub-Parallax: Images translate internally inside their clipped frames
-    panels.forEach((panel) => {
-      const img = panel.querySelector('.media-parallax-img');
-      if (img) {
-        gsap.fromTo(
-          img,
-          { xPercent: 12, scale: 1.2 },
-          {
-            xPercent: -12,
-            scale: 1.08,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: panel,
-              containerAnimation: railTl,
-              start: 'left right',
-              end: 'right left',
-              scrub: true
+      // Pinned lateral track
+      const railTl = gsap.to(venuesStrip, {
+        xPercent: -100 * (totalPanels - 1),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#venuesPin',
+          start: 'top top',
+          end: () => `+=${window.innerWidth * (totalPanels - 0.75)}`,
+          pin: '.venues-track-viewport',
+          scrub: 1.2,
+          invalidateOnRefresh: true
+        }
+      });
+
+      // Internal Media Parallax inside clipped frames
+      panels.forEach((panel) => {
+        const img = panel.querySelector('.media-parallax-img');
+        if (img) {
+          gsap.fromTo(
+            img,
+            { xPercent: 12, scale: 1.18 },
+            {
+              xPercent: -12,
+              scale: 1.06,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: railTl,
+                start: 'left right',
+                end: 'right left',
+                scrub: true
+              }
             }
-          }
-        );
-      }
-    });
-  }
+          );
+        }
+      });
+    }
+  });
 
-  // 9.4 Physical Pass Card Elevate
+  // TABLET / MOBILE: Vertical Natural Flow with ScrollTrigger Batches
+  mm.add('(max-width: 1024px)', () => {
+    ScrollTrigger.batch('.venue-chamber-panel', {
+      onEnter: (batch) => gsap.fromTo(batch, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out', overwrite: true }),
+      start: 'top 85%'
+    });
+  });
+
+  // 9.4 Physical Pass Card Entrance
   const ticketCard = document.querySelector('.punchcard-ticket-pass');
   if (ticketCard) {
     gsap.from(ticketCard, {
-      y: 80,
-      opacity: 0,
+      y: 60,
+      autoAlpha: 0,
       duration: 1.2,
       ease: 'power3.out',
       scrollTrigger: {

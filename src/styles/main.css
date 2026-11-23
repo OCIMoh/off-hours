@@ -1,7 +1,7 @@
 /**
  * OFF HOURS — Clean Gruvbox Light Editorial Main Stylesheet
  * Aesthetic: Crisp White Archival Paper / High-Contrast Gruvbox Letterpress
- * Directed via: awwwards / cinematic-ui / design-spells / ui-ux-pro-max
+ * Directed via: gsap-scrolltrigger / gsap-performance / gsap-core / awwwards / ui-ux-pro-max
  */
 
 :root {
@@ -83,7 +83,7 @@ body {
   cursor: default;
 }
 
-/* Custom Interactive Follower Cursor (Design Spells / Magnetic Reticle) */
+/* Custom Interactive Follower Cursor (GSAP quickTo() GPU Composited) */
 .cursor-dot {
   position: fixed;
   top: 0;
@@ -95,7 +95,7 @@ body {
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
+  will-change: transform;
 }
 
 .cursor-follower {
@@ -112,7 +112,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: width 0.35s var(--ease-expo), height 0.35s var(--ease-expo), background-color 0.35s ease, border-color 0.35s ease, transform 0.12s ease-out;
+  will-change: transform, width, height;
+  transition: width 0.3s var(--ease-expo), height 0.3s var(--ease-expo), background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .cursor-follower .cursor-label {
@@ -123,22 +124,22 @@ body {
   letter-spacing: 0.12em;
   opacity: 0;
   transform: scale(0.8);
-  transition: opacity 0.25s ease, transform 0.25s var(--ease-expo);
+  transition: opacity 0.2s ease, transform 0.2s var(--ease-expo);
   pointer-events: none;
   white-space: nowrap;
 }
 
 /* Cursor Context States */
 .cursor-follower.is-hovering {
-  width: 72px;
-  height: 72px;
+  width: 68px;
+  height: 68px;
   background: rgba(175, 58, 3, 0.1);
   border-color: var(--tungsten);
 }
 
 .cursor-follower.is-media {
-  width: 104px;
-  height: 104px;
+  width: 96px;
+  height: 96px;
   background: var(--tungsten);
   border-color: var(--tungsten-bright);
 }
@@ -154,12 +155,12 @@ body {
   }
 }
 
-/* Filmic Anamorphic Letterbox Framing (Classic Charcoal Letterbox) */
+/* Filmic Anamorphic Letterbox Framing (Charcoal Letterbox) */
 .letterbox-bar-top, .letterbox-bar-bottom {
   position: fixed;
   left: 0;
   width: 100%;
-  height: 20px;
+  height: 18px;
   background: #1d2021;
   z-index: 250;
   pointer-events: none;
@@ -169,7 +170,7 @@ body {
 
 @media (max-width: 768px) {
   .letterbox-bar-top, .letterbox-bar-bottom {
-    height: 12px;
+    height: 10px;
   }
 }
 
@@ -191,22 +192,23 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 700px;
-  height: 700px;
+  width: 650px;
+  height: 650px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(175, 58, 3, 0.04) 0%, rgba(253, 252, 249, 0) 65%);
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 1;
+  will-change: transform;
 }
 
 /* Masthead / Navigation Bar */
 header.masthead {
   position: fixed;
-  top: 20px;
+  top: 18px;
   left: 0;
   width: 100%;
-  padding: 16px 40px;
+  padding: 14px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -242,7 +244,7 @@ header.masthead {
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
 }
 
 .timecode-counter {
@@ -323,11 +325,11 @@ header.masthead {
 }
 
 /* ==========================================================================
-   SCENE 01: HERO SECTION (CRISP WHITE EDITORIAL BROADSIDE)
+   SCENE 01: HERO SECTION (BALANCED MONUMENTAL EDITORIAL BROADSIDE)
    ========================================================================== */
 .hero {
   min-height: 100vh;
-  padding: 140px 40px 60px;
+  padding: 110px 40px 48px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -348,13 +350,17 @@ header.masthead {
   z-index: 0;
 }
 
+.velocity-skew {
+  will-change: transform;
+}
+
 .hero-pretitle-group {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   border-bottom: 1px solid var(--border-hairline);
-  padding-bottom: 14px;
-  margin-bottom: 30px;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
   position: relative;
   z-index: 2;
 }
@@ -378,13 +384,13 @@ header.masthead {
 /* Monumental Typography with Nested Line Masks */
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(3.2rem, 9.8vw, 11.5rem);
+  font-size: clamp(2.8rem, 8.8vw, 9.6rem);
   font-weight: 900;
-  line-height: 0.88;
+  line-height: 0.9;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: var(--text);
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   position: relative;
   z-index: 2;
 }
@@ -408,13 +414,13 @@ header.masthead {
 .kinetic-marquee-bar {
   width: 100vw;
   margin-left: -40px;
-  padding: 12px 0;
+  padding: 10px 0;
   background: var(--bg-surface);
   border-top: 1px solid var(--border-hairline);
   border-bottom: 1px solid var(--border-hairline);
   overflow: hidden;
   white-space: nowrap;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   position: relative;
   z-index: 2;
 }
@@ -445,17 +451,17 @@ header.masthead {
 .hero-bottom-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr 0.6fr;
-  gap: 48px;
+  gap: 40px;
   align-items: end;
   position: relative;
   z-index: 2;
   border-top: 1px solid var(--border-hairline);
-  padding-top: 24px;
+  padding-top: 20px;
 }
 
 .manifesto-lead {
-  font-size: clamp(1rem, 1.35vw, 1.45rem);
-  line-height: 1.45;
+  font-size: clamp(0.95rem, 1.25vw, 1.35rem);
+  line-height: 1.5;
   color: var(--text);
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -467,7 +473,7 @@ header.masthead {
   line-height: 1.8;
   color: var(--text-muted);
   border-left: 1px solid var(--border-hairline);
-  padding-left: 24px;
+  padding-left: 20px;
 }
 
 .hero-spec-ledger strong {
@@ -491,7 +497,7 @@ header.masthead {
 
 .scroll-indicator-line {
   width: 1.5px;
-  height: 48px;
+  height: 42px;
   background: linear-gradient(to bottom, var(--tungsten) 0%, transparent 100%);
   animation: scrollDrop 2s infinite ease-in-out;
 }
@@ -564,8 +570,8 @@ header.masthead {
 }
 
 .atlas-svg {
-  width: 90vw;
-  max-width: 1400px;
+  width: 88vw;
+  max-width: 1350px;
   height: auto;
   overflow: visible;
 }
@@ -596,8 +602,8 @@ header.masthead {
 /* Foreground Reticle HUD */
 .atlas-hud {
   position: absolute;
-  top: 60px;
-  left: 60px;
+  top: 50px;
+  left: 50px;
   z-index: 10;
   font-family: var(--font-mono);
   font-size: 11px;
@@ -605,23 +611,23 @@ header.masthead {
   color: var(--text);
   background: var(--bg-translucent);
   border: 1px solid var(--border-medium);
-  padding: 20px 24px;
+  padding: 18px 22px;
   backdrop-filter: blur(8px);
-  max-width: 380px;
+  max-width: 360px;
   box-shadow: 0 4px 20px rgba(29, 32, 33, 0.08);
 }
 
 .atlas-hud-title {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.18em;
   color: var(--tungsten);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   text-transform: uppercase;
 }
 
 .atlas-hud-meter {
-  margin-top: 14px;
+  margin-top: 12px;
   height: 2px;
   width: 100%;
   background: rgba(29, 32, 33, 0.14);
@@ -640,7 +646,7 @@ header.masthead {
 }
 
 /* ==========================================================================
-   SCENE 03: FOUR CIVIC SPACES (FULL-VIEWPORT MONUMENTAL PARALLAX RAIL)
+   SCENE 03: FOUR CIVIC SPACES (BALANCED FULL-VIEWPORT PARALLAX RAIL)
    ========================================================================== */
 .venues-pin-wrapper {
   position: relative;
@@ -665,15 +671,15 @@ header.masthead {
   will-change: transform;
 }
 
-/* Monumental Chamber Layout: Split Screen Poster */
+/* Monumental Chamber Layout: Balanced Split Screen */
 .venue-chamber-panel {
   width: 100vw;
   height: 100vh;
   flex-shrink: 0;
   display: grid;
   grid-template-columns: 1.15fr 1fr;
-  padding: 100px 80px 60px;
-  gap: 60px;
+  padding: 85px 60px 45px;
+  gap: 48px;
   position: relative;
   border-right: 1px solid var(--border-hairline);
   background: var(--bg);
@@ -685,47 +691,48 @@ header.masthead {
   justify-content: space-between;
   position: relative;
   z-index: 2;
+  min-height: 0;
 }
 
 .chamber-eyebrow-strip {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--tungsten);
   border-bottom: 1px solid var(--border-hairline);
-  padding-bottom: 12px;
+  padding-bottom: 10px;
   font-weight: 700;
 }
 
 .chamber-title-massive {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 5.2vw, 5.8rem);
+  font-size: clamp(2.4rem, 4.2vw, 4.8rem);
   font-weight: 900;
-  line-height: 0.92;
+  line-height: 0.94;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: var(--text);
-  margin: 20px 0 16px;
+  margin: 16px 0 12px;
 }
 
 .chamber-description {
-  font-size: clamp(0.95rem, 1.1vw, 1.2rem);
+  font-size: clamp(0.9rem, 1.05vw, 1.15rem);
   line-height: 1.5;
   color: var(--text-muted);
-  max-width: 580px;
-  margin-bottom: 24px;
+  max-width: 540px;
+  margin-bottom: 18px;
 }
 
 /* Acoustic Waveform & Equalizer */
 .acoustic-signature-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-hairline);
-  padding: 18px 24px;
-  margin-bottom: 28px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -741,7 +748,7 @@ header.masthead {
   color: var(--text-dim);
   text-transform: uppercase;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .acoustic-signature-info .val {
@@ -753,7 +760,7 @@ header.masthead {
   display: flex;
   align-items: flex-end;
   gap: 4px;
-  height: 32px;
+  height: 28px;
 }
 
 .waveform-bar {
@@ -780,9 +787,9 @@ header.masthead {
 .sensory-specs-table {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 14px;
   border-top: 1px solid var(--border-hairline);
-  padding-top: 20px;
+  padding-top: 16px;
   font-family: var(--font-mono);
   font-size: 10px;
 }
@@ -807,16 +814,19 @@ header.masthead {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 0;
 }
 
 .media-frame-clipped {
   position: relative;
   width: 100%;
-  height: 68%;
+  flex: 1 1 auto;
+  min-height: 220px;
   overflow: hidden;
   border: 1.5px solid var(--border-medium);
   background: var(--bg-card);
   cursor: pointer;
+  margin-bottom: 16px;
 }
 
 .media-parallax-img {
@@ -848,8 +858,8 @@ header.masthead {
 .chamber-lineup-ledger {
   background: var(--bg-surface);
   border: 1px solid var(--border-hairline);
-  padding: 20px;
-  margin-top: 20px;
+  padding: 16px 20px;
+  flex: 0 0 auto;
 }
 
 .lineup-ledger-heading {
@@ -858,7 +868,7 @@ header.masthead {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--tungsten);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
   font-weight: 700;
@@ -868,7 +878,7 @@ header.masthead {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 8px 0;
+  padding: 6px 0;
   border-bottom: 1px solid rgba(29, 32, 33, 0.08);
   font-family: var(--font-heading);
   transition: padding-left 0.2s ease;
@@ -884,7 +894,7 @@ header.masthead {
 }
 
 .artist-row .name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--text);
 }
@@ -893,7 +903,7 @@ header.masthead {
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--text-dim);
-  margin-left: 12px;
+  margin-left: 10px;
 }
 
 .artist-row .time {
@@ -907,7 +917,7 @@ header.masthead {
    SCENE 04: SCHEDULE (THE NOCTURNAL TIMETABLE LEDGER)
    ========================================================================== */
 .schedule-section {
-  padding: 120px 40px;
+  padding: 100px 40px;
   background: var(--bg-surface);
   position: relative;
   border-top: 1px solid var(--border-hairline);
@@ -917,14 +927,14 @@ header.masthead {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
   border-bottom: 1px solid var(--border-hairline);
-  padding-bottom: 24px;
+  padding-bottom: 20px;
 }
 
 .schedule-title-massive {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 5.5rem);
+  font-size: clamp(2.2rem, 4.6vw, 5rem);
   font-weight: 900;
   letter-spacing: -0.04em;
   text-transform: uppercase;
@@ -944,7 +954,7 @@ header.masthead {
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 10px 20px;
+  padding: 10px 18px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
@@ -966,10 +976,10 @@ header.masthead {
 
 .time-slot-row {
   display: grid;
-  grid-template-columns: 160px 1.4fr 1fr 120px;
+  grid-template-columns: 150px minmax(220px, 1.4fr) minmax(140px, 1fr) 120px;
   align-items: center;
   background: var(--bg);
-  padding: 24px 32px;
+  padding: 20px 28px;
   transition: background 0.25s ease;
 }
 
@@ -979,7 +989,7 @@ header.masthead {
 
 .time-slot-hour {
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--tungsten);
   letter-spacing: 0.05em;
@@ -987,7 +997,7 @@ header.masthead {
 
 .time-slot-act {
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text);
 }
@@ -998,12 +1008,12 @@ header.masthead {
   font-size: 11px;
   color: var(--text-dim);
   font-weight: 500;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 .time-slot-venue {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -1032,7 +1042,7 @@ header.masthead {
    SCENE 05: PASS DOCKET (PHYSICAL PUNCHCARD / MONOLITH)
    ========================================================================== */
 .tickets-section {
-  padding: 140px 40px;
+  padding: 120px 40px;
   background: var(--bg);
   position: relative;
   overflow: hidden;
@@ -1043,33 +1053,33 @@ header.masthead {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 80px;
+  gap: 72px;
   align-items: center;
 }
 
 .tickets-intro-title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 5.5rem);
+  font-size: clamp(2.3rem, 4.6vw, 5rem);
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: var(--text);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .tickets-intro-lead {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text-muted);
   line-height: 1.6;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 /* Physical Perforated Pass Card */
 .punchcard-ticket-pass {
   background: var(--bg-card);
   border: 1.5px solid var(--border-medium);
-  padding: 48px;
+  padding: 44px;
   position: relative;
   box-shadow: 0 20px 60px rgba(29, 32, 33, 0.1);
 }
@@ -1079,23 +1089,23 @@ header.masthead {
   content: "";
   position: absolute;
   top: 50%;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   background: var(--bg);
   border-radius: 50%;
   transform: translateY(-50%);
   border: 1.5px solid var(--border-medium);
 }
-.punchcard-ticket-pass::before { left: -15px; }
-.punchcard-ticket-pass::after { right: -15px; }
+.punchcard-ticket-pass::before { left: -14px; }
+.punchcard-ticket-pass::after { right: -14px; }
 
 .pass-docket-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   border-bottom: 1px dashed var(--border-medium);
-  padding-bottom: 20px;
-  margin-bottom: 28px;
+  padding-bottom: 18px;
+  margin-bottom: 24px;
 }
 
 .pass-id {
@@ -1120,7 +1130,7 @@ header.masthead {
 
 .pass-title-massive {
   font-family: var(--font-display);
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 900;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -1132,13 +1142,13 @@ header.masthead {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
-  margin: 28px 0;
+  margin: 24px 0;
 }
 
 .tier-choice {
   border: 1px solid var(--border-hairline);
   background: var(--bg);
-  padding: 16px;
+  padding: 14px;
   cursor: pointer;
   transition: all 0.25s ease;
   text-align: center;
@@ -1160,7 +1170,7 @@ header.masthead {
   text-transform: uppercase;
   color: var(--text-muted);
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   font-weight: 600;
 }
 
@@ -1178,7 +1188,7 @@ header.masthead {
 
 .pass-cta-btn {
   width: 100%;
-  padding: 20px;
+  padding: 18px;
   background: var(--tungsten);
   color: #fdfcf9;
   border: none;
@@ -1202,7 +1212,7 @@ header.masthead {
    SCENE 06: MONUMENTAL ARCHIVAL FOOTER
    ========================================================================== */
 footer.monumental-footer {
-  padding: 140px 40px 40px;
+  padding: 110px 40px 36px;
   background: var(--bg-surface);
   border-top: 1px solid var(--border-hairline);
   position: relative;
@@ -1211,7 +1221,7 @@ footer.monumental-footer {
 
 .footer-massive-brand {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 16vw, 18rem);
+  font-size: clamp(3.5rem, 15vw, 17rem);
   font-weight: 900;
   line-height: 0.82;
   letter-spacing: -0.05em;
@@ -1220,7 +1230,7 @@ footer.monumental-footer {
   text-align: center;
   user-select: none;
   pointer-events: none;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
 .footer-four-corners-grid {
@@ -1228,7 +1238,7 @@ footer.monumental-footer {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 32px;
   border-top: 1px solid var(--border-hairline);
-  padding-top: 40px;
+  padding-top: 36px;
   font-family: var(--font-mono);
   font-size: 11px;
 }
@@ -1237,7 +1247,7 @@ footer.monumental-footer {
   color: var(--tungsten);
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   display: block;
   font-weight: 700;
 }
@@ -1289,20 +1299,20 @@ footer.monumental-footer {
   background: var(--bg);
   border: 1.5px solid var(--border-medium);
   width: 100%;
-  max-width: 520px;
-  padding: 48px;
+  max-width: 500px;
+  padding: 40px;
   position: relative;
   box-shadow: 0 30px 100px rgba(29, 32, 33, 0.3);
 }
 
 .modal-close {
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 20px;
+  right: 20px;
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-size: 28px;
+  font-size: 26px;
   line-height: 1;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -1312,44 +1322,52 @@ footer.monumental-footer {
   color: var(--text);
 }
 
-/* Responsive Overrides */
+/* Responsive Overrides (Using GSAP MatchMedia Compliant Layouts) */
 @media (max-width: 1024px) {
   .hero-bottom-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
   .hero-spec-ledger {
     border-left: none;
     padding-left: 0;
   }
-  .venue-chamber-panel {
-    grid-template-columns: 1fr;
-    padding: 80px 32px 40px;
-    height: auto;
-    min-height: 100vh;
-  }
   .venues-pin-wrapper {
-    height: auto;
+    height: auto !important;
   }
   .venues-track-viewport {
-    position: relative;
-    height: auto;
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
   }
   .venues-horizontal-strip {
-    flex-direction: column;
+    flex-direction: column !important;
+    height: auto !important;
+    transform: none !important;
+  }
+  .venue-chamber-panel {
+    grid-template-columns: 1fr;
+    padding: 60px 24px 40px;
     height: auto;
+    min-height: auto;
+    border-bottom: 1px solid var(--border-hairline);
+    border-right: none;
+  }
+  .media-frame-clipped {
+    height: 320px;
   }
   .tickets-layout {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 36px;
   }
   .footer-four-corners-grid {
     grid-template-columns: 1fr 1fr;
     gap: 24px;
   }
   .time-slot-row {
-    grid-template-columns: 100px 1fr;
-    gap: 16px;
+    grid-template-columns: 90px 1fr;
+    gap: 12px;
+    padding: 16px 20px;
   }
   .time-slot-venue, .time-slot-action {
     grid-column: 2;
