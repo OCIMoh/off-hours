@@ -1,17 +1,42 @@
+/**
+ * OFF HOURS — Avant-Garde Industrial Design Tokens
+ * Aesthetic: Berlin Atonal / Unsound / High-Contrast Monumental Brutalism
+ */
+
 :root {
-  --bg: #07080a;
-  --bg-surface: #0e1014;
-  --bg-card: #14171d;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(229, 169, 60, 0.4);
-  --text: #f5f6f8;
-  --text-dim: #7e8490;
+  /* Raw Atmospheric Ground & Tone */
+  --bg: #050608;
+  --bg-surface: #0a0d12;
+  --bg-card: #0f131a;
+  --bg-elevated: #161b24;
+  --bg-translucent: rgba(5, 6, 8, 0.82);
+
+  /* Contrast Ink & Hierarchy */
+  --text: #f4f5f8;
+  --text-muted: #8e95a5;
+  --text-dim: #545b6b;
+  --text-ghost: rgba(244, 245, 248, 0.06);
+
+  /* Industrial Lighting Accents */
   --tungsten: #e5a93c;
-  --tungsten-dim: rgba(229, 169, 60, 0.15);
-  --tungsten-glow: rgba(229, 169, 60, 0.35);
-  --blue-river: #2d4554;
+  --tungsten-bright: #ffbe42;
+  --tungsten-glow: rgba(229, 169, 60, 0.28);
+  --tungsten-subtle: rgba(229, 169, 60, 0.08);
+  --cyan-river: #38bdf8;
+  --cyan-river-dim: rgba(56, 189, 248, 0.15);
+
+  /* Hairlines & Grid Divisions */
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-focus: #e5a93c;
+
+  /* Monumental Typography Families */
   --font-display: "Syne", -apple-system, sans-serif;
   --font-heading: "Space Grotesk", -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+
+  /* Motion Curves (Awwwards Grade) */
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
 }
