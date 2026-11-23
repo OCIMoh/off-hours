@@ -10,7 +10,7 @@ const css = fs.readFileSync(cssPath, 'utf8');
 const js = fs.readFileSync(jsPath, 'utf8');
 
 const htmlContent = `<!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,9 +35,9 @@ const htmlContent = `<!DOCTYPE html>
 ${css}
   </style>
 </head>
-<body class="animaxxing-style">
+<body>
 
-  <!-- Scroll Progress Hairline Indicator -->
+  <!-- Top Terracotta Scroll Progress Hairline Indicator -->
   <div class="scroll-progress-line" id="scrollProgressBar" aria-hidden="true"></div>
 
   <!-- Sticky Header Strip (Site Chrome) -->
@@ -60,7 +60,7 @@ ${css}
           <span class="timecode-dot" aria-hidden="true"></span>
           20:00:00
         </span>
-        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light or dark theme">DARK</button>
+        <button class="audio-toggle-btn" id="audioToggleBtn" aria-label="Toggle 55Hz subterranean room tone">ROOM TONE</button>
         <button class="small-chip" data-open-modal>GET PASS</button>
       </div>
     </div>
@@ -69,7 +69,7 @@ ${css}
   <main class="page-main">
 
     <!-- ======================================================================
-         SCENE 01: HERO SECTION (PROPORTIONAL 100VH BALANCED EDITORIAL POSTER)
+         SCENE 01: HERO BROADSHEET POSTER (PROPORTIONAL 100VH ASYMMETRICAL GRID)
          ====================================================================== -->
     <section class="hero" id="hero" aria-label="Festival Broadside">
       <div>
@@ -78,45 +78,87 @@ ${css}
           <span class="figure">OCTOBER 24–25 · 20:00 — 06:00 · RIVER &amp; RAIL CORRIDOR</span>
         </div>
 
-        <div class="hero-title-wrap">
-          <h1 class="poster poster-align-ink hero-title" id="heroHeadline">
-            OFF HOURS CULTURE FOUR CIVIC SPACES
-          </h1>
-        </div>
+        <!-- Asymmetrical 8 + 4 Hero Grid -->
+        <div class="hero-main-asymmetric-grid">
+          <div>
+            <div class="hero-title-wrap">
+              <h1 class="poster poster-align-ink hero-title" id="heroHeadline">
+                OFF HOURS CULTURE FOUR CIVIC SPACES
+              </h1>
+            </div>
 
-        <p class="hero-subhead" id="heroSubhead">
-          An independent nocturnal culture festival reactivating four overlooked civic environments across an old river-and-rail city for two transformative nights.
-        </p>
+            <p class="hero-subhead" id="heroSubhead">
+              An independent nocturnal culture festival reactivating four overlooked civic environments across an old river-and-rail city for two transformative nights.
+            </p>
 
-        <!-- Particle-Assembled Calls to Action -->
-        <div class="hero-actions-row">
-          <!-- Primary CTA: Reactor (Solid Button with Rising Embers & Heartbeat) -->
-          <div class="particle-btn-wrapper particle-layer-under" data-particle-reactor>
-            <canvas aria-hidden="true"></canvas>
-            <button class="button-solid" id="passCtaAction" data-open-modal>
-              ENTER ARCHIVE / PASS
-            </button>
+            <!-- Particle-Assembled Calls to Action -->
+            <div class="hero-actions-row">
+              <!-- Primary CTA: Reactor (Solid Button with Terracotta Rising Embers) -->
+              <div class="particle-btn-wrapper particle-layer-under" data-particle-reactor>
+                <canvas aria-hidden="true"></canvas>
+                <button class="button-solid" id="passCtaAction" data-open-modal>
+                  ENTER ARCHIVE / PASS
+                </button>
+              </div>
+
+              <!-- Secondary CTA: Marquee (Outline Button with Ochre Chasing Lights) -->
+              <div class="particle-btn-wrapper particle-layer-over" data-particle-marquee>
+                <canvas aria-hidden="true"></canvas>
+                <a href="#venuesPin" class="button-outline">
+                  EXPLORE SPACES
+                </a>
+              </div>
+            </div>
           </div>
 
-          <!-- Secondary CTA: Marquee (Outline Button with Chasing Lights) -->
-          <div class="particle-btn-wrapper particle-layer-over" data-particle-marquee>
-            <canvas aria-hidden="true"></canvas>
-            <a href="#venuesPin" class="button-outline">
-              EXPLORE SPACES
-            </a>
-          </div>
+          <!-- Hero Right: Architectural Passport Metadata Card -->
+          <aside class="hero-passport-card" aria-label="Nocturnal Corridor Dossier Passport">
+            <div class="passport-header">
+              <span>DOSSIER PASSPORT</span>
+              <span class="passport-status-pill">CORRIDOR ACTIVE</span>
+            </div>
+
+            <div class="passport-data-row">
+              <span class="k">COORDINATES</span>
+              <span class="v">53°32′N 09°59′E</span>
+            </div>
+
+            <div class="passport-data-row">
+              <span class="k">TIDE ELEVATION</span>
+              <span class="v">+1.4M (HIGH EBB)</span>
+            </div>
+
+            <div class="passport-data-row">
+              <span class="k">ATMOSPHERIC TEMP</span>
+              <span class="v">11°C NOCTURNAL</span>
+            </div>
+
+            <div class="passport-data-row">
+              <span class="k">ACOUSTIC SPECTRUM</span>
+              <span class="v">45HZ — 108DB PEAK</span>
+            </div>
+
+            <div class="passport-data-row">
+              <span class="k">ACTIVE SECTORS</span>
+              <span class="v">04 CIVIC CHAMBERS</span>
+            </div>
+
+            <div style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-dim); border-top: 1px dashed var(--border-hairline); padding-top: 8px;">
+              AUTHENTICATED RIVER &amp; RAIL ARCHIVE · 2026
+            </div>
+          </aside>
         </div>
       </div>
 
       <!-- Kinetic Marquee Ticker Tape -->
       <div class="kinetic-marquee-bar" aria-hidden="true">
         <div class="marquee-track">
-          <div class="marquee-item"><span>OCT 24—25</span><span class="sep">·</span><span>4 HISTORICAL SPACES</span><span class="sep">·</span><span>24 PERFORMANCES</span><span class="sep">·</span><span>SUBTERRANEAN ACOUSTICS</span><span class="sep">·</span><span>35MM CELLULOID PROJECTION</span><span class="sep">·</span><span>NIGHT MARKET HUB</span><span class="sep">·</span><span>NO REPEAT TIMETABLES</span></div>
-          <div class="marquee-item"><span>OCT 24—25</span><span class="sep">·</span><span>4 HISTORICAL SPACES</span><span class="sep">·</span><span>24 PERFORMANCES</span><span class="sep">·</span><span>SUBTERRANEAN ACOUSTICS</span><span class="sep">·</span><span>35MM CELLULOID PROJECTION</span><span class="sep">·</span><span>NIGHT MARKET HUB</span><span class="sep">·</span><span>NO REPEAT TIMETABLES</span></div>
+          <div class="marquee-item"><span>OCT 24—25</span><span class="sep">✶</span><span>4 CIVIC SPACES</span><span class="sep">✶</span><span>24 SESSIONS</span><span class="sep">✶</span><span>SUBTERRANEAN 55HZ ACOUSTICS</span><span class="sep">✶</span><span>35MM CELLULOID PROJECTION</span><span class="sep">✶</span><span>NIGHT MARKET HUB</span><span class="sep">✶</span><span>NO REPEAT TIMETABLES</span></div>
+          <div class="marquee-item"><span>OCT 24—25</span><span class="sep">✶</span><span>4 CIVIC SPACES</span><span class="sep">✶</span><span>24 SESSIONS</span><span class="sep">✶</span><span>SUBTERRANEAN 55HZ ACOUSTICS</span><span class="sep">✶</span><span>35MM CELLULOID PROJECTION</span><span class="sep">✶</span><span>NIGHT MARKET HUB</span><span class="sep">✶</span><span>NO REPEAT TIMETABLES</span></div>
         </div>
       </div>
 
-      <!-- Hero Bottom Architectural Ledger -->
+      <!-- Hero Bottom Architectural Ledger Baseline -->
       <div class="hero-bottom-grid">
         <p class="body-copy">
           Occupying an abandoned 1912 tram maintenance hangar, tiled municipal bathhouse basements, an all-night rail market, and a decommissioned letterpress printworks.
@@ -174,56 +216,56 @@ ${css}
 
               <div class="atlas-layer-schematic" id="atlasSchematicMap">
                 <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River & Rail Map">
-                  <!-- River Spine -->
-                  <path d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                        stroke="var(--foreground)" stroke-width="28" stroke-linecap="round" fill="none" opacity="0.15"/>
-                  <path d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                        stroke="var(--foreground)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.6"/>
+                  <!-- River Spine in Gruvbox Teal -->
+                  <path class="river" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                        stroke-width="32" stroke-linecap="round" fill="none" opacity="0.2"/>
+                  <path class="river" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                        stroke-width="8" stroke-linecap="round" fill="none" opacity="0.7"/>
 
                   <!-- Rail Freight Sidings -->
-                  <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="var(--foreground)" stroke-width="1.5" stroke-dasharray="10 8" fill="none" opacity="0.4"/>
-                  <path d="M450,420 L700,700 L1300,700" stroke="var(--foreground)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.3"/>
-                  <path d="M200,80 L400,280 L900,240" stroke="var(--foreground)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.3"/>
+                  <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="10 8" fill="none" opacity="0.35"/>
+                  <path d="M450,420 L700,700 L1300,700" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.25"/>
+                  <path d="M200,80 L400,280 L900,240" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.25"/>
 
                   <!-- Reference Grid Lines -->
-                  <line x1="0" y1="200" x2="1400" y2="200" stroke="var(--border)" stroke-width="1"/>
-                  <line x1="0" y1="400" x2="1400" y2="400" stroke="var(--border)" stroke-width="1"/>
-                  <line x1="0" y1="600" x2="1400" y2="600" stroke="var(--border)" stroke-width="1"/>
-                  <line x1="350" y1="0" x2="350" y2="800" stroke="var(--border)" stroke-width="1"/>
-                  <line x1="700" y1="0" x2="700" y2="800" stroke="var(--border)" stroke-width="1"/>
-                  <line x1="1050" y1="0" x2="1050" y2="800" stroke="var(--border)" stroke-width="1"/>
+                  <line x1="0" y1="200" x2="1400" y2="200" stroke="var(--border-hairline)" stroke-width="1"/>
+                  <line x1="0" y1="400" x2="1400" y2="400" stroke="var(--border-hairline)" stroke-width="1"/>
+                  <line x1="0" y1="600" x2="1400" y2="600" stroke="var(--border-hairline)" stroke-width="1"/>
+                  <line x1="350" y1="0" x2="350" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
+                  <line x1="700" y1="0" x2="700" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
+                  <line x1="1050" y1="0" x2="1050" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
 
-                  <!-- Four Civic Nodes -->
+                  <!-- Four Civic Nodes in Terracotta -->
                   <g class="map-node" transform="translate(380, 420)">
-                    <circle class="glow" r="26" />
-                    <circle r="7" fill="var(--foreground)" />
-                    <circle r="2.5" fill="var(--canvas)" />
-                    <text x="16" y="5" fill="var(--foreground)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">01 TRAM DEPOT</text>
-                    <text x="16" y="18" fill="var(--muted)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">TRANSIT · 108dB SUB-BASS</text>
+                    <circle class="glow" r="28" />
+                    <circle r="7.5" fill="var(--tungsten)" />
+                    <circle r="2.5" fill="#fdfcf9" />
+                    <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">01 TRAM DEPOT</text>
+                    <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">TRANSIT · 108dB SUB-BASS</text>
                   </g>
 
                   <g class="map-node" transform="translate(760, 310)">
-                    <circle class="glow" r="26" />
-                    <circle r="7" fill="var(--foreground)" />
-                    <circle r="2.5" fill="var(--canvas)" />
-                    <text x="16" y="5" fill="var(--foreground)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
-                    <text x="16" y="18" fill="var(--muted)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">RECREATION · 7.2s ECHO</text>
+                    <circle class="glow" r="28" />
+                    <circle r="7.5" fill="var(--tungsten)" />
+                    <circle r="2.5" fill="#fdfcf9" />
+                    <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
+                    <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">RECREATION · 7.2s ECHO</text>
                   </g>
 
                   <g class="map-node" transform="translate(680, 680)">
-                    <circle class="glow" r="26" />
-                    <circle r="7" fill="var(--foreground)" />
-                    <circle r="2.5" fill="var(--canvas)" />
-                    <text x="16" y="5" fill="var(--foreground)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">03 NIGHT MARKET</text>
-                    <text x="16" y="18" fill="var(--muted)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMERCE · SOCIAL HUB</text>
+                    <circle class="glow" r="28" />
+                    <circle r="7.5" fill="var(--tungsten)" />
+                    <circle r="2.5" fill="#fdfcf9" />
+                    <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">03 NIGHT MARKET</text>
+                    <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMERCE · SOCIAL HUB</text>
                   </g>
 
                   <g class="map-node" transform="translate(1080, 480)">
-                    <circle class="glow" r="26" />
-                    <circle r="7" fill="var(--foreground)" />
-                    <circle r="2.5" fill="var(--canvas)" />
-                    <text x="16" y="5" fill="var(--foreground)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">04 PRINTING WORKS</text>
-                    <text x="16" y="18" fill="var(--muted)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMUNICATION · 35MM CINEMA</text>
+                    <circle class="glow" r="28" />
+                    <circle r="7.5" fill="var(--tungsten)" />
+                    <circle r="2.5" fill="#fdfcf9" />
+                    <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">04 PRINTING WORKS</text>
+                    <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMUNICATION · 35MM CINEMA</text>
                   </g>
                 </svg>
               </div>
@@ -518,7 +560,7 @@ ${css}
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">LIVE A/V</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
 
             <div class="ledger-row" data-day="1">
@@ -529,7 +571,7 @@ ${css}
               </div>
               <span class="slot-venue">04 / PRINTING WORKS</span>
               <span class="slot-badge">35MM CINEMA</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
 
             <div class="ledger-row" data-day="1">
@@ -540,7 +582,7 @@ ${css}
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">CONCERT</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
 
             <div class="ledger-row" data-day="1">
@@ -551,7 +593,7 @@ ${css}
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">MODULAR</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
 
             <div class="ledger-row" data-day="1">
@@ -562,7 +604,7 @@ ${css}
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">CLOSING</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
 
             <!-- Saturday Slots -->
@@ -574,7 +616,7 @@ ${css}
               </div>
               <span class="slot-venue">02 / MUNICIPAL BATHS</span>
               <span class="slot-badge">AMBIENT</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
@@ -585,7 +627,7 @@ ${css}
               </div>
               <span class="slot-venue">04 / PRINTING WORKS</span>
               <span class="slot-badge">TAPE LOOP</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
@@ -596,7 +638,7 @@ ${css}
               </div>
               <span class="slot-venue">03 / NIGHT MARKET</span>
               <span class="slot-badge">DRONE</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
@@ -607,7 +649,7 @@ ${css}
               </div>
               <span class="slot-venue">04 / PRINTING WORKS</span>
               <span class="slot-badge">ELECTRO-ACOUSTIC</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
@@ -618,7 +660,7 @@ ${css}
               </div>
               <span class="slot-venue">02 / MUNICIPAL BATHS</span>
               <span class="slot-badge">HYDRO-ACOUSTIC</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
@@ -629,7 +671,7 @@ ${css}
               </div>
               <span class="slot-venue">03 / NIGHT MARKET</span>
               <span class="slot-badge">DAWN GATHERING</span>
-              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
             </div>
           </div>
         </section>
@@ -639,7 +681,7 @@ ${css}
              ====================================================================== -->
         <section class="tickets-section" id="passes" aria-label="Festival Admission">
           <div>
-            <span class="mono-label">EDITION 001 · CAPACITY CONTROLLED</span>
+            <span class="mono-label" style="color: var(--tungsten);">EDITION 001 · CAPACITY CONTROLLED</span>
             <h2 class="statement" style="margin-top: 8px;">FESTIVAL ADMISSION DOSSIER</h2>
             <p class="body-copy" style="margin-top: 12px;">
               Every pass provides unrestricted 48-hour access to all four civic environments across both nights. Access is strictly capped to protect intimate acoustic proximity.
@@ -660,12 +702,12 @@ ${css}
               <div class="annotation">CLAIM TIER 01 →</div>
             </div>
 
-            <!-- Tier 2 -->
-            <div class="card" data-open-modal style="border-color: var(--foreground);">
+            <!-- Tier 2 (Featured) -->
+            <div class="card card-featured" data-open-modal>
               <div>
                 <div class="card-label">
-                  <span class="mono-label">02 / STANDARD DOCKET</span>
-                  <span class="figure">€48 · POPULAR</span>
+                  <span class="mono-label" style="color: var(--tungsten);">02 / STANDARD DOCKET</span>
+                  <span class="figure" style="color: var(--tungsten); font-weight: 700;">€48 · POPULAR</span>
                 </div>
                 <h3 class="card-heading">FULL ACCESS</h3>
                 <p class="body-copy">Standard festival pass. Complete unrestricted access to the entire 2-night nocturnal program across all 4 civic venues.</p>
@@ -694,7 +736,7 @@ ${css}
   </main>
 
   <!-- ======================================================================
-       SHELL FOOTER (COLOPHON & MONOCHROME THEME)
+       SHELL FOOTER (COLOPHON & ARCHIVAL IDENTIFIERS)
        ====================================================================== -->
   <footer class="shell-footer" aria-label="Archival Colophon">
     <div class="footer-row">
@@ -719,7 +761,7 @@ ${css}
   <div class="checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
     <div class="modal-content">
       <button class="modal-close" id="modalCloseBtn" aria-label="Close dialog">×</button>
-      <span class="mono-label">PASS RESERVATION · DIRECT CREDENTIALS</span>
+      <span class="mono-label" style="color: var(--tungsten);">PASS RESERVATION · DIRECT CREDENTIALS</span>
       <h3 class="card-heading" id="modalHeading" style="margin-top: 12px; margin-bottom: 24px;">SECURE PASS</h3>
 
       <form id="checkoutForm" onsubmit="event.preventDefault(); alert('Pass registered! Digital credentials sent.'); document.getElementById('checkoutModal').classList.remove('open');">
@@ -748,4 +790,4 @@ ${js}
 `;
 
 fs.writeFileSync(indexPath, htmlContent, 'utf8');
-console.log('Successfully generated animaxxed index.html!');
+console.log('Successfully generated Gruvbox Animaxxed index.html!');

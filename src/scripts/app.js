@@ -1,23 +1,23 @@
 /**
- * OFF HOURS — Animaxxing Motion & Particle Engine
+ * OFF HOURS — Animaxxing Motion & Particle Engine (Gruvbox Editorial)
  * Spec: .agents/skills/animaxxing & .agents/skills/style-animaxxing
  * Features:
  * - Signature curve: CustomEase "animaxxing"
  * - Route letters scatter-implosion hero headline entrance
  * - Word-by-word speak-in hero subhead entrance
- * - Settled ambient headline wave (Hop, Breathe, Lean, Flip, Shear, Squash, Twist)
- * - HTML5 Canvas ParticleField (Reactor embers & Marquee outline runners)
+ * - Settled ambient headline wave (Hop, Breathe, Lean, Flip, Shear, Squash)
+ * - HTML5 Canvas ParticleField (Terracotta Reactor embers & Ochre Marquee runners)
  * - Blast-off hero outro on CTA click
- * - Lenis smooth momentum scroll & 1px hairline scroll progress
+ * - Lenis smooth momentum scroll & 2px terracotta hairline scroll progress
+ * - Subterranean 55Hz Web Audio room tone generator
  * - Pinned 2.5D Atlas descent & zero-dead-scroll 4-chamber horizontal gallery
- * - Light/Dark monochrome theme switcher
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initThemeToggle();
   const lenis = initSmoothScroll();
   initScrollProgress(lenis);
   initTimecode(lenis);
+  initAmbientAudio();
   initParticleButtons();
   initScheduleSwitcher();
   initModal();
@@ -25,44 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   1. THEME SWITCHING (LIGHT & DARK MONOCHROME)
-   ========================================================================== */
-function initThemeToggle() {
-  const btn = document.getElementById('themeToggleBtn');
-  if (!btn) return;
-
-  const currentTheme = localStorage.getItem('offhours-theme') || 
-    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  
-  if (currentTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    btn.textContent = 'LIGHT';
-  } else {
-    document.documentElement.setAttribute('data-theme', 'light');
-    btn.textContent = 'DARK';
-  }
-
-  btn.addEventListener('click', () => {
-    document.documentElement.classList.add('theme-transitioning');
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const nextTheme = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', nextTheme);
-    localStorage.setItem('offhours-theme', nextTheme);
-    btn.textContent = nextTheme === 'dark' ? 'LIGHT' : 'DARK';
-
-    // Recolor active particle fields
-    if (window.activeParticleFields) {
-      window.activeParticleFields.forEach((field) => field.recolor());
-    }
-
-    setTimeout(() => {
-      document.documentElement.classList.remove('theme-transitioning');
-    }, 250);
-  });
-}
-
-/* ==========================================================================
-   2. LENIS SMOOTH MOMENTUM SCROLL & SCROLL PROGRESS
+   1. LENIS SMOOTH MOMENTUM SCROLL & SCROLL PROGRESS
    ========================================================================== */
 function initSmoothScroll() {
   if (typeof Lenis === 'undefined') {
@@ -121,11 +84,88 @@ function initTimecode(lenis) {
     const mm = Math.floor((currentSec % 3600) / 60).toString().padStart(2, '0');
     const ss = Math.floor(currentSec % 60).toString().padStart(2, '0');
 
-    display.textContent = `${hh}:${mm}:${ss}`;
+    display.innerHTML = `<span class="timecode-dot" aria-hidden="true"></span>${hh}:${mm}:${ss}`;
   }
 
   if (lenis) lenis.on('scroll', update);
   else window.addEventListener('scroll', update);
+}
+
+/* ==========================================================================
+   2. SUBTERRANEAN 55HZ WEB AUDIO DRONE
+   ========================================================================== */
+let audioCtx = null;
+let oscDrone = null;
+let oscHarmonic = null;
+let gainNode = null;
+let isAudioActive = false;
+
+function initAmbientAudio() {
+  const btn = document.getElementById('audioToggleBtn');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    if (!isAudioActive) {
+      startDrone();
+      btn.classList.add('active');
+      btn.textContent = 'TONE: 55HZ ON';
+      isAudioActive = true;
+    } else {
+      stopDrone();
+      btn.classList.remove('active');
+      btn.textContent = 'ROOM TONE';
+      isAudioActive = false;
+    }
+  });
+}
+
+function startDrone() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    audioCtx = new AudioContext();
+
+    oscDrone = audioCtx.createOscillator();
+    oscDrone.type = 'sine';
+    oscDrone.frequency.setValueAtTime(55, audioCtx.currentTime); // 55Hz (A1 subterranean)
+
+    oscHarmonic = audioCtx.createOscillator();
+    oscHarmonic.type = 'triangle';
+    oscHarmonic.frequency.setValueAtTime(110, audioCtx.currentTime);
+
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(160, audioCtx.currentTime);
+
+    gainNode = audioCtx.createGain();
+    gainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.07, audioCtx.currentTime + 1.2);
+
+    oscDrone.connect(filter);
+    oscHarmonic.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscDrone.start();
+    oscHarmonic.start();
+  } catch (err) {
+    console.warn('AudioContext prevented or unsupported:', err);
+  }
+}
+
+function stopDrone() {
+  try {
+    if (gainNode && audioCtx) {
+      gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
+      setTimeout(() => {
+        if (oscDrone) oscDrone.stop();
+        if (oscHarmonic) oscHarmonic.stop();
+        if (audioCtx) audioCtx.close();
+      }, 250);
+    }
+  } catch (err) {
+    console.warn('Error stopping drone:', err);
+  }
 }
 
 /* ==========================================================================
@@ -172,7 +212,6 @@ class AccessibleSplitText {
       this.element.appendChild(wordSpan);
       this.words.push(wordSpan);
 
-      // Add space after word if not the last
       if (wordIdx < wordsArray.length - 1) {
         const space = document.createTextNode(' ');
         this.element.appendChild(space);
@@ -187,12 +226,10 @@ class AccessibleSplitText {
 }
 
 /* ==========================================================================
-   4. HTML5 CANVAS PARTICLE FIELD ENGINE
+   4. HTML5 CANVAS PARTICLE FIELD ENGINE (GRUVBOX PALETTE)
    ========================================================================== */
-window.activeParticleFields = [];
-
 class ParticleField {
-  constructor(canvas, target, bleed = 140) {
+  constructor(canvas, target, bleed = 140, defaultColor = '#af3a03') {
     this.canvas = canvas;
     this.target = target;
     this.bleed = bleed;
@@ -201,10 +238,9 @@ class ParticleField {
     this.emitters = new Set();
     this.box = { x: 0, y: 0, w: 0, h: 0 };
     this.radius = 4;
-    this.color = '#171717';
+    this.color = defaultColor;
     this.running = false;
     this.sync();
-    window.activeParticleFields.push(this);
   }
 
   sync() {
@@ -223,12 +259,6 @@ class ParticleField {
     this.canvas.style.height = `${this.height}px`;
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     this.radius = parseFloat(getComputedStyle(this.target).borderRadius) || 4;
-    this.recolor();
-  }
-
-  recolor() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    this.color = isDark ? '#ededed' : '#171717';
   }
 
   spawn(p) {
@@ -306,15 +336,9 @@ class ParticleField {
       this.ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
       this.ctx.fillStyle = p.color;
 
-      if (p.shape === 'spark') {
-        this.ctx.beginPath();
-        this.ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-        this.ctx.fill();
-      } else {
-        this.ctx.beginPath();
-        this.ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-        this.ctx.fill();
-      }
+      this.ctx.beginPath();
+      this.ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+      this.ctx.fill();
       this.ctx.restore();
     }
 
@@ -327,7 +351,7 @@ class ParticleField {
   }
 }
 
-// Perimeter sampling helper for rectangular shapes with border radius
+// Perimeter sampling helper
 function getPerimeterPoint(box, radius, t) {
   t = ((t % 1) + 1) % 1;
   const w = box.w;
@@ -347,20 +371,20 @@ function getPerimeterPoint(box, radius, t) {
 }
 
 function initParticleButtons() {
-  // Primary CTA: Reactor (Solid Button)
+  // Primary CTA: Reactor with Terracotta Embers (#af3a03)
   const primaryWrap = document.querySelector('[data-particle-reactor]');
   if (primaryWrap) {
     const canvas = primaryWrap.querySelector('canvas');
     const button = primaryWrap.querySelector('button, a');
     if (canvas && button) {
-      const field = new ParticleField(canvas, button, 160);
+      const field = new ParticleField(canvas, button, 160, '#af3a03');
       window.primaryParticleField = field;
 
       let hover = false;
       let emberAcc = 0;
 
       field.addEmitter((dt) => {
-        const rate = hover ? 45 : 10;
+        const rate = hover ? 45 : 12;
         emberAcc += rate * dt;
         while (emberAcc >= 1) {
           emberAcc -= 1;
@@ -369,12 +393,12 @@ function initParticleButtons() {
           field.spawn({
             x: px,
             y: py,
-            vx: (Math.random() - 0.5) * 30,
-            vy: -(hover ? 120 + Math.random() * 80 : 45 + Math.random() * 30),
-            size: 1.2 + Math.random() * 1.6,
+            vx: (Math.random() - 0.5) * 35,
+            vy: -(hover ? 130 + Math.random() * 90 : 50 + Math.random() * 35),
+            size: 1.3 + Math.random() * 1.8,
+            color: Math.random() > 0.3 ? '#af3a03' : '#b57614',
             life: 0.6 + Math.random() * 0.8,
-            shrink: true,
-            shape: 'spark'
+            shrink: true
           });
         }
       });
@@ -384,13 +408,13 @@ function initParticleButtons() {
     }
   }
 
-  // Secondary CTA: Marquee (Outlined Button)
+  // Secondary CTA: Marquee with Ochre Perimeter Lights (#b57614)
   const marqueeWrap = document.querySelector('[data-particle-marquee]');
   if (marqueeWrap) {
     const canvas = marqueeWrap.querySelector('canvas');
     const button = marqueeWrap.querySelector('button, a');
     if (canvas && button) {
-      const field = new ParticleField(canvas, button, 140);
+      const field = new ParticleField(canvas, button, 140, '#b57614');
       const runners = [0, 0.25, 0.5, 0.75];
       let rush = 1;
       let hover = false;
@@ -402,11 +426,11 @@ function initParticleButtons() {
           field.spawn({
             x: pt.x,
             y: pt.y,
-            size: hover ? 2.5 : 1.8,
+            size: hover ? 2.6 : 1.8,
+            color: '#b57614',
             life: 0.3,
             fade: true,
-            shrink: true,
-            shape: 'dot'
+            shrink: true
           });
         }
 
@@ -415,12 +439,12 @@ function initParticleButtons() {
           field.spawn({
             x: pt.x,
             y: pt.y,
-            vx: pt.nx * (40 + Math.random() * 60),
-            vy: pt.ny * (40 + Math.random() * 60),
-            size: 1.2,
+            vx: pt.nx * (45 + Math.random() * 65),
+            vy: pt.ny * (45 + Math.random() * 65),
+            size: 1.3,
+            color: '#af3a03',
             life: 0.4,
-            shrink: true,
-            shape: 'spark'
+            shrink: true
           });
         }
       });
@@ -438,12 +462,11 @@ function initParticleButtons() {
 }
 
 /* ==========================================================================
-   5. MASTER GSAP CHOREOGRAPHY (ANIMAXXING FULL TREATMENT)
+   5. MASTER GSAP CHOREOGRAPHY (ANIMAXXING EDITORIAL TREATMENT)
    ========================================================================== */
 function initGSAPTimelines(lenis) {
   if (typeof gsap === 'undefined') return;
 
-  // Register CustomEase for signature animaxxing curve
   if (typeof CustomEase !== 'undefined') {
     CustomEase.create('animaxxing', 'M0,0 C0.16,1 0.3,1 1,1');
   }
@@ -471,7 +494,6 @@ function initGSAPTimelines(lenis) {
     headingSplit = new AccessibleSplitText(heroHeading, { type: 'chars' });
     const chars = headingSplit.chars;
 
-    // Disperse chars across viewport
     const spreadX = () => window.innerWidth * 0.55;
     const spreadY = () => window.innerHeight * 0.55;
 
@@ -486,7 +508,6 @@ function initGSAPTimelines(lenis) {
     const introTl = gsap.timeline({
       delay: 0.3,
       onComplete: () => {
-        // Start Ambient Wave after settled
         initAmbientWave(chars);
       }
     });
@@ -506,7 +527,7 @@ function initGSAPTimelines(lenis) {
     });
   }
 
-  // 5.3 Hero Subhead Intro: Speak-In (Word by word arrival)
+  // 5.3 Hero Subhead Intro: Speak-In
   const heroSubhead = document.getElementById('heroSubhead');
   if (heroSubhead) {
     const subheadSplit = new AccessibleSplitText(heroSubhead, { type: 'words' });
@@ -631,17 +652,11 @@ function initAmbientWave(chars) {
   if (!chars || chars.length === 0) return;
 
   const MOVES = [
-    // Hop
     (c) => gsap.timeline().to(c, { y: -12, duration: 0.14, ease: 'power2.out', stagger: { each: 0.025, yoyo: true, repeat: 1 } }),
-    // Breathe
     (c) => gsap.timeline().to(c, { scale: 1.08, duration: 0.16, ease: 'sine.inOut', stagger: { each: 0.025, yoyo: true, repeat: 1 } }),
-    // Lean
     (c) => gsap.timeline().to(c, { rotation: 6, duration: 0.15, ease: 'sine.inOut', stagger: { each: 0.025, yoyo: true, repeat: 1 } }),
-    // Flip 360
     (c) => gsap.timeline().to(c, { rotationY: 360, duration: 0.35, ease: 'power2.inOut', stagger: 0.02 }),
-    // Shear
     (c) => gsap.timeline().to(c, { skewX: 10, duration: 0.15, ease: 'sine.inOut', stagger: { each: 0.025, yoyo: true, repeat: 1 } }),
-    // Squash
     (c) => gsap.timeline().to(c, { scaleY: 0.84, duration: 0.14, ease: 'sine.inOut', stagger: { each: 0.025, yoyo: true, repeat: 1 } })
   ];
 
@@ -657,7 +672,6 @@ function initAmbientWave(chars) {
     if (move) move(chars);
   }
 
-  // Periodic ambient wave ripple every 4.5 seconds
   setInterval(runWave, 4500);
 }
 
@@ -682,9 +696,9 @@ function runBlastOff(button, heading) {
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         size: 2.2,
+        color: Math.random() > 0.4 ? '#af3a03' : '#b57614',
         life: 0.6,
-        shrink: true,
-        shape: 'spark'
+        shrink: true
       });
     }
   }
@@ -692,7 +706,6 @@ function runBlastOff(button, heading) {
   const blastTl = gsap.timeline({
     onComplete: () => {
       if (modal) modal.classList.add('open');
-      // Smoothly restore hero
       setTimeout(() => {
         gsap.to(chars, { x: 0, y: 0, rotation: 0, scale: 1, autoAlpha: 1, duration: 0.8, ease: 'power3.out' });
         gsap.to(subheadWords, { x: 0, y: 0, rotation: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out' });
@@ -701,7 +714,7 @@ function runBlastOff(button, heading) {
     }
   });
 
-  // 1. Page Rock
+  // Page Rock
   blastTl.to(root, {
     x: () => gsap.utils.random(-8, 8),
     y: () => gsap.utils.random(-5, 5),
@@ -711,7 +724,7 @@ function runBlastOff(button, heading) {
     ease: 'none'
   }, 0);
 
-  // 2. Chars blast radial outwards
+  // Chars blast radially outwards from button
   const btnRect = button.getBoundingClientRect();
   const originX = btnRect.left + btnRect.width / 2;
   const originY = btnRect.top + btnRect.height / 2;
@@ -734,7 +747,7 @@ function runBlastOff(button, heading) {
     }, gsap.utils.random(0, 0.1));
   });
 
-  // 3. Subhead words spin down
+  // Subhead words spin down
   subheadWords.forEach((word) => {
     blastTl.to(word, {
       x: gsap.utils.random(-200, 200),

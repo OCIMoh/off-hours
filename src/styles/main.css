@@ -1,28 +1,41 @@
 /**
- * OFF HOURS — Animaxxing Editorial Production Stylesheet
- * Architectural System: International Typographic Style / Swiss Monochrome
+ * OFF HOURS — Clean Gruvbox Light Editorial Production Stylesheet
+ * Aesthetic: Crisp Archival White Paper / High-Contrast Gruvbox Letterpress
+ * Architecture: Animaxxing Swiss Broadsheet & 12-Column Chapters Grid
  * Spec: .agents/skills/style-animaxxing & .agents/skills/animaxxing
  */
 
 /* ==========================================================================
-   1. DESIGN TOKENS (LIGHT & DARK MONOCHROME)
+   1. DESIGN TOKENS (GRUVBOX LIGHT EDITORIAL PALETTE)
    ========================================================================== */
 :root {
-  color-scheme: light;
+  /* Crisp White Archival Paper Ground */
+  --bg: #fdfcf9;            /* crisp fine-art archival white paper */
+  --bg-surface: #f4f1e8;    /* clean warm off-white ledger surface */
+  --bg-card: #ece6dc;       /* subtle light warm card stock */
+  --bg-elevated: #e0d8ca;   /* pressed binder tone */
+  --bg-translucent: rgba(253, 252, 249, 0.95);
 
-  /* Semantic Monochrome Palette */
-  --canvas: #ffffff;
-  --foreground: #171717;
-  --muted: #525252;
-  --border: #d4d4d4;
-  --surface: #fafafa;
-  --surface-hover: #f0f0f0;
-  --inverse: #171717;
-  --inverse-hover: #404040;
-  --inverse-foreground: #ffffff;
-  --focus: #171717;
-  --selection: #171717;
-  --selection-foreground: #ffffff;
+  /* Deep Gruvbox Letterpress Ink (High-Contrast Editorial) */
+  --text: #1d2021;          /* gruvbox fg0_hard (deepest carbon ink) */
+  --text-muted: #3c3836;    /* gruvbox fg1 (sharp editorial body) */
+  --text-dim: #665c54;      /* gruvbox fg3 (archival caption ink) */
+  --text-ghost: rgba(29, 32, 33, 0.05);
+
+  /* Gruvbox Iconic Accents */
+  --tungsten: #af3a03;       /* gruvbox dark orange / burnt terracotta */
+  --tungsten-bright: #b57614;/* gruvbox dark yellow / raw ochre */
+  --tungsten-glow: rgba(175, 58, 3, 0.2);
+  --tungsten-subtle: rgba(175, 58, 3, 0.08);
+  --cyan-river: #076678;     /* gruvbox dark blue / deep slate teal */
+  --cyan-river-dim: rgba(7, 102, 120, 0.16);
+  --gruvbox-red: #cc241d;
+  --gruvbox-green: #79740e;
+
+  /* Razor-Sharp Hairlines & Grid Rules */
+  --border-hairline: rgba(29, 32, 33, 0.12);
+  --border-medium: rgba(29, 32, 33, 0.24);
+  --border-focus: #af3a03;
 
   /* Typography Stacks */
   --font-sans: "Rethink Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -45,64 +58,14 @@
   --border-width-hairline: 1px;
   --border-width-strong: 2px;
 
-  /* Signature Curves */
+  /* Animaxxing Signature Eases */
   --ease-animaxxing: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --canvas: #0a0a0a;
-    --foreground: #ededed;
-    --muted: #a3a3a3;
-    --border: #262626;
-    --surface: #171717;
-    --surface-hover: #262626;
-    --inverse: #ededed;
-    --inverse-hover: #d4d4d4;
-    --inverse-foreground: #0a0a0a;
-    --focus: #ededed;
-    --selection: #ededed;
-    --selection-foreground: #0a0a0a;
-  }
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --canvas: #0a0a0a;
-  --foreground: #ededed;
-  --muted: #a3a3a3;
-  --border: #262626;
-  --surface: #171717;
-  --surface-hover: #262626;
-  --inverse: #ededed;
-  --inverse-hover: #d4d4d4;
-  --inverse-foreground: #0a0a0a;
-  --focus: #ededed;
-  --selection: #ededed;
-  --selection-foreground: #0a0a0a;
-}
-
-:root[data-theme="light"] {
-  color-scheme: light;
-  --canvas: #ffffff;
-  --foreground: #171717;
-  --muted: #525252;
-  --border: #d4d4d4;
-  --surface: #fafafa;
-  --surface-hover: #f0f0f0;
-  --inverse: #171717;
-  --inverse-hover: #404040;
-  --inverse-foreground: #ffffff;
-  --focus: #171717;
-  --selection: #171717;
-  --selection-foreground: #ffffff;
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================
-   2. BASE RESET & PLAIN-CSS ANIMAXXING STYLES
+   2. BASE RESET & ANIMAXXING STYLES
    ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -111,8 +74,8 @@
 }
 
 html {
-  background-color: var(--canvas);
-  color: var(--foreground);
+  background-color: var(--bg);
+  color: var(--text);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.5;
@@ -123,27 +86,26 @@ html {
 }
 
 body {
-  background: var(--canvas);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Tabular code numbers without ligatures */
 code, pre {
   font-family: var(--font-mono);
   font-variant-ligatures: none;
 }
 
 :focus-visible {
-  outline: var(--border-width-strong) solid var(--focus);
+  outline: var(--border-width-strong) solid var(--border-focus);
   outline-offset: 2px;
 }
 
 ::selection {
-  background: var(--selection);
-  color: var(--selection-foreground);
+  background: var(--text);
+  color: var(--bg);
 }
 
 button {
@@ -165,22 +127,22 @@ img {
   height: auto;
 }
 
-/* Scroll progress hairline */
+/* Top Terracotta Scroll Progress Hairline */
 .scroll-progress-line {
   position: fixed;
   top: 0;
   left: 0;
   width: 0%;
   height: 2px;
-  background: var(--foreground);
+  background: var(--tungsten);
   z-index: 500;
   pointer-events: none;
   transform-origin: left;
 }
 
-/* Hatch pattern fill */
+/* Diagonal Hairline Hatch Pattern */
 .hatch {
-  background-color: var(--foreground);
+  background-color: var(--text);
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M-1 9L9-1M-1 1L1-1M7 9L9 7' stroke='black' stroke-width='1'/%3E%3C/svg%3E");
   mask-size: 8px 8px;
   mask-repeat: repeat;
@@ -191,7 +153,7 @@ img {
    ========================================================================== */
 .poster {
   font-family: var(--font-sans);
-  font-size: clamp(3.2rem, 8.2vw, 8.2rem);
+  font-size: clamp(3.2rem, 7.8vw, 8rem);
   font-weight: 800;
   line-height: 0.84;
   letter-spacing: -0.045em;
@@ -204,7 +166,7 @@ img {
 
 .statement {
   font-family: var(--font-sans);
-  font-size: clamp(2rem, 4.2vw, 3.8rem);
+  font-size: clamp(2rem, 4vw, 3.8rem);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.03em;
@@ -243,7 +205,7 @@ img {
   line-height: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--muted);
+  color: var(--text-dim);
 }
 
 .figure {
@@ -259,19 +221,19 @@ img {
   max-width: 68ch;
   font-size: 1rem;
   line-height: 1.5rem;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
 .body-copy-narrow {
   max-width: 42ch;
 }
 
-.text-muted {
-  color: var(--muted);
+.accent-tungsten {
+  color: var(--tungsten);
 }
 
 /* ==========================================================================
-   4. CHIPS, BUTTONS & PARTICLE ENGINE STYLES
+   4. CHIPS, BUTTONS & GRUVBOX PARTICLE ENGINE STYLES
    ========================================================================== */
 .chip {
   display: inline-flex;
@@ -294,7 +256,7 @@ img {
   align-items: center;
   height: 2.25rem;
   gap: 6px;
-  border: var(--border-width-strong) solid var(--foreground);
+  border: var(--border-width-strong) solid var(--text);
   border-radius: var(--radius-lg);
   padding-inline: 0.875rem;
   font-family: var(--font-sans);
@@ -302,27 +264,8 @@ img {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--foreground);
+  color: var(--text);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.chip-solid {
-  border-color: var(--inverse);
-  background: var(--inverse);
-  color: var(--inverse-foreground);
-}
-.chip-solid:hover {
-  background: var(--inverse-hover);
-  border-color: var(--inverse-hover);
-}
-
-.chip-outline {
-  border-color: var(--foreground);
-  color: var(--foreground);
-  background: transparent;
-}
-.chip-outline:hover {
-  background: var(--surface-hover);
 }
 
 .button-solid {
@@ -333,18 +276,19 @@ img {
   border-radius: var(--radius-lg);
   padding: 0.85rem 1.75rem;
   font-family: var(--font-sans);
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
   line-height: 1;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  background: var(--inverse);
-  color: var(--inverse-foreground);
+  background: var(--text);
+  color: var(--bg);
   border: none;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .button-solid:hover {
-  background: var(--inverse-hover);
+  background: var(--tungsten);
+  color: #fdfcf9;
 }
 
 .button-outline {
@@ -355,18 +299,20 @@ img {
   border-radius: var(--radius-lg);
   padding: 0.85rem 1.75rem;
   font-family: var(--font-sans);
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
   line-height: 1;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  border: var(--border-width-strong) solid var(--foreground);
+  border: var(--border-width-strong) solid var(--text);
   background: transparent;
-  color: var(--foreground);
+  color: var(--text);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .button-outline:hover {
-  background: var(--surface-hover);
+  background: var(--bg-surface);
+  border-color: var(--tungsten);
+  color: var(--tungsten);
 }
 
 /* Particle Canvas Wrapper Isolation */
@@ -384,7 +330,6 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--foreground);
 }
 
 .particle-layer-under canvas {
@@ -410,11 +355,11 @@ img {
   left: 0;
   width: 100%;
   z-index: 200;
-  background: color-mix(in srgb, var(--canvas) 92%, transparent);
+  background: var(--bg-translucent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 var(--spacing-gutter);
+  border-bottom: 1px solid var(--border-hairline);
+  padding: 0 var(--spacing-gutter-lg);
 }
 
 .strip-row {
@@ -435,7 +380,7 @@ img {
   font-size: 0.95rem;
   letter-spacing: 0.12em;
   text-transform: lowercase;
-  color: var(--foreground);
+  color: var(--text);
   font-weight: 700;
   text-decoration: none;
 }
@@ -446,7 +391,7 @@ img {
   left: 0;
   width: 100%;
   height: 1px;
-  background: var(--foreground);
+  background: var(--tungsten);
   transform-origin: left;
   transform: scaleX(0);
 }
@@ -463,12 +408,12 @@ img {
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text-dim);
   transition: color 0.15s ease;
 }
 
 .strip-nav a:hover {
-  color: var(--foreground);
+  color: var(--tungsten);
 }
 
 .strip-meta {
@@ -483,7 +428,7 @@ img {
   font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.1em;
-  color: var(--foreground);
+  color: var(--text);
   font-weight: 700;
   display: inline-flex;
   align-items: center;
@@ -493,7 +438,7 @@ img {
 .timecode-dot {
   width: 6px;
   height: 6px;
-  background: var(--foreground);
+  background: var(--gruvbox-red);
   border-radius: 50%;
   animation: pulseDot 2s infinite ease-in-out;
 }
@@ -503,24 +448,27 @@ img {
   50% { opacity: 0.3; transform: scale(0.75); }
 }
 
-.theme-toggle-btn {
+.audio-toggle-btn {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-sm);
   padding: 4px 10px;
-  color: var(--muted);
+  color: var(--text-dim);
   transition: all 0.2s ease;
+  background: rgba(175, 58, 3, 0.06);
 }
-.theme-toggle-btn:hover {
-  color: var(--foreground);
-  border-color: var(--foreground);
+.audio-toggle-btn:hover,
+.audio-toggle-btn.active {
+  color: #fdfcf9;
+  background: var(--tungsten);
+  border-color: var(--tungsten);
 }
 
 /* ==========================================================================
-   6. SCENE 01: HERO SECTION (PROPORTIONAL 100VH BALANCED EDITORIAL POSTER)
+   6. SCENE 01: HERO BROADSHEET POSTER (PROPORTIONAL 100VH ASYMMETRICAL GRID)
    ========================================================================== */
 .hero {
   min-height: 100vh;
@@ -531,47 +479,101 @@ img {
   justify-content: space-between;
   position: relative;
   overflow: hidden;
-  background: var(--canvas);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border-hairline);
 }
 
 .hero-pretitle-strip {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-hairline);
   padding-bottom: 8px;
   margin-bottom: clamp(10px, 1.8vh, 18px);
 }
 
+/* Asymmetrical 8 + 4 Hero Grid */
+.hero-main-asymmetric-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 36px;
+  align-items: start;
+  margin-bottom: clamp(12px, 2vh, 22px);
+}
+
 .hero-title-wrap {
   position: relative;
-  margin-bottom: clamp(12px, 2.2vh, 24px);
+  margin-bottom: clamp(10px, 1.8vh, 20px);
 }
 
 .hero-title {
   margin: 0;
   text-wrap: balance;
+  color: var(--text);
 }
 
-.hero-title-line {
-  display: block;
-  overflow: hidden;
-}
-
-.hero-title-inner {
-  display: block;
-}
-
-/* Speak-in Subhead */
 .hero-subhead {
   font-family: var(--font-sans);
-  font-size: clamp(1.1rem, 1.35vw, 1.45rem);
+  font-size: clamp(1.05rem, 1.25vw, 1.35rem);
   line-height: 1.42;
   font-weight: 500;
-  color: var(--foreground);
-  max-width: 58ch;
-  margin-bottom: clamp(16px, 2.5vh, 26px);
+  color: var(--text-muted);
+  max-width: 54ch;
+  margin-bottom: clamp(14px, 2vh, 22px);
+}
+
+/* Hero Right: Architectural Passport Metadata Card */
+.hero-passport-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.passport-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-hairline);
+  padding-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  color: var(--tungsten);
+  font-weight: 700;
+}
+
+.passport-data-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+.passport-data-row .k { color: var(--text-dim); text-transform: uppercase; }
+.passport-data-row .v { color: var(--text); font-weight: 700; }
+
+.passport-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--gruvbox-green);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.passport-status-pill::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--gruvbox-green);
+  border-radius: 50%;
 }
 
 /* Hero Actions & Buttons */
@@ -579,7 +581,6 @@ img {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin-bottom: clamp(12px, 2vh, 22px);
   flex-wrap: wrap;
 }
 
@@ -588,12 +589,12 @@ img {
   width: 100vw;
   margin-left: calc(-1 * var(--spacing-gutter-lg));
   padding: 8px 0;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-hairline);
+  border-bottom: 1px solid var(--border-hairline);
   overflow: hidden;
   white-space: nowrap;
-  margin-bottom: clamp(12px, 2vh, 20px);
+  margin-bottom: clamp(10px, 1.8vh, 18px);
 }
 
 .marquee-track {
@@ -607,14 +608,14 @@ img {
   font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
 .marquee-item .sep {
-  color: var(--foreground);
+  color: var(--tungsten-bright);
   font-weight: 700;
 }
 
@@ -624,7 +625,7 @@ img {
   grid-template-columns: 1.4fr 1fr 0.6fr;
   gap: 36px;
   align-items: end;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-hairline);
   padding-top: clamp(10px, 1.5vh, 16px);
 }
 
@@ -632,13 +633,13 @@ img {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   line-height: 1.7;
-  color: var(--muted);
-  border-left: 1px solid var(--border);
+  color: var(--text-dim);
+  border-left: 1px solid var(--border-hairline);
   padding-left: 18px;
 }
 
 .hero-spec-ledger strong {
-  color: var(--foreground);
+  color: var(--text);
   font-weight: 700;
 }
 
@@ -650,15 +651,15 @@ img {
   font-family: var(--font-mono);
   font-size: 0.625rem;
   letter-spacing: 0.2em;
-  color: var(--muted);
+  color: var(--tungsten);
   text-transform: uppercase;
   font-weight: 700;
 }
 
 .scroll-indicator-line {
-  width: 1px;
+  width: 1.5px;
   height: 36px;
-  background: linear-gradient(to bottom, var(--foreground) 0%, transparent 100%);
+  background: linear-gradient(to bottom, var(--tungsten) 0%, transparent 100%);
   animation: scrollDrop 2s infinite ease-in-out;
 }
 
@@ -686,7 +687,7 @@ img {
   top: 5rem;
   height: calc(100vh - 6rem);
   transform: rotate(180deg);
-  border-left: 1px solid var(--border);
+  border-left: 1px solid var(--border-hairline);
   padding-left: 0.75rem;
   writing-mode: vertical-rl;
   display: flex;
@@ -700,7 +701,7 @@ img {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text-dim);
   transition: color 0.15s ease;
   padding-block: 0.5rem;
   cursor: pointer;
@@ -708,7 +709,7 @@ img {
 
 .rail-link:hover,
 .rail-link[aria-current="page"] {
-  color: var(--foreground);
+  color: var(--tungsten);
 }
 
 .chapter-body {
@@ -722,8 +723,8 @@ img {
 .atlas-pin-wrapper {
   position: relative;
   height: 220vh;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-hairline);
 }
 
 .atlas-viewport {
@@ -754,8 +755,8 @@ img {
   width: 140%;
   height: 140%;
   background-image: 
-    linear-gradient(to right, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px);
+    linear-gradient(to right, rgba(29,32,33,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29,32,33,0.06) 1px, transparent 1px);
   background-size: 80px 80px;
   pointer-events: none;
   transform: translateZ(-200px);
@@ -781,9 +782,8 @@ img {
   overflow: visible;
 }
 
-.atlas-svg path {
-  stroke: var(--foreground);
-  transition: stroke 0.2s ease;
+.atlas-svg path.river {
+  stroke: var(--cyan-river);
 }
 
 .map-node {
@@ -792,7 +792,7 @@ img {
 }
 
 .map-node .glow {
-  fill: color-mix(in srgb, var(--foreground) 10%, transparent);
+  fill: var(--tungsten-glow);
 }
 
 .map-node:hover {
@@ -800,7 +800,7 @@ img {
 }
 
 .map-node:hover .glow {
-  fill: color-mix(in srgb, var(--foreground) 25%, transparent);
+  fill: rgba(175, 58, 3, 0.35);
 }
 
 /* Atlas HUD Telemetry */
@@ -813,7 +813,7 @@ img {
   justify-content: space-between;
   align-items: flex-end;
   pointer-events: none;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-hairline);
   padding-top: 16px;
 }
 
@@ -826,7 +826,7 @@ img {
 .atlas-hud-progress {
   width: 180px;
   height: 2px;
-  background: var(--border);
+  background: var(--border-hairline);
   position: relative;
   overflow: hidden;
 }
@@ -837,7 +837,7 @@ img {
   top: 0;
   height: 100%;
   width: 0%;
-  background: var(--foreground);
+  background: var(--tungsten);
   transition: width 0.1s linear;
 }
 
@@ -848,8 +848,8 @@ img {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: var(--canvas);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border-hairline);
 }
 
 .venues-track-viewport {
@@ -877,8 +877,8 @@ img {
   padding: 75px var(--spacing-gutter-lg) 36px;
   gap: 40px;
   position: relative;
-  border-right: 1px solid var(--border);
-  background: var(--canvas);
+  border-right: 1px solid var(--border-hairline);
+  background: var(--bg);
 }
 
 .chamber-editorial-side {
@@ -898,8 +898,8 @@ img {
   font-size: 0.6875rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
-  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border-hairline);
   padding-bottom: 10px;
   font-weight: 700;
 }
@@ -911,22 +911,22 @@ img {
   line-height: 0.94;
   letter-spacing: -0.04em;
   text-transform: uppercase;
-  color: var(--foreground);
+  color: var(--text);
   margin: 12px 0 10px;
 }
 
 .chamber-description {
   font-size: clamp(0.88rem, 1vw, 1.1rem);
   line-height: 1.45;
-  color: var(--muted);
+  color: var(--text-muted);
   max-width: 520px;
   margin-bottom: 14px;
 }
 
 /* Acoustic Telemetry Card */
 .acoustic-signature-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-sm);
   padding: 12px 18px;
   margin-bottom: 16px;
@@ -942,14 +942,14 @@ img {
 }
 
 .acoustic-signature-info .label {
-  color: var(--muted);
+  color: var(--text-dim);
   text-transform: uppercase;
   display: block;
   margin-bottom: 2px;
 }
 
 .acoustic-signature-info .val {
-  color: var(--foreground);
+  color: var(--text);
   font-weight: 700;
 }
 
@@ -962,7 +962,7 @@ img {
 
 .waveform-bar {
   width: 3px;
-  background: var(--foreground);
+  background: var(--tungsten);
   border-radius: 1px;
   animation: waveMotion 1.4s infinite ease-in-out;
 }
@@ -981,7 +981,7 @@ img {
 }
 
 .sensory-specs-table {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-hairline);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px 20px;
@@ -997,14 +997,14 @@ img {
   font-family: var(--font-mono);
   font-size: 0.625rem;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text-dim);
   letter-spacing: 0.12em;
 }
 
 .spec-v {
   font-family: var(--font-sans);
   font-size: 0.75rem;
-  color: var(--foreground);
+  color: var(--text);
   font-weight: 600;
   margin-top: 2px;
 }
@@ -1023,8 +1023,8 @@ img {
   width: 100%;
   flex: 1;
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--surface);
+  border: 1px solid var(--border-hairline);
+  background: var(--bg-surface);
   min-height: 240px;
 }
 
@@ -1038,25 +1038,25 @@ img {
 }
 
 .media-frame-clipped:hover .media-parallax-img {
-  filter: grayscale(80%) contrast(115%);
+  filter: grayscale(60%) contrast(115%);
 }
 
 .media-caption-strip {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-hairline);
   padding: 8px 0;
   margin-top: 10px;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  color: var(--muted);
+  color: var(--text-dim);
 }
 
 .chamber-curation-list {
   margin-top: 8px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
   padding: 10px 14px;
 }
 
@@ -1065,8 +1065,9 @@ img {
   font-size: 0.625rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--tungsten);
   margin-bottom: 4px;
+  font-weight: 700;
 }
 
 .artist-row {
@@ -1074,7 +1075,7 @@ img {
   justify-content: space-between;
   align-items: baseline;
   padding: 4px 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  border-bottom: 1px solid rgba(29, 32, 33, 0.08);
 }
 
 .artist-row:last-child {
@@ -1084,20 +1085,20 @@ img {
 .artist-row .name {
   font-size: 0.8125rem;
   font-weight: 700;
-  color: var(--foreground);
+  color: var(--text);
 }
 
 .artist-row .discipline {
   font-family: var(--font-mono);
   font-size: 0.625rem;
-  color: var(--muted);
+  color: var(--text-dim);
   margin-left: 8px;
 }
 
 .artist-row .time {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  color: var(--foreground);
+  color: var(--tungsten);
   font-weight: 700;
 }
 
@@ -1108,7 +1109,7 @@ img {
   padding: var(--spacing-section) var(--spacing-gutter-lg);
   max-width: 90rem;
   margin-inline: auto;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-hairline);
 }
 
 .schedule-header {
@@ -1116,7 +1117,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-hairline);
   padding-bottom: 1.25rem;
 }
 
@@ -1132,17 +1133,17 @@ img {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 6px 14px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-sm);
-  color: var(--muted);
+  color: var(--text-dim);
   transition: all 0.2s ease;
 }
 
 .tab-btn:hover,
 .tab-btn.active {
-  background: var(--inverse);
-  color: var(--inverse-foreground);
-  border-color: var(--inverse);
+  background: var(--text);
+  color: #fdfcf9;
+  border-color: var(--text);
 }
 
 /* Ledger Rows */
@@ -1151,13 +1152,13 @@ img {
   grid-template-columns: 3rem minmax(0, 1fr);
   align-items: start;
   column-gap: 1.5rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-hairline);
   padding-block: 0.85rem;
   transition: background 0.15s ease;
 }
 
 .ledger-row:hover {
-  background: var(--surface-hover);
+  background: var(--bg-surface);
 }
 
 .ledger-figures {
@@ -1183,7 +1184,7 @@ img {
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 700;
-  color: var(--foreground);
+  color: var(--tungsten);
 }
 
 .slot-act {
@@ -1191,14 +1192,14 @@ img {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.01em;
-  color: var(--foreground);
+  color: var(--text);
 }
 
 .slot-venue {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text-dim);
 }
 
 .slot-badge {
@@ -1209,7 +1210,7 @@ img {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 2px 8px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-xs);
   width: fit-content;
 }
@@ -1221,7 +1222,7 @@ img {
   padding: var(--spacing-section) var(--spacing-gutter-lg);
   max-width: 90rem;
   margin-inline: auto;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-hairline);
 }
 
 .card-grid {
@@ -1242,18 +1243,23 @@ img {
   justify-content: space-between;
   height: 100%;
   cursor: pointer;
-  border: var(--border-width-strong) solid var(--border);
+  border: var(--border-width-strong) solid var(--border-medium);
   border-radius: var(--radius-lg);
-  background: var(--surface);
+  background: var(--bg-surface);
   padding: 2rem;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 .card:hover {
-  border-color: var(--foreground);
-  background: var(--surface-hover);
+  border-color: var(--tungsten);
+  background: #fbf9f4;
   transform: translateY(-2px);
+}
+
+.card.card-featured {
+  border-color: var(--tungsten);
+  background: var(--bg-card);
 }
 
 .card-label {
@@ -1278,14 +1284,14 @@ img {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--foreground);
+  color: var(--tungsten);
 }
 
 /* ==========================================================================
    12. FOOTER & MODAL
    ========================================================================== */
 .shell-footer {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-hairline);
   padding: 3rem var(--spacing-gutter-lg);
   max-width: 90rem;
   margin-inline: auto;
@@ -1306,7 +1312,7 @@ img {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: color-mix(in srgb, var(--canvas) 85%, transparent);
+  background: rgba(29, 32, 33, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   z-index: 600;
@@ -1325,14 +1331,14 @@ img {
 }
 
 .modal-content {
-  background: var(--canvas);
-  border: var(--border-width-strong) solid var(--foreground);
+  background: var(--bg);
+  border: var(--border-width-strong) solid var(--text);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 500px;
   padding: 2.5rem;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
 }
 
 .modal-close {
@@ -1341,7 +1347,7 @@ img {
   right: 18px;
   background: transparent;
   border: none;
-  color: var(--muted);
+  color: var(--text-dim);
   font-size: 24px;
   line-height: 1;
   cursor: pointer;
@@ -1349,31 +1355,31 @@ img {
 }
 
 .modal-close:hover {
-  color: var(--foreground);
+  color: var(--text);
 }
 
 .text-field {
   display: block;
   width: 100%;
   border: 0;
-  border-bottom: 3px solid var(--foreground);
+  border-bottom: 3px solid var(--text);
   background: transparent;
   padding-block: 0.75rem;
   font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--foreground);
+  color: var(--text);
   outline: none;
   margin-bottom: 1.5rem;
 }
 
 .text-field::placeholder {
-  color: var(--border);
-  opacity: 1;
+  color: var(--text-dim);
+  opacity: 0.6;
 }
 
 .text-field:focus-visible {
-  outline: 2px solid var(--focus);
+  outline: 2px solid var(--border-focus);
   outline-offset: 4px;
 }
 
@@ -1385,6 +1391,10 @@ img {
     height: auto;
     min-height: 100vh;
     padding: 85px var(--spacing-gutter) 36px;
+  }
+  .hero-main-asymmetric-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
   .hero-bottom-grid {
     grid-template-columns: 1fr;
@@ -1417,7 +1427,7 @@ img {
     grid-template-columns: 1fr;
     padding: 60px var(--spacing-gutter) 40px;
     height: auto;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-hairline);
     border-right: none;
   }
   .media-frame-clipped {
