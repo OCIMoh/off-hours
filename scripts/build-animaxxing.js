@@ -178,34 +178,47 @@ ${css}
     </section>
 
     <!-- ======================================================================
-         SCENE 02: THE NOCTURNAL ATLAS (ROOT FULL-WIDTH VIEWPORT DESCENT)
+         SCENE 02: THE NOCTURNAL ATLAS (SCROLL-ACTIVATED CIVIC NODES)
          ====================================================================== -->
     <section class="atlas-pin-wrapper" id="atlasPin" aria-label="The Nocturnal Atlas">
       <div class="atlas-viewport" id="atlas">
         
-        <!-- HUD Telemetry Overlay -->
+        <!-- HUD Telemetry Header -->
         <div class="atlas-hud">
           <div class="atlas-hud-info">
             <span class="mono-label">NOCTURNAL ATLAS · RECONNAISSANCE</span>
-            <span class="mono-note">Coordinates: 53°32′N 09°59′E · River &amp; Rail Corridor</span>
-            <span class="mono-note">Depth: -14m Chamber Datum · Active Civic Nodes: 04</span>
+            <span class="mono-note">Coordinates: 53°32′N 09°59′E · Central River &amp; Rail Corridor</span>
           </div>
-          <div class="atlas-hud-progress">
-            <div class="atlas-hud-fill" id="atlasHudFill"></div>
+
+          <!-- Interactive Node Navigator Tabs -->
+          <div class="atlas-hud-nav" role="tablist" aria-label="Civic Space Nodes">
+            <button class="atlas-nav-tab is-active" data-atlas-index="0" role="tab" aria-selected="true">01 TRAM DEPOT</button>
+            <button class="atlas-nav-tab" data-atlas-index="1" role="tab" aria-selected="false">02 BATHS</button>
+            <button class="atlas-nav-tab" data-atlas-index="2" role="tab" aria-selected="false">03 MARKET</button>
+            <button class="atlas-nav-tab" data-atlas-index="3" role="tab" aria-selected="false">04 PRINTWORKS</button>
+          </div>
+
+          <div class="atlas-hud-status">
+            <span class="mono-note" id="atlasNodeCounter">NODE 01 / 04 ACTIVE</span>
+            <div class="atlas-hud-progress">
+              <div class="atlas-hud-fill" id="atlasHudFill"></div>
+            </div>
           </div>
         </div>
 
-        <!-- Multi-Plane Depth Schematic -->
-        <div class="atlas-depth-plane">
-          <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
+        <!-- Main Workspace: Map Canvas + Dossier Deck -->
+        <div class="atlas-workspace">
+          
+          <!-- Left: Schematic Corridor Map (Stable 1:1 scale, zero zoom jitter) -->
+          <div class="atlas-map-stage" id="atlasMapStage">
+            <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
 
-          <div class="atlas-layer-schematic" id="atlasSchematicMap">
-            <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River & Rail Map">
+            <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River &amp; Rail Map">
               <!-- River Spine in Gruvbox Teal -->
-              <path class="river" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                    stroke-width="32" stroke-linecap="round" fill="none" opacity="0.2"/>
-              <path class="river" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                    stroke-width="8" stroke-linecap="round" fill="none" opacity="0.7"/>
+              <path class="river river-bg" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                    stroke-width="32" stroke-linecap="round" fill="none" opacity="0.15"/>
+              <path class="river river-line" id="atlasRiverLine" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                    stroke-width="6" stroke-linecap="round" fill="none" opacity="0.8"/>
 
               <!-- Rail Freight Sidings -->
               <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="10 8" fill="none" opacity="0.35"/>
@@ -220,40 +233,137 @@ ${css}
               <line x1="700" y1="0" x2="700" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
               <line x1="1050" y1="0" x2="1050" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
 
-              <!-- Four Civic Nodes in Terracotta -->
-              <g class="map-node" transform="translate(380, 420)">
-                <circle class="glow" r="28" />
-                <circle r="7.5" fill="var(--tungsten)" />
-                <circle r="2.5" fill="#fdfcf9" />
-                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">01 TRAM DEPOT</text>
-                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">TRANSIT · 108dB SUB-BASS</text>
+              <!-- Four Civic Nodes in Terracotta & Ochre (Zero scale CSS hover to avoid jitter) -->
+              <!-- Node 01: Tram Depot -->
+              <g class="map-node is-active" id="mapNode0" data-node="0" transform="translate(380, 420)">
+                <circle class="radar-ring" r="32" />
+                <circle class="radar-core" r="8" fill="var(--tungsten)" />
+                <circle r="3" fill="#fdfcf9" />
+                <text x="16" y="5" class="node-title">01 TRAM DEPOT</text>
+                <text x="16" y="19" class="node-sub">TRANSIT · 108dB SUB-BASS</text>
               </g>
 
-              <g class="map-node" transform="translate(760, 310)">
-                <circle class="glow" r="28" />
-                <circle r="7.5" fill="var(--tungsten)" />
-                <circle r="2.5" fill="#fdfcf9" />
-                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
-                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">RECREATION · 7.2s ECHO</text>
+              <!-- Node 02: Municipal Baths -->
+              <g class="map-node" id="mapNode1" data-node="1" transform="translate(760, 310)">
+                <circle class="radar-ring" r="32" />
+                <circle class="radar-core" r="8" fill="var(--tungsten)" />
+                <circle r="3" fill="#fdfcf9" />
+                <text x="16" y="5" class="node-title">02 MUNICIPAL BATHS</text>
+                <text x="16" y="19" class="node-sub">RECREATION · 7.2s ECHO</text>
               </g>
 
-              <g class="map-node" transform="translate(680, 680)">
-                <circle class="glow" r="28" />
-                <circle r="7.5" fill="var(--tungsten)" />
-                <circle r="2.5" fill="#fdfcf9" />
-                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">03 NIGHT MARKET</text>
-                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMERCE · SOCIAL HUB</text>
+              <!-- Node 03: Night Market -->
+              <g class="map-node" id="mapNode2" data-node="2" transform="translate(680, 680)">
+                <circle class="radar-ring" r="32" />
+                <circle class="radar-core" r="8" fill="var(--tungsten)" />
+                <circle r="3" fill="#fdfcf9" />
+                <text x="16" y="5" class="node-title">03 NIGHT MARKET</text>
+                <text x="16" y="19" class="node-sub">COMMERCE · SOCIAL HUB</text>
               </g>
 
-              <g class="map-node" transform="translate(1080, 480)">
-                <circle class="glow" r="28" />
-                <circle r="7.5" fill="var(--tungsten)" />
-                <circle r="2.5" fill="#fdfcf9" />
-                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">04 PRINTING WORKS</text>
-                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMUNICATION · 35MM CINEMA</text>
+              <!-- Node 04: Printing Works -->
+              <g class="map-node" id="mapNode3" data-node="3" transform="translate(1080, 480)">
+                <circle class="radar-ring" r="32" />
+                <circle class="radar-core" r="8" fill="var(--tungsten)" />
+                <circle r="3" fill="#fdfcf9" />
+                <text x="16" y="5" class="node-title">04 PRINTING WORKS</text>
+                <text x="16" y="19" class="node-sub">COMMUNICATION · 35MM CINEMA</text>
               </g>
             </svg>
           </div>
+
+          <!-- Right: Active Dossier Deck (Opened sequentially on scroll) -->
+          <aside class="atlas-dossier-deck" aria-label="Civic Space Dossiers">
+            
+            <!-- Card 01 -->
+            <div class="dossier-card is-active" id="dossierCard0" data-card="0">
+              <div class="dossier-card-tag">
+                <span class="tag-num">NODE 01 / 04</span>
+                <span class="tag-status">ACTIVATED</span>
+              </div>
+              <h3 class="dossier-card-title">THE OLD TRAM DEPOT</h3>
+              <p class="dossier-card-copy">
+                A monumental 1912 maintenance hangar with exposed steel riveted trusses, concrete oil pits, and transit track turnouts. Intimate crowd proximity meets visceral sub-bass resonance.
+              </p>
+              <div class="dossier-specs-mini">
+                <div><span>LAYER</span><strong>Transit Infrastructure</strong></div>
+                <div><span>CAPACITY</span><strong>800 Persons</strong></div>
+                <div><span>ACOUSTIC</span><strong>108 dB Sub-bass Peak</strong></div>
+                <div><span>HOURS</span><strong>21:00 — 05:30</strong></div>
+              </div>
+              <a href="#venuesPin" class="dossier-action-btn">
+                <span>INSPECT CHAMBER 01 DOSSIER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Card 02 -->
+            <div class="dossier-card" id="dossierCard1" data-card="1">
+              <div class="dossier-card-tag">
+                <span class="tag-num">NODE 02 / 04</span>
+                <span class="tag-status">STANDBY</span>
+              </div>
+              <h3 class="dossier-card-title">THE MUNICIPAL BATHS</h3>
+              <p class="dossier-card-copy">
+                Drained 1928 ceramic-tiled hydrotherapy natatorium with barrel-vaulted skylights and dry mosaic diving wells. A cathedral for quadraphonic ambient diffusion and microtonal voice.
+              </p>
+              <div class="dossier-specs-mini">
+                <div><span>LAYER</span><strong>Civic Hydrotherapy</strong></div>
+                <div><span>CAPACITY</span><strong>450 Persons</strong></div>
+                <div><span>ACOUSTIC</span><strong>7.2s Ceramic Reverb</strong></div>
+                <div><span>HOURS</span><strong>20:30 — 05:00</strong></div>
+              </div>
+              <a href="#venuesPin" class="dossier-action-btn">
+                <span>INSPECT CHAMBER 02 DOSSIER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Card 03 -->
+            <div class="dossier-card" id="dossierCard2" data-card="2">
+              <div class="dossier-card-tag">
+                <span class="tag-num">NODE 03 / 04</span>
+                <span class="tag-status">STANDBY</span>
+              </div>
+              <h3 class="dossier-card-title">THE NIGHT MARKET</h3>
+              <p class="dossier-card-copy">
+                A cavernous iron-and-glass transit exchange hall active continuously through dark hours. The social vortex hosting regional street kitchens, vinyl stalls, and modular drone installations.
+              </p>
+              <div class="dossier-specs-mini">
+                <div><span>LAYER</span><strong>Nocturnal Commerce</strong></div>
+                <div><span>CAPACITY</span><strong>1200 Persons</strong></div>
+                <div><span>ACOUSTIC</span><strong>Wide Open Dispersion</strong></div>
+                <div><span>HOURS</span><strong>20:00 — 06:00</strong></div>
+              </div>
+              <a href="#venuesPin" class="dossier-action-btn">
+                <span>INSPECT CHAMBER 03 DOSSIER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Card 04 -->
+            <div class="dossier-card" id="dossierCard3" data-card="3">
+              <div class="dossier-card-tag">
+                <span class="tag-num">NODE 04 / 04</span>
+                <span class="tag-status">STANDBY</span>
+              </div>
+              <h3 class="dossier-card-title">THE OLD PRINTWORKS</h3>
+              <p class="dossier-card-copy">
+                A former newspaper press warehouse with double-height ceiling voids, heavy linotype cast-iron bedplates, and darkroom masonry. Dedicated to dual 35mm celluloid projections.
+              </p>
+              <div class="dossier-specs-mini">
+                <div><span>LAYER</span><strong>Print Communication</strong></div>
+                <div><span>CAPACITY</span><strong>500 Persons</strong></div>
+                <div><span>ACOUSTIC</span><strong>Dry Mechanical Damp</strong></div>
+                <div><span>HOURS</span><strong>21:30 — 05:00</strong></div>
+              </div>
+              <a href="#venuesPin" class="dossier-action-btn">
+                <span>INSPECT CHAMBER 04 DOSSIER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+          </aside>
         </div>
 
       </div>

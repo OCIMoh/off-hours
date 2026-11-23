@@ -741,13 +741,16 @@ img {
 }
 
 /* ==========================================================================
-   8. SCENE 02: THE NOCTURNAL ATLAS (ARCHITECTURAL MONOCHROME SCHEMATIC)
+   8. SCENE 02: THE NOCTURNAL ATLAS (SCROLL-ACTIVATED CIVIC DOSSIER DECK)
    ========================================================================== */
 .atlas-pin-wrapper {
   position: relative;
-  height: 220vh;
+  height: 250vh;
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border-hairline);
+  width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 .atlas-viewport {
@@ -756,112 +759,323 @@ img {
   height: 100vh;
   overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1200px;
+  flex-direction: column;
+  padding: 70px var(--spacing-gutter-lg) 24px;
+  box-sizing: border-box;
 }
 
-.atlas-depth-plane {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+.atlas-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-hairline);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.atlas-hud-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.atlas-hud-nav {
+  display: flex;
+  gap: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border-hairline);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.atlas-nav-tab {
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  padding: 6px 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-weight: 600;
+}
+
+.atlas-nav-tab:hover {
+  color: var(--text);
+  background: rgba(29, 32, 33, 0.04);
+}
+
+.atlas-nav-tab.is-active {
+  background: var(--tungsten);
+  color: #fdfcf9;
+}
+
+.atlas-hud-status {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.atlas-hud-progress {
+  width: 120px;
+  height: 4px;
+  background: rgba(29, 32, 33, 0.1);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.atlas-hud-fill {
+  width: 25%;
   height: 100%;
-  transform-style: preserve-3d;
-  will-change: transform;
+  background: var(--tungsten);
+  transition: width 0.25s ease;
+}
+
+/* Workspace: Map Canvas + Dossier Deck */
+.atlas-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 28px;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.atlas-map-stage {
+  position: relative;
+  border: 1px solid var(--border-hairline);
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(29, 32, 33, 0.03);
 }
 
 .atlas-layer-bg-grid {
   position: absolute;
-  top: -20%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
+  inset: 0;
   background-image: 
-    linear-gradient(to right, rgba(29,32,33,0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(29,32,33,0.06) 1px, transparent 1px);
-  background-size: 80px 80px;
+    linear-gradient(to right, rgba(29, 32, 33, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29, 32, 33, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
   pointer-events: none;
-  transform: translateZ(-200px);
-}
-
-.atlas-layer-schematic {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateZ(0px);
-  will-change: transform;
 }
 
 .atlas-svg {
-  width: 88vw;
-  max-width: 1350px;
-  height: auto;
+  width: 95%;
+  height: 92%;
+  max-width: 1100px;
   overflow: visible;
+  /* NO transform scaling so hitboxes and layout are 100% stable */
 }
 
 .atlas-svg path.river {
   stroke: var(--cyan-river);
 }
 
+/* Map Nodes: Jitter-Free Design (No CSS scale transforms on hover!) */
 .map-node {
   cursor: pointer;
-  transition: transform 0.3s var(--ease-expo);
 }
 
-.map-node .glow {
-  fill: var(--tungsten-glow);
+.map-node .radar-ring {
+  fill: none;
+  stroke: var(--tungsten);
+  stroke-width: 1.5;
+  opacity: 0.15;
+  transition: stroke 0.3s ease, opacity 0.3s ease;
 }
 
-.map-node:hover {
-  transform: scale(1.15);
+.map-node .radar-core {
+  fill: var(--text-dim);
+  transition: fill 0.3s ease;
 }
 
-.map-node:hover .glow {
-  fill: rgba(175, 58, 3, 0.35);
+.map-node .node-title {
+  fill: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transition: fill 0.3s ease;
 }
 
-/* Atlas HUD Telemetry */
-.atlas-hud {
-  position: absolute;
-  bottom: 40px;
-  left: var(--spacing-gutter-lg);
-  right: var(--spacing-gutter-lg);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  pointer-events: none;
-  border-top: 1px solid var(--border-hairline);
-  padding-top: 16px;
+.map-node .node-sub {
+  fill: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, fill 0.3s ease;
 }
 
-.atlas-hud-info {
+/* Node Active State (Toggled smoothly by ScrollTrigger) */
+.map-node.is-active .radar-ring {
+  stroke: var(--tungsten);
+  opacity: 0.85;
+  animation: radarPulse 2s infinite ease-out;
+}
+
+.map-node.is-active .radar-core {
+  fill: var(--tungsten);
+}
+
+.map-node.is-active .node-title {
+  fill: var(--text);
+  font-weight: 800;
+}
+
+.map-node.is-active .node-sub {
+  fill: var(--tungsten);
+  opacity: 1;
+}
+
+/* Hover: Subtle color highlight only — zero layout or scale change! */
+.map-node:hover .radar-ring {
+  stroke: var(--tungsten-bright);
+  opacity: 0.7;
+}
+.map-node:hover .node-title {
+  fill: var(--text);
+}
+
+@keyframes radarPulse {
+  0% { r: 10px; opacity: 0.9; stroke-width: 2px; }
+  100% { r: 38px; opacity: 0; stroke-width: 0.5px; }
+}
+
+/* Dossier Deck: Stack of 4 Editorial Cards */
+.atlas-dossier-deck {
+  position: relative;
+  border: 1px solid var(--border-hairline);
+  background: var(--bg);
+  border-radius: var(--radius-sm);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-.atlas-hud-progress {
-  width: 180px;
-  height: 2px;
-  background: var(--border-hairline);
-  position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(29, 32, 33, 0.03);
 }
 
-.atlas-hud-fill {
+.dossier-card {
   position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 0%;
+  inset: 0;
+  padding: 30px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--bg);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  border-left: 3px solid transparent;
+  transition: opacity 0.35s ease, visibility 0.35s ease, border-color 0.35s ease;
+}
+
+.dossier-card.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  border-left: 4px solid var(--tungsten);
+}
+
+.dossier-card-tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.dossier-card-tag .tag-num {
+  color: var(--tungsten);
+  font-weight: 700;
+}
+
+.dossier-card-tag .tag-status {
+  color: var(--text-dim);
+  background: var(--bg-surface);
+  padding: 3px 8px;
+  border: 1px solid var(--border-hairline);
+  border-radius: 2px;
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+}
+
+.dossier-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.2vw, 2.3rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  margin: 14px 0 8px;
+}
+
+.dossier-card-copy {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.dossier-specs-mini {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.dossier-specs-mini > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.dossier-specs-mini span {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.dossier-specs-mini strong {
+  font-size: 0.75rem;
+  color: var(--text);
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+.dossier-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--text);
+  color: #fdfcf9;
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s ease;
+}
+
+.dossier-action-btn:hover {
   background: var(--tungsten);
-  transition: width 0.1s linear;
 }
 
 /* ==========================================================================
@@ -1483,6 +1697,33 @@ img {
   .chapter-body {
     grid-column: span 12 / span 12;
   }
+  /* Atlas Responsive Behavior */
+  .atlas-pin-wrapper {
+    height: auto !important;
+  }
+  .atlas-viewport {
+    height: auto !important;
+    padding: 60px var(--spacing-gutter) 40px !important;
+    overflow: visible !important;
+  }
+  .atlas-hud {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .atlas-hud-nav {
+    flex-wrap: wrap !important;
+  }
+  .atlas-workspace {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .atlas-map-stage {
+    height: 380px !important;
+  }
+  .atlas-dossier-deck {
+    min-height: 400px !important;
+  }
   .venues-pin-wrapper {
     height: auto !important;
     width: 100% !important;
@@ -1668,34 +1909,47 @@ img {
     </section>
 
     <!-- ======================================================================
-         SCENE 02: THE NOCTURNAL ATLAS (ROOT FULL-WIDTH VIEWPORT DESCENT)
+         SCENE 02: THE NOCTURNAL ATLAS (SCROLL-ACTIVATED CIVIC NODES)
          ====================================================================== -->
     <section class="atlas-pin-wrapper" id="atlasPin" aria-label="The Nocturnal Atlas">
       <div class="atlas-viewport" id="atlas">
         
-        <!-- HUD Telemetry Overlay -->
+        <!-- HUD Telemetry Header -->
         <div class="atlas-hud">
           <div class="atlas-hud-info">
             <span class="mono-label">NOCTURNAL ATLAS · RECONNAISSANCE</span>
-            <span class="mono-note">Coordinates: 53°32′N 09°59′E · River &amp; Rail Corridor</span>
-            <span class="mono-note">Depth: -14m Chamber Datum · Active Civic Nodes: 04</span>
+            <span class="mono-note">Coordinates: 53°32′N 09°59′E · Central River &amp; Rail Corridor</span>
           </div>
-          <div class="atlas-hud-progress">
-            <div class="atlas-hud-fill" id="atlasHudFill"></div>
+
+          <!-- Interactive Node Navigator Tabs -->
+          <div class="atlas-hud-nav" role="tablist" aria-label="Civic Space Nodes">
+            <button class="atlas-nav-tab is-active" data-atlas-index="0" role="tab" aria-selected="true">01 TRAM DEPOT</button>
+            <button class="atlas-nav-tab" data-atlas-index="1" role="tab" aria-selected="false">02 BATHS</button>
+            <button class="atlas-nav-tab" data-atlas-index="2" role="tab" aria-selected="false">03 MARKET</button>
+            <button class="atlas-nav-tab" data-atlas-index="3" role="tab" aria-selected="false">04 PRINTWORKS</button>
+          </div>
+
+          <div class="atlas-hud-status">
+            <span class="mono-note" id="atlasNodeCounter">NODE 01 / 04 ACTIVE</span>
+            <div class="atlas-hud-progress">
+              <div class="atlas-hud-fill" id="atlasHudFill"></div>
+            </div>
           </div>
         </div>
 
-        <!-- Multi-Plane Depth Schematic -->
-        <div class="atlas-depth-plane">
-          <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
+        <!-- Main Workspace: Map Canvas + Dossier Deck -->
+        <div class="atlas-workspace">
+          
+          <!-- Left: Schematic Corridor Map (Stable 1:1 scale, zero zoom jitter) -->
+          <div class="atlas-map-stage" id="atlasMapStage">
+            <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
 
-          <div class="atlas-layer-schematic" id="atlasSchematicMap">
-            <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River & Rail Map">
+            <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River &amp; Rail Map">
               <!-- River Spine in Gruvbox Teal -->
-              <path class="river" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                    stroke-width="32" stroke-linecap="round" fill="none" opacity="0.2"/>
-              <path class="river" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                    stroke-width="8" stroke-linecap="round" fill="none" opacity="0.7"/>
+              <path class="river river-bg" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                    stroke-width="32" stroke-linecap="round" fill="none" opacity="0.15"/>
+              <path class="river river-line" id="atlasRiverLine" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                    stroke-width="6" stroke-linecap="round" fill="none" opacity="0.8"/>
 
               <!-- Rail Freight Sidings -->
               <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="10 8" fill="none" opacity="0.35"/>
@@ -1710,40 +1964,137 @@ img {
               <line x1="700" y1="0" x2="700" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
               <line x1="1050" y1="0" x2="1050" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
 
-              <!-- Four Civic Nodes in Terracotta -->
-              <g class="map-node" transform="translate(380, 420)">
-                <circle class="glow" r="28" />
-                <circle r="7.5" fill="var(--tungsten)" />
-                <circle r="2.5" fill="#fdfcf9" />
-                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">01 TRAM DEPOT</text>
-                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">TRANSIT · 108dB SUB-BASS</text>
+              <!-- Four Civic Nodes in Terracotta & Ochre (Zero scale CSS hover to avoid jitter) -->
+              <!-- Node 01: Tram Depot -->
+              <g class="map-node is-active" id="mapNode0" data-node="0" transform="translate(380, 420)">
+                <circle class="radar-ring" r="32" />
+                <circle class="radar-core" r="8" fill="var(--tungsten)" />
+                <circle r="3" fill="#fdfcf9" />
+                <text x="16" y="5" class="node-title">01 TRAM DEPOT</text>
+                <text x="16" y="19" class="node-sub">TRANSIT · 108dB SUB-BASS</text>
               </g>
 
-              <g class="map-node" transform="translate(760, 310)">
-                <circle class="glow" r="28" />
-                <circle r="7.5" fill="var(--tungsten)" />
-                <circle r="2.5" fill="#fdfcf9" />
-                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
-                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">RECREATION · 7.2s ECHO</text>
+              <!-- Node 02: Municipal Baths -->
+              <g class="map-node" id="mapNode1" data-node="1" transform="translate(760, 310)">
+                <circle class="radar-ring" r="32" />
+                <circle class="radar-core" r="8" fill="var(--tungsten)" />
+                <circle r="3" fill="#fdfcf9" />
+                <text x="16" y="5" class="node-title">02 MUNICIPAL BATHS</text>
+                <text x="16" y="19" class="node-sub">RECREATION · 7.2s ECHO</text>
               </g>
 
-              <g class="map-node" transform="translate(680, 680)">
-                <circle class="glow" r="28" />
-                <circle r="7.5" fill="var(--tungsten)" />
-                <circle r="2.5" fill="#fdfcf9" />
-                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">03 NIGHT MARKET</text>
-                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMERCE · SOCIAL HUB</text>
+              <!-- Node 03: Night Market -->
+              <g class="map-node" id="mapNode2" data-node="2" transform="translate(680, 680)">
+                <circle class="radar-ring" r="32" />
+                <circle class="radar-core" r="8" fill="var(--tungsten)" />
+                <circle r="3" fill="#fdfcf9" />
+                <text x="16" y="5" class="node-title">03 NIGHT MARKET</text>
+                <text x="16" y="19" class="node-sub">COMMERCE · SOCIAL HUB</text>
               </g>
 
-              <g class="map-node" transform="translate(1080, 480)">
-                <circle class="glow" r="28" />
-                <circle r="7.5" fill="var(--tungsten)" />
-                <circle r="2.5" fill="#fdfcf9" />
-                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">04 PRINTING WORKS</text>
-                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMUNICATION · 35MM CINEMA</text>
+              <!-- Node 04: Printing Works -->
+              <g class="map-node" id="mapNode3" data-node="3" transform="translate(1080, 480)">
+                <circle class="radar-ring" r="32" />
+                <circle class="radar-core" r="8" fill="var(--tungsten)" />
+                <circle r="3" fill="#fdfcf9" />
+                <text x="16" y="5" class="node-title">04 PRINTING WORKS</text>
+                <text x="16" y="19" class="node-sub">COMMUNICATION · 35MM CINEMA</text>
               </g>
             </svg>
           </div>
+
+          <!-- Right: Active Dossier Deck (Opened sequentially on scroll) -->
+          <aside class="atlas-dossier-deck" aria-label="Civic Space Dossiers">
+            
+            <!-- Card 01 -->
+            <div class="dossier-card is-active" id="dossierCard0" data-card="0">
+              <div class="dossier-card-tag">
+                <span class="tag-num">NODE 01 / 04</span>
+                <span class="tag-status">ACTIVATED</span>
+              </div>
+              <h3 class="dossier-card-title">THE OLD TRAM DEPOT</h3>
+              <p class="dossier-card-copy">
+                A monumental 1912 maintenance hangar with exposed steel riveted trusses, concrete oil pits, and transit track turnouts. Intimate crowd proximity meets visceral sub-bass resonance.
+              </p>
+              <div class="dossier-specs-mini">
+                <div><span>LAYER</span><strong>Transit Infrastructure</strong></div>
+                <div><span>CAPACITY</span><strong>800 Persons</strong></div>
+                <div><span>ACOUSTIC</span><strong>108 dB Sub-bass Peak</strong></div>
+                <div><span>HOURS</span><strong>21:00 — 05:30</strong></div>
+              </div>
+              <a href="#venuesPin" class="dossier-action-btn">
+                <span>INSPECT CHAMBER 01 DOSSIER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Card 02 -->
+            <div class="dossier-card" id="dossierCard1" data-card="1">
+              <div class="dossier-card-tag">
+                <span class="tag-num">NODE 02 / 04</span>
+                <span class="tag-status">STANDBY</span>
+              </div>
+              <h3 class="dossier-card-title">THE MUNICIPAL BATHS</h3>
+              <p class="dossier-card-copy">
+                Drained 1928 ceramic-tiled hydrotherapy natatorium with barrel-vaulted skylights and dry mosaic diving wells. A cathedral for quadraphonic ambient diffusion and microtonal voice.
+              </p>
+              <div class="dossier-specs-mini">
+                <div><span>LAYER</span><strong>Civic Hydrotherapy</strong></div>
+                <div><span>CAPACITY</span><strong>450 Persons</strong></div>
+                <div><span>ACOUSTIC</span><strong>7.2s Ceramic Reverb</strong></div>
+                <div><span>HOURS</span><strong>20:30 — 05:00</strong></div>
+              </div>
+              <a href="#venuesPin" class="dossier-action-btn">
+                <span>INSPECT CHAMBER 02 DOSSIER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Card 03 -->
+            <div class="dossier-card" id="dossierCard2" data-card="2">
+              <div class="dossier-card-tag">
+                <span class="tag-num">NODE 03 / 04</span>
+                <span class="tag-status">STANDBY</span>
+              </div>
+              <h3 class="dossier-card-title">THE NIGHT MARKET</h3>
+              <p class="dossier-card-copy">
+                A cavernous iron-and-glass transit exchange hall active continuously through dark hours. The social vortex hosting regional street kitchens, vinyl stalls, and modular drone installations.
+              </p>
+              <div class="dossier-specs-mini">
+                <div><span>LAYER</span><strong>Nocturnal Commerce</strong></div>
+                <div><span>CAPACITY</span><strong>1200 Persons</strong></div>
+                <div><span>ACOUSTIC</span><strong>Wide Open Dispersion</strong></div>
+                <div><span>HOURS</span><strong>20:00 — 06:00</strong></div>
+              </div>
+              <a href="#venuesPin" class="dossier-action-btn">
+                <span>INSPECT CHAMBER 03 DOSSIER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Card 04 -->
+            <div class="dossier-card" id="dossierCard3" data-card="3">
+              <div class="dossier-card-tag">
+                <span class="tag-num">NODE 04 / 04</span>
+                <span class="tag-status">STANDBY</span>
+              </div>
+              <h3 class="dossier-card-title">THE OLD PRINTWORKS</h3>
+              <p class="dossier-card-copy">
+                A former newspaper press warehouse with double-height ceiling voids, heavy linotype cast-iron bedplates, and darkroom masonry. Dedicated to dual 35mm celluloid projections.
+              </p>
+              <div class="dossier-specs-mini">
+                <div><span>LAYER</span><strong>Print Communication</strong></div>
+                <div><span>CAPACITY</span><strong>500 Persons</strong></div>
+                <div><span>ACOUSTIC</span><strong>Dry Mechanical Damp</strong></div>
+                <div><span>HOURS</span><strong>21:30 — 05:00</strong></div>
+              </div>
+              <a href="#venuesPin" class="dossier-action-btn">
+                <span>INSPECT CHAMBER 04 DOSSIER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+          </aside>
         </div>
 
       </div>
@@ -2864,27 +3215,113 @@ function initGSAPTimelines(lenis) {
     });
   }
 
-  // 5.6 Scene 02: Nocturnal Atlas Camera Descent
+  // 5.6 Scene 02: Nocturnal Atlas — Progressive Scroll-Activated Waypoints (Zero Zoom, Zero Jitter)
   const atlasWrapper = document.getElementById('atlasPin');
   if (atlasWrapper && typeof ScrollTrigger !== 'undefined') {
-    const atlasTl = gsap.timeline({
-      scrollTrigger: {
+    const navTabs = document.querySelectorAll('.atlas-nav-tab');
+    const mapNodes = document.querySelectorAll('.map-node');
+    const dossierCards = document.querySelectorAll('.dossier-card');
+    const nodeCounter = document.getElementById('atlasNodeCounter');
+    const fill = document.getElementById('atlasHudFill');
+    let currentActiveIdx = -1;
+
+    function activateAtlasNode(index) {
+      if (index === currentActiveIdx || index < 0 || index > 3) return;
+      currentActiveIdx = index;
+
+      navTabs.forEach((tab, i) => {
+        const isActive = i === index;
+        tab.classList.toggle('is-active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      mapNodes.forEach((node, i) => {
+        node.classList.toggle('is-active', i === index);
+      });
+
+      dossierCards.forEach((card, i) => {
+        const isActive = i === index;
+        card.classList.toggle('is-active', isActive);
+        const tagStatus = card.querySelector('.tag-status');
+        if (tagStatus) {
+          tagStatus.textContent = isActive ? 'ACTIVATED' : (i < index ? 'LOGGED' : 'STANDBY');
+        }
+      });
+
+      if (nodeCounter) {
+        nodeCounter.textContent = `NODE 0${index + 1} / 04 ACTIVE`;
+      }
+      if (fill) {
+        fill.style.width = `${((index + 1) / 4) * 100}%`;
+      }
+    }
+
+    // Set initial state
+    activateAtlasNode(0);
+
+    // Responsive ScrollTrigger: pin on desktop (min-width: 1025px), sequential scrub
+    const mmAtlas = gsap.matchMedia();
+    mmAtlas.add('(min-width: 1025px)', () => {
+      ScrollTrigger.create({
         trigger: '#atlasPin',
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 1.2,
         pin: '.atlas-viewport',
+        scrub: 0.8,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
-          const fill = document.getElementById('atlasHudFill');
-          if (fill) fill.style.width = `${self.progress * 100}%`;
+          const progress = self.progress;
+          // Clean 4-segment scroll partitioning:
+          // [0.00 — 0.25): Node 0 (The Old Tram Depot)
+          // [0.25 — 0.50): Node 1 (The Municipal Baths)
+          // [0.50 — 0.75): Node 2 (The Night Market)
+          // [0.75 — 1.00]: Node 3 (The Old Printworks)
+          let idx = Math.floor(progress * 4);
+          if (idx > 3) idx = 3;
+          if (idx < 0) idx = 0;
+          activateAtlasNode(idx);
         }
-      }
+      });
     });
 
-    atlasTl
-      .to('.atlas-layer-bg-grid', { scale: 1.6, autoAlpha: 0.25, ease: 'none' }, 0)
-      .to('#atlasSchematicMap', { scale: 3.2, transformOrigin: '52% 46%', ease: 'power2.inOut' }, 0)
-      .from('.atlas-hud', { y: 20, autoAlpha: 0.6, duration: 0.5 }, 0.2);
+    // Mobile/tablet fallback: switch cards on scroll or tap
+    mmAtlas.add('(max-width: 1024px)', () => {
+      navTabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => activateAtlasNode(i));
+      });
+    });
+
+    // Click on Nav Tabs or Map Nodes scrolls directly to that waypoint's position
+    function scrollToAtlasWaypoint(targetIndex) {
+      if (typeof ScrollTrigger === 'undefined') return;
+      const totalScrollable = atlasWrapper.offsetHeight - window.innerHeight;
+      if (totalScrollable <= 0) {
+        activateAtlasNode(targetIndex);
+        return;
+      }
+      const targetProgress = (targetIndex + 0.35) / 4;
+      const targetY = atlasWrapper.offsetTop + (totalScrollable * targetProgress);
+      if (lenis) {
+        lenis.scrollTo(targetY);
+      } else {
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+      }
+      activateAtlasNode(targetIndex);
+    }
+
+    navTabs.forEach((tab, i) => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToAtlasWaypoint(i);
+      });
+    });
+
+    mapNodes.forEach((node, i) => {
+      node.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToAtlasWaypoint(i);
+      });
+    });
   }
 
   // 5.7 Responsive MatchMedia (Horizontal Pinned Gallery on Desktop)

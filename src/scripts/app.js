@@ -583,27 +583,113 @@ function initGSAPTimelines(lenis) {
     });
   }
 
-  // 5.6 Scene 02: Nocturnal Atlas Camera Descent
+  // 5.6 Scene 02: Nocturnal Atlas — Progressive Scroll-Activated Waypoints (Zero Zoom, Zero Jitter)
   const atlasWrapper = document.getElementById('atlasPin');
   if (atlasWrapper && typeof ScrollTrigger !== 'undefined') {
-    const atlasTl = gsap.timeline({
-      scrollTrigger: {
+    const navTabs = document.querySelectorAll('.atlas-nav-tab');
+    const mapNodes = document.querySelectorAll('.map-node');
+    const dossierCards = document.querySelectorAll('.dossier-card');
+    const nodeCounter = document.getElementById('atlasNodeCounter');
+    const fill = document.getElementById('atlasHudFill');
+    let currentActiveIdx = -1;
+
+    function activateAtlasNode(index) {
+      if (index === currentActiveIdx || index < 0 || index > 3) return;
+      currentActiveIdx = index;
+
+      navTabs.forEach((tab, i) => {
+        const isActive = i === index;
+        tab.classList.toggle('is-active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      mapNodes.forEach((node, i) => {
+        node.classList.toggle('is-active', i === index);
+      });
+
+      dossierCards.forEach((card, i) => {
+        const isActive = i === index;
+        card.classList.toggle('is-active', isActive);
+        const tagStatus = card.querySelector('.tag-status');
+        if (tagStatus) {
+          tagStatus.textContent = isActive ? 'ACTIVATED' : (i < index ? 'LOGGED' : 'STANDBY');
+        }
+      });
+
+      if (nodeCounter) {
+        nodeCounter.textContent = `NODE 0${index + 1} / 04 ACTIVE`;
+      }
+      if (fill) {
+        fill.style.width = `${((index + 1) / 4) * 100}%`;
+      }
+    }
+
+    // Set initial state
+    activateAtlasNode(0);
+
+    // Responsive ScrollTrigger: pin on desktop (min-width: 1025px), sequential scrub
+    const mmAtlas = gsap.matchMedia();
+    mmAtlas.add('(min-width: 1025px)', () => {
+      ScrollTrigger.create({
         trigger: '#atlasPin',
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 1.2,
         pin: '.atlas-viewport',
+        scrub: 0.8,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
-          const fill = document.getElementById('atlasHudFill');
-          if (fill) fill.style.width = `${self.progress * 100}%`;
+          const progress = self.progress;
+          // Clean 4-segment scroll partitioning:
+          // [0.00 — 0.25): Node 0 (The Old Tram Depot)
+          // [0.25 — 0.50): Node 1 (The Municipal Baths)
+          // [0.50 — 0.75): Node 2 (The Night Market)
+          // [0.75 — 1.00]: Node 3 (The Old Printworks)
+          let idx = Math.floor(progress * 4);
+          if (idx > 3) idx = 3;
+          if (idx < 0) idx = 0;
+          activateAtlasNode(idx);
         }
-      }
+      });
     });
 
-    atlasTl
-      .to('.atlas-layer-bg-grid', { scale: 1.6, autoAlpha: 0.25, ease: 'none' }, 0)
-      .to('#atlasSchematicMap', { scale: 3.2, transformOrigin: '52% 46%', ease: 'power2.inOut' }, 0)
-      .from('.atlas-hud', { y: 20, autoAlpha: 0.6, duration: 0.5 }, 0.2);
+    // Mobile/tablet fallback: switch cards on scroll or tap
+    mmAtlas.add('(max-width: 1024px)', () => {
+      navTabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => activateAtlasNode(i));
+      });
+    });
+
+    // Click on Nav Tabs or Map Nodes scrolls directly to that waypoint's position
+    function scrollToAtlasWaypoint(targetIndex) {
+      if (typeof ScrollTrigger === 'undefined') return;
+      const totalScrollable = atlasWrapper.offsetHeight - window.innerHeight;
+      if (totalScrollable <= 0) {
+        activateAtlasNode(targetIndex);
+        return;
+      }
+      const targetProgress = (targetIndex + 0.35) / 4;
+      const targetY = atlasWrapper.offsetTop + (totalScrollable * targetProgress);
+      if (lenis) {
+        lenis.scrollTo(targetY);
+      } else {
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+      }
+      activateAtlasNode(targetIndex);
+    }
+
+    navTabs.forEach((tab, i) => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToAtlasWaypoint(i);
+      });
+    });
+
+    mapNodes.forEach((node, i) => {
+      node.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToAtlasWaypoint(i);
+      });
+    });
   }
 
   // 5.7 Responsive MatchMedia (Horizontal Pinned Gallery on Desktop)
