@@ -21,37 +21,46 @@
   <!-- Production Styles -->
   <style>
 /**
- * OFF HOURS — Avant-Garde High-Contrast Industrial Main Stylesheet
+ * OFF HOURS — Gruvbox Light Editorial Main Stylesheet
+ * Aesthetic: High-Contrast Archival Newsprint / Warm Letterpress Broadsheet
  * Directed via: awwwards / cinematic-ui / design-spells / ui-ux-pro-max
  */
 
 :root {
-  --bg: #050608;
-  --bg-surface: #0a0d12;
-  --bg-card: #0f131a;
-  --bg-elevated: #161b24;
-  --bg-translucent: rgba(5, 6, 8, 0.88);
+  /* Gruvbox Light Canonical Canvas (Aged Linen & Parchment) */
+  --bg: #fbf1c7;            /* gruvbox bg0 (warm cream canvas) */
+  --bg-surface: #f2e5bc;    /* gruvbox bg0_h (parchment ledger) */
+  --bg-card: #ebdbb2;       /* gruvbox bg1 (warm card stock) */
+  --bg-elevated: #d5c4a1;   /* gruvbox bg2 (pressed binder) */
+  --bg-translucent: rgba(251, 241, 199, 0.94);
 
-  --text: #f4f5f8;
-  --text-muted: #8e95a5;
-  --text-dim: #545b6b;
-  --text-ghost: rgba(244, 245, 248, 0.05);
+  /* Gruvbox Ink & Editorial Typography */
+  --text: #282828;          /* gruvbox fg0 (deep letterpress carbon) */
+  --text-muted: #504945;    /* gruvbox fg2 (dark warm grey) */
+  --text-dim: #7c6f64;      /* gruvbox fg4 (archival caption ink) */
+  --text-ghost: rgba(40, 40, 40, 0.07);
 
-  --tungsten: #e5a93c;
-  --tungsten-bright: #ffbe42;
-  --tungsten-glow: rgba(229, 169, 60, 0.35);
-  --tungsten-subtle: rgba(229, 169, 60, 0.1);
-  --cyan-river: #38bdf8;
-  --cyan-river-dim: rgba(56, 189, 248, 0.15);
+  /* Gruvbox Industrial Accents */
+  --tungsten: #af3a03;       /* gruvbox dark orange / burnt terracotta */
+  --tungsten-bright: #b57614;/* gruvbox dark yellow / raw ochre */
+  --tungsten-glow: rgba(175, 58, 3, 0.22);
+  --tungsten-subtle: rgba(175, 58, 3, 0.08);
+  --cyan-river: #076678;     /* gruvbox dark blue / deep slate teal */
+  --cyan-river-dim: rgba(7, 102, 120, 0.18);
+  --gruvbox-red: #cc241d;
+  --gruvbox-green: #79740e;
 
-  --border-hairline: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.18);
-  --border-focus: #e5a93c;
+  /* Archival Hairlines & Grid Rules */
+  --border-hairline: rgba(40, 40, 40, 0.14);
+  --border-medium: rgba(40, 40, 40, 0.24);
+  --border-focus: #af3a03;
 
+  /* Monumental Typography Families */
   --font-display: "Syne", -apple-system, sans-serif;
   --font-heading: "Space Grotesk", -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
+  /* Motion Curves (Awwwards Grade) */
   --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
@@ -96,7 +105,7 @@ body {
   cursor: default;
 }
 
-/* Custom Interactive Follower Cursor (Design Spells / Awwwards Standard) */
+/* Custom Interactive Follower Cursor (Design Spells / Magnetic Reticle) */
 .cursor-dot {
   position: fixed;
   top: 0;
@@ -117,7 +126,7 @@ body {
   left: 0;
   width: 38px;
   height: 38px;
-  border: 1px solid rgba(229, 169, 60, 0.45);
+  border: 1.5px solid rgba(175, 58, 3, 0.45);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
@@ -132,7 +141,7 @@ body {
   font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 700;
-  color: #050608;
+  color: #fbf1c7;
   letter-spacing: 0.12em;
   opacity: 0;
   transform: scale(0.8);
@@ -145,14 +154,14 @@ body {
 .cursor-follower.is-hovering {
   width: 72px;
   height: 72px;
-  background: rgba(229, 169, 60, 0.12);
+  background: rgba(175, 58, 3, 0.12);
   border-color: var(--tungsten);
 }
 
 .cursor-follower.is-media {
   width: 104px;
   height: 104px;
-  background: rgba(229, 169, 60, 0.95);
+  background: var(--tungsten);
   border-color: var(--tungsten-bright);
 }
 
@@ -167,13 +176,13 @@ body {
   }
 }
 
-/* Cinematic Letterbox Framing (2.39:1 Anamorphic) */
+/* Filmic Anamorphic Letterbox Framing (Classic Charcoal Letterbox) */
 .letterbox-bar-top, .letterbox-bar-bottom {
   position: fixed;
   left: 0;
   width: 100%;
   height: 20px;
-  background: #000;
+  background: #1d2021;
   z-index: 250;
   pointer-events: none;
 }
@@ -186,7 +195,7 @@ body {
   }
 }
 
-/* 35mm Film Grain Overlay */
+/* Warm Archival Paper Grain Overlay */
 .film-grain {
   position: fixed;
   top: 0;
@@ -195,7 +204,7 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 200;
-  opacity: 0.045;
+  opacity: 0.055;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
@@ -207,7 +216,7 @@ body {
   width: 700px;
   height: 700px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(229, 169, 60, 0.055) 0%, rgba(229, 169, 60, 0) 65%);
+  background: radial-gradient(circle, rgba(175, 58, 3, 0.065) 0%, rgba(251, 241, 199, 0) 65%);
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -224,7 +233,7 @@ header.masthead {
   justify-content: space-between;
   align-items: center;
   z-index: 240;
-  background: linear-gradient(to bottom, rgba(5, 6, 8, 0.95) 0%, rgba(5, 6, 8, 0) 100%);
+  background: linear-gradient(to bottom, rgba(251, 241, 199, 0.96) 0%, rgba(251, 241, 199, 0) 100%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -262,7 +271,7 @@ header.masthead {
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.16em;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-card);
   border: 1px solid var(--border-hairline);
   padding: 8px 14px;
   color: var(--text);
@@ -276,7 +285,7 @@ header.masthead {
   display: inline-block;
   width: 6px;
   height: 6px;
-  background: #ff4444;
+  background: var(--gruvbox-red);
   border-radius: 50%;
   animation: recPulse 1.8s infinite;
 }
@@ -287,8 +296,8 @@ header.masthead {
 }
 
 .audio-toggle-btn {
-  background: rgba(229, 169, 60, 0.08);
-  border: 1px solid rgba(229, 169, 60, 0.3);
+  background: rgba(175, 58, 3, 0.08);
+  border: 1px solid rgba(175, 58, 3, 0.35);
   color: var(--tungsten);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -304,13 +313,13 @@ header.masthead {
 
 .audio-toggle-btn:hover {
   background: var(--tungsten);
-  color: #050608;
+  color: #fbf1c7;
   border-color: var(--tungsten);
 }
 
 .audio-toggle-btn.active {
   background: var(--tungsten);
-  color: #050608;
+  color: #fbf1c7;
   box-shadow: 0 0 16px var(--tungsten-glow);
 }
 
@@ -319,7 +328,7 @@ header.masthead {
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #050608;
+  color: #fbf1c7;
   background: var(--text);
   padding: 9px 18px;
   text-decoration: none;
@@ -335,7 +344,7 @@ header.masthead {
 }
 
 /* ==========================================================================
-   SCENE 01: HERO SECTION (MONUMENTAL KINETIC BROADSIDE)
+   SCENE 01: HERO SECTION (MONUMENTAL EDITORIAL BROADSIDE)
    ========================================================================== */
 .hero {
   min-height: 100vh;
@@ -345,6 +354,7 @@ header.masthead {
   justify-content: space-between;
   position: relative;
   overflow: hidden;
+  background: var(--bg);
 }
 
 .hero-ambient-bg {
@@ -353,8 +363,8 @@ header.masthead {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 75% 30%, rgba(229, 169, 60, 0.08) 0%, transparent 60%),
-              linear-gradient(to bottom, rgba(5,6,8,0.2) 0%, rgba(5,6,8,0.9) 100%);
+  background: radial-gradient(circle at 75% 30%, rgba(175, 58, 3, 0.08) 0%, transparent 60%),
+              linear-gradient(to bottom, rgba(251, 241, 199, 0.2) 0%, rgba(251, 241, 199, 0.9) 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -376,6 +386,7 @@ header.masthead {
   letter-spacing: 0.2em;
   color: var(--tungsten);
   text-transform: uppercase;
+  font-weight: 700;
 }
 
 .hero-pretitle-coord {
@@ -412,7 +423,7 @@ header.masthead {
 
 .hero-title .accent-tungsten {
   color: var(--tungsten);
-  text-shadow: 0 0 60px rgba(229, 169, 60, 0.25);
+  text-shadow: 0 0 40px rgba(175, 58, 3, 0.2);
 }
 
 /* Kinetic Ticker Marquee Strip */
@@ -449,6 +460,7 @@ header.masthead {
 
 .marquee-item .sep {
   color: var(--tungsten);
+  font-weight: 700;
 }
 
 /* Hero Bottom Architectural Split */
@@ -467,7 +479,7 @@ header.masthead {
   font-size: clamp(1rem, 1.35vw, 1.45rem);
   line-height: 1.45;
   color: var(--text);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 
@@ -483,6 +495,7 @@ header.masthead {
 .hero-spec-ledger strong {
   color: var(--text);
   letter-spacing: 0.05em;
+  font-weight: 700;
 }
 
 .scroll-cue-box {
@@ -495,10 +508,11 @@ header.masthead {
   letter-spacing: 0.2em;
   color: var(--tungsten);
   text-transform: uppercase;
+  font-weight: 700;
 }
 
 .scroll-indicator-line {
-  width: 1px;
+  width: 1.5px;
   height: 48px;
   background: linear-gradient(to bottom, var(--tungsten) 0%, transparent 100%);
   animation: scrollDrop 2s infinite ease-in-out;
@@ -517,7 +531,7 @@ header.masthead {
 .atlas-pin-wrapper {
   position: relative;
   height: 300vh;
-  background: var(--bg);
+  background: var(--bg-surface);
 }
 
 .atlas-viewport {
@@ -551,8 +565,8 @@ header.masthead {
   width: 140%;
   height: 140%;
   background-image: 
-    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(40,40,40,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(40,40,40,0.06) 1px, transparent 1px);
   background-size: 80px 80px;
   pointer-events: none;
   transform: translateZ(-200px);
@@ -584,7 +598,7 @@ header.masthead {
 }
 
 .map-node .glow {
-  fill: rgba(229, 169, 60, 0.15);
+  fill: rgba(175, 58, 3, 0.16);
   animation: pulseNode 3s infinite ease-in-out;
 }
 
@@ -598,7 +612,7 @@ header.masthead {
 }
 
 .map-node:hover .glow {
-  fill: rgba(229, 169, 60, 0.4);
+  fill: rgba(175, 58, 3, 0.35);
 }
 
 /* Foreground Reticle HUD */
@@ -612,10 +626,11 @@ header.masthead {
   letter-spacing: 0.14em;
   color: var(--text);
   background: var(--bg-translucent);
-  border: 1px solid var(--border-hairline);
+  border: 1px solid var(--border-medium);
   padding: 20px 24px;
   backdrop-filter: blur(8px);
   max-width: 380px;
+  box-shadow: 0 4px 20px rgba(40, 40, 40, 0.08);
 }
 
 .atlas-hud-title {
@@ -631,7 +646,7 @@ header.masthead {
   margin-top: 14px;
   height: 2px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(40, 40, 40, 0.15);
   position: relative;
   overflow: hidden;
 }
@@ -652,7 +667,7 @@ header.masthead {
 .venues-pin-wrapper {
   position: relative;
   height: 500vh;
-  background: #030405;
+  background: var(--bg);
 }
 
 .venues-track-viewport {
@@ -705,6 +720,7 @@ header.masthead {
   color: var(--tungsten);
   border-bottom: 1px solid var(--border-hairline);
   padding-bottom: 12px;
+  font-weight: 700;
 }
 
 .chamber-title-massive {
@@ -752,7 +768,7 @@ header.masthead {
 
 .acoustic-signature-info .val {
   color: var(--text);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .acoustic-waveform {
@@ -778,7 +794,7 @@ header.masthead {
 .waveform-bar:nth-child(7) { height: 65%; animation-delay: 0.25s; }
 
 @keyframes waveAnim {
-  0% { transform: scaleY(0.3); opacity: 0.5; }
+  0% { transform: scaleY(0.3); opacity: 0.6; }
   100% { transform: scaleY(1); opacity: 1; }
 }
 
@@ -803,7 +819,7 @@ header.masthead {
 
 .spec-entry .spec-v {
   color: var(--text);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* Chamber Media Side (Colossal Architectural Photographic Plate) */
@@ -820,8 +836,8 @@ header.masthead {
   width: 100%;
   height: 68%;
   overflow: hidden;
-  border: 1px solid var(--border-hairline);
-  background: #000;
+  border: 1px solid var(--border-medium);
+  background: var(--bg-card);
   cursor: pointer;
 }
 
@@ -830,13 +846,13 @@ header.masthead {
   height: 120%;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(85%) contrast(125%) brightness(85%);
+  filter: grayscale(40%) sepia(25%) contrast(118%) brightness(95%);
   transition: filter 0.6s var(--ease-expo), transform 0.8s var(--ease-expo);
   will-change: transform;
 }
 
 .media-frame-clipped:hover .media-parallax-img {
-  filter: grayscale(40%) contrast(115%) brightness(95%);
+  filter: grayscale(10%) sepia(15%) contrast(110%) brightness(100%);
 }
 
 .media-frame-clipped::after {
@@ -846,7 +862,7 @@ header.masthead {
   left: 0;
   width: 100%;
   height: 100%;
-  box-shadow: inset 0 0 100px rgba(5,6,8,0.85);
+  box-shadow: inset 0 0 80px rgba(40, 40, 40, 0.35);
   pointer-events: none;
 }
 
@@ -867,6 +883,7 @@ header.masthead {
   margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
+  font-weight: 700;
 }
 
 .artist-row {
@@ -874,7 +891,7 @@ header.masthead {
   justify-content: space-between;
   align-items: baseline;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(40, 40, 40, 0.08);
   font-family: var(--font-heading);
   transition: padding-left 0.2s ease;
 }
@@ -885,12 +902,12 @@ header.masthead {
 
 .artist-row:hover {
   padding-left: 8px;
-  background: rgba(229, 169, 60, 0.04);
+  background: rgba(175, 58, 3, 0.05);
 }
 
 .artist-row .name {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text);
 }
 
@@ -943,7 +960,7 @@ header.masthead {
 
 .filter-btn {
   background: transparent;
-  border: 1px solid var(--border-hairline);
+  border: 1px solid var(--border-medium);
   color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -952,11 +969,12 @@ header.masthead {
   padding: 10px 20px;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 .filter-btn:hover, .filter-btn.active {
   background: var(--tungsten);
-  color: #050608;
+  color: #fbf1c7;
   border-color: var(--tungsten);
   font-weight: 700;
 }
@@ -978,7 +996,7 @@ header.masthead {
 }
 
 .time-slot-row:hover {
-  background: #0d1017;
+  background: var(--bg-card);
 }
 
 .time-slot-hour {
@@ -992,7 +1010,7 @@ header.masthead {
 .time-slot-act {
   font-family: var(--font-heading);
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text);
 }
 
@@ -1001,7 +1019,7 @@ header.masthead {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-dim);
-  font-weight: 400;
+  font-weight: 500;
   margin-top: 4px;
 }
 
@@ -1011,6 +1029,7 @@ header.masthead {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-muted);
+  font-weight: 600;
 }
 
 .time-slot-action a {
@@ -1020,9 +1039,10 @@ header.masthead {
   text-transform: uppercase;
   color: var(--tungsten);
   text-decoration: none;
-  border-bottom: 1px solid rgba(229, 169, 60, 0.3);
+  border-bottom: 1px solid rgba(175, 58, 3, 0.4);
   padding-bottom: 2px;
   transition: border-color 0.2s ease;
+  font-weight: 700;
 }
 
 .time-slot-action a:hover {
@@ -1069,11 +1089,11 @@ header.masthead {
 
 /* Physical Perforated Pass Card */
 .punchcard-ticket-pass {
-  background: #0c0f15;
-  border: 1px solid var(--border-medium);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-medium);
   padding: 48px;
   position: relative;
-  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 20px 60px rgba(40, 40, 40, 0.12);
 }
 
 /* Notch Cutouts */
@@ -1086,7 +1106,7 @@ header.masthead {
   background: var(--bg);
   border-radius: 50%;
   transform: translateY(-50%);
-  border: 1px solid var(--border-medium);
+  border: 1.5px solid var(--border-medium);
 }
 .punchcard-ticket-pass::before { left: -15px; }
 .punchcard-ticket-pass::after { right: -15px; }
@@ -1105,6 +1125,7 @@ header.masthead {
   font-size: 12px;
   letter-spacing: 0.2em;
   color: var(--tungsten);
+  font-weight: 700;
 }
 
 .pass-status-pill {
@@ -1112,10 +1133,11 @@ header.masthead {
   font-size: 10px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  background: rgba(229, 169, 60, 0.15);
+  background: rgba(175, 58, 3, 0.12);
   color: var(--tungsten);
   padding: 4px 10px;
-  border: 1px solid rgba(229, 169, 60, 0.3);
+  border: 1px solid rgba(175, 58, 3, 0.3);
+  font-weight: 700;
 }
 
 .pass-title-massive {
@@ -1150,7 +1172,7 @@ header.masthead {
 
 .tier-choice.active {
   border-color: var(--tungsten);
-  background: rgba(229, 169, 60, 0.08);
+  background: rgba(175, 58, 3, 0.1);
 }
 
 .tier-choice .tier-name {
@@ -1161,10 +1183,12 @@ header.masthead {
   color: var(--text-muted);
   display: block;
   margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .tier-choice.active .tier-name {
   color: var(--tungsten);
+  font-weight: 700;
 }
 
 .tier-choice .tier-cost {
@@ -1178,7 +1202,7 @@ header.masthead {
   width: 100%;
   padding: 20px;
   background: var(--tungsten);
-  color: #050608;
+  color: #fbf1c7;
   border: none;
   font-family: var(--font-mono);
   font-size: 13px;
@@ -1201,7 +1225,7 @@ header.masthead {
    ========================================================================== */
 footer.monumental-footer {
   padding: 140px 40px 40px;
-  background: #020304;
+  background: var(--bg-surface);
   border-top: 1px solid var(--border-hairline);
   position: relative;
   overflow: hidden;
@@ -1266,7 +1290,7 @@ footer.monumental-footer {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(5, 6, 8, 0.92);
+  background: rgba(40, 40, 40, 0.72);
   backdrop-filter: blur(16px);
   z-index: 300;
   display: flex;
@@ -1284,13 +1308,13 @@ footer.monumental-footer {
 }
 
 .modal-content {
-  background: #0c0f15;
-  border: 1px solid var(--border-medium);
+  background: var(--bg);
+  border: 1.5px solid var(--border-medium);
   width: 100%;
   max-width: 520px;
   padding: 48px;
   position: relative;
-  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 30px 100px rgba(40, 40, 40, 0.35);
 }
 
 .modal-close {
@@ -1484,52 +1508,52 @@ footer.monumental-footer {
               <path d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
                     stroke="var(--cyan-river)" stroke-width="48" stroke-linecap="round" fill="none" opacity="0.25" filter="url(#cyanGlow)"/>
               <path d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                    stroke="#569bbd" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.45"/>
+                    stroke="#076678" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.45"/>
 
               <!-- Rail Freight Sidings -->
-              <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="rgba(255,255,255,0.22)" stroke-width="2.5" stroke-dasharray="10 8" fill="none"/>
-              <path d="M450,420 L700,700 L1300,700" stroke="rgba(255,255,255,0.16)" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
-              <path d="M200,80 L400,280 L900,240" stroke="rgba(255,255,255,0.16)" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
+              <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="rgba(40,40,40,0.3)" stroke-width="2.5" stroke-dasharray="10 8" fill="none"/>
+              <path d="M450,420 L700,700 L1300,700" stroke="rgba(40,40,40,0.2)" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
+              <path d="M200,80 L400,280 L900,240" stroke="rgba(40,40,40,0.2)" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
 
               <!-- Grid Lat/Long Reference Lines -->
-              <line x1="0" y1="200" x2="1400" y2="200" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-              <line x1="0" y1="400" x2="1400" y2="400" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-              <line x1="0" y1="600" x2="1400" y2="600" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-              <line x1="350" y1="0" x2="350" y2="800" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-              <line x1="700" y1="0" x2="700" y2="800" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-              <line x1="1050" y1="0" x2="1050" y2="800" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+              <line x1="0" y1="200" x2="1400" y2="200" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
+              <line x1="0" y1="400" x2="1400" y2="400" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
+              <line x1="0" y1="600" x2="1400" y2="600" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
+              <line x1="350" y1="0" x2="350" y2="800" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
+              <line x1="700" y1="0" x2="700" y2="800" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
+              <line x1="1050" y1="0" x2="1050" y2="800" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
 
               <!-- Four Civic Nodes -->
               <g class="map-node" transform="translate(380, 420)" data-cursor="explore">
                 <circle class="glow" r="28" />
-                <circle r="8" fill="#E5A93C" />
-                <circle r="3" fill="#050608" />
-                <text x="18" y="5" fill="#f4f5f8" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">01 TRAM DEPOT</text>
-                <text x="18" y="20" fill="#E5A93C" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">TRANSIT · 108dB SUB-BASS</text>
+                <circle r="8" fill="#af3a03" />
+                <circle r="3" fill="#fbf1c7" />
+                <text x="18" y="5" fill="#282828" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">01 TRAM DEPOT</text>
+                <text x="18" y="20" fill="#af3a03" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">TRANSIT · 108dB SUB-BASS</text>
               </g>
 
               <g class="map-node" transform="translate(760, 310)" data-cursor="explore">
                 <circle class="glow" r="28" />
-                <circle r="8" fill="#E5A93C" />
-                <circle r="3" fill="#050608" />
-                <text x="18" y="5" fill="#f4f5f8" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
-                <text x="18" y="20" fill="#E5A93C" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">RECREATION · 7.2s ECHO</text>
+                <circle r="8" fill="#af3a03" />
+                <circle r="3" fill="#fbf1c7" />
+                <text x="18" y="5" fill="#282828" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
+                <text x="18" y="20" fill="#af3a03" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">RECREATION · 7.2s ECHO</text>
               </g>
 
               <g class="map-node" transform="translate(680, 680)" data-cursor="explore">
                 <circle class="glow" r="28" />
-                <circle r="8" fill="#E5A93C" />
-                <circle r="3" fill="#050608" />
-                <text x="18" y="5" fill="#f4f5f8" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">03 NIGHT MARKET</text>
-                <text x="18" y="20" fill="#E5A93C" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">COMMERCE · SOCIAL HUB</text>
+                <circle r="8" fill="#af3a03" />
+                <circle r="3" fill="#fbf1c7" />
+                <text x="18" y="5" fill="#282828" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">03 NIGHT MARKET</text>
+                <text x="18" y="20" fill="#af3a03" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">COMMERCE · SOCIAL HUB</text>
               </g>
 
               <g class="map-node" transform="translate(1080, 480)" data-cursor="explore">
                 <circle class="glow" r="28" />
-                <circle r="8" fill="#E5A93C" />
-                <circle r="3" fill="#050608" />
-                <text x="18" y="5" fill="#f4f5f8" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">04 PRINTING WORKS</text>
-                <text x="18" y="20" fill="#E5A93C" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">COMMUNICATION · 35MM CINEMA</text>
+                <circle r="8" fill="#af3a03" />
+                <circle r="3" fill="#fbf1c7" />
+                <text x="18" y="5" fill="#282828" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">04 PRINTING WORKS</text>
+                <text x="18" y="20" fill="#af3a03" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">COMMUNICATION · 35MM CINEMA</text>
               </g>
             </svg>
           </div>
@@ -2253,9 +2277,9 @@ footer.monumental-footer {
       <form onsubmit="event.preventDefault(); alert('Order Confirmed: Your OFF HOURS 48-Hour Pass has been generated.'); document.getElementById('checkoutModal').classList.remove('open');">
         <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
           <input type="text" placeholder="Attendee Full Name" required 
-                 style="background: #050608; border: 1px solid var(--border-medium); color: var(--text); padding: 14px; font-family: var(--font-heading); font-size: 14px;">
+                 style="background: #f2e5bc; border: 1.5px solid var(--border-medium); color: var(--text); padding: 14px; font-family: var(--font-heading); font-size: 14px;">
           <input type="email" placeholder="Email Address for Digital Pass Delivery" required 
-                 style="background: #050608; border: 1px solid var(--border-medium); color: var(--text); padding: 14px; font-family: var(--font-heading); font-size: 14px;">
+                 style="background: #f2e5bc; border: 1.5px solid var(--border-medium); color: var(--text); padding: 14px; font-family: var(--font-heading); font-size: 14px;">
         </div>
         <button type="submit" class="pass-cta-btn" style="margin-top: 0;">
           Confirm & Issue Digital Pass

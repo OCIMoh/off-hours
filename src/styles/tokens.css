@@ -1,34 +1,36 @@
 /**
- * OFF HOURS — Avant-Garde Industrial Design Tokens
- * Aesthetic: Berlin Atonal / Unsound / High-Contrast Monumental Brutalism
+ * OFF HOURS — Gruvbox Light Editorial Design Tokens
+ * Aesthetic: High-Contrast Archival Newsprint / Warm Letterpress Broadsheet
  */
 
 :root {
-  /* Raw Atmospheric Ground & Tone */
-  --bg: #050608;
-  --bg-surface: #0a0d12;
-  --bg-card: #0f131a;
-  --bg-elevated: #161b24;
-  --bg-translucent: rgba(5, 6, 8, 0.82);
+  /* Gruvbox Light Canonical Canvas (Aged Linen & Parchment) */
+  --bg: #fbf1c7;            /* gruvbox bg0 (warm cream canvas) */
+  --bg-surface: #f2e5bc;    /* gruvbox bg0_h (parchment ledger) */
+  --bg-card: #ebdbb2;       /* gruvbox bg1 (warm card stock) */
+  --bg-elevated: #d5c4a1;   /* gruvbox bg2 (pressed binder) */
+  --bg-translucent: rgba(251, 241, 199, 0.92);
 
-  /* Contrast Ink & Hierarchy */
-  --text: #f4f5f8;
-  --text-muted: #8e95a5;
-  --text-dim: #545b6b;
-  --text-ghost: rgba(244, 245, 248, 0.06);
+  /* Gruvbox Ink & Editorial Typography */
+  --text: #282828;          /* gruvbox fg0 (deep letterpress carbon) */
+  --text-muted: #504945;    /* gruvbox fg2 (dark warm grey) */
+  --text-dim: #7c6f64;      /* gruvbox fg4 (archival caption ink) */
+  --text-ghost: rgba(40, 40, 40, 0.06);
 
-  /* Industrial Lighting Accents */
-  --tungsten: #e5a93c;
-  --tungsten-bright: #ffbe42;
-  --tungsten-glow: rgba(229, 169, 60, 0.28);
-  --tungsten-subtle: rgba(229, 169, 60, 0.08);
-  --cyan-river: #38bdf8;
-  --cyan-river-dim: rgba(56, 189, 248, 0.15);
+  /* Gruvbox Industrial Accents */
+  --tungsten: #af3a03;       /* gruvbox dark orange / burnt terracotta */
+  --tungsten-bright: #b57614;/* gruvbox dark yellow / raw ochre */
+  --tungsten-glow: rgba(175, 58, 3, 0.22);
+  --tungsten-subtle: rgba(175, 58, 3, 0.08);
+  --cyan-river: #076678;     /* gruvbox dark blue / deep slate teal */
+  --cyan-river-dim: rgba(7, 102, 120, 0.18);
+  --gruvbox-red: #cc241d;
+  --gruvbox-green: #79740e;
 
-  /* Hairlines & Grid Divisions */
-  --border-hairline: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.16);
-  --border-focus: #e5a93c;
+  /* Archival Hairlines & Grid Rules */
+  --border-hairline: rgba(40, 40, 40, 0.14);
+  --border-medium: rgba(40, 40, 40, 0.24);
+  --border-focus: #af3a03;
 
   /* Monumental Typography Families */
   --font-display: "Syne", -apple-system, sans-serif;
