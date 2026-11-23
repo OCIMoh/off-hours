@@ -1,44 +1,130 @@
 /**
- * OFF HOURS — Clean Gruvbox Light Editorial Design Tokens
- * Aesthetic: Crisp White Archival Paper / High-Contrast Gruvbox Letterpress
+ * OFF HOURS — Animaxxing Style Design Tokens
+ * Spec: .agents/skills/style-animaxxing/references/tokens.md
+ * Palette: Strict Swiss Monochrome with Light/Dark Theme Switching
+ * Fonts: Variable Rethink Sans (400-800) & JetBrains Mono (100-800)
  */
 
 :root {
-  /* Crisp White Archival Paper Ground */
-  --bg: #fdfcf9;            /* crisp fine-art archival white paper */
-  --bg-surface: #f4f1e8;    /* clean warm off-white ledger surface */
-  --bg-card: #ece6dc;       /* subtle light warm card stock */
-  --bg-elevated: #e0d8ca;   /* pressed binder tone */
-  --bg-translucent: rgba(253, 252, 249, 0.95);
+  color-scheme: light;
 
-  /* Deep Gruvbox Letterpress Ink (High-Contrast Editorial) */
-  --text: #1d2021;          /* gruvbox fg0_hard (deepest carbon ink) */
-  --text-muted: #3c3836;    /* gruvbox fg1 (sharp editorial body) */
-  --text-dim: #665c54;      /* gruvbox fg3 (archival caption ink) */
-  --text-ghost: rgba(29, 32, 33, 0.05);
+  /* Semantic Monochrome Palette (Light Scheme) */
+  --canvas: #ffffff;
+  --foreground: #171717;
+  --muted: #525252;
+  --border: #d4d4d4;
+  --surface: #fafafa;
+  --surface-hover: #f0f0f0;
+  --inverse: #171717;
+  --inverse-hover: #404040;
+  --inverse-foreground: #ffffff;
+  --focus: #171717;
+  --selection: #171717;
+  --selection-foreground: #ffffff;
 
-  /* Gruvbox Iconic Accents */
-  --tungsten: #af3a03;       /* gruvbox dark orange / burnt terracotta */
-  --tungsten-bright: #b57614;/* gruvbox dark yellow / raw ochre */
-  --tungsten-glow: rgba(175, 58, 3, 0.2);
-  --tungsten-subtle: rgba(175, 58, 3, 0.08);
-  --cyan-river: #076678;     /* gruvbox dark blue / deep slate teal */
-  --cyan-river-dim: rgba(7, 102, 120, 0.16);
-  --gruvbox-red: #cc241d;
-  --gruvbox-green: #79740e;
+  /* Typography Stacks */
+  --font-sans: "Rethink Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-sans);
 
-  /* Razor-Sharp Hairlines & Grid Rules */
-  --border-hairline: rgba(29, 32, 33, 0.12);
-  --border-medium: rgba(29, 32, 33, 0.22);
-  --border-focus: #af3a03;
+  /* Spacing Scale */
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-lg: 2.5rem;
+  --spacing-section: 4.5rem;
 
-  /* Monumental Typography Families */
-  --font-display: "Syne", -apple-system, sans-serif;
-  --font-heading: "Space Grotesk", -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  /* Editorial Tight Radii */
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
 
-  /* Motion Curves (Awwwards Grade) */
-  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
-  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+  /* Border Widths */
+  --border-width-hairline: 1px;
+  --border-width-strong: 2px;
+
+  /* Animaxxing Signature Eases */
+  --ease-animaxxing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Fluid Poster Type Scales */
+  --text-poster: clamp(3.25rem, 8.8vw, 8.5rem);
+  --text-poster-line-height: 0.84;
+  --text-statement: clamp(2.25rem, 4.5vw, 4rem);
+  --text-statement-line-height: 0.95;
+}
+
+/* System Dark Preference (unless pinned to light) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --canvas: #0a0a0a;
+    --foreground: #ededed;
+    --muted: #a3a3a3;
+    --border: #262626;
+    --surface: #171717;
+    --surface-hover: #262626;
+    --inverse: #ededed;
+    --inverse-hover: #d4d4d4;
+    --inverse-foreground: #0a0a0a;
+    --focus: #ededed;
+    --selection: #ededed;
+    --selection-foreground: #0a0a0a;
+  }
+}
+
+/* Explicit User Choice (Theme Toggle) */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --canvas: #0a0a0a;
+  --foreground: #ededed;
+  --muted: #a3a3a3;
+  --border: #262626;
+  --surface: #171717;
+  --surface-hover: #262626;
+  --inverse: #ededed;
+  --inverse-hover: #d4d4d4;
+  --inverse-foreground: #0a0a0a;
+  --focus: #ededed;
+  --selection: #ededed;
+  --selection-foreground: #0a0a0a;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --canvas: #ffffff;
+  --foreground: #171717;
+  --muted: #525252;
+  --border: #d4d4d4;
+  --surface: #fafafa;
+  --surface-hover: #f0f0f0;
+  --inverse: #171717;
+  --inverse-hover: #404040;
+  --inverse-foreground: #ffffff;
+  --focus: #171717;
+  --selection: #171717;
+  --selection-foreground: #ffffff;
+}
+
+/* Theme Switching Smooth Transition */
+:root.theme-transitioning,
+:root.theme-transitioning *,
+:root.theme-transitioning *::before,
+:root.theme-transitioning *::after {
+  transition-duration: 0.25s !important;
+  transition-property: background-color, border-color, color, fill, outline-color, stroke, text-decoration-color !important;
+  transition-timing-function: linear !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root.theme-transitioning,
+  :root.theme-transitioning *,
+  :root.theme-transitioning *::before,
+  :root.theme-transitioning *::after {
+    transition-duration: 0s !important;
+  }
 }

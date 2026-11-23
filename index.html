@@ -1,72 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OFF HOURS — Independent Nocturnal Culture Festival</title>
   <meta name="description" content="OFF HOURS is an independent culture festival reactivating four overlooked spaces across an old river-and-rail city for two nights.">
 
-  <!-- Curated Avant-Garde Typography -->
+  <!-- Curated Animaxxing Typography: Variable Rethink Sans (400-800) & JetBrains Mono (100-800) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
 
-  <!-- Lenis Smooth Scroll Engine (Awwwards 60fps Standard) -->
+  <!-- Lenis Smooth Scroll Engine -->
   <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 
-  <!-- GSAP 3 & ScrollTrigger -->
+  <!-- GSAP 3, ScrollTrigger & CustomEase (Signature Animaxxing Motion) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
 
-  <!-- Production Styles -->
+  <!-- Production Inlined Styles -->
   <style>
 /**
- * OFF HOURS — Clean Gruvbox Light Editorial Main Stylesheet
- * Aesthetic: Crisp White Archival Paper / High-Contrast Gruvbox Letterpress
- * Directed via: gsap-scrolltrigger / gsap-performance / gsap-core / awwwards / ui-ux-pro-max
+ * OFF HOURS — Animaxxing Editorial Production Stylesheet
+ * Architectural System: International Typographic Style / Swiss Monochrome
+ * Spec: .agents/skills/style-animaxxing & .agents/skills/animaxxing
  */
 
+/* ==========================================================================
+   1. DESIGN TOKENS (LIGHT & DARK MONOCHROME)
+   ========================================================================== */
 :root {
-  /* Crisp White Archival Paper Ground */
-  --bg: #fdfcf9;            /* crisp fine-art archival white paper */
-  --bg-surface: #f4f1e8;    /* clean warm off-white ledger surface */
-  --bg-card: #ece6dc;       /* subtle light warm card stock */
-  --bg-elevated: #e0d8ca;   /* pressed binder tone */
-  --bg-translucent: rgba(253, 252, 249, 0.96);
+  color-scheme: light;
 
-  /* Deep Gruvbox Letterpress Ink (High-Contrast Editorial) */
-  --text: #1d2021;          /* gruvbox fg0_hard (deepest carbon ink) */
-  --text-muted: #3c3836;    /* gruvbox fg1 (sharp editorial body) */
-  --text-dim: #665c54;      /* gruvbox fg3 (archival caption ink) */
-  --text-ghost: rgba(29, 32, 33, 0.05);
+  /* Semantic Monochrome Palette */
+  --canvas: #ffffff;
+  --foreground: #171717;
+  --muted: #525252;
+  --border: #d4d4d4;
+  --surface: #fafafa;
+  --surface-hover: #f0f0f0;
+  --inverse: #171717;
+  --inverse-hover: #404040;
+  --inverse-foreground: #ffffff;
+  --focus: #171717;
+  --selection: #171717;
+  --selection-foreground: #ffffff;
 
-  /* Gruvbox Iconic Accents */
-  --tungsten: #af3a03;       /* gruvbox dark orange / burnt terracotta */
-  --tungsten-bright: #b57614;/* gruvbox dark yellow / raw ochre */
-  --tungsten-glow: rgba(175, 58, 3, 0.2);
-  --tungsten-subtle: rgba(175, 58, 3, 0.08);
-  --cyan-river: #076678;     /* gruvbox dark blue / deep slate teal */
-  --cyan-river-dim: rgba(7, 102, 120, 0.16);
-  --gruvbox-red: #cc241d;
-  --gruvbox-green: #79740e;
+  /* Typography Stacks */
+  --font-sans: "Rethink Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-sans);
 
-  /* Razor-Sharp Hairlines & Grid Rules */
-  --border-hairline: rgba(29, 32, 33, 0.12);
-  --border-medium: rgba(29, 32, 33, 0.22);
-  --border-focus: #af3a03;
+  /* Spacing Scale */
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-lg: 2.5rem;
+  --spacing-section: 4.5rem;
 
-  /* Monumental Typography Families */
-  --font-display: "Syne", -apple-system, sans-serif;
-  --font-heading: "Space Grotesk", -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  /* Editorial Tight Radii */
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
 
-  /* Motion Curves (Awwwards Grade) */
-  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
-  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+  /* Border Widths */
+  --border-width-hairline: 1px;
+  --border-width-strong: 2px;
+
+  /* Signature Curves */
+  --ease-animaxxing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* Base Reset & Lenis Integration */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --canvas: #0a0a0a;
+    --foreground: #ededed;
+    --muted: #a3a3a3;
+    --border: #262626;
+    --surface: #171717;
+    --surface-hover: #262626;
+    --inverse: #ededed;
+    --inverse-hover: #d4d4d4;
+    --inverse-foreground: #0a0a0a;
+    --focus: #ededed;
+    --selection: #ededed;
+    --selection-foreground: #0a0a0a;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #0a0a0a;
+  --foreground: #ededed;
+  --muted: #a3a3a3;
+  --border: #262626;
+  --surface: #171717;
+  --surface-hover: #262626;
+  --inverse: #ededed;
+  --inverse-hover: #d4d4d4;
+  --inverse-foreground: #0a0a0a;
+  --focus: #ededed;
+  --selection: #ededed;
+  --selection-foreground: #0a0a0a;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --canvas: #ffffff;
+  --foreground: #171717;
+  --muted: #525252;
+  --border: #d4d4d4;
+  --surface: #fafafa;
+  --surface-hover: #f0f0f0;
+  --inverse: #171717;
+  --inverse-hover: #404040;
+  --inverse-foreground: #ffffff;
+  --focus: #171717;
+  --selection: #171717;
+  --selection-foreground: #ffffff;
+}
+
+/* ==========================================================================
+   2. BASE RESET & PLAIN-CSS ANIMAXXING STYLES
+   ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -74,378 +134,489 @@
 }
 
 html {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: var(--font-heading);
+  background-color: var(--canvas);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-html.lenis, html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
+  background: var(--canvas);
+  color: var(--foreground);
+  min-height: 100vh;
+  position: relative;
   overflow-x: hidden;
-  line-height: 1.5;
-  cursor: default;
 }
 
-/* Custom Interactive Follower Cursor (GSAP quickTo() GPU Composited) */
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 6px;
-  height: 6px;
-  background: var(--tungsten);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  will-change: transform;
-}
-
-.cursor-follower {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 38px;
-  height: 38px;
-  border: 1.5px solid rgba(175, 58, 3, 0.45);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  will-change: transform, width, height;
-  transition: width 0.3s var(--ease-expo), height 0.3s var(--ease-expo), background-color 0.25s ease, border-color 0.25s ease;
-}
-
-.cursor-follower .cursor-label {
+/* Tabular code numbers without ligatures */
+code, pre {
   font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  color: #fdfcf9;
-  letter-spacing: 0.12em;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: opacity 0.2s ease, transform 0.2s var(--ease-expo);
-  pointer-events: none;
-  white-space: nowrap;
+  font-variant-ligatures: none;
 }
 
-/* Cursor Context States */
-.cursor-follower.is-hovering {
-  width: 68px;
-  height: 68px;
-  background: rgba(175, 58, 3, 0.1);
-  border-color: var(--tungsten);
+:focus-visible {
+  outline: var(--border-width-strong) solid var(--focus);
+  outline-offset: 2px;
 }
 
-.cursor-follower.is-media {
-  width: 96px;
-  height: 96px;
-  background: var(--tungsten);
-  border-color: var(--tungsten-bright);
+::selection {
+  background: var(--selection);
+  color: var(--selection-foreground);
 }
 
-.cursor-follower.is-media .cursor-label {
-  opacity: 1;
-  transform: scale(1);
-}
-
-@media (pointer: coarse), (hover: none) {
-  .cursor-dot, .cursor-follower {
-    display: none !important;
-  }
-}
-
-/* Filmic Anamorphic Letterbox Framing (Charcoal Letterbox) */
-.letterbox-bar-top, .letterbox-bar-bottom {
-  position: fixed;
-  left: 0;
-  width: 100%;
-  height: 16px;
-  background: #1d2021;
-  z-index: 250;
-  pointer-events: none;
-}
-.letterbox-bar-top { top: 0; }
-.letterbox-bar-bottom { bottom: 0; }
-
-@media (max-width: 768px) {
-  .letterbox-bar-top, .letterbox-bar-bottom {
-    height: 8px;
-  }
-}
-
-/* Subtle Clean Print Grain Overlay */
-.film-grain {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 200;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* Ambient Cursor Torch */
-#torch {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 650px;
-  height: 650px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(175, 58, 3, 0.04) 0%, rgba(253, 252, 249, 0) 65%);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  will-change: transform;
-}
-
-/* Masthead / Navigation Bar */
-header.masthead {
-  position: fixed;
-  top: 16px;
-  left: 0;
-  width: 100%;
-  padding: 12px 36px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 240;
-  background: linear-gradient(to bottom, rgba(253, 252, 249, 0.96) 0%, rgba(253, 252, 249, 0) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.brand-group {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-}
-
-.brand-name {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 19px;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.brand-meta {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  color: var(--tungsten);
-  text-transform: uppercase;
-}
-
-.header-controls {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.timecode-counter {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  background: var(--bg-card);
-  border: 1px solid var(--border-hairline);
-  padding: 7px 12px;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.timecode-counter::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--gruvbox-red);
-  border-radius: 50%;
-  animation: recPulse 1.8s infinite;
-}
-
-@keyframes recPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-.audio-toggle-btn {
-  background: rgba(175, 58, 3, 0.08);
-  border: 1px solid rgba(175, 58, 3, 0.35);
-  color: var(--tungsten);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 7px 14px;
+button {
   cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
+  border: 0 solid currentColor;
+  background: transparent;
+  font: inherit;
+  color: inherit;
 }
 
-.audio-toggle-btn:hover {
-  background: var(--tungsten);
-  color: #fdfcf9;
-  border-color: var(--tungsten);
-}
-
-.audio-toggle-btn.active {
-  background: var(--tungsten);
-  color: #fdfcf9;
-  box-shadow: 0 0 16px var(--tungsten-glow);
-}
-
-.nav-link-pass {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #fdfcf9;
-  background: var(--text);
-  padding: 8px 16px;
+a {
+  color: inherit;
   text-decoration: none;
-  font-weight: 700;
-  transition: all 0.3s var(--ease-expo);
-  display: inline-flex;
-  align-items: center;
 }
 
-.nav-link-pass:hover {
-  background: var(--tungsten);
-  transform: translateY(-1px);
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Scroll progress hairline */
+.scroll-progress-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--foreground);
+  z-index: 500;
+  pointer-events: none;
+  transform-origin: left;
+}
+
+/* Hatch pattern fill */
+.hatch {
+  background-color: var(--foreground);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M-1 9L9-1M-1 1L1-1M7 9L9 7' stroke='black' stroke-width='1'/%3E%3C/svg%3E");
+  mask-size: 8px 8px;
+  mask-repeat: repeat;
 }
 
 /* ==========================================================================
-   SCENE 01: HERO SECTION (PROPORTIONAL 100VH BALANCED EDITORIAL BROADSIDE)
+   3. ANIMAXXING TYPE ROLES
+   ========================================================================== */
+.poster {
+  font-family: var(--font-sans);
+  font-size: clamp(3.2rem, 8.2vw, 8.2rem);
+  font-weight: 800;
+  line-height: 0.84;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+
+.poster-align-ink {
+  margin-inline-start: -0.055em;
+}
+
+.statement {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4.2vw, 3.8rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.display {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  line-height: 0.84;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+
+.card-heading {
+  font-family: var(--font-sans);
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.mono-note {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.figure {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.body-copy {
+  font-family: var(--font-sans);
+  max-width: 68ch;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--muted);
+}
+
+.body-copy-narrow {
+  max-width: 42ch;
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   4. CHIPS, BUTTONS & PARTICLE ENGINE STYLES
+   ========================================================================== */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  height: 3rem;
+  border: var(--border-width-strong) solid currentColor;
+  border-radius: var(--radius-xl);
+  padding-inline: 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.small-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 2.25rem;
+  gap: 6px;
+  border: var(--border-width-strong) solid var(--foreground);
+  border-radius: var(--radius-lg);
+  padding-inline: 0.875rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--foreground);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chip-solid {
+  border-color: var(--inverse);
+  background: var(--inverse);
+  color: var(--inverse-foreground);
+}
+.chip-solid:hover {
+  background: var(--inverse-hover);
+  border-color: var(--inverse-hover);
+}
+
+.chip-outline {
+  border-color: var(--foreground);
+  color: var(--foreground);
+  background: transparent;
+}
+.chip-outline:hover {
+  background: var(--surface-hover);
+}
+
+.button-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: var(--radius-lg);
+  padding: 0.85rem 1.75rem;
+  font-family: var(--font-sans);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  background: var(--inverse);
+  color: var(--inverse-foreground);
+  border: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.button-solid:hover {
+  background: var(--inverse-hover);
+}
+
+.button-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: var(--radius-lg);
+  padding: 0.85rem 1.75rem;
+  font-family: var(--font-sans);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  border: var(--border-width-strong) solid var(--foreground);
+  background: transparent;
+  color: var(--foreground);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.button-outline:hover {
+  background: var(--surface-hover);
+}
+
+/* Particle Canvas Wrapper Isolation */
+.particle-btn-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.particle-btn-wrapper canvas {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--foreground);
+}
+
+.particle-layer-under canvas {
+  z-index: 5;
+}
+
+.particle-layer-over canvas {
+  z-index: 25;
+}
+
+.particle-btn-wrapper button,
+.particle-btn-wrapper a {
+  position: relative;
+  z-index: 20;
+}
+
+/* ==========================================================================
+   5. SITE CHROME & STICKY STRIP
+   ========================================================================== */
+.sticky-strip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 200;
+  background: color-mix(in srgb, var(--canvas) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 var(--spacing-gutter);
+}
+
+.strip-row {
+  display: flex;
+  min-height: 3.5rem;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+.wordmark {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: var(--foreground);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.wordmark-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--foreground);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.strip-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+.strip-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+
+.strip-nav a:hover {
+  color: var(--foreground);
+}
+
+.strip-meta {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.timecode-figure {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  color: var(--foreground);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timecode-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--foreground);
+  border-radius: 50%;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.75); }
+}
+
+.theme-toggle-btn {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  color: var(--muted);
+  transition: all 0.2s ease;
+}
+.theme-toggle-btn:hover {
+  color: var(--foreground);
+  border-color: var(--foreground);
+}
+
+/* ==========================================================================
+   6. SCENE 01: HERO SECTION (PROPORTIONAL 100VH BALANCED EDITORIAL POSTER)
    ========================================================================== */
 .hero {
   min-height: 100vh;
   height: 100vh;
-  padding: clamp(75px, 10vh, 95px) 40px clamp(20px, 3vh, 32px);
+  padding: clamp(75px, 10vh, 90px) var(--spacing-gutter-lg) clamp(20px, 3vh, 32px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
-  background: var(--bg);
+  background: var(--canvas);
+  border-bottom: 1px solid var(--border);
 }
 
-.hero-ambient-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 75% 30%, rgba(175, 58, 3, 0.05) 0%, transparent 60%),
-              linear-gradient(to bottom, rgba(253, 252, 249, 0.2) 0%, rgba(253, 252, 249, 0.9) 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.velocity-skew {
-  will-change: transform;
-}
-
-.hero-pretitle-group {
+.hero-pretitle-strip {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 1px solid var(--border-hairline);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 8px;
   margin-bottom: clamp(10px, 1.8vh, 18px);
+}
+
+.hero-title-wrap {
   position: relative;
-  z-index: 2;
+  margin-bottom: clamp(12px, 2.2vh, 24px);
 }
 
-.hero-pretitle {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  color: var(--tungsten);
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.hero-pretitle-coord {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  color: var(--text-dim);
-}
-
-/* Monumental Typography with Nested Line Masks */
 .hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.3rem, 6.2vw, 6.2rem);
-  font-weight: 900;
-  line-height: 0.92;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-  color: var(--text);
-  margin-bottom: clamp(12px, 2vh, 20px);
-  position: relative;
-  z-index: 2;
+  margin: 0;
+  text-wrap: balance;
 }
 
-.mask-line {
+.hero-title-line {
   display: block;
   overflow: hidden;
 }
 
-.mask-line-inner {
+.hero-title-inner {
   display: block;
-  transform: translateY(110%);
-  will-change: transform;
 }
 
-.hero-title .accent-tungsten {
-  color: var(--tungsten);
+/* Speak-in Subhead */
+.hero-subhead {
+  font-family: var(--font-sans);
+  font-size: clamp(1.1rem, 1.35vw, 1.45rem);
+  line-height: 1.42;
+  font-weight: 500;
+  color: var(--foreground);
+  max-width: 58ch;
+  margin-bottom: clamp(16px, 2.5vh, 26px);
+}
+
+/* Hero Actions & Buttons */
+.hero-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: clamp(12px, 2vh, 22px);
+  flex-wrap: wrap;
 }
 
 /* Kinetic Ticker Marquee Strip */
 .kinetic-marquee-bar {
   width: 100vw;
-  margin-left: -40px;
+  margin-left: calc(-1 * var(--spacing-gutter-lg));
   padding: 8px 0;
-  background: var(--bg-surface);
-  border-top: 1px solid var(--border-hairline);
-  border-bottom: 1px solid var(--border-hairline);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   overflow: hidden;
   white-space: nowrap;
   margin-bottom: clamp(12px, 2vh, 20px);
-  position: relative;
-  z-index: 2;
 }
 
 .marquee-track {
@@ -456,17 +627,17 @@ header.masthead {
 
 .marquee-item {
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--muted);
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
 .marquee-item .sep {
-  color: var(--tungsten);
+  color: var(--foreground);
   font-weight: 700;
 }
 
@@ -476,32 +647,21 @@ header.masthead {
   grid-template-columns: 1.4fr 1fr 0.6fr;
   gap: 36px;
   align-items: end;
-  position: relative;
-  z-index: 2;
-  border-top: 1px solid var(--border-hairline);
+  border-top: 1px solid var(--border);
   padding-top: clamp(10px, 1.5vh, 16px);
-}
-
-.manifesto-lead {
-  font-size: clamp(0.88rem, 1.08vw, 1.15rem);
-  line-height: 1.45;
-  color: var(--text);
-  font-weight: 500;
-  letter-spacing: -0.01em;
 }
 
 .hero-spec-ledger {
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 0.6875rem;
   line-height: 1.7;
-  color: var(--text-muted);
-  border-left: 1px solid var(--border-hairline);
+  color: var(--muted);
+  border-left: 1px solid var(--border);
   padding-left: 18px;
 }
 
 .hero-spec-ledger strong {
-  color: var(--text);
-  letter-spacing: 0.05em;
+  color: var(--foreground);
   font-weight: 700;
 }
 
@@ -511,17 +671,17 @@ header.masthead {
   align-items: flex-end;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 0.625rem;
   letter-spacing: 0.2em;
-  color: var(--tungsten);
+  color: var(--muted);
   text-transform: uppercase;
   font-weight: 700;
 }
 
 .scroll-indicator-line {
-  width: 1.5px;
+  width: 1px;
   height: 36px;
-  background: linear-gradient(to bottom, var(--tungsten) 0%, transparent 100%);
+  background: linear-gradient(to bottom, var(--foreground) 0%, transparent 100%);
   animation: scrollDrop 2s infinite ease-in-out;
 }
 
@@ -533,12 +693,60 @@ header.masthead {
 }
 
 /* ==========================================================================
-   SCENE 02: THE NOCTURNAL ATLAS (TRUE 2.5D CAMERA DESCENT)
+   7. 12-COLUMN CHAPTER LAYOUT WITH STICKY CHAPTERS RAIL
+   ========================================================================== */
+.chapter-container {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 2rem var(--spacing-gutter);
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+.chapters-rail {
+  grid-column: span 1 / span 1;
+  position: sticky;
+  top: 5rem;
+  height: calc(100vh - 6rem);
+  transform: rotate(180deg);
+  border-left: 1px solid var(--border);
+  padding-left: 0.75rem;
+  writing-mode: vertical-rl;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.rail-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.15s ease;
+  padding-block: 0.5rem;
+  cursor: pointer;
+}
+
+.rail-link:hover,
+.rail-link[aria-current="page"] {
+  color: var(--foreground);
+}
+
+.chapter-body {
+  grid-column: span 11 / span 11;
+  min-width: 0;
+}
+
+/* ==========================================================================
+   8. SCENE 02: THE NOCTURNAL ATLAS (ARCHITECTURAL MONOCHROME SCHEMATIC)
    ========================================================================== */
 .atlas-pin-wrapper {
   position: relative;
   height: 220vh;
-  background: var(--bg-surface);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
 .atlas-viewport {
@@ -562,7 +770,6 @@ header.masthead {
   will-change: transform;
 }
 
-/* Multi-Plane Parallax Layers */
 .atlas-layer-bg-grid {
   position: absolute;
   top: -20%;
@@ -570,8 +777,8 @@ header.masthead {
   width: 140%;
   height: 140%;
   background-image: 
-    linear-gradient(to right, rgba(29,32,33,0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(29,32,33,0.06) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px);
   background-size: 80px 80px;
   pointer-events: none;
   transform: translateZ(-200px);
@@ -597,19 +804,18 @@ header.masthead {
   overflow: visible;
 }
 
+.atlas-svg path {
+  stroke: var(--foreground);
+  transition: stroke 0.2s ease;
+}
+
 .map-node {
   cursor: pointer;
   transition: transform 0.3s var(--ease-expo);
 }
 
 .map-node .glow {
-  fill: rgba(175, 58, 3, 0.16);
-  animation: pulseNode 3s infinite ease-in-out;
-}
-
-@keyframes pulseNode {
-  0%, 100% { r: 24px; opacity: 0.3; }
-  50% { r: 38px; opacity: 0.8; }
+  fill: color-mix(in srgb, var(--foreground) 10%, transparent);
 }
 
 .map-node:hover {
@@ -617,41 +823,33 @@ header.masthead {
 }
 
 .map-node:hover .glow {
-  fill: rgba(175, 58, 3, 0.35);
+  fill: color-mix(in srgb, var(--foreground) 25%, transparent);
 }
 
-/* Foreground Reticle HUD */
+/* Atlas HUD Telemetry */
 .atlas-hud {
   position: absolute;
-  top: 40px;
-  left: 40px;
-  z-index: 10;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  color: var(--text);
-  background: var(--bg-translucent);
-  border: 1px solid var(--border-medium);
-  padding: 16px 20px;
-  backdrop-filter: blur(8px);
-  max-width: 360px;
-  box-shadow: 0 4px 20px rgba(29, 32, 33, 0.08);
+  bottom: 40px;
+  left: var(--spacing-gutter-lg);
+  right: var(--spacing-gutter-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
 }
 
-.atlas-hud-title {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  color: var(--tungsten);
-  margin-bottom: 6px;
-  text-transform: uppercase;
+.atlas-hud-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.atlas-hud-meter {
-  margin-top: 10px;
+.atlas-hud-progress {
+  width: 180px;
   height: 2px;
-  width: 100%;
-  background: rgba(29, 32, 33, 0.14);
+  background: var(--border);
   position: relative;
   overflow: hidden;
 }
@@ -662,18 +860,19 @@ header.masthead {
   top: 0;
   height: 100%;
   width: 0%;
-  background: var(--tungsten);
+  background: var(--foreground);
   transition: width 0.1s linear;
 }
 
 /* ==========================================================================
-   SCENE 03: FOUR CIVIC SPACES (TIGHT PINNED LATERAL RAIL - ZERO DEAD SCROLL)
+   9. SCENE 03: FOUR CIVIC SPACES (TIGHT PINNED LATERAL RAIL - ZERO DEAD SCROLL)
    ========================================================================== */
 .venues-pin-wrapper {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: var(--bg);
+  background: var(--canvas);
+  border-bottom: 1px solid var(--border);
 }
 
 .venues-track-viewport {
@@ -691,18 +890,18 @@ header.masthead {
   will-change: transform;
 }
 
-/* Monumental Chamber Layout: Balanced Split Screen */
+/* Monumental Split Screen */
 .venue-chamber-panel {
   width: 100vw;
   height: 100vh;
   flex-shrink: 0;
   display: grid;
   grid-template-columns: 1.15fr 1fr;
-  padding: 75px 50px 36px;
+  padding: 75px var(--spacing-gutter-lg) 36px;
   gap: 40px;
   position: relative;
-  border-right: 1px solid var(--border-hairline);
-  background: var(--bg);
+  border-right: 1px solid var(--border);
+  background: var(--canvas);
 }
 
 .chamber-editorial-side {
@@ -719,11 +918,11 @@ header.masthead {
   align-items: center;
   gap: 14px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--tungsten);
-  border-bottom: 1px solid var(--border-hairline);
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 10px;
   font-weight: 700;
 }
@@ -731,26 +930,27 @@ header.masthead {
 .chamber-title-massive {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 3.8vw, 4.2rem);
-  font-weight: 900;
+  font-weight: 800;
   line-height: 0.94;
   letter-spacing: -0.04em;
   text-transform: uppercase;
-  color: var(--text);
+  color: var(--foreground);
   margin: 12px 0 10px;
 }
 
 .chamber-description {
   font-size: clamp(0.88rem, 1vw, 1.1rem);
   line-height: 1.45;
-  color: var(--text-muted);
+  color: var(--muted);
   max-width: 520px;
   margin-bottom: 14px;
 }
 
-/* Acoustic Waveform & Equalizer */
+/* Acoustic Telemetry Card */
 .acoustic-signature-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-hairline);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 12px 18px;
   margin-bottom: 16px;
   display: flex;
@@ -760,77 +960,81 @@ header.masthead {
 
 .acoustic-signature-info {
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 0.6875rem;
   letter-spacing: 0.12em;
 }
 
 .acoustic-signature-info .label {
-  color: var(--text-dim);
+  color: var(--muted);
   text-transform: uppercase;
   display: block;
   margin-bottom: 2px;
 }
 
 .acoustic-signature-info .val {
-  color: var(--text);
+  color: var(--foreground);
   font-weight: 700;
 }
 
 .acoustic-waveform {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 4px;
-  height: 26px;
+  height: 24px;
 }
 
 .waveform-bar {
   width: 3px;
-  background: var(--tungsten);
+  background: var(--foreground);
   border-radius: 1px;
-  animation: waveAnim 1.6s infinite ease-in-out alternate;
+  animation: waveMotion 1.4s infinite ease-in-out;
 }
 
-.waveform-bar:nth-child(1) { height: 35%; animation-delay: 0.1s; }
-.waveform-bar:nth-child(2) { height: 75%; animation-delay: 0.3s; }
-.waveform-bar:nth-child(3) { height: 95%; animation-delay: 0.2s; }
-.waveform-bar:nth-child(4) { height: 50%; animation-delay: 0.5s; }
-.waveform-bar:nth-child(5) { height: 85%; animation-delay: 0.15s; }
-.waveform-bar:nth-child(6) { height: 40%; animation-delay: 0.4s; }
-.waveform-bar:nth-child(7) { height: 65%; animation-delay: 0.25s; }
+.waveform-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.waveform-bar:nth-child(2) { height: 16px; animation-delay: 0.3s; }
+.waveform-bar:nth-child(3) { height: 24px; animation-delay: 0.5s; }
+.waveform-bar:nth-child(4) { height: 12px; animation-delay: 0.2s; }
+.waveform-bar:nth-child(5) { height: 18px; animation-delay: 0.4s; }
+.waveform-bar:nth-child(6) { height: 8px; animation-delay: 0.6s; }
+.waveform-bar:nth-child(7) { height: 14px; animation-delay: 0.15s; }
 
-@keyframes waveAnim {
-  0% { transform: scaleY(0.3); opacity: 0.6; }
-  100% { transform: scaleY(1); opacity: 1; }
+@keyframes waveMotion {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1.1); }
 }
 
-/* Material & Sensory Spec Ledger */
 .sensory-specs-table {
+  border-top: 1px solid var(--border);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  border-top: 1px solid var(--border-hairline);
-  padding-top: 14px;
+  gap: 10px 20px;
+  padding-top: 12px;
+}
+
+.spec-entry {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-k {
   font-family: var(--font-mono);
-  font-size: 10px;
-}
-
-.spec-entry .spec-k {
-  color: var(--text-dim);
+  font-size: 0.625rem;
   text-transform: uppercase;
-  display: block;
-  margin-bottom: 2px;
-  letter-spacing: 0.1em;
+  color: var(--muted);
+  letter-spacing: 0.12em;
 }
 
-.spec-entry .spec-v {
-  color: var(--text);
+.spec-v {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--foreground);
   font-weight: 600;
+  margin-top: 2px;
 }
 
-/* Chamber Media Side (Colossal Architectural Photographic Plate) */
+/* Media Side with Clipped Hairline Frame */
 .chamber-media-side {
   position: relative;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -840,473 +1044,301 @@ header.masthead {
 .media-frame-clipped {
   position: relative;
   width: 100%;
-  flex: 1 1 auto;
-  min-height: 200px;
+  flex: 1;
   overflow: hidden;
-  border: 1.5px solid var(--border-medium);
-  background: var(--bg-card);
-  cursor: pointer;
-  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  min-height: 240px;
 }
 
 .media-parallax-img {
-  width: 120%;
-  height: 120%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center;
-  filter: grayscale(35%) sepia(20%) contrast(118%) brightness(96%);
-  transition: filter 0.6s var(--ease-expo), transform 0.8s var(--ease-expo);
+  filter: grayscale(100%) contrast(110%);
+  transition: filter 0.4s ease;
   will-change: transform;
 }
 
 .media-frame-clipped:hover .media-parallax-img {
-  filter: grayscale(10%) sepia(10%) contrast(112%) brightness(100%);
+  filter: grayscale(80%) contrast(115%);
 }
 
-.media-frame-clipped::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-shadow: inset 0 0 60px rgba(29, 32, 33, 0.25);
-  pointer-events: none;
-}
-
-/* Unredacted Artist Lineup Roster */
-.chamber-lineup-ledger {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-hairline);
-  padding: 14px 18px;
-  flex: 0 0 auto;
-}
-
-.lineup-ledger-heading {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--tungsten);
-  margin-bottom: 8px;
+.media-caption-strip {
   display: flex;
   justify-content: space-between;
-  font-weight: 700;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--muted);
+}
+
+.chamber-curation-list {
+  margin-top: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+}
+
+.curation-title {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
 }
 
 .artist-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 5px 0;
-  border-bottom: 1px solid rgba(29, 32, 33, 0.08);
-  font-family: var(--font-heading);
-  transition: padding-left 0.2s ease;
+  padding: 4px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
 }
 
 .artist-row:last-child {
   border-bottom: none;
 }
 
-.artist-row:hover {
-  padding-left: 8px;
-  background: rgba(175, 58, 3, 0.05);
-}
-
 .artist-row .name {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
-  color: var(--text);
+  color: var(--foreground);
 }
 
 .artist-row .discipline {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-dim);
-  margin-left: 10px;
+  font-size: 0.625rem;
+  color: var(--muted);
+  margin-left: 8px;
 }
 
 .artist-row .time {
   font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--tungsten);
+  font-size: 0.6875rem;
+  color: var(--foreground);
   font-weight: 700;
 }
 
 /* ==========================================================================
-   SCENE 04: SCHEDULE (THE NOCTURNAL TIMETABLE LEDGER)
+   10. SCENE 04: SCHEDULE (HAIRLINE-RULED LEDGER TABLE)
    ========================================================================== */
 .schedule-section {
-  padding: 90px 40px;
-  background: var(--bg-surface);
-  position: relative;
-  border-top: 1px solid var(--border-hairline);
+  padding: var(--spacing-section) var(--spacing-gutter-lg);
+  max-width: 90rem;
+  margin-inline: auto;
+  border-bottom: 1px solid var(--border);
 }
 
 .schedule-header {
+  margin-bottom: 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 36px;
-  border-bottom: 1px solid var(--border-hairline);
-  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.25rem;
 }
 
-.schedule-title-massive {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.4vw, 4.8rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-  color: var(--text);
-}
-
-.schedule-filter-controls {
+.schedule-filter-tabs {
   display: flex;
-  gap: 12px;
+  gap: 8px;
 }
 
-.filter-btn {
-  background: transparent;
-  border: 1px solid var(--border-medium);
-  color: var(--text-muted);
+.tab-btn {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 9px 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
-}
-
-.filter-btn:hover, .filter-btn.active {
-  background: var(--tungsten);
-  color: #fdfcf9;
-  border-color: var(--tungsten);
+  font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  transition: all 0.2s ease;
 }
 
-.timetable-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background: var(--border-hairline);
+.tab-btn:hover,
+.tab-btn.active {
+  background: var(--inverse);
+  color: var(--inverse-foreground);
+  border-color: var(--inverse);
 }
 
-.time-slot-row {
+/* Ledger Rows */
+.ledger-row {
   display: grid;
-  grid-template-columns: 140px minmax(220px, 1.4fr) minmax(140px, 1fr) 120px;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  align-items: start;
+  column-gap: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-block: 0.85rem;
+  transition: background 0.15s ease;
+}
+
+.ledger-row:hover {
+  background: var(--surface-hover);
+}
+
+.ledger-figures {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (min-width: 64rem) {
+  .ledger-row {
+    min-height: 2.75rem;
+    grid-template-columns: 5rem minmax(0, 1.5fr) 14rem 9rem 5rem;
+    align-items: center;
+    padding-block: 0.75rem;
+  }
+  .ledger-figures {
+    display: contents;
+  }
+}
+
+.slot-time {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.slot-act {
+  font-size: 1.125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+.slot-venue {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.slot-badge {
+  display: inline-flex;
   align-items: center;
-  background: var(--bg);
-  padding: 18px 24px;
-  transition: background 0.25s ease;
-}
-
-.time-slot-row:hover {
-  background: var(--bg-card);
-}
-
-.time-slot-hour {
   font-family: var(--font-mono);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--tungsten);
-  letter-spacing: 0.05em;
-}
-
-.time-slot-act {
-  font-family: var(--font-heading);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.time-slot-act .sub {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-dim);
-  font-weight: 500;
-  margin-top: 3px;
-}
-
-.time-slot-venue {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.time-slot-action a {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--tungsten);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(175, 58, 3, 0.4);
-  padding-bottom: 2px;
-  transition: border-color 0.2s ease;
-  font-weight: 700;
-}
-
-.time-slot-action a:hover {
-  border-color: var(--tungsten);
-  color: var(--text);
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  width: fit-content;
 }
 
 /* ==========================================================================
-   SCENE 05: PASS DOCKET (PHYSICAL PUNCHCARD / MONOLITH)
+   11. SCENE 05: PASS DOSSIER & CARDS (2PX BORDER ANIMAXXING CARDS)
    ========================================================================== */
 .tickets-section {
-  padding: 110px 40px;
-  background: var(--bg);
-  position: relative;
-  overflow: hidden;
+  padding: var(--spacing-section) var(--spacing-gutter-lg);
+  max-width: 90rem;
+  margin-inline: auto;
+  border-bottom: 1px solid var(--border);
 }
 
-.tickets-layout {
-  max-width: 1280px;
-  margin: 0 auto;
+.card-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 64px;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 48rem) {
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  cursor: pointer;
+  border: var(--border-width-strong) solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  padding: 2rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.card:hover {
+  border-color: var(--foreground);
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+}
+
+.card-label {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.tickets-intro-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.4vw, 4.8rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+.card .card-heading {
+  margin-top: 1.5rem;
+}
+
+.card .body-copy {
+  margin-top: 0.75rem;
+  max-width: 36ch;
+}
+
+.card .annotation {
+  margin-top: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
-  color: var(--text);
-  margin-bottom: 18px;
+  letter-spacing: 0.08em;
+  color: var(--foreground);
 }
 
-.tickets-intro-lead {
-  font-size: 15px;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 24px;
+/* ==========================================================================
+   12. FOOTER & MODAL
+   ========================================================================== */
+.shell-footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem var(--spacing-gutter-lg);
+  max-width: 90rem;
+  margin-inline: auto;
 }
 
-/* Physical Perforated Pass Card */
-.punchcard-ticket-pass {
-  background: var(--bg-card);
-  border: 1.5px solid var(--border-medium);
-  padding: 40px;
-  position: relative;
-  box-shadow: 0 20px 60px rgba(29, 32, 33, 0.1);
-}
-
-/* Notch Cutouts */
-.punchcard-ticket-pass::before, .punchcard-ticket-pass::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 24px;
-  height: 24px;
-  background: var(--bg);
-  border-radius: 50%;
-  transform: translateY(-50%);
-  border: 1.5px solid var(--border-medium);
-}
-.punchcard-ticket-pass::before { left: -13px; }
-.punchcard-ticket-pass::after { right: -13px; }
-
-.pass-docket-header {
+.footer-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 1px dashed var(--border-medium);
-  padding-bottom: 16px;
-  margin-bottom: 22px;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
-.pass-id {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  color: var(--tungsten);
-  font-weight: 700;
-}
-
-.pass-status-pill {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  background: rgba(175, 58, 3, 0.12);
-  color: var(--tungsten);
-  padding: 4px 10px;
-  border: 1px solid rgba(175, 58, 3, 0.3);
-  font-weight: 700;
-}
-
-.pass-title-massive {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-
-.pass-tier-selector {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  margin: 22px 0;
-}
-
-.tier-choice {
-  border: 1px solid var(--border-hairline);
-  background: var(--bg);
-  padding: 14px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  text-align: center;
-}
-
-.tier-choice:hover {
-  border-color: var(--border-medium);
-}
-
-.tier-choice.active {
-  border-color: var(--tungsten);
-  background: rgba(175, 58, 3, 0.08);
-}
-
-.tier-choice .tier-name {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 4px;
-  font-weight: 600;
-}
-
-.tier-choice.active .tier-name {
-  color: var(--tungsten);
-  font-weight: 700;
-}
-
-.tier-choice .tier-cost {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--text);
-}
-
-.pass-cta-btn {
-  width: 100%;
-  padding: 18px;
-  background: var(--tungsten);
-  color: #fdfcf9;
-  border: none;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s var(--ease-expo);
-  box-shadow: 0 4px 20px var(--tungsten-glow);
-}
-
-.pass-cta-btn:hover {
-  background: var(--tungsten-bright);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px var(--tungsten-glow);
-}
-
-/* ==========================================================================
-   SCENE 06: MONUMENTAL ARCHIVAL FOOTER
-   ========================================================================== */
-footer.monumental-footer {
-  padding: 90px 40px 32px;
-  background: var(--bg-surface);
-  border-top: 1px solid var(--border-hairline);
-  position: relative;
-  overflow: hidden;
-}
-
-.footer-massive-brand {
-  font-family: var(--font-display);
-  font-size: clamp(3.2rem, 14vw, 16rem);
-  font-weight: 900;
-  line-height: 0.82;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
-  color: var(--text-ghost);
-  text-align: center;
-  user-select: none;
-  pointer-events: none;
-  margin-bottom: 48px;
-}
-
-.footer-four-corners-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 32px;
-  border-top: 1px solid var(--border-hairline);
-  padding-top: 32px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-}
-
-.footer-col .col-heading {
-  color: var(--tungsten);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 12px;
-  display: block;
-  font-weight: 700;
-}
-
-.footer-col ul {
-  list-style: none;
-}
-
-.footer-col li {
-  color: var(--text-muted);
-  line-height: 1.8;
-}
-
-.footer-col a {
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.footer-col a:hover {
-  color: var(--text);
-}
-
-/* Modal Checkout */
+/* Checkout Modal */
 .checkout-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(29, 32, 33, 0.72);
+  background: color-mix(in srgb, var(--canvas) 85%, transparent);
   backdrop-filter: blur(16px);
-  z-index: 300;
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 600;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s var(--ease-expo);
+  transition: opacity 0.3s ease;
   padding: 24px;
 }
 
@@ -1316,13 +1348,14 @@ footer.monumental-footer {
 }
 
 .modal-content {
-  background: var(--bg);
-  border: 1.5px solid var(--border-medium);
+  background: var(--canvas);
+  border: var(--border-width-strong) solid var(--foreground);
+  border-radius: var(--radius-lg);
   width: 100%;
   max-width: 500px;
-  padding: 36px;
+  padding: 2.5rem;
   position: relative;
-  box-shadow: 0 30px 100px rgba(29, 32, 33, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
 .modal-close {
@@ -1331,23 +1364,50 @@ footer.monumental-footer {
   right: 18px;
   background: transparent;
   border: none;
-  color: var(--text-muted);
-  font-size: 26px;
+  color: var(--muted);
+  font-size: 24px;
   line-height: 1;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.15s ease;
 }
 
 .modal-close:hover {
-  color: var(--text);
+  color: var(--foreground);
 }
 
-/* Responsive Overrides (Using GSAP MatchMedia Compliant Layouts) */
+.text-field {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 3px solid var(--foreground);
+  background: transparent;
+  padding-block: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--foreground);
+  outline: none;
+  margin-bottom: 1.5rem;
+}
+
+.text-field::placeholder {
+  color: var(--border);
+  opacity: 1;
+}
+
+.text-field:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   13. RESPONSIVE BREAKPOINTS
+   ========================================================================== */
 @media (max-width: 1024px) {
   .hero {
     height: auto;
     min-height: 100vh;
-    padding: 90px 24px 36px;
+    padding: 85px var(--spacing-gutter) 36px;
   }
   .hero-bottom-grid {
     grid-template-columns: 1fr;
@@ -1356,6 +1416,12 @@ footer.monumental-footer {
   .hero-spec-ledger {
     border-left: none;
     padding-left: 0;
+  }
+  .chapters-rail {
+    display: none;
+  }
+  .chapter-body {
+    grid-column: span 12 / span 12;
   }
   .venues-pin-wrapper {
     height: auto !important;
@@ -1372,967 +1438,793 @@ footer.monumental-footer {
   }
   .venue-chamber-panel {
     grid-template-columns: 1fr;
-    padding: 60px 24px 40px;
+    padding: 60px var(--spacing-gutter) 40px;
     height: auto;
-    min-height: auto;
-    border-bottom: 1px solid var(--border-hairline);
+    border-bottom: 1px solid var(--border);
     border-right: none;
   }
   .media-frame-clipped {
     height: 320px;
   }
-  .tickets-layout {
-    grid-template-columns: 1fr;
-    gap: 36px;
-  }
-  .footer-four-corners-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-  .time-slot-row {
-    grid-template-columns: 90px 1fr;
-    gap: 12px;
-    padding: 16px 20px;
-  }
-  .time-slot-venue, .time-slot-action {
-    grid-column: 2;
+  .strip-nav {
+    display: none;
   }
 }
 
-</style>
+  </style>
 </head>
-<body>
+<body class="animaxxing-style">
 
-  <!-- Interactive Follower Cursor (Design Spells / Magnetic HUD) -->
-  <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-follower" aria-hidden="true">
-    <span class="cursor-label"></span>
-  </div>
+  <!-- Scroll Progress Hairline Indicator -->
+  <div class="scroll-progress-line" id="scrollProgressBar" aria-hidden="true"></div>
 
-  <!-- Cinematic Letterbox Bars (2.39:1 Anamorphic Framing) -->
-  <div class="letterbox-bar-top" aria-hidden="true"></div>
-  <div class="letterbox-bar-bottom" aria-hidden="true"></div>
+  <!-- Sticky Header Strip (Site Chrome) -->
+  <header class="sticky-strip">
+    <div class="strip-row">
+      <a href="#hero" class="wordmark">
+        off hours
+        <span class="wordmark-underline"></span>
+      </a>
 
-  <!-- Ambient 35mm Grain & Cursor Torch Light -->
-  <div class="film-grain" aria-hidden="true"></div>
-  <div id="torch" aria-hidden="true"></div>
+      <nav class="strip-nav" aria-label="Section Navigation">
+        <a href="#atlas">01 / Atlas</a>
+        <a href="#venuesPin">02 / Spaces</a>
+        <a href="#schedule">03 / Timetable</a>
+        <a href="#passes">04 / Passes</a>
+      </nav>
 
-  <!-- Masthead Navigation -->
-  <header class="masthead">
-    <div class="brand-group">
-      <a href="#" class="brand-name">OFF HOURS</a>
-      <span class="brand-meta">River & Rail Corridor · Edition 01</span>
-    </div>
-
-    <nav class="header-controls" aria-label="Main Navigation">
-      <div class="timecode-counter" title="Nocturnal Timecode (Scrubbed with Scroll Physics)">
-        <span id="timecodeDisplay">20:00:00</span>
+      <div class="strip-meta">
+        <span class="timecode-figure" id="timecodeDisplay">
+          <span class="timecode-dot" aria-hidden="true"></span>
+          20:00:00
+        </span>
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light or dark theme">DARK</button>
+        <button class="small-chip" data-open-modal>GET PASS</button>
       </div>
-
-      <button id="audioToggleBtn" class="audio-toggle-btn" data-cursor="listen" title="Toggle Synthesized 55Hz Subterranean Room Tone Drone">
-        <span>ROOM ACOUSTICS: OFF</span>
-      </button>
-
-      <a href="#tickets" class="nav-link-pass" data-cursor="ticket">48-Hr Pass · €48</a>
-    </nav>
+    </div>
   </header>
 
-  <main>
-    <!-- ======================================================================
-         SCENE 01: HERO SECTION (MONUMENTAL KINETIC BROADSIDE)
-         ====================================================================== -->
-    <section class="hero" aria-label="Festival Manifesto">
-      <div class="hero-ambient-bg" aria-hidden="true"></div>
+  <main class="page-main">
 
-      <div class="velocity-skew">
-        <div class="hero-pretitle-group">
-          <span class="hero-pretitle">The Nocturnal Cultural Dispatch</span>
-          <span class="hero-pretitle-coord">OCTOBER 24—25 · 20:00—06:00 · 53°32′N 09°59′E</span>
+    <!-- ======================================================================
+         SCENE 01: HERO SECTION (PROPORTIONAL 100VH BALANCED EDITORIAL POSTER)
+         ====================================================================== -->
+    <section class="hero" id="hero" aria-label="Festival Broadside">
+      <div>
+        <div class="hero-pretitle-strip">
+          <span class="mono-label">DISPATCH 004 · NOCTURNAL DOSSIER · VOL 01</span>
+          <span class="figure">OCTOBER 24–25 · 20:00 — 06:00 · RIVER &amp; RAIL CORRIDOR</span>
         </div>
 
-        <h1 class="hero-title">
-          <span class="mask-line"><span class="mask-line-inner">THE CITY HAS</span></span>
-          <span class="mask-line"><span class="mask-line-inner">ANOTHER LIFE</span></span>
-          <span class="mask-line"><span class="mask-line-inner accent-tungsten">AFTER MIDNIGHT.</span></span>
-        </h1>
+        <div class="hero-title-wrap">
+          <h1 class="poster poster-align-ink hero-title" id="heroHeadline">
+            OFF HOURS CULTURE FOUR CIVIC SPACES
+          </h1>
+        </div>
+
+        <p class="hero-subhead" id="heroSubhead">
+          An independent nocturnal culture festival reactivating four overlooked civic environments across an old river-and-rail city for two transformative nights.
+        </p>
+
+        <!-- Particle-Assembled Calls to Action -->
+        <div class="hero-actions-row">
+          <!-- Primary CTA: Reactor (Solid Button with Rising Embers & Heartbeat) -->
+          <div class="particle-btn-wrapper particle-layer-under" data-particle-reactor>
+            <canvas aria-hidden="true"></canvas>
+            <button class="button-solid" id="passCtaAction" data-open-modal>
+              ENTER ARCHIVE / PASS
+            </button>
+          </div>
+
+          <!-- Secondary CTA: Marquee (Outline Button with Chasing Lights) -->
+          <div class="particle-btn-wrapper particle-layer-over" data-particle-marquee>
+            <canvas aria-hidden="true"></canvas>
+            <a href="#venuesPin" class="button-outline">
+              EXPLORE SPACES
+            </a>
+          </div>
+        </div>
       </div>
 
-      <!-- Kinetic Marquee Tape Ticker -->
+      <!-- Kinetic Marquee Ticker Tape -->
       <div class="kinetic-marquee-bar" aria-hidden="true">
         <div class="marquee-track">
-          <div class="marquee-item"><span>01 TRAM DEPOT</span><span class="sep">·</span><span>108dB SUB-BASS</span><span class="sep">/</span></div>
-          <div class="marquee-item"><span>02 MUNICIPAL BATHS</span><span class="sep">·</span><span>7.2s FLUTTER ECHO</span><span class="sep">/</span></div>
-          <div class="marquee-item"><span>03 NIGHT MARKET</span><span class="sep">·</span><span>WHISPER HUBS</span><span class="sep">/</span></div>
-          <div class="marquee-item"><span>04 PRINTING WORKS</span><span class="sep">·</span><span>35MM OPTICAL SOUND</span><span class="sep">/</span></div>
-          <div class="marquee-item"><span>TWO NIGHTS UNTIL DAWN</span><span class="sep">·</span><span>48-HR ALL-ACCESS PASS</span><span class="sep">/</span></div>
-          <div class="marquee-item"><span>01 TRAM DEPOT</span><span class="sep">·</span><span>108dB SUB-BASS</span><span class="sep">/</span></div>
-          <div class="marquee-item"><span>02 MUNICIPAL BATHS</span><span class="sep">·</span><span>7.2s FLUTTER ECHO</span><span class="sep">/</span></div>
-          <div class="marquee-item"><span>03 NIGHT MARKET</span><span class="sep">·</span><span>WHISPER HUBS</span><span class="sep">/</span></div>
-          <div class="marquee-item"><span>04 PRINTING WORKS</span><span class="sep">·</span><span>35MM OPTICAL SOUND</span><span class="sep">/</span></div>
-          <div class="marquee-item"><span>TWO NIGHTS UNTIL DAWN</span><span class="sep">·</span><span>48-HR ALL-ACCESS PASS</span><span class="sep">/</span></div>
+          <div class="marquee-item"><span>OCT 24—25</span><span class="sep">·</span><span>4 HISTORICAL SPACES</span><span class="sep">·</span><span>24 PERFORMANCES</span><span class="sep">·</span><span>SUBTERRANEAN ACOUSTICS</span><span class="sep">·</span><span>35MM CELLULOID PROJECTION</span><span class="sep">·</span><span>NIGHT MARKET HUB</span><span class="sep">·</span><span>NO REPEAT TIMETABLES</span></div>
+          <div class="marquee-item"><span>OCT 24—25</span><span class="sep">·</span><span>4 HISTORICAL SPACES</span><span class="sep">·</span><span>24 PERFORMANCES</span><span class="sep">·</span><span>SUBTERRANEAN ACOUSTICS</span><span class="sep">·</span><span>35MM CELLULOID PROJECTION</span><span class="sep">·</span><span>NIGHT MARKET HUB</span><span class="sep">·</span><span>NO REPEAT TIMETABLES</span></div>
         </div>
       </div>
 
-      <div class="hero-bottom-grid velocity-skew">
-        <p class="manifesto-lead">
-          OFF HOURS temporarily unlocks four overlooked civic spaces across an old post-industrial river-and-rail city. No festival stages. No commercial brand sponsors. A temporary cultural world of independent musicians, spatial acoustics, wholesale night markets, and experimental 35mm cinema.
+      <!-- Hero Bottom Architectural Ledger -->
+      <div class="hero-bottom-grid">
+        <p class="body-copy">
+          Occupying an abandoned 1912 tram maintenance hangar, tiled municipal bathhouse basements, an all-night rail market, and a decommissioned letterpress printworks.
         </p>
 
         <div class="hero-spec-ledger">
-          <div><strong>CHAMBERS:</strong> Tram Depot · Baths · Market · Printworks</div>
-          <div><strong>DURATION:</strong> Two Nights · Staggered Until 06:00</div>
-          <div><strong>ADMISSION:</strong> 48-Hour Unrestricted Pass (€48)</div>
-          <div><strong>COORDINATES:</strong> River & Rail Freight Siding</div>
+          <div><strong>LOCATION:</strong> Central River &amp; Rail Corridor</div>
+          <div><strong>DATES:</strong> Friday Oct 24 &amp; Saturday Oct 25</div>
+          <div><strong>HOURS:</strong> 20:00 — 06:00 Both Nights</div>
         </div>
 
         <div class="scroll-cue-box">
-          <span>DESCENT INTO CITY</span>
-          <div class="scroll-indicator-line" aria-hidden="true"></div>
+          <span>DESCENT</span>
+          <div class="scroll-indicator-line"></div>
         </div>
       </div>
     </section>
 
     <!-- ======================================================================
-         SCENE 02: PINNED SECTION 1 (THE NOCTURNAL ATLAS 2.5D CAMERA DESCENT)
+         12-COLUMN CHAPTER LAYOUT WITH STICKY CHAPTERS RAIL
          ====================================================================== -->
-    <section class="atlas-pin-wrapper" id="atlasPin" aria-label="City Network Map">
-      <div class="atlas-viewport">
-        
-        <!-- Foreground Telemetry Reticle HUD -->
-        <div class="atlas-hud">
-          <div class="atlas-hud-title">NOCTURNAL ATLAS · RECONNAISSANCE</div>
-          <div>Coordinates: 53°32′N 09°59′E · River & Rail Corridor</div>
-          <div>Depth: -14m Chamber Datum · Active Civic Nodes: 04</div>
-          <div style="color: var(--tungsten); margin-top: 6px;">Camera descending into the transit & bathhouse corridor</div>
-          <div class="atlas-hud-meter" role="progressbar" aria-label="Descent Progress">
-            <div class="atlas-hud-fill" id="atlasHudFill"></div>
-          </div>
-        </div>
+    <div class="chapter-container">
+      
+      <!-- Sticky Vertical Chapters Rail -->
+      <aside class="chapters-rail" aria-label="Chapter Rail">
+        <a href="#atlas" class="rail-link" aria-current="page">01 / ATLAS</a>
+        <a href="#venuesPin" class="rail-link">02 / SPACES</a>
+        <a href="#schedule" class="rail-link">03 / TIMETABLE</a>
+        <a href="#passes" class="rail-link">04 / PASSES</a>
+      </aside>
 
-        <!-- Multi-Plane 2.5D Perspective Scene -->
-        <div class="atlas-depth-plane">
-          <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
+      <div class="chapter-body">
 
-          <div class="atlas-layer-schematic" id="atlasSchematicMap">
-            <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River & Rail Map">
-              <defs>
-                <filter id="cyanGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="8" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-
-              <!-- River Spine -->
-              <path d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                    stroke="var(--cyan-river)" stroke-width="48" stroke-linecap="round" fill="none" opacity="0.25" filter="url(#cyanGlow)"/>
-              <path d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                    stroke="#076678" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.45"/>
-
-              <!-- Rail Freight Sidings -->
-              <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="rgba(40,40,40,0.3)" stroke-width="2.5" stroke-dasharray="10 8" fill="none"/>
-              <path d="M450,420 L700,700 L1300,700" stroke="rgba(40,40,40,0.2)" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
-              <path d="M200,80 L400,280 L900,240" stroke="rgba(40,40,40,0.2)" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
-
-              <!-- Grid Lat/Long Reference Lines -->
-              <line x1="0" y1="200" x2="1400" y2="200" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
-              <line x1="0" y1="400" x2="1400" y2="400" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
-              <line x1="0" y1="600" x2="1400" y2="600" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
-              <line x1="350" y1="0" x2="350" y2="800" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
-              <line x1="700" y1="0" x2="700" y2="800" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
-              <line x1="1050" y1="0" x2="1050" y2="800" stroke="rgba(40,40,40,0.06)" stroke-width="1"/>
-
-              <!-- Four Civic Nodes -->
-              <g class="map-node" transform="translate(380, 420)" data-cursor="explore">
-                <circle class="glow" r="28" />
-                <circle r="8" fill="#af3a03" />
-                <circle r="3" fill="#fbf1c7" />
-                <text x="18" y="5" fill="#282828" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">01 TRAM DEPOT</text>
-                <text x="18" y="20" fill="#af3a03" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">TRANSIT · 108dB SUB-BASS</text>
-              </g>
-
-              <g class="map-node" transform="translate(760, 310)" data-cursor="explore">
-                <circle class="glow" r="28" />
-                <circle r="8" fill="#af3a03" />
-                <circle r="3" fill="#fbf1c7" />
-                <text x="18" y="5" fill="#282828" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
-                <text x="18" y="20" fill="#af3a03" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">RECREATION · 7.2s ECHO</text>
-              </g>
-
-              <g class="map-node" transform="translate(680, 680)" data-cursor="explore">
-                <circle class="glow" r="28" />
-                <circle r="8" fill="#af3a03" />
-                <circle r="3" fill="#fbf1c7" />
-                <text x="18" y="5" fill="#282828" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">03 NIGHT MARKET</text>
-                <text x="18" y="20" fill="#af3a03" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">COMMERCE · SOCIAL HUB</text>
-              </g>
-
-              <g class="map-node" transform="translate(1080, 480)" data-cursor="explore">
-                <circle class="glow" r="28" />
-                <circle r="8" fill="#af3a03" />
-                <circle r="3" fill="#fbf1c7" />
-                <text x="18" y="5" fill="#282828" font-family="JetBrains Mono" font-size="12" font-weight="700" letter-spacing="0.1em">04 PRINTING WORKS</text>
-                <text x="18" y="20" fill="#af3a03" font-family="JetBrains Mono" font-size="9" letter-spacing="0.16em">COMMUNICATION · 35MM CINEMA</text>
-              </g>
-            </svg>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         SCENE 03: PINNED SECTION 2 (FOUR CIVIC SPACES FULL-VIEWPORT PARALLAX RAIL)
-         ====================================================================== -->
-    <section class="venues-pin-wrapper" id="venuesPin" aria-label="The Four Spaces Dossier">
-      <div class="venues-track-viewport">
-        <div class="venues-horizontal-strip" id="venuesStrip">
-
-          <!-- CHAMBER 01: THE OLD TRAM DEPOT -->
-          <article class="venue-chamber-panel">
-            <div class="chamber-editorial-side velocity-skew">
-              <div>
-                <div class="chamber-eyebrow-strip">
-                  <span>DISPATCH 01</span>
-                  <span>·</span>
-                  <span>CIVIC LAYER: TRANSIT</span>
-                  <span>·</span>
-                  <span>CAPACITY: 800</span>
-                </div>
-
-                <h2 class="chamber-title-massive">01 / THE OLD TRAM DEPOT</h2>
-
-                <p class="chamber-description">
-                  A monumental 1912 maintenance hangar with exposed steel riveted trusses, concrete oil-stained pits, and the original municipal transit track turnouts. Intimate crowd proximity meets visceral sub-bass resonance.
-                </p>
-
-                <!-- Acoustic Waveform Equalizer -->
-                <div class="acoustic-signature-card" title="Acoustic Signature: Raw Concrete Reverb & Low Sub-Bass">
-                  <div class="acoustic-signature-info">
-                    <span class="label">Acoustic Signature</span>
-                    <span class="val">108 dB Peak Resonance · 45Hz Low Cut</span>
-                  </div>
-                  <div class="acoustic-waveform" aria-hidden="true">
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                  </div>
-                </div>
+        <!-- ======================================================================
+             SCENE 02: THE NOCTURNAL ATLAS (ARCHITECTURAL MONOCHROME SCHEMATIC)
+             ====================================================================== -->
+        <section class="atlas-pin-wrapper" id="atlasPin" aria-label="The Nocturnal Atlas">
+          <div class="atlas-viewport" id="atlas">
+            
+            <!-- HUD Telemetry Overlay -->
+            <div class="atlas-hud">
+              <div class="atlas-hud-info">
+                <span class="mono-label">NOCTURNAL ATLAS · RECONNAISSANCE</span>
+                <span class="mono-note">Coordinates: 53°32′N 09°59′E · River &amp; Rail Corridor</span>
+                <span class="mono-note">Depth: -14m Chamber Datum · Active Civic Nodes: 04</span>
               </div>
-
-              <!-- Sensory Specifications -->
-              <div class="sensory-specs-table">
-                <div class="spec-entry">
-                  <span class="spec-k">Acoustics</span>
-                  <span class="spec-v">Raw concrete reverb, sub-bass resonance</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Lighting</span>
-                  <span class="spec-v">Low sodium pools, single beam sweep</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Materials</span>
-                  <span class="spec-v">Rivet steel, concrete, rail switches</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Hours</span>
-                  <span class="spec-v">21:00 — 05:30 (Both Nights)</span>
-                </div>
+              <div class="atlas-hud-progress">
+                <div class="atlas-hud-fill" id="atlasHudFill"></div>
               </div>
             </div>
 
-            <!-- Media & Lineup Side -->
-            <div class="chamber-media-side">
-              <div class="media-frame-clipped" data-cursor="explore">
-                <img class="media-parallax-img" 
-                     src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop" 
-                     alt="Massive brutalist industrial hall with steel trusses and atmospheric sodium light"
-                     loading="lazy">
-              </div>
+            <!-- Multi-Plane Depth Schematic -->
+            <div class="atlas-depth-plane">
+              <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
 
-              <div class="chamber-lineup-ledger">
-                <div class="lineup-ledger-heading">
-                  <span>UNREDACTED ARTIST BILL</span>
-                  <span>NIGHT 01 & 02</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Kattner & Siding Ensemble</span>
-                    <span class="discipline">Live Analog Percussion</span>
-                  </div>
-                  <span class="time">22:30</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Resonance Corridor</span>
-                    <span class="discipline">Post-Punk & Heavy Reverb Trio</span>
-                  </div>
-                  <span class="time">00:45</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Null Hypothesis</span>
-                    <span class="discipline">Modular Synthesizer Drift</span>
-                  </div>
-                  <span class="time">02:30</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Displaced Phase</span>
-                    <span class="discipline">Closing Sub-Bass Improvisation</span>
-                  </div>
-                  <span class="time">04:15</span>
-                </div>
-              </div>
-            </div>
-          </article>
+              <div class="atlas-layer-schematic" id="atlasSchematicMap">
+                <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River & Rail Map">
+                  <!-- River Spine -->
+                  <path d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                        stroke="var(--foreground)" stroke-width="28" stroke-linecap="round" fill="none" opacity="0.15"/>
+                  <path d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                        stroke="var(--foreground)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.6"/>
 
-          <!-- CHAMBER 02: THE MUNICIPAL BATHS -->
-          <article class="venue-chamber-panel">
-            <div class="chamber-editorial-side velocity-skew">
-              <div>
-                <div class="chamber-eyebrow-strip">
-                  <span>DISPATCH 02</span>
-                  <span>·</span>
-                  <span>CIVIC LAYER: RECREATION</span>
-                  <span>·</span>
-                  <span>CAPACITY: 450</span>
-                </div>
+                  <!-- Rail Freight Sidings -->
+                  <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="var(--foreground)" stroke-width="1.5" stroke-dasharray="10 8" fill="none" opacity="0.4"/>
+                  <path d="M450,420 L700,700 L1300,700" stroke="var(--foreground)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.3"/>
+                  <path d="M200,80 L400,280 L900,240" stroke="var(--foreground)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.3"/>
 
-                <h2 class="chamber-title-massive">02 / THE MUNICIPAL BATHS</h2>
+                  <!-- Reference Grid Lines -->
+                  <line x1="0" y1="200" x2="1400" y2="200" stroke="var(--border)" stroke-width="1"/>
+                  <line x1="0" y1="400" x2="1400" y2="400" stroke="var(--border)" stroke-width="1"/>
+                  <line x1="0" y1="600" x2="1400" y2="600" stroke="var(--border)" stroke-width="1"/>
+                  <line x1="350" y1="0" x2="350" y2="800" stroke="var(--border)" stroke-width="1"/>
+                  <line x1="700" y1="0" x2="700" y2="800" stroke="var(--border)" stroke-width="1"/>
+                  <line x1="1050" y1="0" x2="1050" y2="800" stroke="var(--border)" stroke-width="1"/>
 
-                <p class="chamber-description">
-                  A decommissioned 1928 public bathhouse with glazed ceramic tiles, high vaulted arches, and an empty mosaic plunge pool converted into an amphitheater for spatial acoustic resonance and water-light projections.
-                </p>
+                  <!-- Four Civic Nodes -->
+                  <g class="map-node" transform="translate(380, 420)">
+                    <circle class="glow" r="26" />
+                    <circle r="7" fill="var(--foreground)" />
+                    <circle r="2.5" fill="var(--canvas)" />
+                    <text x="16" y="5" fill="var(--foreground)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">01 TRAM DEPOT</text>
+                    <text x="16" y="18" fill="var(--muted)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">TRANSIT · 108dB SUB-BASS</text>
+                  </g>
 
-                <!-- Acoustic Waveform Equalizer -->
-                <div class="acoustic-signature-card" title="Acoustic Signature: 7.2s Natural Flutter Echo">
-                  <div class="acoustic-signature-info">
-                    <span class="label">Acoustic Signature</span>
-                    <span class="val">7.2s Natural Flutter Echo · Glazed Tile Ambience</span>
-                  </div>
-                  <div class="acoustic-waveform" aria-hidden="true">
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                  </div>
-                </div>
-              </div>
+                  <g class="map-node" transform="translate(760, 310)">
+                    <circle class="glow" r="26" />
+                    <circle r="7" fill="var(--foreground)" />
+                    <circle r="2.5" fill="var(--canvas)" />
+                    <text x="16" y="5" fill="var(--foreground)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
+                    <text x="16" y="18" fill="var(--muted)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">RECREATION · 7.2s ECHO</text>
+                  </g>
 
-              <!-- Sensory Specifications -->
-              <div class="sensory-specs-table">
-                <div class="spec-entry">
-                  <span class="spec-k">Acoustics</span>
-                  <span class="spec-v">High-frequency flutter echo, 7-second tail</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Lighting</span>
-                  <span class="spec-v">Submerged caustics, slow dim cyan</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Materials</span>
-                  <span class="spec-v">Glazed tiles, wrought iron railings, stone</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Hours</span>
-                  <span class="spec-v">20:30 — 05:00 (Both Nights)</span>
-                </div>
+                  <g class="map-node" transform="translate(680, 680)">
+                    <circle class="glow" r="26" />
+                    <circle r="7" fill="var(--foreground)" />
+                    <circle r="2.5" fill="var(--canvas)" />
+                    <text x="16" y="5" fill="var(--foreground)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">03 NIGHT MARKET</text>
+                    <text x="16" y="18" fill="var(--muted)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMERCE · SOCIAL HUB</text>
+                  </g>
+
+                  <g class="map-node" transform="translate(1080, 480)">
+                    <circle class="glow" r="26" />
+                    <circle r="7" fill="var(--foreground)" />
+                    <circle r="2.5" fill="var(--canvas)" />
+                    <text x="16" y="5" fill="var(--foreground)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">04 PRINTING WORKS</text>
+                    <text x="16" y="18" fill="var(--muted)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMUNICATION · 35MM CINEMA</text>
+                  </g>
+                </svg>
               </div>
             </div>
 
-            <!-- Media & Lineup Side -->
-            <div class="chamber-media-side">
-              <div class="media-frame-clipped" data-cursor="explore">
-                <img class="media-parallax-img" 
-                     src="https://images.unsplash.com/photo-1584905066893-7d5c142ba4e1?q=80&w=1200&auto=format&fit=crop" 
-                     alt="Cavernous concrete vaulted municipal bathhouse with ceramic tiles and arches"
-                     loading="lazy">
-              </div>
+          </div>
+        </section>
 
-              <div class="chamber-lineup-ledger">
-                <div class="lineup-ledger-heading">
-                  <span>UNREDACTED ARTIST BILL</span>
-                  <span>NIGHT 01 & 02</span>
-                </div>
-                <div class="artist-row">
+        <!-- ======================================================================
+             SCENE 03: FOUR CIVIC SPACES (TIGHT PINNED LATERAL RAIL - ZERO DEAD SCROLL)
+             ====================================================================== -->
+        <section class="venues-pin-wrapper" id="venuesPin" aria-label="The Four Spaces Dossier">
+          <div class="venues-track-viewport">
+            <div class="venues-horizontal-strip" id="venuesStrip">
+
+              <!-- CHAMBER 01: THE OLD TRAM DEPOT -->
+              <article class="venue-chamber-panel">
+                <div class="chamber-editorial-side">
                   <div>
-                    <span class="name">Hannelore Vane</span>
-                    <span class="discipline">Acoustic Spatial Cello</span>
+                    <div class="chamber-eyebrow-strip">
+                      <span>DISPATCH 01</span>
+                      <span>·</span>
+                      <span>CIVIC LAYER: TRANSIT</span>
+                      <span>·</span>
+                      <span>CAPACITY: 800</span>
+                    </div>
+
+                    <h2 class="chamber-title-massive">01 / THE OLD TRAM DEPOT</h2>
+
+                    <p class="chamber-description">
+                      A monumental 1912 maintenance hangar with exposed steel riveted trusses, concrete oil-stained pits, and the original municipal transit track turnouts. Intimate crowd proximity meets visceral sub-bass resonance.
+                    </p>
+
+                    <div class="acoustic-signature-card">
+                      <div class="acoustic-signature-info">
+                        <span class="label">Acoustic Signature</span>
+                        <span class="val">108 dB Peak Resonance · 45Hz Low Cut</span>
+                      </div>
+                      <div class="acoustic-waveform" aria-hidden="true">
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                      </div>
+                    </div>
                   </div>
-                  <span class="time">21:30</span>
+
+                  <div class="sensory-specs-table">
+                    <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Raw concrete reverb, sub-bass resonance</span></div>
+                    <div class="spec-entry"><span class="spec-k">Lighting</span><span class="spec-v">Low sodium pools, single beam sweep</span></div>
+                    <div class="spec-entry"><span class="spec-k">Materials</span><span class="spec-v">Rivet steel, concrete, rail switches</span></div>
+                    <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">21:00 — 05:30 (Both Nights)</span></div>
+                  </div>
                 </div>
-                <div class="artist-row">
+
+                <div class="chamber-media-side">
+                  <div class="media-frame-clipped">
+                    <img class="media-parallax-img" 
+                         src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80" 
+                         alt="Monochrome Industrial Hangar Interior with Concrete Columns"
+                         loading="lazy" />
+                  </div>
+                  <div class="media-caption-strip">
+                    <span>SECTOR: SOUTHERN SIDINGS</span>
+                    <span class="figure">53°32′14″N 09°59′02″E</span>
+                  </div>
+                  <div class="chamber-curation-list">
+                    <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
+                    <div class="artist-row"><span class="name">Kattner &amp; Siding Ensemble</span><span class="discipline">Analog Percussion</span><span class="time">22:30</span></div>
+                    <div class="artist-row"><span class="name">Resonance Corridor</span><span class="discipline">Post-Punk Trio</span><span class="time">00:45</span></div>
+                    <div class="artist-row"><span class="name">Null Hypothesis</span><span class="discipline">Modular Feedback</span><span class="time">02:30</span></div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- CHAMBER 02: THE MUNICIPAL BATHS -->
+              <article class="venue-chamber-panel">
+                <div class="chamber-editorial-side">
                   <div>
-                    <span class="name">Vapour Phase</span>
-                    <span class="discipline">Ambient Hydro-Tape Loops</span>
+                    <div class="chamber-eyebrow-strip">
+                      <span>DISPATCH 02</span>
+                      <span>·</span>
+                      <span>CIVIC LAYER: RECREATION</span>
+                      <span>·</span>
+                      <span>CAPACITY: 450</span>
+                    </div>
+
+                    <h2 class="chamber-title-massive">02 / THE MUNICIPAL BATHS</h2>
+
+                    <p class="chamber-description">
+                      Drained 1928 ceramic-tiled hydrotherapy natatorium with barrel-vaulted skylights, dry mosaic diving wells, and copper piping conduits. A cathedral for quadraphonic ambient diffusion and microtonal voice.
+                    </p>
+
+                    <div class="acoustic-signature-card">
+                      <div class="acoustic-signature-info">
+                        <span class="label">Acoustic Signature</span>
+                        <span class="val">7.2s Natural Ceramic Reverb Decay</span>
+                      </div>
+                      <div class="acoustic-waveform" aria-hidden="true">
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                      </div>
+                    </div>
                   </div>
-                  <span class="time">23:45</span>
+
+                  <div class="sensory-specs-table">
+                    <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Extreme tiled reverberation, cavernous slapback</span></div>
+                    <div class="spec-entry"><span class="spec-k">Lighting</span><span class="spec-v">Filtered water refractions, mercury vapour</span></div>
+                    <div class="spec-entry"><span class="spec-k">Materials</span><span class="spec-v">Glazed porcelain tile, brass drains, mosaic</span></div>
+                    <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">20:30 — 05:00 (Both Nights)</span></div>
+                  </div>
                 </div>
-                <div class="artist-row">
+
+                <div class="chamber-media-side">
+                  <div class="media-frame-clipped">
+                    <img class="media-parallax-img" 
+                         src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1200&q=80" 
+                         alt="Drained Tiled Bathhouse Interior with Vaulted Ceilings"
+                         loading="lazy" />
+                  </div>
+                  <div class="media-caption-strip">
+                    <span>SECTOR: DEEP BASIN BASINWELL</span>
+                    <span class="figure">53°32′41″N 09°59′34″E</span>
+                  </div>
+                  <div class="chamber-curation-list">
+                    <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
+                    <div class="artist-row"><span class="name">Vapour Phase</span><span class="discipline">Hydro-Tape Loops</span><span class="time">20:30</span></div>
+                    <div class="artist-row"><span class="name">Submerged Tones</span><span class="discipline">Water Sine Drift</span><span class="time">03:30</span></div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- CHAMBER 03: THE NIGHT MARKET -->
+              <article class="venue-chamber-panel">
+                <div class="chamber-editorial-side">
                   <div>
-                    <span class="name">Glazed Resonant Quad</span>
-                    <span class="discipline">Microtonal Choral Movement</span>
+                    <div class="chamber-eyebrow-strip">
+                      <span>DISPATCH 03</span>
+                      <span>·</span>
+                      <span>CIVIC LAYER: COMMERCE</span>
+                      <span>·</span>
+                      <span>CAPACITY: 1200</span>
+                    </div>
+
+                    <h2 class="chamber-title-massive">03 / THE NIGHT MARKET</h2>
+
+                    <p class="chamber-description">
+                      A cavernous iron-and-glass transit exchange hall active continuously through the dark hours. The social vortex of the festival hosting regional street kitchens, vinyl stalls, and modular drone installations.
+                    </p>
+
+                    <div class="acoustic-signature-card">
+                      <div class="acoustic-signature-info">
+                        <span class="label">Acoustic Signature</span>
+                        <span class="val">Wide Stereo Dispersion · Warm Air Absorption</span>
+                      </div>
+                      <div class="acoustic-waveform" aria-hidden="true">
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                      </div>
+                    </div>
                   </div>
-                  <span class="time">01:45</span>
+
+                  <div class="sensory-specs-table">
+                    <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Open air diffusion, dense crowd murmur</span></div>
+                    <div class="spec-entry"><span class="spec-k">Atmosphere</span><span class="spec-v">Wood smoke, fermented citrus, damp rain</span></div>
+                    <div class="spec-entry"><span class="spec-k">Curation</span><span class="spec-v">Independent micro-stalls &amp; sound stations</span></div>
+                    <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">20:00 — 06:00 (All Night)</span></div>
+                  </div>
                 </div>
-                <div class="artist-row">
+
+                <div class="chamber-media-side">
+                  <div class="media-frame-clipped">
+                    <img class="media-parallax-img" 
+                         src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80" 
+                         alt="Nocturnal City Market with Lantern Glow and Shadow Figures"
+                         loading="lazy" />
+                  </div>
+                  <div class="media-caption-strip">
+                    <span>SECTOR: VIADUCT CONCOURSE</span>
+                    <span class="figure">53°31′58″N 09°58′48″E</span>
+                  </div>
+                  <div class="chamber-curation-list">
+                    <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
+                    <div class="artist-row"><span class="name">Market Drone Trio</span><span class="discipline">Accordion &amp; Harmonium</span><span class="time">23:15</span></div>
+                    <div class="artist-row"><span class="name">Dawn Chorus Group</span><span class="discipline">Acoustic Welcome</span><span class="time">05:00</span></div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- CHAMBER 04: THE OLD PRINTING WORKS -->
+              <article class="venue-chamber-panel">
+                <div class="chamber-editorial-side">
                   <div>
-                    <span class="name">Submerged Tones</span>
-                    <span class="discipline">Sine Wave & Water Frequency Drift</span>
+                    <div class="chamber-eyebrow-strip">
+                      <span>DISPATCH 04</span>
+                      <span>·</span>
+                      <span>CIVIC LAYER: COMMUNICATION</span>
+                      <span>·</span>
+                      <span>CAPACITY: 500</span>
+                    </div>
+
+                    <h2 class="chamber-title-massive">04 / THE OLD PRINTWORKS</h2>
+
+                    <p class="chamber-description">
+                      A former newspaper press warehouse with double-height ceiling voids, heavy linotype cast-iron bedplates, and darkroom chambers. Dedicated to expanded cinema, dual 35mm optical projections, and live mechanical tape loop composition.
+                    </p>
+
+                    <div class="acoustic-signature-card">
+                      <div class="acoustic-signature-info">
+                        <span class="label">Acoustic Signature</span>
+                        <span class="val">Dry Absorption · Heavy Machinery Rhythmic Damp</span>
+                      </div>
+                      <div class="acoustic-waveform" aria-hidden="true">
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                      </div>
+                    </div>
                   </div>
-                  <span class="time">03:30</span>
+
+                  <div class="sensory-specs-table">
+                    <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Dry industrial damp, high mechanical clarity</span></div>
+                    <div class="spec-entry"><span class="spec-k">Visual Media</span><span class="spec-v">Dual 35mm celluloid projections, tungsten lamps</span></div>
+                    <div class="spec-entry"><span class="spec-k">Materials</span><span class="spec-v">Letterpress machinery, darkroom masonry</span></div>
+                    <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">21:30 — 05:00 (Both Nights)</span></div>
+                  </div>
                 </div>
-              </div>
+
+                <div class="chamber-media-side">
+                  <div class="media-frame-clipped">
+                    <img class="media-parallax-img" 
+                         src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80" 
+                         alt="Monochrome Industrial Printing Facility with Riveted Columns"
+                         loading="lazy" />
+                  </div>
+                  <div class="media-caption-strip">
+                    <span>SECTOR: ROTARY PRESS ROOM</span>
+                    <span class="figure">53°32′29″N 10°00′12″E</span>
+                  </div>
+                  <div class="chamber-curation-list">
+                    <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
+                    <div class="artist-row"><span class="name">Celluloid Dispersal</span><span class="discipline">35mm Projection</span><span class="time">23:30</span></div>
+                    <div class="artist-row"><span class="name">Rotational Press Audio</span><span class="discipline">Tape Loop Rig</span><span class="time">21:00</span></div>
+                    <div class="artist-row"><span class="name">Monotype Live Assembly</span><span class="discipline">Typewriter Noise</span><span class="time">01:30</span></div>
+                  </div>
+                </div>
+              </article>
+
             </div>
-          </article>
-
-          <!-- CHAMBER 03: THE NIGHT MARKET -->
-          <article class="venue-chamber-panel">
-            <div class="chamber-editorial-side velocity-skew">
-              <div>
-                <div class="chamber-eyebrow-strip">
-                  <span>DISPATCH 03</span>
-                  <span>·</span>
-                  <span>CIVIC LAYER: COMMERCE</span>
-                  <span>·</span>
-                  <span>CAPACITY: 1,200</span>
-                </div>
-
-                <h2 class="chamber-title-massive">03 / THE NIGHT MARKET</h2>
-
-                <p class="chamber-description">
-                  A cavernous covered wholesale market hall active exclusively between midnight and dawn. Communal wooden tables, local independent food stalls, print stalls, and spontaneous unannounced acoustic performances.
-                </p>
-
-                <!-- Acoustic Waveform Equalizer -->
-                <div class="acoustic-signature-card" title="Acoustic Signature: Dense Conversational Murmur">
-                  <div class="acoustic-signature-info">
-                    <span class="label">Acoustic Signature</span>
-                    <span class="val">Dense Crowd Murmur · 45 Whisper Listening Nodes</span>
-                  </div>
-                  <div class="acoustic-waveform" aria-hidden="true">
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Sensory Specifications -->
-              <div class="sensory-specs-table">
-                <div class="spec-entry">
-                  <span class="spec-k">Acoustics</span>
-                  <span class="spec-v">Soft reverberant wood, localized speakers</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Lighting</span>
-                  <span class="spec-v">Overhead filament bulbs, charcoal braziers</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Materials</span>
-                  <span class="spec-v">Rough timber, corrugated sheet, steel stalls</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Hours</span>
-                  <span class="spec-v">20:00 — 06:00 (All Night Continuous)</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Media & Lineup Side -->
-            <div class="chamber-media-side">
-              <div class="media-frame-clipped" data-cursor="explore">
-                <img class="media-parallax-img" 
-                     src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1200&auto=format&fit=crop" 
-                     alt="Atmospheric nocturnal shipping market hall with amber filament floodlights"
-                     loading="lazy">
-              </div>
-
-              <div class="chamber-lineup-ledger">
-                <div class="lineup-ledger-heading">
-                  <span>UNREDACTED ARTIST BILL</span>
-                  <span>NIGHT 01 & 02</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Broadcast Siding</span>
-                    <span class="discipline">Field Recording & Shortwave Radio</span>
-                  </div>
-                  <span class="time">20:00</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Market Drone Trio</span>
-                    <span class="discipline">Acoustic Accordion & Harmonium</span>
-                  </div>
-                  <span class="time">23:15</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Nocturnal Shift</span>
-                    <span class="discipline">Slow Tempo Dub & Tape Delays</span>
-                  </div>
-                  <span class="time">02:00</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Dawn Chorus Group</span>
-                    <span class="discipline">Morning Ambient Acoustic Welcome</span>
-                  </div>
-                  <span class="time">05:00</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- CHAMBER 04: THE PRINTING WORKS -->
-          <article class="venue-chamber-panel">
-            <div class="chamber-editorial-side velocity-skew">
-              <div>
-                <div class="chamber-eyebrow-strip">
-                  <span>DISPATCH 04</span>
-                  <span>·</span>
-                  <span>CIVIC LAYER: COMMUNICATION</span>
-                  <span>·</span>
-                  <span>CAPACITY: 500</span>
-                </div>
-
-                <h2 class="chamber-title-massive">04 / THE PRINTING WORKS</h2>
-
-                <p class="chamber-description">
-                  A decommissioned mid-century municipal newspaper press. Silent Heidelberg rotary machinery forms the sculptural backdrop for rare 35mm archival cinema screenings and live score improvisations.
-                </p>
-
-                <!-- Acoustic Waveform Equalizer -->
-                <div class="acoustic-signature-card" title="Acoustic Signature: Mechanical 42Hz Heavy Bass">
-                  <div class="acoustic-signature-info">
-                    <span class="label">Acoustic Signature</span>
-                    <span class="val">42Hz Machine Drone · 35mm Optical Audio Track</span>
-                  </div>
-                  <div class="acoustic-waveform" aria-hidden="true">
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                    <div class="waveform-bar"></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Sensory Specifications -->
-              <div class="sensory-specs-table">
-                <div class="spec-entry">
-                  <span class="spec-k">Acoustics</span>
-                  <span class="spec-v">Muffled ink drums, dry mechanical dead room</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Lighting</span>
-                  <span class="spec-v">35mm Xenon projector beam, red safelights</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Materials</span>
-                  <span class="spec-v">Cast iron machinery, lead type drawers, paper</span>
-                </div>
-                <div class="spec-entry">
-                  <span class="spec-k">Hours</span>
-                  <span class="spec-v">21:00 — 05:00 (Both Nights)</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Media & Lineup Side -->
-            <div class="chamber-media-side">
-              <div class="media-frame-clipped" data-cursor="explore">
-                <img class="media-parallax-img" 
-                     src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop" 
-                     alt="Heavy cast iron vintage mechanical printing press machine in industrial darkness"
-                     loading="lazy">
-              </div>
-
-              <div class="chamber-lineup-ledger">
-                <div class="lineup-ledger-heading">
-                  <span>UNREDACTED ARTIST BILL</span>
-                  <span>NIGHT 01 & 02</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Rotational Press Audio</span>
-                    <span class="discipline">Mechanical Tape Loop Performance</span>
-                  </div>
-                  <span class="time">21:00</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Celluloid Dispersal</span>
-                    <span class="discipline">Expanded 35mm Dual Projection</span>
-                  </div>
-                  <span class="time">23:30</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Monotype Live Assembly</span>
-                    <span class="discipline">Electro-Acoustic Typewriter Improvisation</span>
-                  </div>
-                  <span class="time">01:30</span>
-                </div>
-                <div class="artist-row">
-                  <div>
-                    <span class="name">Cold Run Outro</span>
-                    <span class="discipline">Subterranean Deep Sine Fadeout</span>
-                  </div>
-                  <span class="time">04:00</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         SCENE 04: THE NOCTURNAL TIMETABLE (RAW UNREDACTED EDITORIAL LEDGER)
-         ====================================================================== -->
-    <section class="schedule-section" id="schedule" aria-label="Night Timetable">
-      <div class="schedule-header velocity-skew">
-        <div>
-          <div class="chamber-eyebrow-strip" style="border:none; padding:0; margin-bottom: 8px;">
-            <span>STAGGERED NIGHT ACCESS</span>
-            <span>·</span>
-            <span>20:00 — 06:00</span>
           </div>
-          <h2 class="schedule-title-massive">THE NOCTURNAL TIMETABLE</h2>
-        </div>
+        </section>
 
-        <div class="schedule-filter-controls">
-          <button id="day1Btn" class="filter-btn active">NIGHT 01 · FRIDAY</button>
-          <button id="day2Btn" class="filter-btn">NIGHT 02 · SATURDAY</button>
-        </div>
-      </div>
-
-      <div class="timetable-grid">
-        <!-- Friday Entries -->
-        <div class="time-slot-row" data-day="1">
-          <div class="time-slot-hour">20:00 — 21:30</div>
-          <div class="time-slot-act">
-            Broadcast Siding
-            <span class="sub">Shortwave Radio Signals & Field Sound</span>
-          </div>
-          <div class="time-slot-venue">03 / NIGHT MARKET</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="1">
-          <div class="time-slot-hour">21:30 — 23:00</div>
-          <div class="time-slot-act">
-            Hannelore Vane
-            <span class="sub">Acoustic Cello in 7-Second Echo Vault</span>
-          </div>
-          <div class="time-slot-venue">02 / MUNICIPAL BATHS</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="1">
-          <div class="time-slot-hour">22:30 — 00:15</div>
-          <div class="time-slot-act">
-            Kattner & Siding Ensemble
-            <span class="sub">Analog Percussion & Industrial Sub-Bass</span>
-          </div>
-          <div class="time-slot-venue">01 / TRAM DEPOT</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="1">
-          <div class="time-slot-hour">23:30 — 01:15</div>
-          <div class="time-slot-act">
-            Celluloid Dispersal
-            <span class="sub">Archival 35mm Dual-Screen Projection</span>
-          </div>
-          <div class="time-slot-venue">04 / PRINTING WORKS</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="1">
-          <div class="time-slot-hour">00:45 — 02:15</div>
-          <div class="time-slot-act">
-            Resonance Corridor
-            <span class="sub">Heavy Post-Punk & Spring Reverb Trio</span>
-          </div>
-          <div class="time-slot-venue">01 / TRAM DEPOT</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="1">
-          <div class="time-slot-hour">02:30 — 04:00</div>
-          <div class="time-slot-act">
-            Null Hypothesis
-            <span class="sub">Modular Drift & Spatial Feedback</span>
-          </div>
-          <div class="time-slot-venue">01 / TRAM DEPOT</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="1">
-          <div class="time-slot-hour">04:15 — 05:45</div>
-          <div class="time-slot-act">
-            Displaced Phase
-            <span class="sub">Dawn Sub-Bass Closing Improvisation</span>
-          </div>
-          <div class="time-slot-venue">01 / TRAM DEPOT</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <!-- Saturday Entries -->
-        <div class="time-slot-row" data-day="2" style="display: none;">
-          <div class="time-slot-hour">20:30 — 22:00</div>
-          <div class="time-slot-act">
-            Vapour Phase
-            <span class="sub">Ambient Hydro-Tape Loops & Quad Phasing</span>
-          </div>
-          <div class="time-slot-venue">02 / MUNICIPAL BATHS</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="2" style="display: none;">
-          <div class="time-slot-hour">21:00 — 22:45</div>
-          <div class="time-slot-act">
-            Rotational Press Audio
-            <span class="sub">Mechanical Tape Loop Performance</span>
-          </div>
-          <div class="time-slot-venue">04 / PRINTING WORKS</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="2" style="display: none;">
-          <div class="time-slot-hour">23:15 — 01:00</div>
-          <div class="time-slot-act">
-            Market Drone Trio
-            <span class="sub">Acoustic Accordion & Harmonium</span>
-          </div>
-          <div class="time-slot-venue">03 / NIGHT MARKET</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="2" style="display: none;">
-          <div class="time-slot-hour">01:30 — 03:00</div>
-          <div class="time-slot-act">
-            Monotype Live Assembly
-            <span class="sub">Electro-Acoustic Typewriter Improvisation</span>
-          </div>
-          <div class="time-slot-venue">04 / PRINTING WORKS</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="2" style="display: none;">
-          <div class="time-slot-hour">03:30 — 05:00</div>
-          <div class="time-slot-act">
-            Submerged Tones
-            <span class="sub">Sine Wave & Water Reflection Drift</span>
-          </div>
-          <div class="time-slot-venue">02 / MUNICIPAL BATHS</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-
-        <div class="time-slot-row" data-day="2" style="display: none;">
-          <div class="time-slot-hour">05:00 — 06:00</div>
-          <div class="time-slot-act">
-            Dawn Chorus Group
-            <span class="sub">Morning Ambient Acoustic Welcome</span>
-          </div>
-          <div class="time-slot-venue">03 / NIGHT MARKET</div>
-          <div class="time-slot-action"><a href="#tickets" data-open-modal>Reserve Pass →</a></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         SCENE 05: PASS DOCKET (PHYSICAL PUNCHCARD / MONOLITH)
-         ====================================================================== -->
-    <section class="tickets-section" id="tickets" aria-label="Festival Admission">
-      <div class="tickets-layout">
-        
-        <div class="velocity-skew">
-          <div class="chamber-eyebrow-strip" style="border:none; padding:0; margin-bottom: 12px;">
-            <span>LIMITED REGISTRATION</span>
-            <span>·</span>
-            <span>EDITION 01 ACCESS</span>
-          </div>
-          <h2 class="tickets-intro-title">SECURE YOUR ALL-ACCESS PASS</h2>
-          <p class="tickets-intro-lead">
-            Every pass grants unrestricted 48-hour access to all four civic locations across Friday and Saturday nights. Tickets are limited to maintain intimate space capacity and acoustic integrity. Digital access credentials delivered instantly.
-          </p>
-          <div class="hero-spec-ledger" style="border:none; padding:0;">
-            <div>✓ Entry to all 4 venues: Tram Depot, Baths, Market, Printworks</div>
-            <div>✓ Night timetable access from 20:00 to 06:00 until dawn</div>
-            <div>✓ Spatial acoustic performances & 35mm screenings included</div>
-            <div>✓ Zero booking surcharges · Pure independent cultural initiative</div>
-          </div>
-        </div>
-
-        <!-- Physical Punchcard Pass Artifact -->
-        <div class="punchcard-ticket-pass" data-cursor="ticket">
-          <div class="pass-docket-header">
+        <!-- ======================================================================
+             SCENE 04: SCHEDULE (HAIRLINE-RULED LEDGER TABLE)
+             ====================================================================== -->
+        <section class="schedule-section" id="schedule" aria-label="Schedule Timetable">
+          <div class="schedule-header">
             <div>
-              <span class="pass-id">DOCKET #OH-2026-CORR</span>
-              <div style="font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); margin-top: 4px;">RIVER & RAIL CORRIDOR CIVIC PASS</div>
+              <span class="mono-label">CHRONOLOGICAL DISPATCH</span>
+              <h2 class="statement" style="margin-top: 8px;">NOCTURNAL TIMETABLE</h2>
             </div>
-            <span class="pass-status-pill">84% CLAIMED</span>
-          </div>
-
-          <h3 class="pass-title-massive">48-HOUR FULL ACCESS</h3>
-          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
-            Unrestricted access across both festival nights across all 4 historical venues.
-          </p>
-
-          <!-- Interactive Tier Choice -->
-          <div class="pass-tier-selector">
-            <div class="tier-choice" data-tier="Early Docket" data-price="38">
-              <span class="tier-name">Early Tier</span>
-              <span class="tier-cost">€38</span>
-            </div>
-            <div class="tier-choice active" data-tier="Full Access" data-price="48">
-              <span class="tier-name">Standard</span>
-              <span class="tier-cost">€48</span>
-            </div>
-            <div class="tier-choice" data-tier="Patron Support" data-price="75">
-              <span class="tier-name">Patron</span>
-              <span class="tier-cost">€75</span>
+            <div class="schedule-filter-tabs">
+              <button class="tab-btn active" id="day1Btn">FRI OCT 24</button>
+              <button class="tab-btn" id="day2Btn">SAT OCT 25</button>
             </div>
           </div>
 
-          <button id="passCtaAction" class="pass-cta-btn" data-open-modal>
-            Reserve Full Access Pass · €48
-          </button>
+          <div class="ledger-table">
+            <!-- Friday Slots -->
+            <div class="ledger-row" data-day="1">
+              <span class="slot-time">22:30</span>
+              <div>
+                <div class="slot-act">Kattner &amp; Siding Ensemble</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Analog Percussion &amp; Industrial Sub-Bass</div>
+              </div>
+              <span class="slot-venue">01 / TRAM DEPOT</span>
+              <span class="slot-badge">LIVE A/V</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 16px; border-top: 1px dashed var(--border-medium); font-family: var(--font-mono); font-size: 10px; color: var(--text-dim);">
-            <span>BARCODE: ||| | |||| | |||||| || |</span>
-            <span>SECURE CHECKOUT</span>
+            <div class="ledger-row" data-day="1">
+              <span class="slot-time">23:30</span>
+              <div>
+                <div class="slot-act">Celluloid Dispersal</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Archival 35mm Dual-Screen Projection</div>
+              </div>
+              <span class="slot-venue">04 / PRINTING WORKS</span>
+              <span class="slot-badge">35MM CINEMA</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
+
+            <div class="ledger-row" data-day="1">
+              <span class="slot-time">00:45</span>
+              <div>
+                <div class="slot-act">Resonance Corridor</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Heavy Post-Punk &amp; Spring Reverb Trio</div>
+              </div>
+              <span class="slot-venue">01 / TRAM DEPOT</span>
+              <span class="slot-badge">CONCERT</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
+
+            <div class="ledger-row" data-day="1">
+              <span class="slot-time">02:30</span>
+              <div>
+                <div class="slot-act">Null Hypothesis</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Modular Drift &amp; Spatial Feedback</div>
+              </div>
+              <span class="slot-venue">01 / TRAM DEPOT</span>
+              <span class="slot-badge">MODULAR</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
+
+            <div class="ledger-row" data-day="1">
+              <span class="slot-time">04:15</span>
+              <div>
+                <div class="slot-act">Displaced Phase</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Dawn Sub-Bass Closing Improvisation</div>
+              </div>
+              <span class="slot-venue">01 / TRAM DEPOT</span>
+              <span class="slot-badge">CLOSING</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
+
+            <!-- Saturday Slots -->
+            <div class="ledger-row" data-day="2" style="display: none;">
+              <span class="slot-time">20:30</span>
+              <div>
+                <div class="slot-act">Vapour Phase</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Ambient Hydro-Tape Loops &amp; Quad Phasing</div>
+              </div>
+              <span class="slot-venue">02 / MUNICIPAL BATHS</span>
+              <span class="slot-badge">AMBIENT</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
+
+            <div class="ledger-row" data-day="2" style="display: none;">
+              <span class="slot-time">21:00</span>
+              <div>
+                <div class="slot-act">Rotational Press Audio</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Mechanical Tape Loop Performance</div>
+              </div>
+              <span class="slot-venue">04 / PRINTING WORKS</span>
+              <span class="slot-badge">TAPE LOOP</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
+
+            <div class="ledger-row" data-day="2" style="display: none;">
+              <span class="slot-time">23:15</span>
+              <div>
+                <div class="slot-act">Market Drone Trio</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Acoustic Accordion &amp; Harmonium</div>
+              </div>
+              <span class="slot-venue">03 / NIGHT MARKET</span>
+              <span class="slot-badge">DRONE</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
+
+            <div class="ledger-row" data-day="2" style="display: none;">
+              <span class="slot-time">01:30</span>
+              <div>
+                <div class="slot-act">Monotype Live Assembly</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Electro-Acoustic Typewriter Improvisation</div>
+              </div>
+              <span class="slot-venue">04 / PRINTING WORKS</span>
+              <span class="slot-badge">ELECTRO-ACOUSTIC</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
+
+            <div class="ledger-row" data-day="2" style="display: none;">
+              <span class="slot-time">03:30</span>
+              <div>
+                <div class="slot-act">Submerged Tones</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Sine Wave &amp; Water Reflection Drift</div>
+              </div>
+              <span class="slot-venue">02 / MUNICIPAL BATHS</span>
+              <span class="slot-badge">HYDRO-ACOUSTIC</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
+
+            <div class="ledger-row" data-day="2" style="display: none;">
+              <span class="slot-time">05:00</span>
+              <div>
+                <div class="slot-act">Dawn Chorus Group</div>
+                <div class="body-copy" style="font-size: 0.8125rem;">Morning Ambient Acoustic Welcome</div>
+              </div>
+              <span class="slot-venue">03 / NIGHT MARKET</span>
+              <span class="slot-badge">DAWN GATHERING</span>
+              <button class="mono-label" data-open-modal style="text-align: right;">RESERVE →</button>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <!-- ======================================================================
+             SCENE 05: PASS DOSSIER & CARDS (2PX BORDER ANIMAXXING CARDS)
+             ====================================================================== -->
+        <section class="tickets-section" id="passes" aria-label="Festival Admission">
+          <div>
+            <span class="mono-label">EDITION 001 · CAPACITY CONTROLLED</span>
+            <h2 class="statement" style="margin-top: 8px;">FESTIVAL ADMISSION DOSSIER</h2>
+            <p class="body-copy" style="margin-top: 12px;">
+              Every pass provides unrestricted 48-hour access to all four civic environments across both nights. Access is strictly capped to protect intimate acoustic proximity.
+            </p>
+          </div>
+
+          <div class="card-grid">
+            <!-- Tier 1 -->
+            <div class="card" data-open-modal>
+              <div>
+                <div class="card-label">
+                  <span class="mono-label">01 / EARLY DOCKET</span>
+                  <span class="figure">€38 · LIMITED</span>
+                </div>
+                <h3 class="card-heading">EARLY ACCESS</h3>
+                <p class="body-copy">Early registrant allocation. Full 48-hour access to all 4 spaces, spatial acoustics, and 35mm cinema screenings.</p>
+              </div>
+              <div class="annotation">CLAIM TIER 01 →</div>
+            </div>
+
+            <!-- Tier 2 -->
+            <div class="card" data-open-modal style="border-color: var(--foreground);">
+              <div>
+                <div class="card-label">
+                  <span class="mono-label">02 / STANDARD DOCKET</span>
+                  <span class="figure">€48 · POPULAR</span>
+                </div>
+                <h3 class="card-heading">FULL ACCESS</h3>
+                <p class="body-copy">Standard festival pass. Complete unrestricted access to the entire 2-night nocturnal program across all 4 civic venues.</p>
+              </div>
+              <div class="annotation">CLAIM TIER 02 →</div>
+            </div>
+
+            <!-- Tier 3 -->
+            <div class="card" data-open-modal>
+              <div>
+                <div class="card-label">
+                  <span class="mono-label">03 / PATRON DOCKET</span>
+                  <span class="figure">€75 · SUPPORT</span>
+                </div>
+                <h3 class="card-heading">PATRON PASS</h3>
+                <p class="body-copy">Direct contribution to artist honorariums and historical site preservation. Includes archival festival poster and printed program.</p>
+              </div>
+              <div class="annotation">CLAIM TIER 03 →</div>
+            </div>
+          </div>
+        </section>
 
       </div>
-    </section>
+    </div>
 
-    <!-- ======================================================================
-         SCENE 06: MONUMENTAL ARCHIVAL FOOTER
-         ====================================================================== -->
-    <footer class="monumental-footer" aria-label="Archival Colophon">
-      <div class="footer-massive-brand" aria-hidden="true">
-        OFF HOURS
-      </div>
-
-      <div class="footer-four-corners-grid">
-        <div class="footer-col">
-          <span class="col-heading">01 / ARCHIVAL DATA</span>
-          <ul>
-            <li>OFF HOURS Culture Festival</li>
-            <li>Edition 01 · October 24—25</li>
-            <li>River & Rail Municipal Corridor</li>
-            <li>53°32′N 09°59′E</li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <span class="col-heading">02 / CIVIC SPACES</span>
-          <ul>
-            <li>01 Tram Maintenance Hall</li>
-            <li>02 Glazed Municipal Baths</li>
-            <li>03 Wholesale Night Market</li>
-            <li>04 Gutenberg Printing Works</li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <span class="col-heading">03 / ACCESS POLICY</span>
-          <ul>
-            <li>Capacity-limited chambers</li>
-            <li>Strict acoustic listening silence</li>
-            <li>Accessible flat-grade transit</li>
-            <li>Independent self-funded protocol</li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <span class="col-heading">04 / DISPATCH CHANNELS</span>
-          <ul>
-            <li><a href="#tickets" data-open-modal>Issue Access Pass</a></li>
-            <li><a href="#schedule">Nocturnal Timetable</a></li>
-            <li><a href="#atlasPin">Spatial Coordinates</a></li>
-            <li><a href="#">Press & Archival Docket</a></li>
-          </ul>
-        </div>
-      </div>
-    </footer>
   </main>
 
-  <!-- Interactive Checkout Modal -->
-  <div id="checkoutModal" class="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
-    <div class="modal-content">
-      <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">&times;</button>
-      <div class="chamber-eyebrow-strip" style="border:none; padding:0; margin-bottom: 8px;">
-        <span>OFFICIAL REGISTRATION DOCKET</span>
+  <!-- ======================================================================
+       SHELL FOOTER (COLOPHON & MONOCHROME THEME)
+       ====================================================================== -->
+  <footer class="shell-footer" aria-label="Archival Colophon">
+    <div class="footer-row">
+      <div>
+        <div class="wordmark" style="font-size: 1.25rem;">off hours</div>
+        <div class="mono-note" style="margin-top: 6px;">Independent Nocturnal Culture Festival · Edition 01</div>
       </div>
-      <h3 id="modalHeading" style="font-family: var(--font-display); font-size: 26px; text-transform: uppercase; margin-bottom: 6px;">48-Hour Full Access Pass</h3>
-      <div style="font-family: var(--font-mono); font-size: 20px; color: var(--tungsten); font-weight: 700; margin-bottom: 16px;">€48.00 EUR</div>
-      
-      <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5; margin-bottom: 24px;">
-        Unlocks all four locations across the river-and-rail corridor for Friday and Saturday nights (20:00—06:00). Your digital pass will be delivered instantly with encrypted entry QR credentials.
-      </p>
 
-      <form onsubmit="event.preventDefault(); alert('Order Confirmed: Your OFF HOURS 48-Hour Pass has been generated.'); document.getElementById('checkoutModal').classList.remove('open');">
-        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
-          <input type="text" placeholder="Attendee Full Name" required 
-                 style="background: #f2e5bc; border: 1.5px solid var(--border-medium); color: var(--text); padding: 14px; font-family: var(--font-heading); font-size: 14px;">
-          <input type="email" placeholder="Email Address for Digital Pass Delivery" required 
-                 style="background: #f2e5bc; border: 1.5px solid var(--border-medium); color: var(--text); padding: 14px; font-family: var(--font-heading); font-size: 14px;">
+      <div class="mono-note">
+        Central River &amp; Rail Municipal Corridor · 53°32′N 09°59′E
+      </div>
+
+      <div class="mono-note">
+        All Rights Reserved © 2026 OFF HOURS Civic Arts
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       CHECKOUT MODAL (MINIMALIST UNDERLINE FORM)
+       ====================================================================== -->
+  <div class="checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
+    <div class="modal-content">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close dialog">×</button>
+      <span class="mono-label">PASS RESERVATION · DIRECT CREDENTIALS</span>
+      <h3 class="card-heading" id="modalHeading" style="margin-top: 12px; margin-bottom: 24px;">SECURE PASS</h3>
+
+      <form id="checkoutForm" onsubmit="event.preventDefault(); alert('Pass registered! Digital credentials sent.'); document.getElementById('checkoutModal').classList.remove('open');">
+        <label for="attendeeName" class="mono-label" style="display: block; margin-bottom: 6px;">ATTENDEE FULL NAME</label>
+        <input type="text" id="attendeeName" class="text-field" placeholder="E.g. Elena Rostova" required />
+
+        <label for="attendeeEmail" class="mono-label" style="display: block; margin-bottom: 6px;">DISPATCH EMAIL ADDRESS</label>
+        <input type="email" id="attendeeEmail" class="text-field" placeholder="elena@example.com" required />
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
+          <span class="figure" style="font-size: 0.875rem;">PASS TIER: FULL ACCESS · €48</span>
+          <button type="submit" class="button-solid" style="font-size: 1rem; padding: 0.65rem 1.25rem;">
+            CONFIRM &amp; DISPATCH →
+          </button>
         </div>
-        <button type="submit" class="pass-cta-btn" style="margin-top: 0;">
-          Confirm & Issue Digital Pass
-        </button>
       </form>
     </div>
   </div>
 
-  <!-- Application Controller -->
+  <!-- Production Inlined Motion Scripts -->
   <script>
 /**
- * OFF HOURS — Production Motion Engine & Experience Controller
- * Built strictly according to GSAP Official Skills:
- * - gsap-core: transforms, autoAlpha, gsap.matchMedia(), proper eases
- * - gsap-scrolltrigger: pinned containers, containerAnimation, invalidateOnRefresh, Lenis sync
- * - gsap-performance: gsap.quickTo() for 60fps mouse follower, composited transforms
- * - gsap-vanilla: lifecycle, font-ready refresh, clean responsive adaptation
+ * OFF HOURS — Animaxxing Motion & Particle Engine
+ * Spec: .agents/skills/animaxxing & .agents/skills/style-animaxxing
+ * Features:
+ * - Signature curve: CustomEase "animaxxing"
+ * - Route letters scatter-implosion hero headline entrance
+ * - Word-by-word speak-in hero subhead entrance
+ * - Settled ambient headline wave (Hop, Breathe, Lean, Flip, Shear, Squash, Twist)
+ * - HTML5 Canvas ParticleField (Reactor embers & Marquee outline runners)
+ * - Blast-off hero outro on CTA click
+ * - Lenis smooth momentum scroll & 1px hairline scroll progress
+ * - Pinned 2.5D Atlas descent & zero-dead-scroll 4-chamber horizontal gallery
+ * - Light/Dark monochrome theme switcher
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   const lenis = initSmoothScroll();
-  initCursorFollower();
+  initScrollProgress(lenis);
   initTimecode(lenis);
-  initAmbientAudio();
-  initHeroMarquee();
+  initParticleButtons();
   initScheduleSwitcher();
-  initPassSelection();
   initModal();
   initGSAPTimelines(lenis);
 });
 
-// 1. Lenis Smooth Momentum Scroll Engine (Official GSAP ScrollTrigger Integration)
+/* ==========================================================================
+   1. THEME SWITCHING (LIGHT & DARK MONOCHROME)
+   ========================================================================== */
+function initThemeToggle() {
+  const btn = document.getElementById('themeToggleBtn');
+  if (!btn) return;
+
+  const currentTheme = localStorage.getItem('offhours-theme') || 
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  
+  if (currentTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    btn.textContent = 'LIGHT';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    btn.textContent = 'DARK';
+  }
+
+  btn.addEventListener('click', () => {
+    document.documentElement.classList.add('theme-transitioning');
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const nextTheme = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('offhours-theme', nextTheme);
+    btn.textContent = nextTheme === 'dark' ? 'LIGHT' : 'DARK';
+
+    // Recolor active particle fields
+    if (window.activeParticleFields) {
+      window.activeParticleFields.forEach((field) => field.recolor());
+    }
+
+    setTimeout(() => {
+      document.documentElement.classList.remove('theme-transitioning');
+    }, 250);
+  });
+}
+
+/* ==========================================================================
+   2. LENIS SMOOTH MOMENTUM SCROLL & SCROLL PROGRESS
+   ========================================================================== */
 function initSmoothScroll() {
   if (typeof Lenis === 'undefined') {
     console.warn('Lenis not loaded, falling back to native scroll');
@@ -2350,106 +2242,30 @@ function initSmoothScroll() {
   });
 
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    // Notify ScrollTrigger on every scroll event
     lenis.on('scroll', ScrollTrigger.update);
-
-    // Sync Lenis RAF with GSAP ticker
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
-
-    // Disable lag smoothing to prevent visual jumps during heavy RAF
     gsap.ticker.lagSmoothing(0);
-  }
-
-  // Velocity-Skew Physics (GPU-composited via transforms)
-  let skewTarget = 0;
-  let currentSkew = 0;
-
-  lenis.on('scroll', ({ velocity }) => {
-    skewTarget = Math.max(-3.5, Math.min(3.5, velocity * 0.12));
-  });
-
-  if (typeof gsap !== 'undefined') {
-    gsap.ticker.add(() => {
-      currentSkew += (skewTarget - currentSkew) * 0.1;
-      skewTarget *= 0.88;
-
-      const skewEls = document.querySelectorAll('.velocity-skew');
-      if (skewEls.length > 0) {
-        gsap.set(skewEls, { skewY: currentSkew });
-      }
-    });
   }
 
   return lenis;
 }
 
-// 2. High-Performance Follower Cursor via gsap.quickTo() (Official gsap-performance skill)
-function initCursorFollower() {
-  const dot = document.querySelector('.cursor-dot');
-  const follower = document.querySelector('.cursor-follower');
-  const label = follower ? follower.querySelector('.cursor-label') : null;
-  const torch = document.getElementById('torch');
+function initScrollProgress(lenis) {
+  const progressBar = document.getElementById('scrollProgressBar');
+  if (!progressBar) return;
 
-  if (!dot || !follower) return;
+  function update() {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+    progressBar.style.width = `${progress * 100}%`;
+  }
 
-  // Use gsap.quickTo() to completely eliminate layout thrashing
-  const setDotX = gsap.quickTo(dot, "x", { duration: 0.08, ease: "power3" });
-  const setDotY = gsap.quickTo(dot, "y", { duration: 0.08, ease: "power3" });
-  const setFollowerX = gsap.quickTo(follower, "x", { duration: 0.35, ease: "power3" });
-  const setFollowerY = gsap.quickTo(follower, "y", { duration: 0.35, ease: "power3" });
-  const setTorchX = torch ? gsap.quickTo(torch, "x", { duration: 0.22, ease: "power2" }) : null;
-  const setTorchY = torch ? gsap.quickTo(torch, "y", { duration: 0.22, ease: "power2" }) : null;
-
-  window.addEventListener('mousemove', (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
-
-    setDotX(x);
-    setDotY(y);
-    setFollowerX(x);
-    setFollowerY(y);
-
-    if (setTorchX && setTorchY) {
-      setTorchX(x);
-      setTorchY(y);
-    }
-  });
-
-  // Contextual cursor triggers
-  document.querySelectorAll('[data-cursor]').forEach((el) => {
-    el.addEventListener('mouseenter', () => {
-      const type = el.getAttribute('data-cursor');
-      if (type === 'explore') {
-        follower.classList.add('is-media');
-        if (label) label.textContent = 'EXPLORE';
-      } else if (type === 'listen') {
-        follower.classList.add('is-hovering');
-        if (label) label.textContent = 'LISTEN';
-      } else if (type === 'ticket') {
-        follower.classList.add('is-media');
-        if (label) label.textContent = 'GET PASS';
-      } else {
-        follower.classList.add('is-hovering');
-      }
-    });
-
-    el.addEventListener('mouseleave', () => {
-      follower.classList.remove('is-hovering', 'is-media');
-      if (label) label.textContent = '';
-    });
-  });
-
-  document.querySelectorAll('a, button, input').forEach((el) => {
-    if (!el.hasAttribute('data-cursor')) {
-      el.addEventListener('mouseenter', () => follower.classList.add('is-hovering'));
-      el.addEventListener('mouseleave', () => follower.classList.remove('is-hovering'));
-    }
-  });
+  if (lenis) lenis.on('scroll', update);
+  else window.addEventListener('scroll', update);
 }
 
-// 3. Scrubbed Nocturnal Timecode (20:00:00 to 06:00:00)
 function initTimecode(lenis) {
   const display = document.getElementById('timecodeDisplay');
   if (!display) return;
@@ -2469,181 +2285,677 @@ function initTimecode(lenis) {
     display.textContent = `${hh}:${mm}:${ss}`;
   }
 
-  if (lenis) {
-    lenis.on('scroll', update);
+  if (lenis) lenis.on('scroll', update);
+  else window.addEventListener('scroll', update);
+}
+
+/* ==========================================================================
+   3. ZERO-DEPENDENCY ACCESSIBLE SPLIT-TEXT HELPER
+   ========================================================================== */
+class AccessibleSplitText {
+  constructor(element, options = { type: 'chars,words' }) {
+    this.element = element;
+    this.options = options;
+    this.originalHTML = element.innerHTML;
+    this.words = [];
+    this.chars = [];
+    this.split();
+  }
+
+  split() {
+    const rawText = this.element.textContent.trim();
+    const wordsArray = rawText.split(/\s+/);
+    this.element.setAttribute('aria-label', rawText);
+    this.element.innerHTML = '';
+
+    wordsArray.forEach((wordStr, wordIdx) => {
+      const wordSpan = document.createElement('span');
+      wordSpan.className = 'split-word';
+      wordSpan.style.display = 'inline-block';
+      wordSpan.style.whiteSpace = 'nowrap';
+      wordSpan.setAttribute('aria-hidden', 'true');
+
+      if (this.options.type.includes('chars')) {
+        const charArray = Array.from(wordStr);
+        charArray.forEach((char) => {
+          const charSpan = document.createElement('span');
+          charSpan.className = 'split-char';
+          charSpan.style.display = 'inline-block';
+          charSpan.style.willChange = 'transform, opacity';
+          charSpan.textContent = char;
+          wordSpan.appendChild(charSpan);
+          this.chars.push(charSpan);
+        });
+      } else {
+        wordSpan.textContent = wordStr;
+      }
+
+      this.element.appendChild(wordSpan);
+      this.words.push(wordSpan);
+
+      // Add space after word if not the last
+      if (wordIdx < wordsArray.length - 1) {
+        const space = document.createTextNode(' ');
+        this.element.appendChild(space);
+      }
+    });
+  }
+
+  revert() {
+    this.element.innerHTML = this.originalHTML;
+    this.element.removeAttribute('aria-label');
+  }
+}
+
+/* ==========================================================================
+   4. HTML5 CANVAS PARTICLE FIELD ENGINE
+   ========================================================================== */
+window.activeParticleFields = [];
+
+class ParticleField {
+  constructor(canvas, target, bleed = 140) {
+    this.canvas = canvas;
+    this.target = target;
+    this.bleed = bleed;
+    this.ctx = canvas.getContext('2d');
+    this.particles = [];
+    this.emitters = new Set();
+    this.box = { x: 0, y: 0, w: 0, h: 0 };
+    this.radius = 4;
+    this.color = '#171717';
+    this.running = false;
+    this.sync();
+    window.activeParticleFields.push(this);
+  }
+
+  sync() {
+    const w = this.target.offsetWidth;
+    const h = this.target.offsetHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.width = w + this.bleed * 2;
+    this.height = h + this.bleed * 2;
+    this.box.x = this.bleed;
+    this.box.y = this.bleed;
+    this.box.w = w;
+    this.box.h = h;
+    this.canvas.width = Math.round(this.width * dpr);
+    this.canvas.height = Math.round(this.height * dpr);
+    this.canvas.style.width = `${this.width}px`;
+    this.canvas.style.height = `${this.height}px`;
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.radius = parseFloat(getComputedStyle(this.target).borderRadius) || 4;
+    this.recolor();
+  }
+
+  recolor() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    this.color = isDark ? '#ededed' : '#171717';
+  }
+
+  spawn(p) {
+    const particle = {
+      x: p.x || 0,
+      y: p.y || 0,
+      vx: p.vx || 0,
+      vy: p.vy || 0,
+      size: p.size || 2,
+      alpha: p.alpha !== undefined ? p.alpha : 1,
+      life: p.life || 1,
+      age: 0,
+      fade: p.fade !== undefined ? p.fade : true,
+      shrink: p.shrink || false,
+      color: p.color || this.color,
+      shape: p.shape || 'dot',
+      update: p.update || null
+    };
+    this.particles.push(particle);
+    this.start();
+    return particle;
+  }
+
+  addEmitter(fn) {
+    this.emitters.add(fn);
+    this.start();
+  }
+
+  removeEmitter(fn) {
+    this.emitters.delete(fn);
+  }
+
+  start() {
+    if (this.running) return;
+    this.running = true;
+    this.lastTime = performance.now();
+    this.tick = this.tick.bind(this);
+    requestAnimationFrame(this.tick);
+  }
+
+  tick(now) {
+    if (!this.running) return;
+    const dt = Math.min((now - this.lastTime) / 1000, 0.05);
+    this.lastTime = now;
+
+    this.ctx.clearRect(0, 0, this.width, this.height);
+
+    for (const emitter of this.emitters) {
+      emitter(dt);
+    }
+
+    for (let i = this.particles.length - 1; i >= 0; i--) {
+      const p = this.particles[i];
+      p.age += dt;
+      if (p.age >= p.life && p.life !== Infinity) {
+        this.particles.splice(i, 1);
+        continue;
+      }
+
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+
+      if (p.update) p.update(p, dt);
+
+      let alpha = p.alpha;
+      if (p.fade && p.life !== Infinity) {
+        alpha = p.alpha * (1 - p.age / p.life);
+      }
+      let size = p.size;
+      if (p.shrink && p.life !== Infinity) {
+        size = Math.max(0, p.size * (1 - p.age / p.life));
+      }
+
+      this.ctx.save();
+      this.ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
+      this.ctx.fillStyle = p.color;
+
+      if (p.shape === 'spark') {
+        this.ctx.beginPath();
+        this.ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        this.ctx.fill();
+      } else {
+        this.ctx.beginPath();
+        this.ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        this.ctx.fill();
+      }
+      this.ctx.restore();
+    }
+
+    if (this.particles.length === 0 && this.emitters.size === 0) {
+      this.running = false;
+      return;
+    }
+
+    requestAnimationFrame(this.tick);
+  }
+}
+
+// Perimeter sampling helper for rectangular shapes with border radius
+function getPerimeterPoint(box, radius, t) {
+  t = ((t % 1) + 1) % 1;
+  const w = box.w;
+  const h = box.h;
+  const perimeter = 2 * (w + h);
+  const dist = t * perimeter;
+
+  if (dist < w) {
+    return { x: box.x + dist, y: box.y, nx: 0, ny: -1 };
+  } else if (dist < w + h) {
+    return { x: box.x + w, y: box.y + (dist - w), nx: 1, ny: 0 };
+  } else if (dist < 2 * w + h) {
+    return { x: box.x + w - (dist - (w + h)), y: box.y + h, nx: 0, ny: 1 };
   } else {
-    window.addEventListener('scroll', update);
+    return { x: box.x, y: box.y + h - (dist - (2 * w + h)), nx: -1, ny: 0 };
   }
 }
 
-// 4. Subterranean Web Audio Room Tone (55Hz / A1 Fundamental)
-let audioCtx = null;
-let oscDrone = null;
-let oscHarmonic = null;
-let gainNode = null;
-let isAudioActive = false;
+function initParticleButtons() {
+  // Primary CTA: Reactor (Solid Button)
+  const primaryWrap = document.querySelector('[data-particle-reactor]');
+  if (primaryWrap) {
+    const canvas = primaryWrap.querySelector('canvas');
+    const button = primaryWrap.querySelector('button, a');
+    if (canvas && button) {
+      const field = new ParticleField(canvas, button, 160);
+      window.primaryParticleField = field;
 
-function initAmbientAudio() {
-  const btn = document.getElementById('audioToggleBtn');
-  if (!btn) return;
+      let hover = false;
+      let emberAcc = 0;
 
-  btn.addEventListener('click', () => {
-    if (!isAudioActive) {
-      startDrone();
-      btn.classList.add('active');
-      btn.innerHTML = '<span>ACOUSTICS: LIVE 55Hz</span>';
-      isAudioActive = true;
-    } else {
-      stopDrone();
-      btn.classList.remove('active');
-      btn.innerHTML = '<span>ROOM ACOUSTICS: OFF</span>';
-      isAudioActive = false;
+      field.addEmitter((dt) => {
+        const rate = hover ? 45 : 10;
+        emberAcc += rate * dt;
+        while (emberAcc >= 1) {
+          emberAcc -= 1;
+          const px = field.box.x + Math.random() * field.box.w;
+          const py = field.box.y + field.box.h + Math.random() * 4;
+          field.spawn({
+            x: px,
+            y: py,
+            vx: (Math.random() - 0.5) * 30,
+            vy: -(hover ? 120 + Math.random() * 80 : 45 + Math.random() * 30),
+            size: 1.2 + Math.random() * 1.6,
+            life: 0.6 + Math.random() * 0.8,
+            shrink: true,
+            shape: 'spark'
+          });
+        }
+      });
+
+      button.addEventListener('mouseenter', () => { hover = true; });
+      button.addEventListener('mouseleave', () => { hover = false; });
     }
+  }
+
+  // Secondary CTA: Marquee (Outlined Button)
+  const marqueeWrap = document.querySelector('[data-particle-marquee]');
+  if (marqueeWrap) {
+    const canvas = marqueeWrap.querySelector('canvas');
+    const button = marqueeWrap.querySelector('button, a');
+    if (canvas && button) {
+      const field = new ParticleField(canvas, button, 140);
+      const runners = [0, 0.25, 0.5, 0.75];
+      let rush = 1;
+      let hover = false;
+
+      field.addEmitter((dt) => {
+        for (let i = 0; i < runners.length; i++) {
+          runners[i] = (runners[i] + (dt * 0.35 * rush)) % 1;
+          const pt = getPerimeterPoint(field.box, field.radius, runners[i]);
+          field.spawn({
+            x: pt.x,
+            y: pt.y,
+            size: hover ? 2.5 : 1.8,
+            life: 0.3,
+            fade: true,
+            shrink: true,
+            shape: 'dot'
+          });
+        }
+
+        if (hover) {
+          const pt = getPerimeterPoint(field.box, field.radius, Math.random());
+          field.spawn({
+            x: pt.x,
+            y: pt.y,
+            vx: pt.nx * (40 + Math.random() * 60),
+            vy: pt.ny * (40 + Math.random() * 60),
+            size: 1.2,
+            life: 0.4,
+            shrink: true,
+            shape: 'spark'
+          });
+        }
+      });
+
+      button.addEventListener('mouseenter', () => {
+        hover = true;
+        rush = 3;
+      });
+      button.addEventListener('mouseleave', () => {
+        hover = false;
+        rush = 1;
+      });
+    }
+  }
+}
+
+/* ==========================================================================
+   5. MASTER GSAP CHOREOGRAPHY (ANIMAXXING FULL TREATMENT)
+   ========================================================================== */
+function initGSAPTimelines(lenis) {
+  if (typeof gsap === 'undefined') return;
+
+  // Register CustomEase for signature animaxxing curve
+  if (typeof CustomEase !== 'undefined') {
+    CustomEase.create('animaxxing', 'M0,0 C0.16,1 0.3,1 1,1');
+  }
+
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+    if (document.fonts) {
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
+  }
+
+  // 5.1 Shell Wordmark Underline Reveal
+  gsap.to('.wordmark-underline', {
+    scaleX: 1,
+    duration: 1.2,
+    ease: 'power3.out',
+    delay: 0.2
   });
-}
 
-function startDrone() {
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) return;
+  // 5.2 Hero Headline Intro: Letters Scatter-Implosion (Route letters)
+  const heroHeading = document.getElementById('heroHeadline');
+  let headingSplit = null;
 
-    audioCtx = new AudioContext();
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
+  if (heroHeading) {
+    headingSplit = new AccessibleSplitText(heroHeading, { type: 'chars' });
+    const chars = headingSplit.chars;
 
-    // 55Hz Sub-Bass Fundamental (A1)
-    oscDrone = audioCtx.createOscillator();
-    oscDrone.type = 'sine';
-    oscDrone.frequency.setValueAtTime(55, audioCtx.currentTime);
+    // Disperse chars across viewport
+    const spreadX = () => window.innerWidth * 0.55;
+    const spreadY = () => window.innerHeight * 0.55;
 
-    // Warm Second Harmonic (110Hz)
-    oscHarmonic = audioCtx.createOscillator();
-    oscHarmonic.type = 'triangle';
-    oscHarmonic.frequency.setValueAtTime(110, audioCtx.currentTime);
+    gsap.set(chars, {
+      autoAlpha: 0,
+      x: () => gsap.utils.random(-spreadX(), spreadX()),
+      y: () => gsap.utils.random(-spreadY(), spreadY()),
+      rotation: () => gsap.utils.random(-90, 90),
+      scale: 0.5
+    });
 
-    // Lowpass filter replicating vast concrete chamber acoustics
-    const filter = audioCtx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(160, audioCtx.currentTime);
+    const introTl = gsap.timeline({
+      delay: 0.3,
+      onComplete: () => {
+        // Start Ambient Wave after settled
+        initAmbientWave(chars);
+      }
+    });
 
-    gainNode = audioCtx.createGain();
-    gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+    introTl.to(chars, {
+      autoAlpha: 1,
+      x: 0,
+      y: 0,
+      rotation: 0,
+      scale: 1,
+      duration: 0.85,
+      ease: 'power4.out',
+      stagger: {
+        each: 0.02,
+        from: 'random'
+      }
+    });
+  }
 
-    oscDrone.connect(filter);
-    oscHarmonic.connect(filter);
-    filter.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
+  // 5.3 Hero Subhead Intro: Speak-In (Word by word arrival)
+  const heroSubhead = document.getElementById('heroSubhead');
+  if (heroSubhead) {
+    const subheadSplit = new AccessibleSplitText(heroSubhead, { type: 'words' });
+    gsap.set(subheadSplit.words, { autoAlpha: 0, y: 16 });
 
-    oscDrone.start();
-    oscHarmonic.start();
-  } catch (err) {
-    console.warn('AudioContext prevented or unsupported:', err);
+    gsap.to(subheadSplit.words, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.42,
+      stagger: 0.05,
+      ease: 'power3.out',
+      delay: 1.05
+    });
+  }
+
+  // 5.4 Kinetic Marquee Tape Ticker
+  const marqueeTrack = document.querySelector('.marquee-track');
+  if (marqueeTrack) {
+    gsap.to(marqueeTrack, {
+      xPercent: -50,
+      repeat: -1,
+      duration: 28,
+      ease: 'none'
+    });
+  }
+
+  // 5.5 Hero Outro: Blast-Off on Primary CTA Press
+  const blastBtn = document.getElementById('passCtaAction');
+  if (blastBtn && heroHeading) {
+    blastBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      runBlastOff(blastBtn, heroHeading);
+    });
+  }
+
+  // 5.6 Scene 02: Nocturnal Atlas Camera Descent
+  const atlasWrapper = document.getElementById('atlasPin');
+  if (atlasWrapper && typeof ScrollTrigger !== 'undefined') {
+    const atlasTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#atlasPin',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.2,
+        pin: '.atlas-viewport',
+        onUpdate: (self) => {
+          const fill = document.getElementById('atlasHudFill');
+          if (fill) fill.style.width = `${self.progress * 100}%`;
+        }
+      }
+    });
+
+    atlasTl
+      .to('.atlas-layer-bg-grid', { scale: 1.6, autoAlpha: 0.25, ease: 'none' }, 0)
+      .to('#atlasSchematicMap', { scale: 3.2, transformOrigin: '52% 46%', ease: 'power2.inOut' }, 0)
+      .from('.atlas-hud', { y: 20, autoAlpha: 0.6, duration: 0.5 }, 0.2);
+  }
+
+  // 5.7 Responsive MatchMedia (Horizontal Pinned Gallery on Desktop)
+  if (typeof ScrollTrigger !== 'undefined') {
+    const mm = gsap.matchMedia();
+
+    mm.add('(min-width: 1025px)', () => {
+      const venuesStrip = document.getElementById('venuesStrip');
+      const venuesPinWrapper = document.getElementById('venuesPin');
+
+      if (venuesStrip && venuesPinWrapper) {
+        const panels = gsap.utils.toArray('.venue-chamber-panel');
+        const getScrollAmount = () => venuesStrip.scrollWidth - window.innerWidth;
+
+        const railTl = gsap.to(venuesStrip, {
+          x: () => -getScrollAmount(),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#venuesPin',
+            start: 'top top',
+            end: () => `+=${getScrollAmount()}`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            invalidateOnRefresh: true
+          }
+        });
+
+        panels.forEach((panel) => {
+          const img = panel.querySelector('.media-parallax-img');
+          if (img) {
+            gsap.fromTo(
+              img,
+              { xPercent: 12, scale: 1.15 },
+              {
+                xPercent: -12,
+                scale: 1.05,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: panel,
+                  containerAnimation: railTl,
+                  start: 'left right',
+                  end: 'right left',
+                  scrub: true
+                }
+              }
+            );
+          }
+        });
+      }
+    });
+
+    mm.add('(max-width: 1024px)', () => {
+      ScrollTrigger.batch('.venue-chamber-panel', {
+        onEnter: (batch) => gsap.fromTo(batch, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out', overwrite: true }),
+        start: 'top 85%'
+      });
+    });
   }
 }
 
-function stopDrone() {
-  try {
-    if (gainNode && audioCtx) {
-      gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
+/* ==========================================================================
+   6. AMBIENT HEADLINE WAVE (THE WAVE RECIPE)
+   ========================================================================== */
+function initAmbientWave(chars) {
+  if (!chars || chars.length === 0) return;
+
+  const MOVES = [
+    // Hop
+    (c) => gsap.timeline().to(c, { y: -12, duration: 0.14, ease: 'power2.out', stagger: { each: 0.025, yoyo: true, repeat: 1 } }),
+    // Breathe
+    (c) => gsap.timeline().to(c, { scale: 1.08, duration: 0.16, ease: 'sine.inOut', stagger: { each: 0.025, yoyo: true, repeat: 1 } }),
+    // Lean
+    (c) => gsap.timeline().to(c, { rotation: 6, duration: 0.15, ease: 'sine.inOut', stagger: { each: 0.025, yoyo: true, repeat: 1 } }),
+    // Flip 360
+    (c) => gsap.timeline().to(c, { rotationY: 360, duration: 0.35, ease: 'power2.inOut', stagger: 0.02 }),
+    // Shear
+    (c) => gsap.timeline().to(c, { skewX: 10, duration: 0.15, ease: 'sine.inOut', stagger: { each: 0.025, yoyo: true, repeat: 1 } }),
+    // Squash
+    (c) => gsap.timeline().to(c, { scaleY: 0.84, duration: 0.14, ease: 'sine.inOut', stagger: { each: 0.025, yoyo: true, repeat: 1 } })
+  ];
+
+  let deck = gsap.utils.shuffle([...MOVES]);
+  let index = 0;
+
+  function runWave() {
+    const move = deck[index++];
+    if (index >= deck.length) {
+      deck = gsap.utils.shuffle([...MOVES]);
+      index = 0;
+    }
+    if (move) move(chars);
+  }
+
+  // Periodic ambient wave ripple every 4.5 seconds
+  setInterval(runWave, 4500);
+}
+
+/* ==========================================================================
+   7. HERO BLAST-OFF OUTRO
+   ========================================================================== */
+function runBlastOff(button, heading) {
+  const root = document.querySelector('.hero');
+  const chars = heading.querySelectorAll('.split-char');
+  const subheadWords = document.querySelectorAll('.hero-subhead .split-word');
+  const modal = document.getElementById('checkoutModal');
+
+  // Trigger button particles flash
+  if (window.primaryParticleField) {
+    const field = window.primaryParticleField;
+    for (let i = 0; i < 60; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 150 + Math.random() * 350;
+      field.spawn({
+        x: field.box.x + field.box.w / 2,
+        y: field.box.y + field.box.h / 2,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        size: 2.2,
+        life: 0.6,
+        shrink: true,
+        shape: 'spark'
+      });
+    }
+  }
+
+  const blastTl = gsap.timeline({
+    onComplete: () => {
+      if (modal) modal.classList.add('open');
+      // Smoothly restore hero
       setTimeout(() => {
-        if (oscDrone) oscDrone.stop();
-        if (oscHarmonic) oscHarmonic.stop();
-        if (audioCtx) audioCtx.close();
-      }, 250);
+        gsap.to(chars, { x: 0, y: 0, rotation: 0, scale: 1, autoAlpha: 1, duration: 0.8, ease: 'power3.out' });
+        gsap.to(subheadWords, { x: 0, y: 0, rotation: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out' });
+        gsap.to(root, { x: 0, y: 0 });
+      }, 600);
     }
-  } catch (err) {
-    console.warn('Error stopping drone:', err);
-  }
-}
+  });
 
-// 5. Kinetic Marquee Tape Ticker
-function initHeroMarquee() {
-  const track = document.querySelector('.marquee-track');
-  if (!track || typeof gsap === 'undefined') return;
-
-  gsap.to(track, {
-    xPercent: -50,
-    repeat: -1,
-    duration: 32,
+  // 1. Page Rock
+  blastTl.to(root, {
+    x: () => gsap.utils.random(-8, 8),
+    y: () => gsap.utils.random(-5, 5),
+    duration: 0.04,
+    repeat: 5,
+    yoyo: true,
     ease: 'none'
+  }, 0);
+
+  // 2. Chars blast radial outwards
+  const btnRect = button.getBoundingClientRect();
+  const originX = btnRect.left + btnRect.width / 2;
+  const originY = btnRect.top + btnRect.height / 2;
+
+  chars.forEach((char) => {
+    const charRect = char.getBoundingClientRect();
+    const cx = charRect.left + charRect.width / 2;
+    const cy = charRect.top + charRect.height / 2;
+    const angle = Math.atan2(cy - originY, cx - originX) + gsap.utils.random(-0.4, 0.4);
+    const distance = gsap.utils.random(350, 750);
+
+    blastTl.to(char, {
+      x: Math.cos(angle) * distance,
+      y: Math.sin(angle) * distance,
+      rotation: gsap.utils.random(-360, 360),
+      scale: gsap.utils.random(0.4, 2),
+      autoAlpha: 0,
+      duration: gsap.utils.random(0.4, 0.6),
+      ease: 'expo.out'
+    }, gsap.utils.random(0, 0.1));
+  });
+
+  // 3. Subhead words spin down
+  subheadWords.forEach((word) => {
+    blastTl.to(word, {
+      x: gsap.utils.random(-200, 200),
+      y: gsap.utils.random(250, 500),
+      rotation: gsap.utils.random(-180, 180),
+      autoAlpha: 0,
+      duration: gsap.utils.random(0.35, 0.5),
+      ease: 'power2.in'
+    }, gsap.utils.random(0, 0.1));
   });
 }
 
-// 6. Timetable Schedule Day Switcher (Using autoAlpha to prevent click blocks)
+/* ==========================================================================
+   8. SCHEDULE SWITCHER & MODAL
+   ========================================================================== */
 function initScheduleSwitcher() {
   const day1Btn = document.getElementById('day1Btn');
   const day2Btn = document.getElementById('day2Btn');
-  const slots = document.querySelectorAll('.time-slot-row');
+  const rows = document.querySelectorAll('.ledger-row');
 
   if (!day1Btn || !day2Btn) return;
 
   day1Btn.addEventListener('click', () => {
     day1Btn.classList.add('active');
     day2Btn.classList.remove('active');
-    filterSlots('day1');
+    filterRows('1');
   });
 
   day2Btn.addEventListener('click', () => {
     day2Btn.classList.add('active');
     day1Btn.classList.remove('active');
-    filterSlots('day2');
+    filterRows('2');
   });
 
-  function filterSlots(day) {
+  function filterRows(day) {
     if (typeof gsap === 'undefined') return;
 
-    gsap.to(slots, {
+    gsap.to(rows, {
       autoAlpha: 0,
-      y: 10,
-      duration: 0.2,
+      y: 6,
+      duration: 0.15,
       stagger: 0.02,
       onComplete: () => {
-        slots.forEach((row) => {
-          if (day === 'day1') {
-            const isDay1 = row.getAttribute('data-day') === '1';
-            row.style.display = isDay1 ? 'grid' : 'none';
-          } else {
-            const isDay2 = row.getAttribute('data-day') === '2';
-            row.style.display = isDay2 ? 'grid' : 'none';
-          }
+        rows.forEach((row) => {
+          const rowDay = row.getAttribute('data-day');
+          row.style.display = rowDay === day ? 'grid' : 'none';
         });
-
-        gsap.to(slots, {
+        gsap.to(rows, {
           autoAlpha: 1,
           y: 0,
-          duration: 0.35,
-          stagger: 0.03,
+          duration: 0.25,
+          stagger: 0.02,
           ease: 'power2.out'
         });
-
-        ScrollTrigger.refresh();
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
       }
     });
   }
 }
 
-// 7. Pass Tier Selection
-function initPassSelection() {
-  const choices = document.querySelectorAll('.tier-choice');
-  const ctaBtn = document.getElementById('passCtaAction');
-
-  choices.forEach((choice) => {
-    choice.addEventListener('click', () => {
-      choices.forEach((c) => c.classList.remove('active'));
-      choice.classList.add('active');
-
-      const price = choice.getAttribute('data-price');
-      const tierName = choice.getAttribute('data-tier');
-
-      if (ctaBtn) {
-        ctaBtn.textContent = `Reserve ${tierName} · €${price}`;
-      }
-    });
-  });
-}
-
-// 8. Pass Checkout Modal
 function initModal() {
   const modal = document.getElementById('checkoutModal');
   const closeBtn = document.getElementById('modalCloseBtn');
@@ -2669,151 +2981,6 @@ function initModal() {
   });
 }
 
-// 9. Master GSAP ScrollTrigger Choreography (Using matchMedia & context)
-function initGSAPTimelines(lenis) {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    console.warn('GSAP or ScrollTrigger not loaded');
-    return;
-  }
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Refresh ScrollTrigger when custom fonts (Syne, Space Grotesk) finish rendering
-  if (document.fonts) {
-    document.fonts.ready.then(() => {
-      ScrollTrigger.refresh();
-    });
-  }
-
-  // 9.1 Hero Headline Line-Mask Reveal
-  gsap.fromTo(
-    '.mask-line-inner',
-    { y: '115%', autoAlpha: 0 },
-    {
-      y: '0%',
-      autoAlpha: 1,
-      duration: 1.4,
-      stagger: 0.12,
-      ease: 'power4.out',
-      delay: 0.15
-    }
-  );
-
-  // 9.2 Scene 02: Pinned 2.5D Camera Descent into the Nocturnal Atlas
-  const atlasWrapper = document.getElementById('atlasPin');
-  if (atlasWrapper) {
-    const atlasTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#atlasPin',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1.2,
-        pin: '.atlas-viewport',
-        onUpdate: (self) => {
-          const fill = document.getElementById('atlasHudFill');
-          if (fill) fill.style.width = `${self.progress * 100}%`;
-        }
-      }
-    });
-
-    atlasTl
-      .to('.atlas-layer-bg-grid', {
-        scale: 1.6,
-        autoAlpha: 0.25,
-        ease: 'none'
-      }, 0)
-      .to('#atlasSchematicMap', {
-        scale: 3.4,
-        transformOrigin: '52% 46%',
-        ease: 'power2.inOut'
-      }, 0)
-      .to('.atlas-svg path', {
-        strokeWidth: '+=2',
-        ease: 'none'
-      }, 0)
-      .from('.atlas-hud', {
-        y: 20,
-        autoAlpha: 0.6,
-        duration: 0.5
-      }, 0.2);
-  }
-
-  // 9.3 Responsive MatchMedia Setup (Official GSAP Responsive Pattern)
-  const mm = gsap.matchMedia();
-
-  // DESKTOP: Horizontal Pinned Parallax Rail (Zero Dead Scroll)
-  mm.add('(min-width: 1025px)', () => {
-    const venuesStrip = document.getElementById('venuesStrip');
-    const venuesPinWrapper = document.getElementById('venuesPin');
-
-    if (venuesStrip && venuesPinWrapper) {
-      const panels = gsap.utils.toArray('.venue-chamber-panel');
-      const getScrollAmount = () => venuesStrip.scrollWidth - window.innerWidth;
-
-      // Pinned lateral track with exact pixel travel to eliminate empty dead scroll
-      const railTl = gsap.to(venuesStrip, {
-        x: () => -getScrollAmount(),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '#venuesPin',
-          start: 'top top',
-          end: () => `+=${getScrollAmount()}`,
-          pin: true,
-          pinSpacing: true,
-          scrub: 1,
-          invalidateOnRefresh: true
-        }
-      });
-
-      // Internal Media Parallax inside clipped frames
-      panels.forEach((panel) => {
-        const img = panel.querySelector('.media-parallax-img');
-        if (img) {
-          gsap.fromTo(
-            img,
-            { xPercent: 12, scale: 1.15 },
-            {
-              xPercent: -12,
-              scale: 1.05,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: panel,
-                containerAnimation: railTl,
-                start: 'left right',
-                end: 'right left',
-                scrub: true
-              }
-            }
-          );
-        }
-      });
-    }
-  });
-
-  // TABLET / MOBILE: Vertical Natural Flow with ScrollTrigger Batches
-  mm.add('(max-width: 1024px)', () => {
-    ScrollTrigger.batch('.venue-chamber-panel', {
-      onEnter: (batch) => gsap.fromTo(batch, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out', overwrite: true }),
-      start: 'top 85%'
-    });
-  });
-
-  // 9.4 Physical Pass Card Entrance
-  const ticketCard = document.querySelector('.punchcard-ticket-pass');
-  if (ticketCard) {
-    gsap.from(ticketCard, {
-      y: 60,
-      autoAlpha: 0,
-      duration: 1.2,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.tickets-section',
-        start: 'top 75%'
-      }
-    });
-  }
-}
-
-</script>
+  </script>
 </body>
 </html>
