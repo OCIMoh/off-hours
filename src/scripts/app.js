@@ -1,10 +1,13 @@
 /**
  * OFF HOURS — Production Experience Controller
  * Concept: THE CITY DISPATCH
+ * Directed via: cinematic-ui v2.8.0
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initTorch();
+  initTimecode();
+  initAmbientAudio();
   initTierSelection();
   initScheduleFilter();
   initModal();
@@ -22,7 +25,100 @@ function initTorch() {
   });
 }
 
-// 2. Pass Tier Selection
+// 2. Running Nocturnal Timecode (20:00:00 to 06:00:00)
+function initTimecode() {
+  const tcElement = document.getElementById('timecodeDisplay');
+  if (!tcElement) return;
+
+  let totalSeconds = 20 * 3600; // Starts at 20:00:00
+
+  // Scroll advances nocturnal timecode
+  window.addEventListener('scroll', () => {
+    const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    const nightDuration = 10 * 3600; // 10 hours of festival night
+    const currentSeconds = (20 * 3600 + Math.floor(scrollPercent * nightDuration)) % (24 * 3600);
+
+    const hours = Math.floor(currentSeconds / 3600).toString().padStart(2, '0');
+    const minutes = Math.floor((currentSeconds % 3600) / 60).toString().padStart(2, '0');
+    const seconds = Math.floor(currentSeconds % 60).toString().padStart(2, '0');
+
+    tcElement.textContent = `${hours}:${minutes}:${seconds}`;
+  });
+}
+
+// 3. Web Audio Subterranean Room Tone (Zero External MP3 Dependency)
+let audioCtx = null;
+let oscDrone = null;
+let gainNode = null;
+let isAudioActive = false;
+
+function initAmbientAudio() {
+  const audioBtn = document.getElementById('audioToggleBtn');
+  if (!audioBtn) return;
+
+  audioBtn.addEventListener('click', () => {
+    if (!isAudioActive) {
+      startAmbientSound();
+      audioBtn.classList.add('active');
+      audioBtn.textContent = 'Room Acoustics: Live';
+    } else {
+      stopAmbientSound();
+      audioBtn.classList.remove('active');
+      audioBtn.textContent = 'Room Acoustics: Off';
+    }
+  });
+}
+
+function startAmbientSound() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+
+    audioCtx = new AudioContext();
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    // Warm sub-bass fundamental (55Hz / A1)
+    oscDrone = audioCtx.createOscillator();
+    oscDrone.type = 'sine';
+    oscDrone.frequency.setValueAtTime(55, audioCtx.currentTime);
+
+    // Warm second harmonic (110Hz)
+    const oscHarmonic = audioCtx.createOscillator();
+    oscHarmonic.type = 'triangle';
+    oscHarmonic.frequency.setValueAtTime(110, audioCtx.currentTime);
+
+    // Lowpass filter for muffled industrial room acoustics
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(180, audioCtx.currentTime);
+
+    gainNode = audioCtx.createGain();
+    gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+
+    oscDrone.connect(filter);
+    oscHarmonic.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscDrone.start();
+    oscHarmonic.start();
+    isAudioActive = true;
+  } catch (err) {
+    console.warn('[OFF HOURS] Web Audio not permitted by browser policy:', err);
+  }
+}
+
+function stopAmbientSound() {
+  if (audioCtx) {
+    audioCtx.close();
+    audioCtx = null;
+    isAudioActive = false;
+  }
+}
+
+// 4. Pass Tier Selection
 let selectedPassTier = {
   name: '48-Hour Full Access Pass',
   price: '€48.00'
@@ -54,7 +150,7 @@ function initTierSelection() {
   }
 }
 
-// 3. Schedule Day Filtering
+// 5. Schedule Day Filtering
 function initScheduleFilter() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   filterBtns.forEach((btn) => {
@@ -68,11 +164,10 @@ function initScheduleFilter() {
 }
 
 function updateScheduleDay(day) {
-  // Can be hooked to dynamic day swaps or filter indicators
   console.log(`[OFF HOURS] Schedule switched to Night ${day}`);
 }
 
-// 4. Modal Checkout
+// 6. Modal Checkout
 function initModal() {
   const modal = document.getElementById('checkoutModal');
   const closeBtn = document.getElementById('modalCloseBtn');
@@ -105,9 +200,8 @@ function openCheckoutModal(tier) {
   }
 }
 
-// 5. GSAP & ScrollTrigger Animations
+// 7. GSAP & ScrollTrigger Animations
 function initAnimations() {
-  // Check reduced motion preference
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {
     console.log('[OFF HOURS] prefers-reduced-motion active. Animations bypassed.');
@@ -131,7 +225,7 @@ function initAnimations() {
     delay: 0.2
   });
 
-  // Pinned Section 1: The Nocturnal Atlas Zoom
+  // Pinned Section 1: The Nocturnal Atlas Zoom (24mm Camera Crane Push)
   const atlasMap = document.getElementById('atlasMap');
   const hudProgress = document.getElementById('hudProgress');
 
@@ -161,7 +255,7 @@ function initAnimations() {
     }, 0);
   }
 
-  // Pinned Section 2: Four Venues Horizontal Architectural Rail
+  // Pinned Section 2: Four Venues Horizontal Architectural Rail (35mm Dolly Track)
   const venuesStrip = document.getElementById('venuesStrip');
   const venuesPin = document.getElementById('venuesPin');
 
