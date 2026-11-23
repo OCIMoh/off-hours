@@ -1,0 +1,40 @@
+{
+  "project": "OFF HOURS",
+  "mode": "M",
+  "entry": "E0",
+  "phase": "P6",
+  "tools": {
+    "web_search": true,
+    "browser_agent": false,
+    "external_site_inspection": false,
+    "local_site_inspection": true,
+    "playwright": false,
+    "screenshot_capture": false,
+    "motion_capture": false,
+    "image_presentation": true,
+    "web_fetch": false,
+    "lighthouse": false,
+    "axe": false
+  },
+  "write_boundary_enforcement": "soft",
+  "stakeholders": {
+    "operator": "User",
+    "approver": "User"
+  },
+  "approvals": {
+    "G1_brief": { "status": "approved", "by": "User", "at": "2026-11-23", "artifact": "docs/00_PROJECT_BRIEF.md" },
+    "G2_direction": { "status": "approved", "by": "User", "at": "2026-11-23", "artifact": "docs/04_CREATIVE_DIRECTIONS.md" },
+    "G3_blueprint": { "status": "pending", "artifact": "docs/05_EXPERIENCE_BLUEPRINT.md" },
+    "G4_production": { "status": "pending" },
+    "G5_final": { "status": "pending" }
+  },
+  "skipped_phases": [],
+  "open_questions": [
+    "Do you approve the experience blueprint in docs/05_EXPERIENCE_BLUEPRINT.md to unlock Phase P7 (Lab Prototyping)?"
+  ],
+  "budget_used": {
+    "P2_fetches": 12,
+    "P3_fetches": 2,
+    "critic_rounds": 0
+  }
+}
