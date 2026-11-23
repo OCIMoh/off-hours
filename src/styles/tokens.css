@@ -1,0 +1,17 @@
+:root {
+  --bg: #07080a;
+  --bg-surface: #0e1014;
+  --bg-card: #14171d;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(229, 169, 60, 0.4);
+  --text: #f5f6f8;
+  --text-dim: #7e8490;
+  --tungsten: #e5a93c;
+  --tungsten-dim: rgba(229, 169, 60, 0.15);
+  --tungsten-glow: rgba(229, 169, 60, 0.35);
+  --blue-river: #2d4554;
+  --font-display: "Syne", -apple-system, sans-serif;
+  --font-heading: "Space Grotesk", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+}

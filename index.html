@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OFF HOURS — The City Has Another Life</title>
+  <meta name="description" content="OFF HOURS is an independent culture festival reactivating four overlooked spaces across an old river-and-rail city for two nights.">
+
+  <!-- Curated Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- GSAP 3 & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Production Styles -->
+  <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+
+  <!-- Ambient Overlays -->
+  <div class="film-grain" aria-hidden="true"></div>
+  <div id="torch" aria-hidden="true"></div>
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="brand-group">
+      <a href="#" class="brand-name">OFF HOURS</a>
+      <span class="brand-meta">River & Rail City · Edition 01</span>
+    </div>
+    <nav class="header-controls" aria-label="Main Navigation">
+      <div class="status-pulse">
+        <span class="status-dot"></span>
+        <span>Two Nights · 20:00–06:00</span>
+      </div>
+      <a href="#tickets" class="nav-link-pass">48-Hr Pass · €48</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" aria-label="Festival Manifesto">
+      <div class="hero-pretitle">The Nocturnal Cultural Dispatch</div>
+      <h1 class="hero-title">
+        <span class="line"><span class="char">THE CITY HAS</span></span>
+        <span class="line"><span class="char">ANOTHER LIFE</span></span>
+        <span class="line" style="color: var(--tungsten);"><span class="char">AFTER MIDNIGHT.</span></span>
+      </h1>
+
+      <div class="hero-bottom-grid">
+        <p class="manifesto-lead">
+          OFF HOURS temporarily unlocks four overlooked spaces across an old post-industrial river-and-rail city. No festival stages. No commercial sponsors. A temporary cultural world of independent musicians, spatial acoustics, wholesale night markets, and experimental cinema.
+        </p>
+        <div class="hero-spec">
+          <div><strong>Four Locations:</strong> Tram Depot / Baths / Market / Printworks</div>
+          <div><strong>Two Nights:</strong> Staggered Programs Until Dawn</div>
+          <div><strong>Entry Pass:</strong> 48-Hour Unrestricted Access</div>
+        </div>
+        <div class="scroll-cue">
+          <span>Explore The City Network</span>
+          <span class="scroll-arrow" aria-hidden="true">↓</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pinned Section 1: The Nocturnal Atlas Zoom -->
+    <section class="atlas-pin-wrapper" id="atlasPin" aria-label="City Network Map">
+      <div class="atlas-viewport">
+        
+        <div class="hud-overlay">
+          <div class="hud-title">THE NOCTURNAL ATLAS</div>
+          <div>Coordinates: 53°32′N 09°59′E · River & Rail Corridor</div>
+          <div style="color: var(--tungsten); margin-top: 4px;">Scroll down to zoom into the four active spaces</div>
+          <div class="hud-progress-bar" role="progressbar" aria-label="Zoom Progress">
+            <div class="hud-progress-fill" id="hudProgress"></div>
+          </div>
+        </div>
+
+        <div class="atlas-map-layer" id="atlasMap">
+          <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River & Rail Map">
+            <!-- River Spine -->
+            <path d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                  stroke="var(--blue-river)" stroke-width="42" stroke-linecap="round" fill="none" opacity="0.4"/>
+            <path d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                  stroke="#4a708a" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.3"/>
+
+            <!-- Railways -->
+            <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
+            <path d="M450,420 L700,700 L1300,700" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
+            <path d="M200,80 L400,280 L900,240" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
+
+            <!-- Grid Lines -->
+            <line x1="0" y1="200" x2="1400" y2="200" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <line x1="0" y1="400" x2="1400" y2="400" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <line x1="0" y1="600" x2="1400" y2="600" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <line x1="350" y1="0" x2="350" y2="800" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <line x1="700" y1="0" x2="700" y2="800" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <line x1="1050" y1="0" x2="1050" y2="800" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+
+            <!-- 4 Venue Nodes -->
+            <g class="map-node" transform="translate(380, 420)">
+              <circle class="glow" r="28" />
+              <circle r="7" fill="#E5A93C" />
+              <text x="16" y="5" fill="#f5f6f8" font-family="JetBrains Mono" font-size="12" letter-spacing="0.1em">01 TRAM DEPOT</text>
+              <text x="16" y="20" fill="#E5A93C" font-family="JetBrains Mono" font-size="9" letter-spacing="0.15em">TRANSIT · MAIN STAGE</text>
+            </g>
+
+            <g class="map-node" transform="translate(760, 310)">
+              <circle class="glow" r="28" />
+              <circle r="7" fill="#E5A93C" />
+              <text x="16" y="5" fill="#f5f6f8" font-family="JetBrains Mono" font-size="12" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
+              <text x="16" y="20" fill="#E5A93C" font-family="JetBrains Mono" font-size="9" letter-spacing="0.15em">RECREATION · AMBIENT ECHO</text>
+            </g>
+
+            <g class="map-node" transform="translate(680, 680)">
+              <circle class="glow" r="28" />
+              <circle r="7" fill="#E5A93C" />
+              <text x="16" y="5" fill="#f5f6f8" font-family="JetBrains Mono" font-size="12" letter-spacing="0.1em">03 NIGHT MARKET</text>
+              <text x="16" y="20" fill="#E5A93C" font-family="JetBrains Mono" font-size="9" letter-spacing="0.15em">COMMERCE · SOCIAL HUB</text>
+            </g>
+
+            <g class="map-node" transform="translate(1080, 480)">
+              <circle class="glow" r="28" />
+              <circle r="7" fill="#E5A93C" />
+              <text x="16" y="5" fill="#f5f6f8" font-family="JetBrains Mono" font-size="12" letter-spacing="0.1em">04 PRINTING WORKS</text>
+              <text x="16" y="20" fill="#E5A93C" font-family="JetBrains Mono" font-size="9" letter-spacing="0.15em">COMMUNICATION · CINEMA</text>
+            </g>
+          </svg>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Pinned Section 2: Four Venues Horizontal Architectural Rail -->
+    <section class="venues-pin-wrapper" id="venuesPin" aria-label="The Four Spaces Dossier">
+      <div class="venues-track-viewport">
+        <div class="venues-horizontal-strip" id="venuesStrip">
+
+          <!-- Space 01: Tram Depot -->
+          <article class="venue-chamber-card">
+            <div class="card-left">
+              <div>
+                <div class="card-eyebrow">
+                  <span>Dispatch 01</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Civic Layer: Transit</span>
+                </div>
+                <h2 class="card-title">The Old Tram Depot</h2>
+                <p class="card-description">
+                  A monumental 1912 maintenance hall with exposed steel trusses, concrete oil-stained floors, and the remnants of the municipal transit switches. Intimate crowd proximity meets visceral sub-bass reverberation.
+                </p>
+              </div>
+
+              <div class="card-sensory-specs">
+                <div class="spec-block">
+                  <span class="spec-label">Acoustics</span>
+                  <span class="spec-val">Raw concrete reverb, sub-bass resonance</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Lighting</span>
+                  <span class="spec-val">Warm sodium pools & narrow beam tracking</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Materials</span>
+                  <span class="spec-val">Rivet steel, concrete, transit rail</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Operating Hours</span>
+                  <span class="spec-val">21:00 — 05:30 (Both Nights)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-right">
+              <div>
+                <div class="lineup-heading">Curated Independent Programming</div>
+                <div class="artists-list">
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Kattner & Siding Ensemble</div>
+                      <div class="artist-discipline">Live Analog Percussion & Modular</div>
+                    </div>
+                    <div class="artist-slot">22:30</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Resonance Corridor</div>
+                      <div class="artist-discipline">Post-Punk & Heavy Reverb Trio</div>
+                    </div>
+                    <div class="artist-slot">00:45</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Null Hypothesis</div>
+                      <div class="artist-discipline">Experimental Synthesizer Drift</div>
+                    </div>
+                    <div class="artist-slot">02:30</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Displaced Phase</div>
+                      <div class="artist-discipline">Closing Sub-Bass Improvisation</div>
+                    </div>
+                    <div class="artist-slot">04:15</div>
+                  </div>
+                </div>
+              </div>
+              <a href="#tickets" class="explore-space-cta" style="text-decoration: none;">Reserve Space 01 Access</a>
+            </div>
+          </article>
+
+          <!-- Space 02: Municipal Baths -->
+          <article class="venue-chamber-card">
+            <div class="card-left">
+              <div>
+                <div class="card-eyebrow">
+                  <span>Dispatch 02</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Civic Layer: Recreation</span>
+                </div>
+                <h2 class="card-title">The Municipal Baths</h2>
+                <p class="card-description">
+                  A decommissioned public bathhouse with glazed ceramic tiles, high vaulted arches, and an empty mosaic pool converted into an amphitheater for spatial audio and light reflections.
+                </p>
+              </div>
+
+              <div class="card-sensory-specs">
+                <div class="spec-block">
+                  <span class="spec-label">Acoustics</span>
+                  <span class="spec-val">7-second natural flutter echo</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Lighting</span>
+                  <span class="spec-val">Submerged tungsten glow below tile ledges</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Materials</span>
+                  <span class="spec-val">Glazed white tile, mosaic stone, cast iron</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Operating Hours</span>
+                  <span class="spec-val">20:30 — 04:30 (Both Nights)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-right">
+              <div>
+                <div class="lineup-heading">Spatial & Ambient Audio Works</div>
+                <div class="artists-list">
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Aqueous Horizon</div>
+                      <div class="artist-discipline">Quadraphonic Hydrophone Ambient</div>
+                    </div>
+                    <div class="artist-slot">21:30</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Ceramic Tides</div>
+                      <div class="artist-discipline">Prepared Piano & Contact Mics</div>
+                    </div>
+                    <div class="artist-slot">23:15</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Vocal Silt</div>
+                      <div class="artist-discipline">Tape Loop Polyphony & Drone</div>
+                    </div>
+                    <div class="artist-slot">01:30</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Submerged Sine</div>
+                      <div class="artist-discipline">Low Frequency Meditation</div>
+                    </div>
+                    <div class="artist-slot">03:30</div>
+                  </div>
+                </div>
+              </div>
+              <a href="#tickets" class="explore-space-cta" style="text-decoration: none;">Reserve Space 02 Access</a>
+            </div>
+          </article>
+
+          <!-- Space 03: Night Market -->
+          <article class="venue-chamber-card">
+            <div class="card-left">
+              <div>
+                <div class="card-eyebrow">
+                  <span>Dispatch 03</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Civic Layer: Commerce</span>
+                </div>
+                <h2 class="card-title">The Night Market</h2>
+                <p class="card-description">
+                  The massive concrete loading docks and trade floor of the wholesale produce market. Transformed after hours into a vibrant communal ground with late-night food, conversations, and spontaneous interventions.
+                </p>
+              </div>
+
+              <div class="card-sensory-specs">
+                <div class="spec-block">
+                  <span class="spec-label">Acoustics</span>
+                  <span class="spec-val">Open air concrete, lively crowd murmur</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Lighting</span>
+                  <span class="spec-val">Hanging festoon bulbs & work floodlights</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Materials</span>
+                  <span class="spec-val">Brushed concrete, corrugated zinc, timber</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Operating Hours</span>
+                  <span class="spec-val">20:00 — 05:00 (Both Nights)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-right">
+              <div>
+                <div class="lineup-heading">Spontaneous Interventions & Dub</div>
+                <div class="artists-list">
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">The Logistics Brass</div>
+                      <div class="artist-discipline">Deconstructed Street Fanfare</div>
+                    </div>
+                    <div class="artist-slot">20:45</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Crate Sessions</div>
+                      <div class="artist-discipline">Field Recordings & Vinyl Dub</div>
+                    </div>
+                    <div class="artist-slot">22:30</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Night Shift Sound</div>
+                      <div class="artist-discipline">Heavy Bass & Spoken Word</div>
+                    </div>
+                    <div class="artist-slot">00:30</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Midnight Kitchen Ensemble</div>
+                      <div class="artist-discipline">Live Acoustic Improvisation</div>
+                    </div>
+                    <div class="artist-slot">02:15</div>
+                  </div>
+                </div>
+              </div>
+              <a href="#tickets" class="explore-space-cta" style="text-decoration: none;">Reserve Space 03 Access</a>
+            </div>
+          </article>
+
+          <!-- Space 04: Printing Works -->
+          <article class="venue-chamber-card">
+            <div class="card-left">
+              <div>
+                <div class="card-eyebrow">
+                  <span>Dispatch 04</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Civic Layer: Communication</span>
+                </div>
+                <h2 class="card-title">The Printing Works</h2>
+                <p class="card-description">
+                  A newspaper printing press plant with multi-ton rotary presses preserved in place, narrow maintenance corridors, and paper roll archives. Dedicated to experimental cinema, 16mm film, and light projections.
+                </p>
+              </div>
+
+              <div class="card-sensory-specs">
+                <div class="spec-block">
+                  <span class="spec-label">Acoustics</span>
+                  <span class="spec-val">Muffled mechanical silence & paper damping</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Lighting</span>
+                  <span class="spec-val">Projector beams cutting through dark ink mist</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Materials</span>
+                  <span class="spec-val">Cast-iron machinery, paper rolls, ink</span>
+                </div>
+                <div class="spec-block">
+                  <span class="spec-label">Operating Hours</span>
+                  <span class="spec-val">21:00 — 04:00 (Both Nights)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-right">
+              <div>
+                <div class="lineup-heading">Moving Image & Projections</div>
+                <div class="artists-list">
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Chronicle 16mm</div>
+                      <div class="artist-discipline">Live Score to Archival Documentary</div>
+                    </div>
+                    <div class="artist-slot">21:15</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Offset Projections</div>
+                      <div class="artist-discipline">Multi-Channel Optical Sound</div>
+                    </div>
+                    <div class="artist-slot">23:00</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Typographic Ghost</div>
+                      <div class="artist-discipline">Kinetic Video & Mechanical Sound</div>
+                    </div>
+                    <div class="artist-slot">01:00</div>
+                  </div>
+                  <div class="artist-item">
+                    <div>
+                      <div class="artist-title">Rotary Epilogue</div>
+                      <div class="artist-discipline">Expanded Cinema & Light Sculpture</div>
+                    </div>
+                    <div class="artist-slot">02:45</div>
+                  </div>
+                </div>
+              </div>
+              <a href="#tickets" class="explore-space-cta" style="text-decoration: none;">Reserve Space 04 Access</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: 48-Hour Night-Shift Schedule -->
+    <section class="schedule-section" aria-label="Festival Schedule">
+      <div class="section-header">
+        <div>
+          <div class="hero-pretitle">The Typeset Timeline</div>
+          <h2 class="section-title">48-Hour Night Ledger</h2>
+        </div>
+        <div class="timeline-filter" role="tablist">
+          <button class="filter-btn active" data-day="1" role="tab" aria-selected="true">Night 01 · Friday</button>
+          <button class="filter-btn" data-day="2" role="tab" aria-selected="false">Night 02 · Saturday</button>
+        </div>
+      </div>
+
+      <div class="schedule-matrix" role="table">
+        <div class="matrix-cell matrix-header">Hour</div>
+        <div class="matrix-cell matrix-header">01 Tram Depot</div>
+        <div class="matrix-cell matrix-header">02 Municipal Baths</div>
+        <div class="matrix-cell matrix-header">03 Night Market</div>
+        <div class="matrix-cell matrix-header">04 Printing Works</div>
+
+        <div class="matrix-cell matrix-time">20:00 — 22:00</div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Doors Open / Warmup</div>
+          <div class="matrix-sub">Transit ambient</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Aqueous Horizon</div>
+          <div class="matrix-sub">Spatial hydrophones</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Logistics Brass</div>
+          <div class="matrix-sub">Opening fanfare & food</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Chronicle 16mm</div>
+          <div class="matrix-sub">Archival film projections</div>
+        </div>
+
+        <div class="matrix-cell matrix-time">22:00 — 01:00</div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Kattner & Siding</div>
+          <div class="matrix-sub">Live analog drums</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Ceramic Tides</div>
+          <div class="matrix-sub">Prepared piano echo</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Crate Sessions</div>
+          <div class="matrix-sub">Vinyl dub & discussions</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Offset Projections</div>
+          <div class="matrix-sub">Multi-channel optical sound</div>
+        </div>
+
+        <div class="matrix-cell matrix-time">01:00 — 04:00</div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Null Hypothesis</div>
+          <div class="matrix-sub">Heavy modular synth set</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Vocal Silt</div>
+          <div class="matrix-sub">Tape loops & drone</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Night Shift Sound</div>
+          <div class="matrix-sub">Sub-bass & late food</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Typographic Ghost</div>
+          <div class="matrix-sub">Expanded light sculpture</div>
+        </div>
+
+        <div class="matrix-cell matrix-time">04:00 — 06:00</div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Displaced Phase</div>
+          <div class="matrix-sub">Sub-bass till sunrise</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Submerged Sine</div>
+          <div class="matrix-sub">Quiet closing meditation</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Dawn Communal Tea</div>
+          <div class="matrix-sub">Produce floor handover</div>
+        </div>
+        <div class="matrix-cell">
+          <div class="matrix-act">Press Closes</div>
+          <div class="matrix-sub">Exhibition archive reset</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: The Embossed Ticket Pass -->
+    <section class="tickets-section" id="tickets" aria-label="Ticket Pass Selection">
+      <div class="hero-pretitle">The Official Admit-One Pass</div>
+      <h2 class="section-title">Secure Your Docket</h2>
+      <p style="color: var(--text-dim); margin-top: 12px; text-align: center; max-width: 500px;">
+        One pass unlocks all four locations across the two nights. No VIP zones. No backstage separation.
+      </p>
+
+      <div class="ticket-pass-artifact">
+        <div class="pass-header">
+          <div class="pass-badge">Official Entry Docket · 2026</div>
+          <div class="pass-barcode" aria-hidden="true">||| | ||||| || ||| |||||| | |||</div>
+        </div>
+
+        <div class="pass-body">
+          <div>
+            <div class="pass-title">48-Hour Full Access Pass</div>
+            <p style="color: var(--text-dim); font-size: 14px; line-height: 1.5;">
+              Grants unrestricted entry to The Old Tram Depot, The Municipal Baths, The Night Market, and The Printing Works for both Friday and Saturday nights (20:00 through 06:00).
+            </p>
+
+            <div class="pass-tiers">
+              <div class="tier-option active" data-tier-name="48-Hour Full Access Pass" data-tier-price="€48.00" tabindex="0" role="button">
+                <div>
+                  <strong>Tier 02 · 48-Hour All-Access Pass</strong>
+                  <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">Tier 01 Sold Out · Limited allocation remaining</div>
+                </div>
+                <span style="font-family: var(--font-mono); font-weight: 700; color: var(--tungsten);">€48.00</span>
+              </div>
+
+              <div class="tier-option" data-tier-name="Single Night Pass (Friday)" data-tier-price="€28.00" tabindex="0" role="button">
+                <div>
+                  <strong>Single Night Pass · Friday Only</strong>
+                  <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">Valid Friday 20:00 through Saturday 06:00</div>
+                </div>
+                <span style="font-family: var(--font-mono); font-weight: 700; color: var(--tungsten);">€28.00</span>
+              </div>
+
+              <div class="tier-option" data-tier-name="Single Night Pass (Saturday)" data-tier-price="€28.00" tabindex="0" role="button">
+                <div>
+                  <strong>Single Night Pass · Saturday Only</strong>
+                  <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">Valid Saturday 20:00 through Sunday 06:00</div>
+                </div>
+                <span style="font-family: var(--font-mono); font-weight: 700; color: var(--tungsten);">€28.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; justify-content: space-between; border-left: 1px dashed var(--border); padding-left: 36px;">
+            <div class="hero-spec">
+              <div><strong>Format:</strong> Digital Contactless Entry</div>
+              <div><strong>Capacity:</strong> 84% Claimed</div>
+              <div><strong>Transferable:</strong> Yes (Until 24h prior)</div>
+              <div><strong>Age Restriction:</strong> 18+</div>
+            </div>
+
+            <div>
+              <button class="tier-btn-primary" id="passActionBtn">
+                Purchase Pass · €48.00
+              </button>
+              <div style="font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); text-align: center; margin-top: 10px;">
+                ENCRYPTED CHECKOUT · IMMEDIATE WALLET PASS
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Persistent Bottom Telemetry Rail -->
+  <footer class="bottom-rail">
+    <div class="rail-data">
+      <div>ACCESS: <span class="rail-val">48-HR ALL-ACCESS</span></div>
+      <div>CAPACITY: <span class="rail-val" style="color: var(--tungsten);">84% CLAIMED</span></div>
+      <div>CURRENT TIER: <span class="rail-val">TIER 02 · €48</span></div>
+    </div>
+
+    <div>
+      <a href="#tickets" class="rail-cta-btn" style="text-decoration: none; display: inline-block;">Get 48-Hr Pass · €48</a>
+    </div>
+  </footer>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="modalTierName">
+    <div class="modal-content">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      <div class="hero-pretitle">Official Checkout Docket</div>
+      <h3 id="modalTierName" style="font-family: var(--font-display); font-size: 26px; text-transform: uppercase; margin: 8px 0;">48-Hour Full Access Pass</h3>
+      <div id="modalTierPrice" style="font-family: var(--font-mono); font-size: 22px; color: var(--tungsten); font-weight: 700; margin-bottom: 20px;">€48.00</div>
+      
+      <p style="color: var(--text-dim); font-size: 14px; line-height: 1.5; margin-bottom: 24px;">
+        Unlocks all four locations across the river-and-rail city for Friday and Saturday nights. Your digital pass will be delivered instantly with entry QR credentials.
+      </p>
+
+      <form onsubmit="event.preventDefault(); alert('Demo Order Confirmed: Your OFF HOURS 48-Hour Pass has been generated.'); document.getElementById('checkoutModal').classList.remove('open');">
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+          <input type="text" placeholder="Attendee Full Name" required 
+                 style="background: #07080a; border: 1px solid var(--border); color: var(--text); padding: 12px; font-family: var(--font-heading); font-size: 14px;">
+          <input type="email" placeholder="Email Address for Pass Delivery" required 
+                 style="background: #07080a; border: 1px solid var(--border); color: var(--text); padding: 12px; font-family: var(--font-heading); font-size: 14px;">
+        </div>
+        <button type="submit" class="tier-btn-primary" style="margin-top: 0;">
+          Confirm & Issue Digital Pass
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Application Controller -->
+  <script src="src/scripts/app.js"></script>
+</body>
+</html>
