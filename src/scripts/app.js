@@ -476,6 +476,26 @@ function initGSAPTimelines(lenis) {
     if (document.fonts) {
       document.fonts.ready.then(() => ScrollTrigger.refresh());
     }
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+
+    // Synchronize ScrollTrigger on chamber image completion to prevent dimension shift
+    const chamberImgs = document.querySelectorAll('.media-parallax-img');
+    let loadedImgs = 0;
+    chamberImgs.forEach((img) => {
+      if (img.complete) {
+        loadedImgs++;
+      } else {
+        img.addEventListener('load', () => {
+          loadedImgs++;
+          if (loadedImgs === chamberImgs.length && typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+          }
+        });
+        img.addEventListener('error', () => {
+          if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+        });
+      }
+    });
   }
 
   // 5.1 Shell Wordmark Underline Reveal
@@ -612,21 +632,27 @@ function initGSAPTimelines(lenis) {
           }
         });
 
-        panels.forEach((panel) => {
+        panels.forEach((panel, i) => {
           const img = panel.querySelector('.media-parallax-img');
           if (img) {
+            // First panel is already in viewport when pin begins (x = 0)
+            // Middle panels enter from right and exit to left
+            // Last panel enters from right and rests when strip reaches end
+            const startPos = i === 0 ? 'left left' : 'left right';
+            const endPos = i === panels.length - 1 ? 'right right' : 'right left';
+
             gsap.fromTo(
               img,
-              { xPercent: 12, scale: 1.15 },
+              { xPercent: 6, scale: 1.14 },
               {
-                xPercent: -12,
+                xPercent: -6,
                 scale: 1.05,
                 ease: 'none',
                 scrollTrigger: {
                   trigger: panel,
                   containerAnimation: railTl,
-                  start: 'left right',
-                  end: 'right left',
+                  start: startPos,
+                  end: endPos,
                   scrub: true
                 }
               }

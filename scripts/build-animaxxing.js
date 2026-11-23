@@ -178,362 +178,368 @@ ${css}
     </section>
 
     <!-- ======================================================================
-         12-COLUMN CHAPTER LAYOUT WITH STICKY CHAPTERS RAIL
+         SCENE 02: THE NOCTURNAL ATLAS (ROOT FULL-WIDTH VIEWPORT DESCENT)
+         ====================================================================== -->
+    <section class="atlas-pin-wrapper" id="atlasPin" aria-label="The Nocturnal Atlas">
+      <div class="atlas-viewport" id="atlas">
+        
+        <!-- HUD Telemetry Overlay -->
+        <div class="atlas-hud">
+          <div class="atlas-hud-info">
+            <span class="mono-label">NOCTURNAL ATLAS · RECONNAISSANCE</span>
+            <span class="mono-note">Coordinates: 53°32′N 09°59′E · River &amp; Rail Corridor</span>
+            <span class="mono-note">Depth: -14m Chamber Datum · Active Civic Nodes: 04</span>
+          </div>
+          <div class="atlas-hud-progress">
+            <div class="atlas-hud-fill" id="atlasHudFill"></div>
+          </div>
+        </div>
+
+        <!-- Multi-Plane Depth Schematic -->
+        <div class="atlas-depth-plane">
+          <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
+
+          <div class="atlas-layer-schematic" id="atlasSchematicMap">
+            <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River & Rail Map">
+              <!-- River Spine in Gruvbox Teal -->
+              <path class="river" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                    stroke-width="32" stroke-linecap="round" fill="none" opacity="0.2"/>
+              <path class="river" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
+                    stroke-width="8" stroke-linecap="round" fill="none" opacity="0.7"/>
+
+              <!-- Rail Freight Sidings -->
+              <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="10 8" fill="none" opacity="0.35"/>
+              <path d="M450,420 L700,700 L1300,700" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.25"/>
+              <path d="M200,80 L400,280 L900,240" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.25"/>
+
+              <!-- Reference Grid Lines -->
+              <line x1="0" y1="200" x2="1400" y2="200" stroke="var(--border-hairline)" stroke-width="1"/>
+              <line x1="0" y1="400" x2="1400" y2="400" stroke="var(--border-hairline)" stroke-width="1"/>
+              <line x1="0" y1="600" x2="1400" y2="600" stroke="var(--border-hairline)" stroke-width="1"/>
+              <line x1="350" y1="0" x2="350" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
+              <line x1="700" y1="0" x2="700" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
+              <line x1="1050" y1="0" x2="1050" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
+
+              <!-- Four Civic Nodes in Terracotta -->
+              <g class="map-node" transform="translate(380, 420)">
+                <circle class="glow" r="28" />
+                <circle r="7.5" fill="var(--tungsten)" />
+                <circle r="2.5" fill="#fdfcf9" />
+                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">01 TRAM DEPOT</text>
+                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">TRANSIT · 108dB SUB-BASS</text>
+              </g>
+
+              <g class="map-node" transform="translate(760, 310)">
+                <circle class="glow" r="28" />
+                <circle r="7.5" fill="var(--tungsten)" />
+                <circle r="2.5" fill="#fdfcf9" />
+                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
+                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">RECREATION · 7.2s ECHO</text>
+              </g>
+
+              <g class="map-node" transform="translate(680, 680)">
+                <circle class="glow" r="28" />
+                <circle r="7.5" fill="var(--tungsten)" />
+                <circle r="2.5" fill="#fdfcf9" />
+                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">03 NIGHT MARKET</text>
+                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMERCE · SOCIAL HUB</text>
+              </g>
+
+              <g class="map-node" transform="translate(1080, 480)">
+                <circle class="glow" r="28" />
+                <circle r="7.5" fill="var(--tungsten)" />
+                <circle r="2.5" fill="#fdfcf9" />
+                <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">04 PRINTING WORKS</text>
+                <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMUNICATION · 35MM CINEMA</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCENE 03: FOUR CIVIC SPACES (ROOT FULL-WIDTH PINNED LATERAL RAIL)
+         ====================================================================== -->
+    <section class="venues-pin-wrapper" id="venuesPin" aria-label="The Four Spaces Dossier">
+      <div class="venues-track-viewport">
+        <div class="venues-horizontal-strip" id="venuesStrip">
+
+          <!-- CHAMBER 01: THE OLD TRAM DEPOT -->
+          <article class="venue-chamber-panel">
+            <div class="chamber-editorial-side">
+              <div>
+                <div class="chamber-eyebrow-strip">
+                  <span>DISPATCH 01</span>
+                  <span>·</span>
+                  <span>CIVIC LAYER: TRANSIT</span>
+                  <span>·</span>
+                  <span>CAPACITY: 800</span>
+                </div>
+
+                <h2 class="chamber-title-massive">01 / THE OLD TRAM DEPOT</h2>
+
+                <p class="chamber-description">
+                  A monumental 1912 maintenance hangar with exposed steel riveted trusses, concrete oil-stained pits, and the original municipal transit track turnouts. Intimate crowd proximity meets visceral sub-bass resonance.
+                </p>
+
+                <div class="acoustic-signature-card">
+                  <div class="acoustic-signature-info">
+                    <span class="label">Acoustic Signature</span>
+                    <span class="val">108 dB Peak Resonance · 45Hz Low Cut</span>
+                  </div>
+                  <div class="acoustic-waveform" aria-hidden="true">
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sensory-specs-table">
+                <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Raw concrete reverb, sub-bass resonance</span></div>
+                <div class="spec-entry"><span class="spec-k">Lighting</span><span class="spec-v">Low sodium pools, single beam sweep</span></div>
+                <div class="spec-entry"><span class="spec-k">Materials</span><span class="spec-v">Rivet steel, concrete, rail switches</span></div>
+                <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">21:00 — 05:30 (Both Nights)</span></div>
+              </div>
+            </div>
+
+            <div class="chamber-media-side">
+              <div class="media-frame-clipped">
+                <img class="media-parallax-img" 
+                     width="1200" height="800"
+                     loading="eager" decoding="async"
+                     src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80" 
+                     alt="Monochrome Industrial Hangar Interior with Concrete Columns"
+                     onerror="this.onerror=null; this.style.opacity='0';" />
+              </div>
+              <div class="media-caption-strip">
+                <span>SECTOR: SOUTHERN SIDINGS</span>
+                <span class="figure">53°32′14″N 09°59′02″E</span>
+              </div>
+              <div class="chamber-curation-list">
+                <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
+                <div class="artist-row"><span class="name">Kattner &amp; Siding Ensemble</span><span class="discipline">Analog Percussion</span><span class="time">22:30</span></div>
+                <div class="artist-row"><span class="name">Resonance Corridor</span><span class="discipline">Post-Punk Trio</span><span class="time">00:45</span></div>
+                <div class="artist-row"><span class="name">Null Hypothesis</span><span class="discipline">Modular Feedback</span><span class="time">02:30</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CHAMBER 02: THE MUNICIPAL BATHS -->
+          <article class="venue-chamber-panel">
+            <div class="chamber-editorial-side">
+              <div>
+                <div class="chamber-eyebrow-strip">
+                  <span>DISPATCH 02</span>
+                  <span>·</span>
+                  <span>CIVIC LAYER: RECREATION</span>
+                  <span>·</span>
+                  <span>CAPACITY: 450</span>
+                </div>
+
+                <h2 class="chamber-title-massive">02 / THE MUNICIPAL BATHS</h2>
+
+                <p class="chamber-description">
+                  Drained 1928 ceramic-tiled hydrotherapy natatorium with barrel-vaulted skylights, dry mosaic diving wells, and copper piping conduits. A cathedral for quadraphonic ambient diffusion and microtonal voice.
+                </p>
+
+                <div class="acoustic-signature-card">
+                  <div class="acoustic-signature-info">
+                    <span class="label">Acoustic Signature</span>
+                    <span class="val">7.2s Natural Ceramic Reverb Decay</span>
+                  </div>
+                  <div class="acoustic-waveform" aria-hidden="true">
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sensory-specs-table">
+                <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Extreme tiled reverberation, cavernous slapback</span></div>
+                <div class="spec-entry"><span class="spec-k">Lighting</span><span class="spec-v">Filtered water refractions, mercury vapour</span></div>
+                <div class="spec-entry"><span class="spec-k">Materials</span><span class="spec-v">Glazed porcelain tile, brass drains, mosaic</span></div>
+                <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">20:30 — 05:00 (Both Nights)</span></div>
+              </div>
+            </div>
+
+            <div class="chamber-media-side">
+              <div class="media-frame-clipped">
+                <img class="media-parallax-img" 
+                     width="1200" height="800"
+                     loading="eager" decoding="async"
+                     src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1200&q=80" 
+                     alt="Drained Tiled Bathhouse Interior with Vaulted Ceilings"
+                     onerror="this.onerror=null; this.style.opacity='0';" />
+              </div>
+              <div class="media-caption-strip">
+                <span>SECTOR: DEEP BASIN BASINWELL</span>
+                <span class="figure">53°32′41″N 09°59′34″E</span>
+              </div>
+              <div class="chamber-curation-list">
+                <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
+                <div class="artist-row"><span class="name">Vapour Phase</span><span class="discipline">Hydro-Tape Loops</span><span class="time">20:30</span></div>
+                <div class="artist-row"><span class="name">Submerged Tones</span><span class="discipline">Water Sine Drift</span><span class="time">03:30</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CHAMBER 03: THE NIGHT MARKET -->
+          <article class="venue-chamber-panel">
+            <div class="chamber-editorial-side">
+              <div>
+                <div class="chamber-eyebrow-strip">
+                  <span>DISPATCH 03</span>
+                  <span>·</span>
+                  <span>CIVIC LAYER: COMMERCE</span>
+                  <span>·</span>
+                  <span>CAPACITY: 1200</span>
+                </div>
+
+                <h2 class="chamber-title-massive">03 / THE NIGHT MARKET</h2>
+
+                <p class="chamber-description">
+                  A cavernous iron-and-glass transit exchange hall active continuously through the dark hours. The social vortex of the festival hosting regional street kitchens, vinyl stalls, and modular drone installations.
+                </p>
+
+                <div class="acoustic-signature-card">
+                  <div class="acoustic-signature-info">
+                    <span class="label">Acoustic Signature</span>
+                    <span class="val">Wide Stereo Dispersion · Warm Air Absorption</span>
+                  </div>
+                  <div class="acoustic-waveform" aria-hidden="true">
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sensory-specs-table">
+                <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Open air diffusion, dense crowd murmur</span></div>
+                <div class="spec-entry"><span class="spec-k">Atmosphere</span><span class="spec-v">Wood smoke, fermented citrus, damp rain</span></div>
+                <div class="spec-entry"><span class="spec-k">Curation</span><span class="spec-v">Independent micro-stalls &amp; sound stations</span></div>
+                <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">20:00 — 06:00 (All Night)</span></div>
+              </div>
+            </div>
+
+            <div class="chamber-media-side">
+              <div class="media-frame-clipped">
+                <img class="media-parallax-img" 
+                     width="1200" height="800"
+                     loading="eager" decoding="async"
+                     src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80" 
+                     alt="Nocturnal City Market with Lantern Glow and Shadow Figures"
+                     onerror="this.onerror=null; this.style.opacity='0';" />
+              </div>
+              <div class="media-caption-strip">
+                <span>SECTOR: VIADUCT CONCOURSE</span>
+                <span class="figure">53°31′58″N 09°58′48″E</span>
+              </div>
+              <div class="chamber-curation-list">
+                <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
+                <div class="artist-row"><span class="name">Market Drone Trio</span><span class="discipline">Accordion &amp; Harmonium</span><span class="time">23:15</span></div>
+                <div class="artist-row"><span class="name">Dawn Chorus Group</span><span class="discipline">Acoustic Welcome</span><span class="time">05:00</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CHAMBER 04: THE OLD PRINTING WORKS -->
+          <article class="venue-chamber-panel">
+            <div class="chamber-editorial-side">
+              <div>
+                <div class="chamber-eyebrow-strip">
+                  <span>DISPATCH 04</span>
+                  <span>·</span>
+                  <span>CIVIC LAYER: COMMUNICATION</span>
+                  <span>·</span>
+                  <span>CAPACITY: 500</span>
+                </div>
+
+                <h2 class="chamber-title-massive">04 / THE OLD PRINTWORKS</h2>
+
+                <p class="chamber-description">
+                  A former newspaper press warehouse with double-height ceiling voids, heavy linotype cast-iron bedplates, and darkroom chambers. Dedicated to expanded cinema, dual 35mm optical projections, and live mechanical tape loop composition.
+                </p>
+
+                <div class="acoustic-signature-card">
+                  <div class="acoustic-signature-info">
+                    <span class="label">Acoustic Signature</span>
+                    <span class="val">Dry Absorption · Heavy Machinery Rhythmic Damp</span>
+                  </div>
+                  <div class="acoustic-waveform" aria-hidden="true">
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                    <div class="waveform-bar"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sensory-specs-table">
+                <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Dry industrial damp, high mechanical clarity</span></div>
+                <div class="spec-entry"><span class="spec-k">Visual Media</span><span class="spec-v">Dual 35mm celluloid projections, tungsten lamps</span></div>
+                <div class="spec-entry"><span class="spec-k">Materials</span><span class="spec-v">Letterpress machinery, darkroom masonry</span></div>
+                <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">21:30 — 05:00 (Both Nights)</span></div>
+              </div>
+            </div>
+
+            <div class="chamber-media-side">
+              <div class="media-frame-clipped">
+                <img class="media-parallax-img" 
+                     width="1200" height="800"
+                     loading="eager" decoding="async"
+                     src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80" 
+                     alt="Monochrome Industrial Printing Facility with Riveted Columns"
+                     onerror="this.onerror=null; this.style.opacity='0';" />
+              </div>
+              <div class="media-caption-strip">
+                <span>SECTOR: ROTARY PRESS ROOM</span>
+                <span class="figure">53°32′29″N 10°00′12″E</span>
+              </div>
+              <div class="chamber-curation-list">
+                <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
+                <div class="artist-row"><span class="name">Celluloid Dispersal</span><span class="discipline">35mm Projection</span><span class="time">23:30</span></div>
+                <div class="artist-row"><span class="name">Rotational Press Audio</span><span class="discipline">Tape Loop Rig</span><span class="time">21:00</span></div>
+                <div class="artist-row"><span class="name">Monotype Live Assembly</span><span class="discipline">Typewriter Noise</span><span class="time">01:30</span></div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         EDITORIAL CHAPTER SECTIONS: TIMETABLE & PASSES (IN 12-COL CONTAINER)
          ====================================================================== -->
     <div class="chapter-container">
       
       <!-- Sticky Vertical Chapters Rail -->
       <aside class="chapters-rail" aria-label="Chapter Rail">
-        <a href="#atlas" class="rail-link" aria-current="page">01 / ATLAS</a>
-        <a href="#venuesPin" class="rail-link">02 / SPACES</a>
-        <a href="#schedule" class="rail-link">03 / TIMETABLE</a>
+        <a href="#schedule" class="rail-link" aria-current="page">03 / TIMETABLE</a>
         <a href="#passes" class="rail-link">04 / PASSES</a>
       </aside>
 
       <div class="chapter-body">
-
-        <!-- ======================================================================
-             SCENE 02: THE NOCTURNAL ATLAS (ARCHITECTURAL MONOCHROME SCHEMATIC)
-             ====================================================================== -->
-        <section class="atlas-pin-wrapper" id="atlasPin" aria-label="The Nocturnal Atlas">
-          <div class="atlas-viewport" id="atlas">
-            
-            <!-- HUD Telemetry Overlay -->
-            <div class="atlas-hud">
-              <div class="atlas-hud-info">
-                <span class="mono-label">NOCTURNAL ATLAS · RECONNAISSANCE</span>
-                <span class="mono-note">Coordinates: 53°32′N 09°59′E · River &amp; Rail Corridor</span>
-                <span class="mono-note">Depth: -14m Chamber Datum · Active Civic Nodes: 04</span>
-              </div>
-              <div class="atlas-hud-progress">
-                <div class="atlas-hud-fill" id="atlasHudFill"></div>
-              </div>
-            </div>
-
-            <!-- Multi-Plane Depth Schematic -->
-            <div class="atlas-depth-plane">
-              <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
-
-              <div class="atlas-layer-schematic" id="atlasSchematicMap">
-                <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River & Rail Map">
-                  <!-- River Spine in Gruvbox Teal -->
-                  <path class="river" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                        stroke-width="32" stroke-linecap="round" fill="none" opacity="0.2"/>
-                  <path class="river" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
-                        stroke-width="8" stroke-linecap="round" fill="none" opacity="0.7"/>
-
-                  <!-- Rail Freight Sidings -->
-                  <path d="M50,850 L450,420 L1050,420 L1450,80" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="10 8" fill="none" opacity="0.35"/>
-                  <path d="M450,420 L700,700 L1300,700" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.25"/>
-                  <path d="M200,80 L400,280 L900,240" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.25"/>
-
-                  <!-- Reference Grid Lines -->
-                  <line x1="0" y1="200" x2="1400" y2="200" stroke="var(--border-hairline)" stroke-width="1"/>
-                  <line x1="0" y1="400" x2="1400" y2="400" stroke="var(--border-hairline)" stroke-width="1"/>
-                  <line x1="0" y1="600" x2="1400" y2="600" stroke="var(--border-hairline)" stroke-width="1"/>
-                  <line x1="350" y1="0" x2="350" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
-                  <line x1="700" y1="0" x2="700" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
-                  <line x1="1050" y1="0" x2="1050" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
-
-                  <!-- Four Civic Nodes in Terracotta -->
-                  <g class="map-node" transform="translate(380, 420)">
-                    <circle class="glow" r="28" />
-                    <circle r="7.5" fill="var(--tungsten)" />
-                    <circle r="2.5" fill="#fdfcf9" />
-                    <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">01 TRAM DEPOT</text>
-                    <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">TRANSIT · 108dB SUB-BASS</text>
-                  </g>
-
-                  <g class="map-node" transform="translate(760, 310)">
-                    <circle class="glow" r="28" />
-                    <circle r="7.5" fill="var(--tungsten)" />
-                    <circle r="2.5" fill="#fdfcf9" />
-                    <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">02 MUNICIPAL BATHS</text>
-                    <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">RECREATION · 7.2s ECHO</text>
-                  </g>
-
-                  <g class="map-node" transform="translate(680, 680)">
-                    <circle class="glow" r="28" />
-                    <circle r="7.5" fill="var(--tungsten)" />
-                    <circle r="2.5" fill="#fdfcf9" />
-                    <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">03 NIGHT MARKET</text>
-                    <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMERCE · SOCIAL HUB</text>
-                  </g>
-
-                  <g class="map-node" transform="translate(1080, 480)">
-                    <circle class="glow" r="28" />
-                    <circle r="7.5" fill="var(--tungsten)" />
-                    <circle r="2.5" fill="#fdfcf9" />
-                    <text x="16" y="5" fill="var(--text)" font-family="JetBrains Mono" font-size="11" font-weight="700" letter-spacing="0.1em">04 PRINTING WORKS</text>
-                    <text x="16" y="18" fill="var(--tungsten)" font-family="JetBrains Mono" font-size="9" letter-spacing="0.14em">COMMUNICATION · 35MM CINEMA</text>
-                  </g>
-                </svg>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        <!-- ======================================================================
-             SCENE 03: FOUR CIVIC SPACES (TIGHT PINNED LATERAL RAIL - ZERO DEAD SCROLL)
-             ====================================================================== -->
-        <section class="venues-pin-wrapper" id="venuesPin" aria-label="The Four Spaces Dossier">
-          <div class="venues-track-viewport">
-            <div class="venues-horizontal-strip" id="venuesStrip">
-
-              <!-- CHAMBER 01: THE OLD TRAM DEPOT -->
-              <article class="venue-chamber-panel">
-                <div class="chamber-editorial-side">
-                  <div>
-                    <div class="chamber-eyebrow-strip">
-                      <span>DISPATCH 01</span>
-                      <span>·</span>
-                      <span>CIVIC LAYER: TRANSIT</span>
-                      <span>·</span>
-                      <span>CAPACITY: 800</span>
-                    </div>
-
-                    <h2 class="chamber-title-massive">01 / THE OLD TRAM DEPOT</h2>
-
-                    <p class="chamber-description">
-                      A monumental 1912 maintenance hangar with exposed steel riveted trusses, concrete oil-stained pits, and the original municipal transit track turnouts. Intimate crowd proximity meets visceral sub-bass resonance.
-                    </p>
-
-                    <div class="acoustic-signature-card">
-                      <div class="acoustic-signature-info">
-                        <span class="label">Acoustic Signature</span>
-                        <span class="val">108 dB Peak Resonance · 45Hz Low Cut</span>
-                      </div>
-                      <div class="acoustic-waveform" aria-hidden="true">
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="sensory-specs-table">
-                    <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Raw concrete reverb, sub-bass resonance</span></div>
-                    <div class="spec-entry"><span class="spec-k">Lighting</span><span class="spec-v">Low sodium pools, single beam sweep</span></div>
-                    <div class="spec-entry"><span class="spec-k">Materials</span><span class="spec-v">Rivet steel, concrete, rail switches</span></div>
-                    <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">21:00 — 05:30 (Both Nights)</span></div>
-                  </div>
-                </div>
-
-                <div class="chamber-media-side">
-                  <div class="media-frame-clipped">
-                    <img class="media-parallax-img" 
-                         src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80" 
-                         alt="Monochrome Industrial Hangar Interior with Concrete Columns"
-                         loading="lazy" />
-                  </div>
-                  <div class="media-caption-strip">
-                    <span>SECTOR: SOUTHERN SIDINGS</span>
-                    <span class="figure">53°32′14″N 09°59′02″E</span>
-                  </div>
-                  <div class="chamber-curation-list">
-                    <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
-                    <div class="artist-row"><span class="name">Kattner &amp; Siding Ensemble</span><span class="discipline">Analog Percussion</span><span class="time">22:30</span></div>
-                    <div class="artist-row"><span class="name">Resonance Corridor</span><span class="discipline">Post-Punk Trio</span><span class="time">00:45</span></div>
-                    <div class="artist-row"><span class="name">Null Hypothesis</span><span class="discipline">Modular Feedback</span><span class="time">02:30</span></div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- CHAMBER 02: THE MUNICIPAL BATHS -->
-              <article class="venue-chamber-panel">
-                <div class="chamber-editorial-side">
-                  <div>
-                    <div class="chamber-eyebrow-strip">
-                      <span>DISPATCH 02</span>
-                      <span>·</span>
-                      <span>CIVIC LAYER: RECREATION</span>
-                      <span>·</span>
-                      <span>CAPACITY: 450</span>
-                    </div>
-
-                    <h2 class="chamber-title-massive">02 / THE MUNICIPAL BATHS</h2>
-
-                    <p class="chamber-description">
-                      Drained 1928 ceramic-tiled hydrotherapy natatorium with barrel-vaulted skylights, dry mosaic diving wells, and copper piping conduits. A cathedral for quadraphonic ambient diffusion and microtonal voice.
-                    </p>
-
-                    <div class="acoustic-signature-card">
-                      <div class="acoustic-signature-info">
-                        <span class="label">Acoustic Signature</span>
-                        <span class="val">7.2s Natural Ceramic Reverb Decay</span>
-                      </div>
-                      <div class="acoustic-waveform" aria-hidden="true">
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="sensory-specs-table">
-                    <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Extreme tiled reverberation, cavernous slapback</span></div>
-                    <div class="spec-entry"><span class="spec-k">Lighting</span><span class="spec-v">Filtered water refractions, mercury vapour</span></div>
-                    <div class="spec-entry"><span class="spec-k">Materials</span><span class="spec-v">Glazed porcelain tile, brass drains, mosaic</span></div>
-                    <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">20:30 — 05:00 (Both Nights)</span></div>
-                  </div>
-                </div>
-
-                <div class="chamber-media-side">
-                  <div class="media-frame-clipped">
-                    <img class="media-parallax-img" 
-                         src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1200&q=80" 
-                         alt="Drained Tiled Bathhouse Interior with Vaulted Ceilings"
-                         loading="lazy" />
-                  </div>
-                  <div class="media-caption-strip">
-                    <span>SECTOR: DEEP BASIN BASINWELL</span>
-                    <span class="figure">53°32′41″N 09°59′34″E</span>
-                  </div>
-                  <div class="chamber-curation-list">
-                    <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
-                    <div class="artist-row"><span class="name">Vapour Phase</span><span class="discipline">Hydro-Tape Loops</span><span class="time">20:30</span></div>
-                    <div class="artist-row"><span class="name">Submerged Tones</span><span class="discipline">Water Sine Drift</span><span class="time">03:30</span></div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- CHAMBER 03: THE NIGHT MARKET -->
-              <article class="venue-chamber-panel">
-                <div class="chamber-editorial-side">
-                  <div>
-                    <div class="chamber-eyebrow-strip">
-                      <span>DISPATCH 03</span>
-                      <span>·</span>
-                      <span>CIVIC LAYER: COMMERCE</span>
-                      <span>·</span>
-                      <span>CAPACITY: 1200</span>
-                    </div>
-
-                    <h2 class="chamber-title-massive">03 / THE NIGHT MARKET</h2>
-
-                    <p class="chamber-description">
-                      A cavernous iron-and-glass transit exchange hall active continuously through the dark hours. The social vortex of the festival hosting regional street kitchens, vinyl stalls, and modular drone installations.
-                    </p>
-
-                    <div class="acoustic-signature-card">
-                      <div class="acoustic-signature-info">
-                        <span class="label">Acoustic Signature</span>
-                        <span class="val">Wide Stereo Dispersion · Warm Air Absorption</span>
-                      </div>
-                      <div class="acoustic-waveform" aria-hidden="true">
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="sensory-specs-table">
-                    <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Open air diffusion, dense crowd murmur</span></div>
-                    <div class="spec-entry"><span class="spec-k">Atmosphere</span><span class="spec-v">Wood smoke, fermented citrus, damp rain</span></div>
-                    <div class="spec-entry"><span class="spec-k">Curation</span><span class="spec-v">Independent micro-stalls &amp; sound stations</span></div>
-                    <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">20:00 — 06:00 (All Night)</span></div>
-                  </div>
-                </div>
-
-                <div class="chamber-media-side">
-                  <div class="media-frame-clipped">
-                    <img class="media-parallax-img" 
-                         src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80" 
-                         alt="Nocturnal City Market with Lantern Glow and Shadow Figures"
-                         loading="lazy" />
-                  </div>
-                  <div class="media-caption-strip">
-                    <span>SECTOR: VIADUCT CONCOURSE</span>
-                    <span class="figure">53°31′58″N 09°58′48″E</span>
-                  </div>
-                  <div class="chamber-curation-list">
-                    <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
-                    <div class="artist-row"><span class="name">Market Drone Trio</span><span class="discipline">Accordion &amp; Harmonium</span><span class="time">23:15</span></div>
-                    <div class="artist-row"><span class="name">Dawn Chorus Group</span><span class="discipline">Acoustic Welcome</span><span class="time">05:00</span></div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- CHAMBER 04: THE OLD PRINTING WORKS -->
-              <article class="venue-chamber-panel">
-                <div class="chamber-editorial-side">
-                  <div>
-                    <div class="chamber-eyebrow-strip">
-                      <span>DISPATCH 04</span>
-                      <span>·</span>
-                      <span>CIVIC LAYER: COMMUNICATION</span>
-                      <span>·</span>
-                      <span>CAPACITY: 500</span>
-                    </div>
-
-                    <h2 class="chamber-title-massive">04 / THE OLD PRINTWORKS</h2>
-
-                    <p class="chamber-description">
-                      A former newspaper press warehouse with double-height ceiling voids, heavy linotype cast-iron bedplates, and darkroom chambers. Dedicated to expanded cinema, dual 35mm optical projections, and live mechanical tape loop composition.
-                    </p>
-
-                    <div class="acoustic-signature-card">
-                      <div class="acoustic-signature-info">
-                        <span class="label">Acoustic Signature</span>
-                        <span class="val">Dry Absorption · Heavy Machinery Rhythmic Damp</span>
-                      </div>
-                      <div class="acoustic-waveform" aria-hidden="true">
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                        <div class="waveform-bar"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="sensory-specs-table">
-                    <div class="spec-entry"><span class="spec-k">Acoustics</span><span class="spec-v">Dry industrial damp, high mechanical clarity</span></div>
-                    <div class="spec-entry"><span class="spec-k">Visual Media</span><span class="spec-v">Dual 35mm celluloid projections, tungsten lamps</span></div>
-                    <div class="spec-entry"><span class="spec-k">Materials</span><span class="spec-v">Letterpress machinery, darkroom masonry</span></div>
-                    <div class="spec-entry"><span class="spec-k">Hours</span><span class="spec-v">21:30 — 05:00 (Both Nights)</span></div>
-                  </div>
-                </div>
-
-                <div class="chamber-media-side">
-                  <div class="media-frame-clipped">
-                    <img class="media-parallax-img" 
-                         src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80" 
-                         alt="Monochrome Industrial Printing Facility with Riveted Columns"
-                         loading="lazy" />
-                  </div>
-                  <div class="media-caption-strip">
-                    <span>SECTOR: ROTARY PRESS ROOM</span>
-                    <span class="figure">53°32′29″N 10°00′12″E</span>
-                  </div>
-                  <div class="chamber-curation-list">
-                    <div class="curation-title">FEATURED ARTISTS &amp; SESSIONS</div>
-                    <div class="artist-row"><span class="name">Celluloid Dispersal</span><span class="discipline">35mm Projection</span><span class="time">23:30</span></div>
-                    <div class="artist-row"><span class="name">Rotational Press Audio</span><span class="discipline">Tape Loop Rig</span><span class="time">21:00</span></div>
-                    <div class="artist-row"><span class="name">Monotype Live Assembly</span><span class="discipline">Typewriter Noise</span><span class="time">01:30</span></div>
-                  </div>
-                </div>
-              </article>
-
-            </div>
-          </div>
-        </section>
 
         <!-- ======================================================================
              SCENE 04: SCHEDULE (HAIRLINE-RULED LEDGER TABLE)
@@ -790,4 +796,4 @@ ${js}
 `;
 
 fs.writeFileSync(indexPath, htmlContent, 'utf8');
-console.log('Successfully generated Gruvbox Animaxxed index.html!');
+console.log('Successfully generated clean full-width pinned index.html!');
