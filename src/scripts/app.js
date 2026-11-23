@@ -428,25 +428,26 @@ function initGSAPTimelines(lenis) {
   // 9.3 Responsive MatchMedia Setup (Official GSAP Responsive Pattern)
   const mm = gsap.matchMedia();
 
-  // DESKTOP: Horizontal Pinned Parallax Rail
+  // DESKTOP: Horizontal Pinned Parallax Rail (Zero Dead Scroll)
   mm.add('(min-width: 1025px)', () => {
     const venuesStrip = document.getElementById('venuesStrip');
     const venuesPinWrapper = document.getElementById('venuesPin');
 
     if (venuesStrip && venuesPinWrapper) {
       const panels = gsap.utils.toArray('.venue-chamber-panel');
-      const totalPanels = panels.length;
+      const getScrollAmount = () => venuesStrip.scrollWidth - window.innerWidth;
 
-      // Pinned lateral track
+      // Pinned lateral track with exact pixel travel to eliminate empty dead scroll
       const railTl = gsap.to(venuesStrip, {
-        xPercent: -100 * (totalPanels - 1),
+        x: () => -getScrollAmount(),
         ease: 'none',
         scrollTrigger: {
           trigger: '#venuesPin',
           start: 'top top',
-          end: () => `+=${window.innerWidth * (totalPanels - 0.75)}`,
-          pin: '.venues-track-viewport',
-          scrub: 1.2,
+          end: () => `+=${getScrollAmount()}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: 1,
           invalidateOnRefresh: true
         }
       });
@@ -457,10 +458,10 @@ function initGSAPTimelines(lenis) {
         if (img) {
           gsap.fromTo(
             img,
-            { xPercent: 12, scale: 1.18 },
+            { xPercent: 12, scale: 1.15 },
             {
               xPercent: -12,
-              scale: 1.06,
+              scale: 1.05,
               ease: 'none',
               scrollTrigger: {
                 trigger: panel,
