@@ -1,36 +1,36 @@
 /**
- * OFF HOURS — Gruvbox Light Editorial Main Stylesheet
- * Aesthetic: High-Contrast Archival Newsprint / Warm Letterpress Broadsheet
+ * OFF HOURS — Clean Gruvbox Light Editorial Main Stylesheet
+ * Aesthetic: Crisp White Archival Paper / High-Contrast Gruvbox Letterpress
  * Directed via: awwwards / cinematic-ui / design-spells / ui-ux-pro-max
  */
 
 :root {
-  /* Gruvbox Light Canonical Canvas (Aged Linen & Parchment) */
-  --bg: #fbf1c7;            /* gruvbox bg0 (warm cream canvas) */
-  --bg-surface: #f2e5bc;    /* gruvbox bg0_h (parchment ledger) */
-  --bg-card: #ebdbb2;       /* gruvbox bg1 (warm card stock) */
-  --bg-elevated: #d5c4a1;   /* gruvbox bg2 (pressed binder) */
-  --bg-translucent: rgba(251, 241, 199, 0.94);
+  /* Crisp White Archival Paper Ground */
+  --bg: #fdfcf9;            /* crisp fine-art archival white paper */
+  --bg-surface: #f4f1e8;    /* clean warm off-white ledger surface */
+  --bg-card: #ece6dc;       /* subtle light warm card stock */
+  --bg-elevated: #e0d8ca;   /* pressed binder tone */
+  --bg-translucent: rgba(253, 252, 249, 0.96);
 
-  /* Gruvbox Ink & Editorial Typography */
-  --text: #282828;          /* gruvbox fg0 (deep letterpress carbon) */
-  --text-muted: #504945;    /* gruvbox fg2 (dark warm grey) */
-  --text-dim: #7c6f64;      /* gruvbox fg4 (archival caption ink) */
-  --text-ghost: rgba(40, 40, 40, 0.07);
+  /* Deep Gruvbox Letterpress Ink (High-Contrast Editorial) */
+  --text: #1d2021;          /* gruvbox fg0_hard (deepest carbon ink) */
+  --text-muted: #3c3836;    /* gruvbox fg1 (sharp editorial body) */
+  --text-dim: #665c54;      /* gruvbox fg3 (archival caption ink) */
+  --text-ghost: rgba(29, 32, 33, 0.05);
 
-  /* Gruvbox Industrial Accents */
+  /* Gruvbox Iconic Accents */
   --tungsten: #af3a03;       /* gruvbox dark orange / burnt terracotta */
   --tungsten-bright: #b57614;/* gruvbox dark yellow / raw ochre */
-  --tungsten-glow: rgba(175, 58, 3, 0.22);
+  --tungsten-glow: rgba(175, 58, 3, 0.2);
   --tungsten-subtle: rgba(175, 58, 3, 0.08);
   --cyan-river: #076678;     /* gruvbox dark blue / deep slate teal */
-  --cyan-river-dim: rgba(7, 102, 120, 0.18);
+  --cyan-river-dim: rgba(7, 102, 120, 0.16);
   --gruvbox-red: #cc241d;
   --gruvbox-green: #79740e;
 
-  /* Archival Hairlines & Grid Rules */
-  --border-hairline: rgba(40, 40, 40, 0.14);
-  --border-medium: rgba(40, 40, 40, 0.24);
+  /* Razor-Sharp Hairlines & Grid Rules */
+  --border-hairline: rgba(29, 32, 33, 0.12);
+  --border-medium: rgba(29, 32, 33, 0.22);
   --border-focus: #af3a03;
 
   /* Monumental Typography Families */
@@ -119,7 +119,7 @@ body {
   font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 700;
-  color: #fbf1c7;
+  color: #fdfcf9;
   letter-spacing: 0.12em;
   opacity: 0;
   transform: scale(0.8);
@@ -132,7 +132,7 @@ body {
 .cursor-follower.is-hovering {
   width: 72px;
   height: 72px;
-  background: rgba(175, 58, 3, 0.12);
+  background: rgba(175, 58, 3, 0.1);
   border-color: var(--tungsten);
 }
 
@@ -173,7 +173,7 @@ body {
   }
 }
 
-/* Warm Archival Paper Grain Overlay */
+/* Subtle Clean Print Grain Overlay */
 .film-grain {
   position: fixed;
   top: 0;
@@ -182,7 +182,7 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 200;
-  opacity: 0.055;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
@@ -194,7 +194,7 @@ body {
   width: 700px;
   height: 700px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(175, 58, 3, 0.065) 0%, rgba(251, 241, 199, 0) 65%);
+  background: radial-gradient(circle, rgba(175, 58, 3, 0.04) 0%, rgba(253, 252, 249, 0) 65%);
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -211,7 +211,7 @@ header.masthead {
   justify-content: space-between;
   align-items: center;
   z-index: 240;
-  background: linear-gradient(to bottom, rgba(251, 241, 199, 0.96) 0%, rgba(251, 241, 199, 0) 100%);
+  background: linear-gradient(to bottom, rgba(253, 252, 249, 0.96) 0%, rgba(253, 252, 249, 0) 100%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -287,17 +287,18 @@ header.masthead {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-weight: 600;
 }
 
 .audio-toggle-btn:hover {
   background: var(--tungsten);
-  color: #fbf1c7;
+  color: #fdfcf9;
   border-color: var(--tungsten);
 }
 
 .audio-toggle-btn.active {
   background: var(--tungsten);
-  color: #fbf1c7;
+  color: #fdfcf9;
   box-shadow: 0 0 16px var(--tungsten-glow);
 }
 
@@ -306,7 +307,7 @@ header.masthead {
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #fbf1c7;
+  color: #fdfcf9;
   background: var(--text);
   padding: 9px 18px;
   text-decoration: none;
@@ -322,7 +323,7 @@ header.masthead {
 }
 
 /* ==========================================================================
-   SCENE 01: HERO SECTION (MONUMENTAL EDITORIAL BROADSIDE)
+   SCENE 01: HERO SECTION (CRISP WHITE EDITORIAL BROADSIDE)
    ========================================================================== */
 .hero {
   min-height: 100vh;
@@ -341,8 +342,8 @@ header.masthead {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 75% 30%, rgba(175, 58, 3, 0.08) 0%, transparent 60%),
-              linear-gradient(to bottom, rgba(251, 241, 199, 0.2) 0%, rgba(251, 241, 199, 0.9) 100%);
+  background: radial-gradient(circle at 75% 30%, rgba(175, 58, 3, 0.05) 0%, transparent 60%),
+              linear-gradient(to bottom, rgba(253, 252, 249, 0.2) 0%, rgba(253, 252, 249, 0.9) 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -401,7 +402,6 @@ header.masthead {
 
 .hero-title .accent-tungsten {
   color: var(--tungsten);
-  text-shadow: 0 0 40px rgba(175, 58, 3, 0.2);
 }
 
 /* Kinetic Ticker Marquee Strip */
@@ -543,8 +543,8 @@ header.masthead {
   width: 140%;
   height: 140%;
   background-image: 
-    linear-gradient(to right, rgba(40,40,40,0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(40,40,40,0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(29,32,33,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29,32,33,0.06) 1px, transparent 1px);
   background-size: 80px 80px;
   pointer-events: none;
   transform: translateZ(-200px);
@@ -608,7 +608,7 @@ header.masthead {
   padding: 20px 24px;
   backdrop-filter: blur(8px);
   max-width: 380px;
-  box-shadow: 0 4px 20px rgba(40, 40, 40, 0.08);
+  box-shadow: 0 4px 20px rgba(29, 32, 33, 0.08);
 }
 
 .atlas-hud-title {
@@ -624,7 +624,7 @@ header.masthead {
   margin-top: 14px;
   height: 2px;
   width: 100%;
-  background: rgba(40, 40, 40, 0.15);
+  background: rgba(29, 32, 33, 0.14);
   position: relative;
   overflow: hidden;
 }
@@ -814,7 +814,7 @@ header.masthead {
   width: 100%;
   height: 68%;
   overflow: hidden;
-  border: 1px solid var(--border-medium);
+  border: 1.5px solid var(--border-medium);
   background: var(--bg-card);
   cursor: pointer;
 }
@@ -824,13 +824,13 @@ header.masthead {
   height: 120%;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(40%) sepia(25%) contrast(118%) brightness(95%);
+  filter: grayscale(35%) sepia(20%) contrast(118%) brightness(96%);
   transition: filter 0.6s var(--ease-expo), transform 0.8s var(--ease-expo);
   will-change: transform;
 }
 
 .media-frame-clipped:hover .media-parallax-img {
-  filter: grayscale(10%) sepia(15%) contrast(110%) brightness(100%);
+  filter: grayscale(10%) sepia(10%) contrast(112%) brightness(100%);
 }
 
 .media-frame-clipped::after {
@@ -840,7 +840,7 @@ header.masthead {
   left: 0;
   width: 100%;
   height: 100%;
-  box-shadow: inset 0 0 80px rgba(40, 40, 40, 0.35);
+  box-shadow: inset 0 0 60px rgba(29, 32, 33, 0.25);
   pointer-events: none;
 }
 
@@ -869,7 +869,7 @@ header.masthead {
   justify-content: space-between;
   align-items: baseline;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(40, 40, 40, 0.08);
+  border-bottom: 1px solid rgba(29, 32, 33, 0.08);
   font-family: var(--font-heading);
   transition: padding-left 0.2s ease;
 }
@@ -952,7 +952,7 @@ header.masthead {
 
 .filter-btn:hover, .filter-btn.active {
   background: var(--tungsten);
-  color: #fbf1c7;
+  color: #fdfcf9;
   border-color: var(--tungsten);
   font-weight: 700;
 }
@@ -1071,7 +1071,7 @@ header.masthead {
   border: 1.5px solid var(--border-medium);
   padding: 48px;
   position: relative;
-  box-shadow: 0 20px 60px rgba(40, 40, 40, 0.12);
+  box-shadow: 0 20px 60px rgba(29, 32, 33, 0.1);
 }
 
 /* Notch Cutouts */
@@ -1150,7 +1150,7 @@ header.masthead {
 
 .tier-choice.active {
   border-color: var(--tungsten);
-  background: rgba(175, 58, 3, 0.1);
+  background: rgba(175, 58, 3, 0.08);
 }
 
 .tier-choice .tier-name {
@@ -1180,7 +1180,7 @@ header.masthead {
   width: 100%;
   padding: 20px;
   background: var(--tungsten);
-  color: #fbf1c7;
+  color: #fdfcf9;
   border: none;
   font-family: var(--font-mono);
   font-size: 13px;
@@ -1268,7 +1268,7 @@ footer.monumental-footer {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(40, 40, 40, 0.72);
+  background: rgba(29, 32, 33, 0.72);
   backdrop-filter: blur(16px);
   z-index: 300;
   display: flex;
@@ -1292,7 +1292,7 @@ footer.monumental-footer {
   max-width: 520px;
   padding: 48px;
   position: relative;
-  box-shadow: 0 30px 100px rgba(40, 40, 40, 0.35);
+  box-shadow: 0 30px 100px rgba(29, 32, 33, 0.3);
 }
 
 .modal-close {

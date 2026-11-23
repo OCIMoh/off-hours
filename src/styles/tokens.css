@@ -1,35 +1,35 @@
 /**
- * OFF HOURS — Gruvbox Light Editorial Design Tokens
- * Aesthetic: High-Contrast Archival Newsprint / Warm Letterpress Broadsheet
+ * OFF HOURS — Clean Gruvbox Light Editorial Design Tokens
+ * Aesthetic: Crisp White Archival Paper / High-Contrast Gruvbox Letterpress
  */
 
 :root {
-  /* Gruvbox Light Canonical Canvas (Aged Linen & Parchment) */
-  --bg: #fbf1c7;            /* gruvbox bg0 (warm cream canvas) */
-  --bg-surface: #f2e5bc;    /* gruvbox bg0_h (parchment ledger) */
-  --bg-card: #ebdbb2;       /* gruvbox bg1 (warm card stock) */
-  --bg-elevated: #d5c4a1;   /* gruvbox bg2 (pressed binder) */
-  --bg-translucent: rgba(251, 241, 199, 0.92);
+  /* Crisp White Archival Paper Ground */
+  --bg: #fdfcf9;            /* crisp fine-art archival white paper */
+  --bg-surface: #f4f1e8;    /* clean warm off-white ledger surface */
+  --bg-card: #ece6dc;       /* subtle light warm card stock */
+  --bg-elevated: #e0d8ca;   /* pressed binder tone */
+  --bg-translucent: rgba(253, 252, 249, 0.95);
 
-  /* Gruvbox Ink & Editorial Typography */
-  --text: #282828;          /* gruvbox fg0 (deep letterpress carbon) */
-  --text-muted: #504945;    /* gruvbox fg2 (dark warm grey) */
-  --text-dim: #7c6f64;      /* gruvbox fg4 (archival caption ink) */
-  --text-ghost: rgba(40, 40, 40, 0.06);
+  /* Deep Gruvbox Letterpress Ink (High-Contrast Editorial) */
+  --text: #1d2021;          /* gruvbox fg0_hard (deepest carbon ink) */
+  --text-muted: #3c3836;    /* gruvbox fg1 (sharp editorial body) */
+  --text-dim: #665c54;      /* gruvbox fg3 (archival caption ink) */
+  --text-ghost: rgba(29, 32, 33, 0.05);
 
-  /* Gruvbox Industrial Accents */
+  /* Gruvbox Iconic Accents */
   --tungsten: #af3a03;       /* gruvbox dark orange / burnt terracotta */
   --tungsten-bright: #b57614;/* gruvbox dark yellow / raw ochre */
-  --tungsten-glow: rgba(175, 58, 3, 0.22);
+  --tungsten-glow: rgba(175, 58, 3, 0.2);
   --tungsten-subtle: rgba(175, 58, 3, 0.08);
   --cyan-river: #076678;     /* gruvbox dark blue / deep slate teal */
-  --cyan-river-dim: rgba(7, 102, 120, 0.18);
+  --cyan-river-dim: rgba(7, 102, 120, 0.16);
   --gruvbox-red: #cc241d;
   --gruvbox-green: #79740e;
 
-  /* Archival Hairlines & Grid Rules */
-  --border-hairline: rgba(40, 40, 40, 0.14);
-  --border-medium: rgba(40, 40, 40, 0.24);
+  /* Razor-Sharp Hairlines & Grid Rules */
+  --border-hairline: rgba(29, 32, 33, 0.12);
+  --border-medium: rgba(29, 32, 33, 0.22);
   --border-focus: #af3a03;
 
   /* Monumental Typography Families */
