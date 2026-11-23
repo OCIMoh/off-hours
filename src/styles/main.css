@@ -492,13 +492,10 @@ img {
   margin-bottom: clamp(10px, 1.8vh, 18px);
 }
 
-/* Asymmetrical 8 + 4 Hero Grid */
-.hero-main-asymmetric-grid {
-  display: grid;
-  grid-template-columns: 1.8fr 1fr;
-  gap: 36px;
-  align-items: start;
-  margin-bottom: clamp(12px, 2vh, 22px);
+/* Hero Main Broadsheet Block */
+.hero-main-block {
+  max-width: 72rem;
+  margin-bottom: clamp(14px, 2.4vh, 26px);
 }
 
 .hero-title-wrap {
@@ -515,65 +512,11 @@ img {
 .hero-subhead {
   font-family: var(--font-sans);
   font-size: clamp(1.05rem, 1.25vw, 1.35rem);
-  line-height: 1.42;
+  line-height: 1.45;
   font-weight: 500;
   color: var(--text-muted);
-  max-width: 54ch;
-  margin-bottom: clamp(14px, 2vh, 22px);
-}
-
-/* Hero Right: Architectural Passport Metadata Card */
-.hero-passport-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-hairline);
-  border-radius: var(--radius-sm);
-  padding: 16px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.passport-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border-hairline);
-  padding-bottom: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.14em;
-  color: var(--tungsten);
-  font-weight: 700;
-}
-
-.passport-data-row {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-}
-.passport-data-row .k { color: var(--text-dim); text-transform: uppercase; }
-.passport-data-row .v { color: var(--text); font-weight: 700; }
-
-.passport-status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--gruvbox-green);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.passport-status-pill::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--gruvbox-green);
-  border-radius: 50%;
+  max-width: 60ch;
+  margin-bottom: clamp(16px, 2.4vh, 26px);
 }
 
 /* Hero Actions & Buttons */
@@ -1655,10 +1598,6 @@ img {
     height: auto;
     min-height: 100vh;
     padding: 85px var(--spacing-gutter) 36px;
-  }
-  .hero-main-asymmetric-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
   }
   .hero-bottom-grid {
     grid-template-columns: 1fr;

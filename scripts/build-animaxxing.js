@@ -78,75 +78,36 @@ ${css}
           <span class="figure">OCTOBER 24–25 · 20:00 — 06:00 · RIVER &amp; RAIL CORRIDOR</span>
         </div>
 
-        <!-- Asymmetrical 8 + 4 Hero Grid -->
-        <div class="hero-main-asymmetric-grid">
-          <div>
-            <div class="hero-title-wrap">
-              <h1 class="poster poster-align-ink hero-title" id="heroHeadline">
-                OFF HOURS CULTURE FOUR CIVIC SPACES
-              </h1>
-            </div>
-
-            <p class="hero-subhead" id="heroSubhead">
-              An independent nocturnal culture festival reactivating four overlooked civic environments across an old river-and-rail city for two transformative nights.
-            </p>
-
-            <!-- Particle-Assembled Calls to Action -->
-            <div class="hero-actions-row">
-              <!-- Primary CTA: Reactor (Solid Button with Terracotta Rising Embers) -->
-              <div class="particle-btn-wrapper particle-layer-under" data-particle-reactor>
-                <canvas aria-hidden="true"></canvas>
-                <button class="button-solid" id="passCtaAction" data-open-modal>
-                  ENTER ARCHIVE / PASS
-                </button>
-              </div>
-
-              <!-- Secondary CTA: Marquee (Outline Button with Ochre Chasing Lights) -->
-              <div class="particle-btn-wrapper particle-layer-over" data-particle-marquee>
-                <canvas aria-hidden="true"></canvas>
-                <a href="#venuesPin" class="button-outline">
-                  EXPLORE SPACES
-                </a>
-              </div>
-            </div>
+        <!-- Hero Main Broadsheet Block -->
+        <div class="hero-main-block">
+          <div class="hero-title-wrap">
+            <h1 class="poster poster-align-ink hero-title" id="heroHeadline">
+              OFF HOURS CULTURE FOUR CIVIC SPACES
+            </h1>
           </div>
 
-          <!-- Hero Right: Architectural Passport Metadata Card -->
-          <aside class="hero-passport-card" aria-label="Nocturnal Corridor Dossier Passport">
-            <div class="passport-header">
-              <span>DOSSIER PASSPORT</span>
-              <span class="passport-status-pill">CORRIDOR ACTIVE</span>
+          <p class="hero-subhead" id="heroSubhead">
+            An independent nocturnal culture festival reactivating four overlooked civic environments across an old river-and-rail city for two transformative nights.
+          </p>
+
+          <!-- Particle-Assembled Calls to Action -->
+          <div class="hero-actions-row">
+            <!-- Primary CTA: Reactor (Solid Button with Terracotta Rising Embers) -->
+            <div class="particle-btn-wrapper particle-layer-under" data-particle-reactor>
+              <canvas aria-hidden="true"></canvas>
+              <button class="button-solid" id="passCtaAction" data-open-modal>
+                ENTER ARCHIVE / PASS
+              </button>
             </div>
 
-            <div class="passport-data-row">
-              <span class="k">COORDINATES</span>
-              <span class="v">53°32′N 09°59′E</span>
+            <!-- Secondary CTA: Marquee (Outline Button with Ochre Chasing Lights) -->
+            <div class="particle-btn-wrapper particle-layer-over" data-particle-marquee>
+              <canvas aria-hidden="true"></canvas>
+              <a href="#venuesPin" class="button-outline">
+                EXPLORE SPACES
+              </a>
             </div>
-
-            <div class="passport-data-row">
-              <span class="k">TIDE ELEVATION</span>
-              <span class="v">+1.4M (HIGH EBB)</span>
-            </div>
-
-            <div class="passport-data-row">
-              <span class="k">ATMOSPHERIC TEMP</span>
-              <span class="v">11°C NOCTURNAL</span>
-            </div>
-
-            <div class="passport-data-row">
-              <span class="k">ACOUSTIC SPECTRUM</span>
-              <span class="v">45HZ — 108DB PEAK</span>
-            </div>
-
-            <div class="passport-data-row">
-              <span class="k">ACTIVE SECTORS</span>
-              <span class="v">04 CIVIC CHAMBERS</span>
-            </div>
-
-            <div style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-dim); border-top: 1px dashed var(--border-hairline); padding-top: 8px;">
-              AUTHENTICATED RIVER &amp; RAIL ARCHIVE · 2026
-            </div>
-          </aside>
+          </div>
         </div>
       </div>
 
