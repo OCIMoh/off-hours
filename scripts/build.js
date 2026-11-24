@@ -15,7 +15,26 @@ const htmlContent = `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OFF HOURS — Independent Nocturnal Culture Festival</title>
-  <meta name="description" content="OFF HOURS is an independent culture festival reactivating four overlooked spaces across an old river-and-rail city for two nights.">
+  <meta name="description" content="OFF HOURS is an independent culture festival reactivating four overlooked spaces across an old river-and-rail corridor for two transformative nights.">
+
+  <!-- Favicon (Inline Vector SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23af3a03'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23fdfcf9' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23fdfcf9'/%3E%3Cline x1='16' y1='2' x2='16' y2='30' stroke='%23fdfcf9' stroke-width='1.5' stroke-dasharray='2,3'/%3E%3Cline x1='2' y1='16' x2='30' y2='16' stroke='%23fdfcf9' stroke-width='1.5' stroke-dasharray='2,3'/%3E%3C/svg%3E">
+
+  <!-- Mobile & Browser Theme -->
+  <meta name="theme-color" content="#fdfcf9">
+  <meta name="color-scheme" content="light">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OFF HOURS — Independent Nocturnal Culture Festival">
+  <meta property="og:description" content="Reactivating four overlooked civic spaces across an old river-and-rail corridor for two transformative nights. October 24–25.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OFF HOURS — Independent Nocturnal Culture Festival">
+  <meta name="twitter:description" content="Reactivating four overlooked civic spaces across an old river-and-rail corridor for two transformative nights. October 24–25.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80">
 
   <!-- Curated Animaxxing Typography: Variable Rethink Sans (400-800) & JetBrains Mono (100-800) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -144,36 +163,29 @@ ${css}
     <section class="atlas-pin-wrapper" id="atlasPin" aria-label="The Nocturnal Atlas">
       <div class="atlas-viewport" id="atlas">
         
-        <!-- HUD Telemetry Header -->
+        <!-- Minimal Swiss Editorial Atlas Header -->
         <div class="atlas-hud">
           <div class="atlas-hud-info">
-            <span class="mono-label">NOCTURNAL ATLAS · RECONNAISSANCE</span>
-            <span class="mono-note">Coordinates: 53°32′N 09°59′E · Central River &amp; Rail Corridor</span>
+            <span class="mono-label">01 / NOCTURNAL ATLAS</span>
           </div>
 
-          <!-- Interactive Node Navigator Tabs -->
-          <div class="atlas-hud-nav" role="tablist" aria-label="Civic Space Nodes">
-            <button class="atlas-nav-tab is-active" data-atlas-index="0" role="tab" aria-selected="true">01 TRAM DEPOT</button>
+          <!-- Quiet Typographic Venue Navigator -->
+          <nav class="atlas-hud-nav" role="tablist" aria-label="Civic Space Waypoints">
+            <button class="atlas-nav-tab is-active" data-atlas-index="0" role="tab" aria-selected="true">01 DEPOT</button>
+            <span class="atlas-nav-sep" aria-hidden="true">·</span>
             <button class="atlas-nav-tab" data-atlas-index="1" role="tab" aria-selected="false">02 BATHS</button>
+            <span class="atlas-nav-sep" aria-hidden="true">·</span>
             <button class="atlas-nav-tab" data-atlas-index="2" role="tab" aria-selected="false">03 MARKET</button>
+            <span class="atlas-nav-sep" aria-hidden="true">·</span>
             <button class="atlas-nav-tab" data-atlas-index="3" role="tab" aria-selected="false">04 PRINTWORKS</button>
-          </div>
-
-          <div class="atlas-hud-status">
-            <span class="mono-note" id="atlasNodeCounter">NODE 01 / 04 ACTIVE</span>
-            <div class="atlas-hud-progress">
-              <div class="atlas-hud-fill" id="atlasHudFill"></div>
-            </div>
-          </div>
+          </nav>
         </div>
 
-        <!-- Main Workspace: Map Canvas + Dossier Deck -->
-        <div class="atlas-workspace">
-          
-          <!-- Left: Schematic Corridor Map (Stable 1:1 scale, zero zoom jitter) -->
-          <div class="atlas-map-stage" id="atlasMapStage">
-            <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
+        <!-- Full-Width Map Stage (On-Map Waypoints & Live Callouts) -->
+        <div class="atlas-map-stage" id="atlasMapStage">
+          <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
 
+          <div class="atlas-map-container">
             <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River &amp; Rail Map">
               <!-- River Spine in Gruvbox Teal -->
               <path class="river river-bg" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
@@ -194,9 +206,17 @@ ${css}
               <line x1="700" y1="0" x2="700" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
               <line x1="1050" y1="0" x2="1050" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
 
-              <!-- Four Civic Nodes in Terracotta & Ochre (Zero scale CSS hover to avoid jitter) -->
+              <!-- Leader Connecting Lines (Animated on scroll to connect node to callout) -->
+              <path class="leader-line" id="leaderLine0" d="M380,420 L415,360 L450,360" stroke="var(--tungsten)" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" fill="none" />
+              <path class="leader-line" id="leaderLine1" d="M760,310 L795,245 L830,245" stroke="var(--tungsten)" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" fill="none" />
+              <path class="leader-line" id="leaderLine2" d="M680,680 L715,610 L750,610" stroke="var(--tungsten)" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" fill="none" />
+              <path class="leader-line" id="leaderLine3" d="M1080,480 L1035,420 L985,420" stroke="var(--tungsten)" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" fill="none" />
+
+              <!-- Four Civic Nodes in Terracotta & Ochre with Living Sonar Radar Beacons -->
               <!-- Node 01: Tram Depot -->
               <g class="map-node is-active" id="mapNode0" data-node="0" transform="translate(380, 420)">
+                <circle class="radar-sonar sonar-ring-1" r="28" />
+                <circle class="radar-sonar sonar-ring-2" r="28" />
                 <circle class="radar-ring" r="32" />
                 <circle class="radar-core" r="8" fill="var(--tungsten)" />
                 <circle r="3" fill="#fdfcf9" />
@@ -206,6 +226,8 @@ ${css}
 
               <!-- Node 02: Municipal Baths -->
               <g class="map-node" id="mapNode1" data-node="1" transform="translate(760, 310)">
+                <circle class="radar-sonar sonar-ring-1" r="28" />
+                <circle class="radar-sonar sonar-ring-2" r="28" />
                 <circle class="radar-ring" r="32" />
                 <circle class="radar-core" r="8" fill="var(--tungsten)" />
                 <circle r="3" fill="#fdfcf9" />
@@ -215,6 +237,8 @@ ${css}
 
               <!-- Node 03: Night Market -->
               <g class="map-node" id="mapNode2" data-node="2" transform="translate(680, 680)">
+                <circle class="radar-sonar sonar-ring-1" r="28" />
+                <circle class="radar-sonar sonar-ring-2" r="28" />
                 <circle class="radar-ring" r="32" />
                 <circle class="radar-core" r="8" fill="var(--tungsten)" />
                 <circle r="3" fill="#fdfcf9" />
@@ -224,6 +248,8 @@ ${css}
 
               <!-- Node 04: Printing Works -->
               <g class="map-node" id="mapNode3" data-node="3" transform="translate(1080, 480)">
+                <circle class="radar-sonar sonar-ring-1" r="28" />
+                <circle class="radar-sonar sonar-ring-2" r="28" />
                 <circle class="radar-ring" r="32" />
                 <circle class="radar-core" r="8" fill="var(--tungsten)" />
                 <circle r="3" fill="#fdfcf9" />
@@ -231,100 +257,93 @@ ${css}
                 <text x="16" y="19" class="node-sub">COMMUNICATION · 35MM CINEMA</text>
               </g>
             </svg>
+
+            <!-- On-Map Floating Dossier Callouts (Opened sequentially by GSAP on scroll) -->
+            <!-- Callout 01: Tram Depot -->
+            <div class="map-callout-card" id="mapCallout0" data-callout="0" style="left: 32%; top: 38%;">
+              <div class="callout-header">
+                <span class="callout-tag">NODE 01 / 04 · TRANSIT</span>
+                <span class="callout-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h4 class="callout-title">01 / THE OLD TRAM DEPOT</h4>
+              <p class="callout-desc">
+                1912 transit maintenance hangar. Riveted steel trusses, concrete oil pits, visceral sub-bass resonance.
+              </p>
+              <div class="callout-telemetry">
+                <div class="tel-item"><span class="k">ACOUSTIC</span><span class="v">108 dB Sub-bass</span></div>
+                <div class="tel-item"><span class="k">CAPACITY</span><span class="v">800 Persons</span></div>
+                <div class="tel-item"><span class="k">HOURS</span><span class="v">21:00 — 05:30</span></div>
+              </div>
+              <a href="#venuesPin" class="callout-cta">
+                <span>INSPECT CHAMBER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Callout 02: Municipal Baths -->
+            <div class="map-callout-card" id="mapCallout1" data-callout="1" style="left: 59%; top: 22%;">
+              <div class="callout-header">
+                <span class="callout-tag">NODE 02 / 04 · RECREATION</span>
+                <span class="callout-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h4 class="callout-title">02 / THE MUNICIPAL BATHS</h4>
+              <p class="callout-desc">
+                Drained 1928 ceramic-tiled natatorium with dry mosaic wells. Cathedral for quadraphonic ambient diffusion.
+              </p>
+              <div class="callout-telemetry">
+                <div class="tel-item"><span class="k">ACOUSTIC</span><span class="v">7.2s Decay Reverb</span></div>
+                <div class="tel-item"><span class="k">CAPACITY</span><span class="v">450 Persons</span></div>
+                <div class="tel-item"><span class="k">HOURS</span><span class="v">20:30 — 05:00</span></div>
+              </div>
+              <a href="#venuesPin" class="callout-cta">
+                <span>INSPECT CHAMBER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Callout 03: Night Market -->
+            <div class="map-callout-card" id="mapCallout2" data-callout="2" style="left: 53%; top: 66%;">
+              <div class="callout-header">
+                <span class="callout-tag">NODE 03 / 04 · COMMERCE</span>
+                <span class="callout-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h4 class="callout-title">03 / THE NIGHT MARKET</h4>
+              <p class="callout-desc">
+                Iron-and-glass transit exchange hall. Continuous nocturnal vortex with regional food stalls and modular drones.
+              </p>
+              <div class="callout-telemetry">
+                <div class="tel-item"><span class="k">ACOUSTIC</span><span class="v">Wide Open Diffusion</span></div>
+                <div class="tel-item"><span class="k">CAPACITY</span><span class="v">1200 Persons</span></div>
+                <div class="tel-item"><span class="k">HOURS</span><span class="v">20:00 — 06:00</span></div>
+              </div>
+              <a href="#venuesPin" class="callout-cta">
+                <span>INSPECT CHAMBER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Callout 04: Printing Works -->
+            <div class="map-callout-card" id="mapCallout3" data-callout="3" style="left: 70%; top: 43%;">
+              <div class="callout-header">
+                <span class="callout-tag">NODE 04 / 04 · COMMUNICATION</span>
+                <span class="callout-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h4 class="callout-title">04 / THE OLD PRINTWORKS</h4>
+              <p class="callout-desc">
+                Former newspaper press warehouse with double-height voids, linotype bedplates, and dual 35mm projections.
+              </p>
+              <div class="callout-telemetry">
+                <div class="tel-item"><span class="k">ACOUSTIC</span><span class="v">Mechanical Damp</span></div>
+                <div class="tel-item"><span class="k">CAPACITY</span><span class="v">500 Persons</span></div>
+                <div class="tel-item"><span class="k">HOURS</span><span class="v">21:30 — 05:00</span></div>
+              </div>
+              <a href="#venuesPin" class="callout-cta">
+                <span>INSPECT CHAMBER</span>
+                <span>→</span>
+              </a>
+            </div>
+
           </div>
-
-          <!-- Right: Active Dossier Deck (Opened sequentially on scroll) -->
-          <aside class="atlas-dossier-deck" aria-label="Civic Space Dossiers">
-            
-            <!-- Card 01 -->
-            <div class="dossier-card is-active" id="dossierCard0" data-card="0">
-              <div class="dossier-card-tag">
-                <span class="tag-num">NODE 01 / 04</span>
-                <span class="tag-status">ACTIVATED</span>
-              </div>
-              <h3 class="dossier-card-title">THE OLD TRAM DEPOT</h3>
-              <p class="dossier-card-copy">
-                A monumental 1912 maintenance hangar with exposed steel riveted trusses, concrete oil pits, and transit track turnouts. Intimate crowd proximity meets visceral sub-bass resonance.
-              </p>
-              <div class="dossier-specs-mini">
-                <div><span>LAYER</span><strong>Transit Infrastructure</strong></div>
-                <div><span>CAPACITY</span><strong>800 Persons</strong></div>
-                <div><span>ACOUSTIC</span><strong>108 dB Sub-bass Peak</strong></div>
-                <div><span>HOURS</span><strong>21:00 — 05:30</strong></div>
-              </div>
-              <a href="#venuesPin" class="dossier-action-btn">
-                <span>INSPECT CHAMBER 01 DOSSIER</span>
-                <span>→</span>
-              </a>
-            </div>
-
-            <!-- Card 02 -->
-            <div class="dossier-card" id="dossierCard1" data-card="1">
-              <div class="dossier-card-tag">
-                <span class="tag-num">NODE 02 / 04</span>
-                <span class="tag-status">STANDBY</span>
-              </div>
-              <h3 class="dossier-card-title">THE MUNICIPAL BATHS</h3>
-              <p class="dossier-card-copy">
-                Drained 1928 ceramic-tiled hydrotherapy natatorium with barrel-vaulted skylights and dry mosaic diving wells. A cathedral for quadraphonic ambient diffusion and microtonal voice.
-              </p>
-              <div class="dossier-specs-mini">
-                <div><span>LAYER</span><strong>Civic Hydrotherapy</strong></div>
-                <div><span>CAPACITY</span><strong>450 Persons</strong></div>
-                <div><span>ACOUSTIC</span><strong>7.2s Ceramic Reverb</strong></div>
-                <div><span>HOURS</span><strong>20:30 — 05:00</strong></div>
-              </div>
-              <a href="#venuesPin" class="dossier-action-btn">
-                <span>INSPECT CHAMBER 02 DOSSIER</span>
-                <span>→</span>
-              </a>
-            </div>
-
-            <!-- Card 03 -->
-            <div class="dossier-card" id="dossierCard2" data-card="2">
-              <div class="dossier-card-tag">
-                <span class="tag-num">NODE 03 / 04</span>
-                <span class="tag-status">STANDBY</span>
-              </div>
-              <h3 class="dossier-card-title">THE NIGHT MARKET</h3>
-              <p class="dossier-card-copy">
-                A cavernous iron-and-glass transit exchange hall active continuously through dark hours. The social vortex hosting regional street kitchens, vinyl stalls, and modular drone installations.
-              </p>
-              <div class="dossier-specs-mini">
-                <div><span>LAYER</span><strong>Nocturnal Commerce</strong></div>
-                <div><span>CAPACITY</span><strong>1200 Persons</strong></div>
-                <div><span>ACOUSTIC</span><strong>Wide Open Dispersion</strong></div>
-                <div><span>HOURS</span><strong>20:00 — 06:00</strong></div>
-              </div>
-              <a href="#venuesPin" class="dossier-action-btn">
-                <span>INSPECT CHAMBER 03 DOSSIER</span>
-                <span>→</span>
-              </a>
-            </div>
-
-            <!-- Card 04 -->
-            <div class="dossier-card" id="dossierCard3" data-card="3">
-              <div class="dossier-card-tag">
-                <span class="tag-num">NODE 04 / 04</span>
-                <span class="tag-status">STANDBY</span>
-              </div>
-              <h3 class="dossier-card-title">THE OLD PRINTWORKS</h3>
-              <p class="dossier-card-copy">
-                A former newspaper press warehouse with double-height ceiling voids, heavy linotype cast-iron bedplates, and darkroom masonry. Dedicated to dual 35mm celluloid projections.
-              </p>
-              <div class="dossier-specs-mini">
-                <div><span>LAYER</span><strong>Print Communication</strong></div>
-                <div><span>CAPACITY</span><strong>500 Persons</strong></div>
-                <div><span>ACOUSTIC</span><strong>Dry Mechanical Damp</strong></div>
-                <div><span>HOURS</span><strong>21:30 — 05:00</strong></div>
-              </div>
-              <a href="#venuesPin" class="dossier-action-btn">
-                <span>INSPECT CHAMBER 04 DOSSIER</span>
-                <span>→</span>
-              </a>
-            </div>
-
-          </aside>
         </div>
 
       </div>
@@ -618,137 +637,196 @@ ${css}
         <section class="schedule-section" id="schedule" aria-label="Schedule Timetable">
           <div class="schedule-header">
             <div>
-              <span class="mono-label">CHRONOLOGICAL DISPATCH</span>
+              <span class="mono-label">CHRONOLOGICAL DISPATCH · RIVER &amp; RAIL</span>
               <h2 class="statement" style="margin-top: 8px;">NOCTURNAL TIMETABLE</h2>
             </div>
-            <div class="schedule-filter-tabs">
-              <button class="tab-btn active" id="day1Btn">FRI OCT 24</button>
-              <button class="tab-btn" id="day2Btn">SAT OCT 25</button>
+            <div class="schedule-filter-tabs" role="tablist">
+              <button class="tab-btn active" id="day1Btn" role="tab" aria-selected="true">
+                <span>FRI OCT 24</span>
+              </button>
+              <button class="tab-btn" id="day2Btn" role="tab" aria-selected="false">
+                <span>SAT OCT 25</span>
+              </button>
             </div>
           </div>
 
-          <div class="ledger-table">
+          <div class="ledger-table" id="scheduleLedger">
             <!-- Friday Slots -->
             <div class="ledger-row" data-day="1">
-              <span class="slot-time">22:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">22:30</span>
+              </div>
               <div>
                 <div class="slot-act">Kattner &amp; Siding Ensemble</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Analog Percussion &amp; Industrial Sub-Bass</div>
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">LIVE A/V</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Kattner &amp; Siding Ensemble">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="1">
-              <span class="slot-time">23:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">23:30</span>
+              </div>
               <div>
                 <div class="slot-act">Celluloid Dispersal</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Archival 35mm Dual-Screen Projection</div>
               </div>
               <span class="slot-venue">04 / PRINTING WORKS</span>
               <span class="slot-badge">35MM CINEMA</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Celluloid Dispersal">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="1">
-              <span class="slot-time">00:45</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">00:45</span>
+              </div>
               <div>
                 <div class="slot-act">Resonance Corridor</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Heavy Post-Punk &amp; Spring Reverb Trio</div>
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">CONCERT</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Resonance Corridor">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="1">
-              <span class="slot-time">02:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">02:30</span>
+              </div>
               <div>
                 <div class="slot-act">Null Hypothesis</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Modular Drift &amp; Spatial Feedback</div>
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">MODULAR</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Null Hypothesis">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="1">
-              <span class="slot-time">04:15</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">04:15</span>
+              </div>
               <div>
                 <div class="slot-act">Displaced Phase</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Dawn Sub-Bass Closing Improvisation</div>
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">CLOSING</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Displaced Phase">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <!-- Saturday Slots -->
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">20:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">20:30</span>
+              </div>
               <div>
                 <div class="slot-act">Vapour Phase</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Ambient Hydro-Tape Loops &amp; Quad Phasing</div>
               </div>
               <span class="slot-venue">02 / MUNICIPAL BATHS</span>
               <span class="slot-badge">AMBIENT</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Vapour Phase">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">21:00</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">21:00</span>
+              </div>
               <div>
                 <div class="slot-act">Rotational Press Audio</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Mechanical Tape Loop Performance</div>
               </div>
               <span class="slot-venue">04 / PRINTING WORKS</span>
               <span class="slot-badge">TAPE LOOP</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Rotational Press Audio">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">23:15</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">23:15</span>
+              </div>
               <div>
                 <div class="slot-act">Market Drone Trio</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Acoustic Accordion &amp; Harmonium</div>
               </div>
               <span class="slot-venue">03 / NIGHT MARKET</span>
               <span class="slot-badge">DRONE</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Market Drone Trio">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">01:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">01:30</span>
+              </div>
               <div>
                 <div class="slot-act">Monotype Live Assembly</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Electro-Acoustic Typewriter Improvisation</div>
               </div>
               <span class="slot-venue">04 / PRINTING WORKS</span>
               <span class="slot-badge">ELECTRO-ACOUSTIC</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Monotype Live Assembly">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">03:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">03:30</span>
+              </div>
               <div>
                 <div class="slot-act">Submerged Tones</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Sine Wave &amp; Water Reflection Drift</div>
               </div>
               <span class="slot-venue">02 / MUNICIPAL BATHS</span>
               <span class="slot-badge">HYDRO-ACOUSTIC</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Submerged Tones">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">05:00</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">05:00</span>
+              </div>
               <div>
                 <div class="slot-act">Dawn Chorus Group</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Morning Ambient Acoustic Welcome</div>
               </div>
               <span class="slot-venue">03 / NIGHT MARKET</span>
               <span class="slot-badge">DAWN GATHERING</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Dawn Chorus Group">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
           </div>
         </section>
@@ -776,7 +854,7 @@ ${css}
                 <h3 class="card-heading">EARLY ACCESS</h3>
                 <p class="body-copy">Early registrant allocation. Full 48-hour access to all 4 spaces, spatial acoustics, and 35mm cinema screenings.</p>
               </div>
-              <div class="annotation">CLAIM TIER 01 →</div>
+              <div class="annotation">CLAIM TIER 01 <span class="card-arrow" aria-hidden="true">→</span></div>
             </div>
 
             <!-- Tier 2 (Featured) -->
@@ -789,7 +867,7 @@ ${css}
                 <h3 class="card-heading">FULL ACCESS</h3>
                 <p class="body-copy">Standard festival pass. Complete unrestricted access to the entire 2-night nocturnal program across all 4 civic venues.</p>
               </div>
-              <div class="annotation">CLAIM TIER 02 →</div>
+              <div class="annotation">CLAIM TIER 02 <span class="card-arrow" aria-hidden="true">→</span></div>
             </div>
 
             <!-- Tier 3 -->
@@ -802,7 +880,7 @@ ${css}
                 <h3 class="card-heading">PATRON PASS</h3>
                 <p class="body-copy">Direct contribution to artist honorariums and historical site preservation. Includes archival festival poster and printed program.</p>
               </div>
-              <div class="annotation">CLAIM TIER 03 →</div>
+              <div class="annotation">CLAIM TIER 03 <span class="card-arrow" aria-hidden="true">→</span></div>
             </div>
           </div>
         </section>
@@ -841,20 +919,44 @@ ${css}
       <span class="mono-label" style="color: var(--tungsten);">PASS RESERVATION · DIRECT CREDENTIALS</span>
       <h3 class="card-heading" id="modalHeading" style="margin-top: 12px; margin-bottom: 24px;">SECURE PASS</h3>
 
-      <form id="checkoutForm" onsubmit="event.preventDefault(); alert('Pass registered! Digital credentials sent.'); document.getElementById('checkoutModal').classList.remove('open');">
+      <!-- Interactive Reservation Form -->
+      <form id="checkoutForm">
         <label for="attendeeName" class="mono-label" style="display: block; margin-bottom: 6px;">ATTENDEE FULL NAME</label>
-        <input type="text" id="attendeeName" class="text-field" placeholder="E.g. Elena Rostova" required />
+        <input type="text" id="attendeeName" class="text-field" placeholder="E.g. Elena Rostova" required autocomplete="name" />
 
-        <label for="attendeeEmail" class="mono-label" style="display: block; margin-bottom: 6px;">DISPATCH EMAIL ADDRESS</label>
-        <input type="email" id="attendeeEmail" class="text-field" placeholder="elena@example.com" required />
+        <label for="attendeeEmail" class="mono-label" style="display: block; margin-bottom: 6px; margin-top: 16px;">DISPATCH EMAIL ADDRESS</label>
+        <input type="email" id="attendeeEmail" class="text-field" placeholder="elena@example.com" required autocomplete="email" />
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
-          <span class="figure" style="font-size: 0.875rem;">PASS TIER: FULL ACCESS · €48</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; flex-wrap: wrap; gap: 12px;">
+          <span class="figure" id="modalTierPrice" style="font-size: 0.875rem;">PASS TIER: FULL ACCESS · €48</span>
           <button type="submit" class="button-solid" style="font-size: 1rem; padding: 0.65rem 1.25rem;">
             CONFIRM &amp; DISPATCH →
           </button>
         </div>
       </form>
+
+      <!-- Digital Receipt Confirmation View (Initially Hidden) -->
+      <div id="checkoutSuccessState" style="display: none;">
+        <div style="border: 2px dashed var(--tungsten); padding: 1.5rem; background: rgba(175, 58, 3, 0.03); border-radius: 4px; margin-top: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px; margin-bottom: 12px;">
+            <span class="mono-label" style="color: var(--tungsten);">PASSPORT STATUS: ISSUED</span>
+            <span class="mono-note" id="receiptSerial">OH-2026-8841</span>
+          </div>
+          <div style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; text-transform: uppercase; color: var(--text);">
+            CREDENTIALS CONFIRMED
+          </div>
+          <p class="body-copy" style="font-size: 0.8125rem; margin-top: 6px;">
+            Digital admission dispatch sent to <strong id="receiptEmail" style="color: var(--text);">attendee@example.com</strong>. Present digital QR docket at any of the four civic entrances.
+          </p>
+          <div style="margin-top: 14px; font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-muted); display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div>VALIDITY: 48-HOUR PASS</div>
+            <div>ACCESS: 4 MONUMENTS</div>
+          </div>
+        </div>
+        <button type="button" class="button-solid" id="receiptCloseBtn" style="width: 100%; margin-top: 20px; justify-content: center; text-align: center;">
+          RETURN TO DOSSIER [ESC]
+        </button>
+      </div>
     </div>
   </div>
 

@@ -13,15 +13,65 @@
  * - Pinned 2.5D Atlas descent & zero-dead-scroll 4-chamber horizontal gallery
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  const lenis = initSmoothScroll();
-  initScrollProgress(lenis);
-  initTimecode(lenis);
-  initAmbientAudio();
-  initParticleButtons();
-  initScheduleSwitcher();
-  initModal();
-  initGSAPTimelines(lenis);
+let isBooted = false;
+
+function bootApp() {
+  if (isBooted) return;
+  isBooted = true;
+
+  // 1. GSAP & Plugins Pre-Registration (GSAP Best Practice: register before any usage)
+  if (typeof gsap !== 'undefined') {
+    if (typeof ScrollTrigger !== 'undefined') {
+      try {
+        gsap.registerPlugin(ScrollTrigger);
+      } catch (e) {
+        console.warn('[OFF HOURS] ScrollTrigger plugin registration warning:', e);
+      }
+    }
+    if (typeof CustomEase !== 'undefined') {
+      try {
+        gsap.registerPlugin(CustomEase);
+        CustomEase.create('animaxxing', 'M0,0 C0.16,1 0.3,1 1,1');
+      } catch (e) {
+        console.warn('[OFF HOURS] CustomEase plugin registration warning:', e);
+      }
+    }
+  } else {
+    console.warn('[OFF HOURS] GSAP library not found on window. If running offline, check CDN script tags.');
+  }
+
+  // 2. Isolated subsystem initialization (prevents single-module failures from blocking animations)
+  let lenis = null;
+  try {
+    lenis = initSmoothScroll();
+  } catch (err) {
+    console.warn('[OFF HOURS] Smooth scroll initialization failed, falling back to native scroll:', err);
+  }
+
+  try { initScrollProgress(lenis); } catch (err) { console.warn('[OFF HOURS] Scroll progress failed:', err); }
+  try { initTimecode(lenis); } catch (err) { console.warn('[OFF HOURS] Timecode failed:', err); }
+  try { initAmbientAudio(); } catch (err) { console.warn('[OFF HOURS] Ambient audio failed:', err); }
+  try { initParticleButtons(); } catch (err) { console.warn('[OFF HOURS] Particle buttons failed:', err); }
+  try { initScheduleSwitcher(); } catch (err) { console.warn('[OFF HOURS] Schedule switcher failed:', err); }
+  try { initCardTilt(); } catch (err) { console.warn('[OFF HOURS] Card tilt failed:', err); }
+  try { initModal(); } catch (err) { console.warn('[OFF HOURS] Modal failed:', err); }
+  try { initGSAPTimelines(lenis); } catch (err) { console.error('[OFF HOURS] GSAP timelines initialization failed:', err); }
+}
+
+// Resilient readyState bootstrap (runs immediately if document is already ready/interactive)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootApp);
+} else {
+  // DOM is already parsed (interactive or complete), boot immediately
+  bootApp();
+}
+
+// Extra safety fallback for late scripts or async execution
+window.addEventListener('load', () => {
+  bootApp();
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.refresh();
+  }
 });
 
 /* ==========================================================================
@@ -465,10 +515,15 @@ function initParticleButtons() {
    5. MASTER GSAP CHOREOGRAPHY (ANIMAXXING EDITORIAL TREATMENT)
    ========================================================================== */
 function initGSAPTimelines(lenis) {
-  if (typeof gsap === 'undefined') return;
+  if (typeof gsap === 'undefined') {
+    console.warn('[OFF HOURS] initGSAPTimelines skipped: gsap is undefined');
+    return;
+  }
 
   if (typeof CustomEase !== 'undefined') {
-    CustomEase.create('animaxxing', 'M0,0 C0.16,1 0.3,1 1,1');
+    try {
+      CustomEase.create('animaxxing', 'M0,0 C0.16,1 0.3,1 1,1');
+    } catch (_) {}
   }
 
   if (typeof ScrollTrigger !== 'undefined') {
@@ -476,7 +531,11 @@ function initGSAPTimelines(lenis) {
     if (document.fonts) {
       document.fonts.ready.then(() => ScrollTrigger.refresh());
     }
-    window.addEventListener('load', () => ScrollTrigger.refresh());
+    if (document.readyState === 'complete') {
+      ScrollTrigger.refresh();
+    } else {
+      window.addEventListener('load', () => ScrollTrigger.refresh());
+    }
 
     // Synchronize ScrollTrigger on chamber image completion to prevent dimension shift
     const chamberImgs = document.querySelectorAll('.media-parallax-img');
@@ -583,79 +642,132 @@ function initGSAPTimelines(lenis) {
     });
   }
 
-  // 5.6 Scene 02: Nocturnal Atlas — Progressive Scroll-Activated Waypoints (Zero Zoom, Zero Jitter)
+  // 5.6 Scene 02: Nocturnal Atlas — On-Map Scroll-Activated Waypoints & GSAP Popovers
   const atlasWrapper = document.getElementById('atlasPin');
   if (atlasWrapper && typeof ScrollTrigger !== 'undefined') {
     const navTabs = document.querySelectorAll('.atlas-nav-tab');
-    const mapNodes = document.querySelectorAll('.map-node');
-    const dossierCards = document.querySelectorAll('.dossier-card');
-    const nodeCounter = document.getElementById('atlasNodeCounter');
-    const fill = document.getElementById('atlasHudFill');
-    let currentActiveIdx = -1;
+    const mapNodes = [
+      document.getElementById('mapNode0'),
+      document.getElementById('mapNode1'),
+      document.getElementById('mapNode2'),
+      document.getElementById('mapNode3')
+    ];
+    const leaderLines = [
+      document.getElementById('leaderLine0'),
+      document.getElementById('leaderLine1'),
+      document.getElementById('leaderLine2'),
+      document.getElementById('leaderLine3')
+    ];
+    const calloutCards = [
+      document.getElementById('mapCallout0'),
+      document.getElementById('mapCallout1'),
+      document.getElementById('mapCallout2'),
+      document.getElementById('mapCallout3')
+    ];
 
-    function activateAtlasNode(index) {
-      if (index === currentActiveIdx || index < 0 || index > 3) return;
-      currentActiveIdx = index;
+    // Prepare leader lines with stroke-dashoffset for draw-in animation
+    leaderLines.forEach((line) => {
+      if (line) {
+        const len = line.getTotalLength ? line.getTotalLength() : 120;
+        gsap.set(line, { strokeDasharray: len, strokeDashoffset: len });
+      }
+    });
 
+    // Initial state: hide all callout cards
+    gsap.set(calloutCards, { autoAlpha: 0, scale: 0.85, y: 15 });
+
+    function updateHud(index) {
       navTabs.forEach((tab, i) => {
         const isActive = i === index;
         tab.classList.toggle('is-active', isActive);
         tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
       });
-
-      mapNodes.forEach((node, i) => {
-        node.classList.toggle('is-active', i === index);
-      });
-
-      dossierCards.forEach((card, i) => {
-        const isActive = i === index;
-        card.classList.toggle('is-active', isActive);
-        const tagStatus = card.querySelector('.tag-status');
-        if (tagStatus) {
-          tagStatus.textContent = isActive ? 'ACTIVATED' : (i < index ? 'LOGGED' : 'STANDBY');
-        }
-      });
-
-      if (nodeCounter) {
-        nodeCounter.textContent = `NODE 0${index + 1} / 04 ACTIVE`;
-      }
-      if (fill) {
-        fill.style.width = `${((index + 1) / 4) * 100}%`;
-      }
     }
 
-    // Set initial state
-    activateAtlasNode(0);
-
-    // Responsive ScrollTrigger: pin on desktop (min-width: 1025px), sequential scrub
     const mmAtlas = gsap.matchMedia();
+
     mmAtlas.add('(min-width: 1025px)', () => {
-      ScrollTrigger.create({
-        trigger: '#atlasPin',
-        start: 'top top',
-        end: 'bottom bottom',
-        pin: '.atlas-viewport',
-        scrub: 0.8,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          // Clean 4-segment scroll partitioning:
-          // [0.00 — 0.25): Node 0 (The Old Tram Depot)
-          // [0.25 — 0.50): Node 1 (The Municipal Baths)
-          // [0.50 — 0.75): Node 2 (The Night Market)
-          // [0.75 — 1.00]: Node 3 (The Old Printworks)
-          let idx = Math.floor(progress * 4);
-          if (idx > 3) idx = 3;
-          if (idx < 0) idx = 0;
-          activateAtlasNode(idx);
+      const atlasTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#atlasPin',
+          start: 'top top',
+          end: 'bottom bottom',
+          pin: '.atlas-viewport',
+          scrub: 0.8,
+          anticipatePin: 1
         }
       });
+
+      // River flow pulse
+      atlasTl.fromTo('#atlasRiverLine', 
+        { strokeDashoffset: 1400 }, 
+        { strokeDashoffset: 0, ease: 'none', duration: 4 }, 
+        0
+      );
+
+      // Waypoint 01: The Old Tram Depot (Scroll segment 0.2 - 0.8)
+      atlasTl
+        .call(() => updateHud(0), null, 0.2)
+        .to(mapNodes[0], { opacity: 1, duration: 0.2 }, 0.2)
+        .add(() => mapNodes[0]?.classList.add('is-active'), 0.2)
+        .to(leaderLines[0], { strokeDashoffset: 0, duration: 0.35, ease: 'power2.out' }, 0.25)
+        .to(calloutCards[0], { autoAlpha: 1, scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.4)' }, 0.3)
+        .add(() => calloutCards[0]?.classList.add('is-active'), 0.3);
+
+      // Waypoint 02: The Municipal Baths (Scroll segment 1.2 - 1.8)
+      atlasTl
+        .call(() => updateHud(1), null, 1.2)
+        .to(mapNodes[1], { opacity: 1, duration: 0.2 }, 1.2)
+        .add(() => mapNodes[1]?.classList.add('is-active'), 1.2)
+        .to(leaderLines[1], { strokeDashoffset: 0, duration: 0.35, ease: 'power2.out' }, 1.25)
+        .to(calloutCards[1], { autoAlpha: 1, scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.4)' }, 1.3)
+        .add(() => calloutCards[1]?.classList.add('is-active'), 1.3);
+
+      // Waypoint 03: The Night Market (Scroll segment 2.2 - 2.8)
+      atlasTl
+        .call(() => updateHud(2), null, 2.2)
+        .to(mapNodes[2], { opacity: 1, duration: 0.2 }, 2.2)
+        .add(() => mapNodes[2]?.classList.add('is-active'), 2.2)
+        .to(leaderLines[2], { strokeDashoffset: 0, duration: 0.35, ease: 'power2.out' }, 2.25)
+        .to(calloutCards[2], { autoAlpha: 1, scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.4)' }, 2.3)
+        .add(() => calloutCards[2]?.classList.add('is-active'), 2.3);
+
+      // Waypoint 04: The Old Printworks (Scroll segment 3.2 - 3.8)
+      atlasTl
+        .call(() => updateHud(3), null, 3.2)
+        .to(mapNodes[3], { opacity: 1, duration: 0.2 }, 3.2)
+        .add(() => mapNodes[3]?.classList.add('is-active'), 3.2)
+        .to(leaderLines[3], { strokeDashoffset: 0, duration: 0.35, ease: 'power2.out' }, 3.25)
+        .to(calloutCards[3], { autoAlpha: 1, scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.4)' }, 3.3)
+        .add(() => calloutCards[3]?.classList.add('is-active'), 3.3);
     });
 
-    // Mobile/tablet fallback: switch cards on scroll or tap
+    // Mobile / Tablet: show active card on tap/scroll
     mmAtlas.add('(max-width: 1024px)', () => {
+      function showMobileCallout(index) {
+        updateHud(index);
+        calloutCards.forEach((card, i) => {
+          if (card) {
+            const isActive = i === index;
+            card.classList.toggle('is-active', isActive);
+            gsap.to(card, { autoAlpha: isActive ? 1 : 0, scale: isActive ? 1 : 0.9, duration: 0.3 });
+          }
+        });
+        mapNodes.forEach((node, i) => {
+          if (node) node.classList.toggle('is-active', i === index);
+        });
+        leaderLines.forEach((line, i) => {
+          if (line) gsap.to(line, { strokeDashoffset: i === index ? 0 : 120, duration: 0.3 });
+        });
+      }
+
+      showMobileCallout(0);
+
       navTabs.forEach((tab, i) => {
-        tab.addEventListener('click', () => activateAtlasNode(i));
+        tab.addEventListener('click', () => showMobileCallout(i));
+      });
+      mapNodes.forEach((node, i) => {
+        if (node) node.addEventListener('click', () => showMobileCallout(i));
       });
     });
 
@@ -663,10 +775,7 @@ function initGSAPTimelines(lenis) {
     function scrollToAtlasWaypoint(targetIndex) {
       if (typeof ScrollTrigger === 'undefined') return;
       const totalScrollable = atlasWrapper.offsetHeight - window.innerHeight;
-      if (totalScrollable <= 0) {
-        activateAtlasNode(targetIndex);
-        return;
-      }
+      if (totalScrollable <= 0) return;
       const targetProgress = (targetIndex + 0.35) / 4;
       const targetY = atlasWrapper.offsetTop + (totalScrollable * targetProgress);
       if (lenis) {
@@ -674,7 +783,6 @@ function initGSAPTimelines(lenis) {
       } else {
         window.scrollTo({ top: targetY, behavior: 'smooth' });
       }
-      activateAtlasNode(targetIndex);
     }
 
     navTabs.forEach((tab, i) => {
@@ -685,10 +793,12 @@ function initGSAPTimelines(lenis) {
     });
 
     mapNodes.forEach((node, i) => {
-      node.addEventListener('click', (e) => {
-        e.preventDefault();
-        scrollToAtlasWaypoint(i);
-      });
+      if (node) {
+        node.addEventListener('click', (e) => {
+          e.preventDefault();
+          scrollToAtlasWaypoint(i);
+        });
+      }
     });
   }
 
@@ -729,9 +839,9 @@ function initGSAPTimelines(lenis) {
 
             gsap.fromTo(
               img,
-              { xPercent: 6, scale: 1.14 },
+              { xPercent: 16, scale: 1.2 },
               {
-                xPercent: -6,
+                xPercent: -16,
                 scale: 1.05,
                 ease: 'none',
                 scrollTrigger: {
@@ -754,6 +864,139 @@ function initGSAPTimelines(lenis) {
         start: 'top 85%'
       });
     });
+  }
+
+  // 5.8 Schedule Timetable Entrance Animation
+  const scheduleSection = document.getElementById('schedule');
+  if (scheduleSection && typeof ScrollTrigger !== 'undefined') {
+    const scheduleHeader = scheduleSection.querySelector('.schedule-header');
+    const day1Rows = scheduleSection.querySelectorAll('.ledger-row[data-day="1"]');
+    const day1TimeRolls = scheduleSection.querySelectorAll('.ledger-row[data-day="1"] .slot-time-roll');
+    const day1Acts = scheduleSection.querySelectorAll('.ledger-row[data-day="1"] .slot-act');
+    const day1Badges = scheduleSection.querySelectorAll('.ledger-row[data-day="1"] .slot-badge');
+    const day1Btns = scheduleSection.querySelectorAll('.ledger-row[data-day="1"] .reserve-btn');
+
+    const scheduleTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: scheduleSection,
+        start: 'top 75%',
+        once: true
+      }
+    });
+
+    if (scheduleHeader) {
+      scheduleTl.fromTo(scheduleHeader,
+        { autoAlpha: 0, y: 20 },
+        { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+      );
+    }
+
+    if (day1Rows.length > 0) {
+      scheduleTl.fromTo(day1Rows,
+        { autoAlpha: 0, y: 14 },
+        { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.045, ease: 'power3.out' },
+        '-=0.2'
+      );
+
+      // Split-flap departure-board odometer roll-up on timestamps
+      if (day1TimeRolls.length > 0) {
+        scheduleTl.fromTo(day1TimeRolls,
+          { yPercent: 120, autoAlpha: 0 },
+          { yPercent: 0, autoAlpha: 1, duration: 0.55, stagger: 0.045, ease: 'animaxxing' },
+          '<-0.35'
+        );
+      }
+
+      // Typographic reveal on acts
+      if (day1Acts.length > 0) {
+        scheduleTl.fromTo(day1Acts,
+          { x: -10, autoAlpha: 0 },
+          { x: 0, autoAlpha: 1, duration: 0.4, stagger: 0.045, ease: 'power2.out' },
+          '<-0.35'
+        );
+      }
+
+      // Rubber-stamp pop on session badges
+      if (day1Badges.length > 0) {
+        scheduleTl.fromTo(day1Badges,
+          { scale: 1.4, autoAlpha: 0 },
+          { scale: 1, autoAlpha: 1, duration: 0.45, stagger: 0.045, ease: 'back.out(2)' },
+          '<-0.3'
+        );
+      }
+
+      // Reserve CTA subtle slide
+      if (day1Btns.length > 0) {
+        scheduleTl.fromTo(day1Btns,
+          { x: 8, autoAlpha: 0 },
+          { x: 0, autoAlpha: 1, duration: 0.35, stagger: 0.045, ease: 'power2.out' },
+          '<-0.3'
+        );
+      }
+    }
+  }
+
+  // 5.9 Passes Dossier Entrance Animation
+  const passesSection = document.getElementById('passes');
+  if (passesSection && typeof ScrollTrigger !== 'undefined') {
+    const passesHeader = passesSection.querySelector('div:first-child');
+    const cards = passesSection.querySelectorAll('.card');
+
+    const passesTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: passesSection,
+        start: 'top 75%',
+        once: true
+      }
+    });
+
+    if (passesHeader) {
+      passesTl.fromTo(passesHeader,
+        { autoAlpha: 0, y: 22 },
+        { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+      );
+    }
+
+    if (cards.length > 0) {
+      passesTl.fromTo(cards,
+        { autoAlpha: 0, y: 32, scale: 0.96 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.12, ease: 'animaxxing' },
+        '-=0.25'
+      );
+    }
+  }
+
+  // 5.10 Dynamic Scroll Velocity Skew (High-Craft Kinetic Inertia)
+  if (typeof ScrollTrigger !== 'undefined' && !prefersReducedMotion()) {
+    const skewTargets = gsap.utils.toArray('.schedule-section, .card-grid, .hero-main-block');
+    if (skewTargets.length > 0) {
+      const clamp = gsap.utils.clamp(-2.5, 2.5);
+      const lean = { skew: 0 };
+      gsap.set(skewTargets, { skewY: 0, transformOrigin: '50% 50%', willChange: 'transform' });
+      const setSkew = gsap.quickSetter(skewTargets, 'skewY', 'deg');
+      let settle = null;
+
+      ScrollTrigger.create({
+        onUpdate: (self) => {
+          const velocity = self.getVelocity();
+          const targetSkew = clamp(velocity / -350);
+          if (Math.abs(targetSkew) <= Math.abs(lean.skew)) return;
+          lean.skew = targetSkew;
+          if (settle) settle.kill();
+          settle = gsap.to(lean, {
+            skew: 0,
+            duration: 0.75,
+            ease: 'power3.out',
+            onUpdate: () => setSkew(lean.skew),
+          });
+        },
+      });
+    }
+  }
+
+  // Force an immediate refresh so all pinned triggers compute accurate positions
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.refresh();
   }
 }
 
@@ -817,7 +1060,11 @@ function runBlastOff(button, heading) {
 
   const blastTl = gsap.timeline({
     onComplete: () => {
-      if (modal) modal.classList.add('open');
+      if (window.openCheckoutModal) {
+        window.openCheckoutModal();
+      } else if (modal) {
+        modal.classList.add('open');
+      }
       setTimeout(() => {
         gsap.to(chars, { x: 0, y: 0, rotation: 0, scale: 1, autoAlpha: 1, duration: 0.8, ease: 'power3.out' });
         gsap.to(subheadWords, { x: 0, y: 0, rotation: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out' });
@@ -882,39 +1129,104 @@ function initScheduleSwitcher() {
 
   if (!day1Btn || !day2Btn) return;
 
+  let isSwitching = false;
+
   day1Btn.addEventListener('click', () => {
+    if (day1Btn.classList.contains('active') || isSwitching) return;
     day1Btn.classList.add('active');
     day2Btn.classList.remove('active');
+    day1Btn.setAttribute('aria-selected', 'true');
+    day2Btn.setAttribute('aria-selected', 'false');
     filterRows('1');
   });
 
   day2Btn.addEventListener('click', () => {
+    if (day2Btn.classList.contains('active') || isSwitching) return;
     day2Btn.classList.add('active');
     day1Btn.classList.remove('active');
+    day2Btn.setAttribute('aria-selected', 'true');
+    day1Btn.setAttribute('aria-selected', 'false');
     filterRows('2');
   });
 
   function filterRows(day) {
-    if (typeof gsap === 'undefined') return;
+    if (typeof gsap === 'undefined') {
+      rows.forEach((row) => {
+        row.style.display = row.getAttribute('data-day') === day ? 'grid' : 'none';
+      });
+      return;
+    }
 
-    gsap.to(rows, {
+    isSwitching = true;
+    const currentRows = Array.from(rows).filter((r) => r.style.display !== 'none');
+    const incomingRows = Array.from(rows).filter((r) => r.getAttribute('data-day') === day);
+
+    // Mechanical departure board: outgoing rows flick up and fade
+    gsap.to(currentRows, {
+      y: -8,
       autoAlpha: 0,
-      y: 6,
-      duration: 0.15,
+      duration: 0.16,
       stagger: 0.02,
+      ease: 'power2.in',
       onComplete: () => {
-        rows.forEach((row) => {
-          const rowDay = row.getAttribute('data-day');
-          row.style.display = rowDay === day ? 'grid' : 'none';
+        currentRows.forEach((r) => { r.style.display = 'none'; });
+        incomingRows.forEach((r) => {
+          r.style.display = 'grid';
         });
-        gsap.to(rows, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.25,
-          stagger: 0.02,
-          ease: 'power2.out'
+
+        const timeRolls = incomingRows.map((r) => r.querySelector('.slot-time-roll')).filter(Boolean);
+        const acts = incomingRows.map((r) => r.querySelector('.slot-act')).filter(Boolean);
+        const badges = incomingRows.map((r) => r.querySelector('.slot-badge')).filter(Boolean);
+        const reserveBtns = incomingRows.map((r) => r.querySelector('.reserve-btn')).filter(Boolean);
+
+        const switchTl = gsap.timeline({
+          onComplete: () => {
+            isSwitching = false;
+            if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+          }
         });
-        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+
+        // Rows cascade in
+        switchTl.fromTo(incomingRows,
+          { y: 10, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.32, stagger: 0.035, ease: 'power3.out' }
+        );
+
+        // Odometer roll on incoming timestamps
+        if (timeRolls.length > 0) {
+          switchTl.fromTo(timeRolls,
+            { yPercent: 110, autoAlpha: 0 },
+            { yPercent: 0, autoAlpha: 1, duration: 0.45, stagger: 0.035, ease: 'animaxxing' },
+            0.04
+          );
+        }
+
+        // Typographic slide on incoming acts
+        if (acts.length > 0) {
+          switchTl.fromTo(acts,
+            { x: -6, autoAlpha: 0 },
+            { x: 0, autoAlpha: 1, duration: 0.35, stagger: 0.035, ease: 'power2.out' },
+            0.06
+          );
+        }
+
+        // Rubber-stamp pop on incoming badges
+        if (badges.length > 0) {
+          switchTl.fromTo(badges,
+            { scale: 1.3, autoAlpha: 0 },
+            { scale: 1, autoAlpha: 1, duration: 0.35, stagger: 0.035, ease: 'back.out(2)' },
+            0.08
+          );
+        }
+
+        // Reserve buttons slide
+        if (reserveBtns.length > 0) {
+          switchTl.fromTo(reserveBtns,
+            { x: 6, autoAlpha: 0 },
+            { x: 0, autoAlpha: 1, duration: 0.3, stagger: 0.035, ease: 'power2.out' },
+            0.08
+          );
+        }
       }
     });
   }
@@ -924,23 +1236,223 @@ function initModal() {
   const modal = document.getElementById('checkoutModal');
   const closeBtn = document.getElementById('modalCloseBtn');
   const triggerBtns = document.querySelectorAll('[data-open-modal]');
+  const modalContent = modal ? modal.querySelector('.modal-content') : null;
+  const formElements = modalContent ? modalContent.querySelectorAll('.mono-label, .card-heading, label, input, button') : [];
+  const form = document.getElementById('checkoutForm');
+  const successState = document.getElementById('checkoutSuccessState');
+  const emailInput = document.getElementById('attendeeEmail');
+  const receiptEmail = document.getElementById('receiptEmail');
+  const receiptSerial = document.getElementById('receiptSerial');
+  const receiptCloseBtn = document.getElementById('receiptCloseBtn');
+  const modalTierPrice = document.getElementById('modalTierPrice');
 
-  if (!modal) return;
+  if (!modal || !modalContent) return;
+
+  let isOpen = false;
+  let activeTl = null;
+
+  function openModal(triggerElement) {
+    if (isOpen) return;
+    isOpen = true;
+
+    if (activeTl) activeTl.kill();
+
+    if (triggerElement && modalTierPrice) {
+      const card = triggerElement.closest ? triggerElement.closest('.card') : null;
+      if (card) {
+        const figure = card.querySelector('.figure');
+        const heading = card.querySelector('.card-heading');
+        if (figure && heading) {
+          modalTierPrice.textContent = `PASS TIER: ${heading.textContent.trim()} · ${figure.textContent.split('·')[0].trim()}`;
+        }
+      } else {
+        modalTierPrice.textContent = 'PASS TIER: FULL ACCESS · €48';
+      }
+    }
+
+    modal.classList.add('open');
+    modal.style.display = 'flex';
+    modal.style.pointerEvents = 'auto';
+
+    if (typeof gsap === 'undefined') {
+      modal.style.opacity = '1';
+      return;
+    }
+
+    activeTl = gsap.timeline();
+
+    // 1. Backdrop ink wash fade in
+    activeTl.fromTo(modal,
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.35, ease: 'power2.out' }
+    );
+
+    // 2. Broadsheet modal content panel elastic pop-in
+    activeTl.fromTo(modalContent,
+      { scale: 0.94, y: 18, autoAlpha: 0 },
+      { scale: 1, y: 0, autoAlpha: 1, duration: 0.45, ease: 'animaxxing' },
+      0.05
+    );
+
+    // 3. Staggered cascade of form inputs and elements
+    if (formElements.length > 0) {
+      activeTl.fromTo(formElements,
+        { autoAlpha: 0, y: 8 },
+        { autoAlpha: 1, y: 0, duration: 0.28, stagger: 0.03, ease: 'power2.out' },
+        0.15
+      );
+    }
+  }
+
+  function closeModal() {
+    if (!isOpen) return;
+    isOpen = false;
+
+    if (activeTl) activeTl.kill();
+
+    if (typeof gsap === 'undefined') {
+      modal.classList.remove('open');
+      modal.style.display = 'none';
+      modal.style.pointerEvents = 'none';
+      return;
+    }
+
+    activeTl = gsap.timeline({
+      onComplete: () => {
+        modal.classList.remove('open');
+        modal.style.display = 'none';
+        modal.style.pointerEvents = 'none';
+        // Reset form to ready state
+        if (form && successState) {
+          form.reset();
+          form.style.display = 'block';
+          gsap.set(form, { autoAlpha: 1, y: 0 });
+          successState.style.display = 'none';
+          gsap.set(successState, { autoAlpha: 0 });
+        }
+      }
+    });
+
+    activeTl.to(modalContent, {
+      scale: 0.95,
+      y: 10,
+      autoAlpha: 0,
+      duration: 0.22,
+      ease: 'power2.in'
+    });
+
+    activeTl.to(modal, {
+      autoAlpha: 0,
+      duration: 0.22,
+      ease: 'power2.in'
+    }, 0.04);
+  }
+
+  window.openCheckoutModal = openModal;
+  window.closeCheckoutModal = closeModal;
+
+  // Form submission: digital receipt confirmation
+  if (form && successState) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = emailInput && emailInput.value ? emailInput.value : 'elena@example.com';
+      if (receiptEmail) receiptEmail.textContent = email;
+      if (receiptSerial) {
+        receiptSerial.textContent = `OH-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      }
+
+      gsap.to(form, {
+        autoAlpha: 0,
+        y: -10,
+        duration: 0.22,
+        ease: 'power2.in',
+        onComplete: () => {
+          form.style.display = 'none';
+          successState.style.display = 'block';
+          gsap.fromTo(successState,
+            { autoAlpha: 0, scale: 0.96, y: 12 },
+            { autoAlpha: 1, scale: 1, y: 0, duration: 0.35, ease: 'back.out(1.4)' }
+          );
+        }
+      });
+    });
+
+    if (receiptCloseBtn) {
+      receiptCloseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeModal();
+      });
+    }
+  }
 
   triggerBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
+      // If hero blast-off button, it triggers blastOff animation first
+      if (btn.id === 'passCtaAction') return;
       e.preventDefault();
-      modal.classList.add('open');
+      openModal(btn);
     });
   });
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', () => modal.classList.remove('open'));
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal();
+    });
   }
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('open')) {
-      modal.classList.remove('open');
+  // Backdrop click dismisses modal
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
     }
+  });
+
+  // ESC key dismisses modal
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) {
+      closeModal();
+    }
+  });
+}
+
+function initCardTilt() {
+  if (typeof gsap === 'undefined' || prefersReducedMotion()) return;
+  const cards = document.querySelectorAll('.card');
+  if (cards.length === 0) return;
+
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  if (!isFinePointer) return;
+
+  cards.forEach((card) => {
+    gsap.set(card, { transformPerspective: 900 });
+    const rx = gsap.quickTo(card, 'rotationX', { duration: 0.35, ease: 'power2.out' });
+    const ry = gsap.quickTo(card, 'rotationY', { duration: 0.35, ease: 'power2.out' });
+
+    let rect = card.getBoundingClientRect();
+
+    card.addEventListener('pointerenter', (e) => {
+      if (e.pointerType === 'touch') return;
+      rect = card.getBoundingClientRect();
+    });
+
+    card.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      const px = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+      const py = Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height));
+      const maxTilt = 15;
+      ry((px - 0.5) * 2 * maxTilt);
+      rx((0.5 - py) * 2 * maxTilt);
+      card.style.setProperty('--pointer-x', `${(px * 100).toFixed(1)}%`);
+      card.style.setProperty('--pointer-y', `${(py * 100).toFixed(1)}%`);
+    });
+
+    card.addEventListener('pointerleave', (e) => {
+      if (e.pointerType === 'touch') return;
+      rx(0);
+      ry(0);
+      card.style.removeProperty('--pointer-x');
+      card.style.removeProperty('--pointer-y');
+    });
   });
 }

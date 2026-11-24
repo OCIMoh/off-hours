@@ -4,7 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OFF HOURS — Independent Nocturnal Culture Festival</title>
-  <meta name="description" content="OFF HOURS is an independent culture festival reactivating four overlooked spaces across an old river-and-rail city for two nights.">
+  <meta name="description" content="OFF HOURS is an independent culture festival reactivating four overlooked spaces across an old river-and-rail corridor for two transformative nights.">
+
+  <!-- Favicon (Inline Vector SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23af3a03'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23fdfcf9' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23fdfcf9'/%3E%3Cline x1='16' y1='2' x2='16' y2='30' stroke='%23fdfcf9' stroke-width='1.5' stroke-dasharray='2,3'/%3E%3Cline x1='2' y1='16' x2='30' y2='16' stroke='%23fdfcf9' stroke-width='1.5' stroke-dasharray='2,3'/%3E%3C/svg%3E">
+
+  <!-- Mobile & Browser Theme -->
+  <meta name="theme-color" content="#fdfcf9">
+  <meta name="color-scheme" content="light">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OFF HOURS — Independent Nocturnal Culture Festival">
+  <meta property="og:description" content="Reactivating four overlooked civic spaces across an old river-and-rail corridor for two transformative nights. October 24–25.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OFF HOURS — Independent Nocturnal Culture Festival">
+  <meta name="twitter:description" content="Reactivating four overlooked civic spaces across an old river-and-rail corridor for two transformative nights. October 24–25.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80">
 
   <!-- Curated Animaxxing Typography: Variable Rethink Sans (400-800) & JetBrains Mono (100-800) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -684,11 +703,11 @@ img {
 }
 
 /* ==========================================================================
-   8. SCENE 02: THE NOCTURNAL ATLAS (SCROLL-ACTIVATED CIVIC DOSSIER DECK)
+   8. SCENE 02: THE NOCTURNAL ATLAS (ON-MAP SCROLL-ACTIVATED CALLOUTS)
    ========================================================================== */
 .atlas-pin-wrapper {
   position: relative;
-  height: 250vh;
+  height: 260vh;
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border-hairline);
   width: 100vw;
@@ -703,34 +722,33 @@ img {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 70px var(--spacing-gutter-lg) 24px;
+  padding: 70px var(--spacing-gutter-lg) 20px;
   box-sizing: border-box;
 }
 
 .atlas-hud {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-hairline);
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-  gap: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  gap: 16px;
   flex-shrink: 0;
 }
 
 .atlas-hud-info {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
 }
 
 .atlas-hud-nav {
-  display: flex;
-  gap: 6px;
-  background: var(--bg);
-  border: 1px solid var(--border-hairline);
-  padding: 4px;
-  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .atlas-nav-tab {
@@ -739,57 +757,38 @@ img {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
-  padding: 6px 12px;
-  color: var(--text-muted);
+  padding: 2px 4px;
+  color: var(--text-dim);
   cursor: pointer;
-  border-radius: 2px;
-  transition: background 0.2s ease, color 0.2s ease;
-  font-weight: 600;
+  transition: color 0.2s ease;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .atlas-nav-tab:hover {
   color: var(--text);
-  background: rgba(29, 32, 33, 0.04);
+  background: transparent;
 }
 
 .atlas-nav-tab.is-active {
-  background: var(--tungsten);
-  color: #fdfcf9;
+  color: var(--tungsten);
+  font-weight: 800;
+  background: transparent;
 }
 
-.atlas-hud-status {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+.atlas-nav-sep {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--border-medium);
+  user-select: none;
 }
 
-.atlas-hud-progress {
-  width: 120px;
-  height: 4px;
-  background: rgba(29, 32, 33, 0.1);
-  overflow: hidden;
-  border-radius: 2px;
-}
-
-.atlas-hud-fill {
-  width: 25%;
-  height: 100%;
-  background: var(--tungsten);
-  transition: width 0.25s ease;
-}
-
-/* Workspace: Map Canvas + Dossier Deck */
-.atlas-workspace {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: 28px;
-  flex: 1;
-  min-height: 0;
-  align-items: stretch;
-}
-
+/* Full-Width Map Stage */
 .atlas-map-stage {
   position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
   border: 1px solid var(--border-hairline);
   background: var(--bg);
   border-radius: var(--radius-sm);
@@ -804,34 +803,79 @@ img {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(to right, rgba(29, 32, 33, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(29, 32, 33, 0.05) 1px, transparent 1px);
-  background-size: 60px 60px;
+    linear-gradient(to right, rgba(29, 32, 33, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29, 32, 33, 0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
   pointer-events: none;
 }
 
+/* Map Container: Locks to 1400 / 800 SVG aspect ratio for pixel-perfect on-map callout anchoring */
+.atlas-map-container {
+  position: relative;
+  width: min(100%, calc((100vh - 140px) * 1.75));
+  max-width: 1350px;
+  aspect-ratio: 1400 / 800;
+  margin: 0 auto;
+}
+
 .atlas-svg {
-  width: 95%;
-  height: 92%;
-  max-width: 1100px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   overflow: visible;
-  /* NO transform scaling so hitboxes and layout are 100% stable */
 }
 
 .atlas-svg path.river {
   stroke: var(--cyan-river);
 }
 
-/* Map Nodes: Jitter-Free Design (No CSS scale transforms on hover!) */
+.leader-line {
+  stroke: var(--tungsten);
+  stroke-width: 1.5;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  pointer-events: none;
+}
+
+/* Map Nodes: Jitter-Free Design (No CSS scale transforms on hover) */
 .map-node {
   cursor: pointer;
+}
+
+/* Living Radar Sonar Beacons */
+.radar-sonar {
+  fill: none;
+  stroke: var(--tungsten);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  pointer-events: none;
+  opacity: 0;
+  animation: sonarWave 2.8s infinite cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+.sonar-ring-2 {
+  animation-delay: 1.4s;
+}
+
+.map-node.is-active .radar-sonar {
+  stroke: var(--tungsten);
+  stroke-width: 2;
+  animation-duration: 2.2s;
+}
+
+@keyframes sonarWave {
+  0% { transform: scale(0.25); opacity: 0.85; stroke-width: 2.5px; }
+  60% { opacity: 0.45; }
+  100% { transform: scale(1.75); opacity: 0; stroke-width: 0.5px; }
 }
 
 .map-node .radar-ring {
   fill: none;
   stroke: var(--tungsten);
   stroke-width: 1.5;
-  opacity: 0.15;
+  opacity: 0.2;
   transition: stroke 0.3s ease, opacity 0.3s ease;
 }
 
@@ -858,7 +902,6 @@ img {
   transition: opacity 0.3s ease, fill 0.3s ease;
 }
 
-/* Node Active State (Toggled smoothly by ScrollTrigger) */
 .map-node.is-active .radar-ring {
   stroke: var(--tungsten);
   opacity: 0.85;
@@ -879,11 +922,11 @@ img {
   opacity: 1;
 }
 
-/* Hover: Subtle color highlight only — zero layout or scale change! */
 .map-node:hover .radar-ring {
   stroke: var(--tungsten-bright);
   opacity: 0.7;
 }
+
 .map-node:hover .node-title {
   fill: var(--text);
 }
@@ -893,131 +936,125 @@ img {
   100% { r: 38px; opacity: 0; stroke-width: 0.5px; }
 }
 
-/* Dossier Deck: Stack of 4 Editorial Cards */
-.atlas-dossier-deck {
-  position: relative;
-  border: 1px solid var(--border-hairline);
-  background: var(--bg);
-  border-radius: var(--radius-sm);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(29, 32, 33, 0.03);
-}
-
-.dossier-card {
+/* On-Map Floating Dossier Callouts (GSAP Animated on scroll) */
+.map-callout-card {
   position: absolute;
-  inset: 0;
-  padding: 30px 26px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  width: 250px;
   background: var(--bg);
+  border: 1px solid var(--border-hairline);
+  border-left: 3px solid var(--tungsten);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  box-shadow: 0 8px 30px rgba(29, 32, 33, 0.08), 0 2px 6px rgba(29, 32, 33, 0.04);
+  z-index: 10;
+  pointer-events: auto;
   opacity: 0;
   visibility: hidden;
-  pointer-events: none;
-  border-left: 3px solid transparent;
-  transition: opacity 0.35s ease, visibility 0.35s ease, border-color 0.35s ease;
+  transform-origin: top left;
+  transition: box-shadow 0.3s ease;
 }
 
-.dossier-card.is-active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  border-left: 4px solid var(--tungsten);
+.map-callout-card.is-active {
+  box-shadow: 0 12px 36px rgba(175, 58, 3, 0.12), 0 2px 8px rgba(29, 32, 33, 0.06);
 }
 
-.dossier-card-tag {
+.callout-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.15em;
-  padding-bottom: 12px;
   border-bottom: 1px solid var(--border-hairline);
+  padding-bottom: 6px;
+  margin-bottom: 8px;
 }
 
-.dossier-card-tag .tag-num {
-  color: var(--tungsten);
-  font-weight: 700;
-}
-
-.dossier-card-tag .tag-status {
-  color: var(--text-dim);
-  background: var(--bg-surface);
-  padding: 3px 8px;
-  border: 1px solid var(--border-hairline);
-  border-radius: 2px;
+.callout-tag {
+  font-family: var(--font-mono);
   font-size: 0.625rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
+  color: var(--tungsten);
+  text-transform: uppercase;
 }
 
-.dossier-card-title {
+.callout-pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--tungsten);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--tungsten);
+  animation: pulseDot 1.6s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.callout-title {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 2.2vw, 2.3rem);
+  font-size: 0.9375rem;
   font-weight: 800;
-  line-height: 1.05;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   color: var(--text);
-  letter-spacing: -0.03em;
-  margin: 14px 0 8px;
+  margin: 0 0 6px 0;
 }
 
-.dossier-card-copy {
-  font-size: 0.875rem;
-  line-height: 1.5;
+.callout-desc {
+  font-size: 0.75rem;
+  line-height: 1.4;
   color: var(--text-muted);
-  margin-bottom: 16px;
+  margin: 0 0 8px 0;
 }
 
-.dossier-specs-mini {
+.callout-telemetry {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 14px;
+  gap: 4px 8px;
   background: var(--bg-surface);
   border: 1px solid var(--border-hairline);
-  padding: 12px 14px;
-  border-radius: var(--radius-sm);
-  margin-bottom: 16px;
+  padding: 6px 8px;
+  border-radius: 2px;
+  margin-bottom: 8px;
 }
 
-.dossier-specs-mini > div {
+.callout-telemetry .tel-item {
   display: flex;
   flex-direction: column;
 }
 
-.dossier-specs-mini span {
+.callout-telemetry .k {
   font-family: var(--font-mono);
-  font-size: 0.5625rem;
-  letter-spacing: 0.12em;
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
   color: var(--text-dim);
   text-transform: uppercase;
 }
 
-.dossier-specs-mini strong {
-  font-size: 0.75rem;
-  color: var(--text);
-  margin-top: 2px;
+.callout-telemetry .v {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
   font-weight: 700;
+  color: var(--text);
 }
 
-.dossier-action-btn {
+.callout-cta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: var(--text);
   color: #fdfcf9;
-  padding: 12px 16px;
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.1em;
+  padding: 6px 10px;
+  border-radius: 2px;
   text-decoration: none;
-  border-radius: var(--radius-sm);
   transition: background 0.2s ease;
 }
 
-.dossier-action-btn:hover {
+.callout-cta:hover {
   background: var(--tungsten);
 }
 
@@ -1333,7 +1370,7 @@ img {
 }
 
 /* ==========================================================================
-   10. SCENE 04: SCHEDULE (HAIRLINE-RULED LEDGER TABLE)
+   10. SCENE 04: SCHEDULE (HAIRLINE-RULED LEDGER TABLE & MECHANICAL FLIP)
    ========================================================================== */
 .schedule-section {
   padding: var(--spacing-section) var(--spacing-gutter-lg);
@@ -1349,6 +1386,7 @@ img {
   align-items: flex-end;
   border-bottom: 1px solid var(--border-hairline);
   padding-bottom: 1.25rem;
+  position: relative;
 }
 
 .schedule-filter-tabs {
@@ -1362,33 +1400,51 @@ img {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-sm);
+  background: var(--bg);
   color: var(--text-dim);
-  transition: all 0.2s ease;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tab-btn:hover,
+.tab-btn:hover {
+  color: var(--text);
+  border-color: var(--text);
+  background: rgba(29, 32, 33, 0.03);
+}
+
 .tab-btn.active {
   background: var(--text);
   color: #fdfcf9;
   border-color: var(--text);
+  box-shadow: 0 2px 8px rgba(29, 32, 33, 0.12);
 }
 
-/* Ledger Rows */
+.tab-btn:active {
+  transform: scale(0.94);
+}
+
+/* Ledger Rows & Mechanical Odometer Slots */
 .ledger-row {
   display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr);
+  grid-template-columns: 4rem minmax(0, 1fr);
   align-items: start;
   column-gap: 1.5rem;
   border-bottom: 1px solid var(--border-hairline);
-  padding-block: 0.85rem;
-  transition: background 0.15s ease;
+  padding-block: 0.95rem;
+  position: relative;
+  background: transparent;
+  border-left: 3px solid transparent;
+  padding-left: 10px;
+  transition: background 0.2s ease, border-left-color 0.2s ease;
+  cursor: pointer;
 }
 
 .ledger-row:hover {
-  background: var(--bg-surface);
+  background: rgba(175, 58, 3, 0.04);
+  border-left-color: var(--tungsten);
 }
 
 .ledger-figures {
@@ -1400,21 +1456,38 @@ img {
 
 @media (min-width: 64rem) {
   .ledger-row {
-    min-height: 2.75rem;
-    grid-template-columns: 5rem minmax(0, 1.5fr) 14rem 9rem 5rem;
+    min-height: 3.25rem;
+    grid-template-columns: 5.5rem minmax(0, 1.5fr) 14rem 9.5rem 6.5rem;
     align-items: center;
-    padding-block: 0.75rem;
+    padding-block: 0.85rem;
+    padding-left: 14px;
   }
   .ledger-figures {
     display: contents;
   }
 }
 
-.slot-time {
+/* Odometer Vertical Slat Box */
+.slot-time-box {
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  height: 1.5rem;
+}
+
+.slot-time-roll {
+  display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--tungsten);
+  will-change: transform, color;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
+}
+
+.ledger-row:hover .slot-time-roll {
+  color: var(--tungsten);
+  transform: translateX(4px);
 }
 
 .slot-act {
@@ -1423,6 +1496,11 @@ img {
   text-transform: uppercase;
   letter-spacing: -0.01em;
   color: var(--text);
+  transition: color 0.2s ease;
+}
+
+.ledger-row:hover .slot-act {
+  color: var(--tungsten);
 }
 
 .slot-venue {
@@ -1435,14 +1513,65 @@ img {
 .slot-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   font-family: var(--font-mono);
   font-size: 0.625rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 2px 8px;
+  padding: 3px 8px;
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-xs);
   width: fit-content;
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  transform-origin: center center;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.ledger-row:hover .slot-badge {
+  border-color: var(--tungsten);
+  color: var(--tungsten);
+  background: #fdfcf9;
+}
+
+/* Reserve CTA Microinteraction */
+.reserve-btn {
+  background: transparent;
+  border: none;
+  padding: 6px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--tungsten);
+  transition: transform 0.15s ease;
+  outline: none;
+}
+
+.reserve-btn:active {
+  transform: scale(0.92);
+}
+
+.reserve-btn .btn-arrow {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ledger-row:hover .reserve-btn .btn-arrow {
+  transform: translateX(5px);
+}
+
+.reserve-btn .btn-text {
+  transition: color 0.2s ease;
+}
+
+.ledger-row:hover .reserve-btn .btn-text {
+  color: var(--tungsten);
 }
 
 /* ==========================================================================
@@ -1475,36 +1604,57 @@ img {
   cursor: pointer;
   border: var(--border-width-strong) solid var(--border-medium);
   border-radius: var(--radius-lg);
-  background: var(--bg-surface);
-  padding: 2rem;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: 
+    radial-gradient(circle 320px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(229, 169, 60, 0.22), transparent 60%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%),
+    var(--bg-surface);
+  padding: 2.25rem 2rem;
   position: relative;
+  overflow: hidden;
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
 .card:hover {
   border-color: var(--tungsten);
-  background: #fbf9f4;
-  transform: translateY(-2px);
+  background-color: #faf8f3;
+  box-shadow: 
+    0 20px 48px rgba(29, 32, 33, 0.09),
+    0 0 24px rgba(175, 58, 3, 0.1);
 }
 
 .card.card-featured {
   border-color: var(--tungsten);
-  background: var(--bg-card);
+  background: 
+    radial-gradient(circle 340px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(229, 169, 60, 0.28), transparent 60%),
+    var(--bg-card);
+  box-shadow: 0 10px 32px rgba(175, 58, 3, 0.09);
+}
+
+.card:active {
+  transform: scale(0.97);
 }
 
 .card-label {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transform: translateZ(22px);
+  transform-style: preserve-3d;
 }
 
 .card .card-heading {
   margin-top: 1.5rem;
+  transform: translateZ(24px);
+  transform-style: preserve-3d;
 }
 
 .card .body-copy {
   margin-top: 0.75rem;
   max-width: 36ch;
+  transform: translateZ(14px);
+  transform-style: preserve-3d;
 }
 
 .card .annotation {
@@ -1515,6 +1665,20 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--tungsten);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateZ(20px);
+  transform-style: preserve-3d;
+}
+
+.card .card-arrow {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .card-arrow {
+  transform: translateX(6px);
 }
 
 /* ==========================================================================
@@ -1546,17 +1710,16 @@ img {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   z-index: 600;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
   padding: 24px;
 }
 
 .checkout-modal.open {
-  opacity: 1;
+  display: flex;
   pointer-events: auto;
 }
 
@@ -1569,6 +1732,7 @@ img {
   padding: 2.5rem;
   position: relative;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  transform-origin: center center;
 }
 
 .modal-close {
@@ -1653,15 +1817,21 @@ img {
   .atlas-hud-nav {
     flex-wrap: wrap !important;
   }
-  .atlas-workspace {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-  }
   .atlas-map-stage {
-    height: 380px !important;
+    height: auto !important;
+    min-height: 480px !important;
+    padding: 12px 0 !important;
   }
-  .atlas-dossier-deck {
-    min-height: 400px !important;
+  .atlas-map-container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .map-callout-card {
+    width: clamp(170px, 35vw, 230px) !important;
+    padding: 8px 10px !important;
+  }
+  .callout-desc {
+    display: none !important;
   }
   .venues-pin-wrapper {
     height: auto !important;
@@ -1814,36 +1984,29 @@ img {
     <section class="atlas-pin-wrapper" id="atlasPin" aria-label="The Nocturnal Atlas">
       <div class="atlas-viewport" id="atlas">
         
-        <!-- HUD Telemetry Header -->
+        <!-- Minimal Swiss Editorial Atlas Header -->
         <div class="atlas-hud">
           <div class="atlas-hud-info">
-            <span class="mono-label">NOCTURNAL ATLAS · RECONNAISSANCE</span>
-            <span class="mono-note">Coordinates: 53°32′N 09°59′E · Central River &amp; Rail Corridor</span>
+            <span class="mono-label">01 / NOCTURNAL ATLAS</span>
           </div>
 
-          <!-- Interactive Node Navigator Tabs -->
-          <div class="atlas-hud-nav" role="tablist" aria-label="Civic Space Nodes">
-            <button class="atlas-nav-tab is-active" data-atlas-index="0" role="tab" aria-selected="true">01 TRAM DEPOT</button>
+          <!-- Quiet Typographic Venue Navigator -->
+          <nav class="atlas-hud-nav" role="tablist" aria-label="Civic Space Waypoints">
+            <button class="atlas-nav-tab is-active" data-atlas-index="0" role="tab" aria-selected="true">01 DEPOT</button>
+            <span class="atlas-nav-sep" aria-hidden="true">·</span>
             <button class="atlas-nav-tab" data-atlas-index="1" role="tab" aria-selected="false">02 BATHS</button>
+            <span class="atlas-nav-sep" aria-hidden="true">·</span>
             <button class="atlas-nav-tab" data-atlas-index="2" role="tab" aria-selected="false">03 MARKET</button>
+            <span class="atlas-nav-sep" aria-hidden="true">·</span>
             <button class="atlas-nav-tab" data-atlas-index="3" role="tab" aria-selected="false">04 PRINTWORKS</button>
-          </div>
-
-          <div class="atlas-hud-status">
-            <span class="mono-note" id="atlasNodeCounter">NODE 01 / 04 ACTIVE</span>
-            <div class="atlas-hud-progress">
-              <div class="atlas-hud-fill" id="atlasHudFill"></div>
-            </div>
-          </div>
+          </nav>
         </div>
 
-        <!-- Main Workspace: Map Canvas + Dossier Deck -->
-        <div class="atlas-workspace">
-          
-          <!-- Left: Schematic Corridor Map (Stable 1:1 scale, zero zoom jitter) -->
-          <div class="atlas-map-stage" id="atlasMapStage">
-            <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
+        <!-- Full-Width Map Stage (On-Map Waypoints & Live Callouts) -->
+        <div class="atlas-map-stage" id="atlasMapStage">
+          <div class="atlas-layer-bg-grid" aria-hidden="true"></div>
 
+          <div class="atlas-map-container">
             <svg class="atlas-svg" viewBox="0 0 1400 800" aria-label="Schematic River &amp; Rail Map">
               <!-- River Spine in Gruvbox Teal -->
               <path class="river river-bg" d="M-100,550 C300,520 450,380 750,340 C1050,300 1200,180 1500,150" 
@@ -1864,9 +2027,17 @@ img {
               <line x1="700" y1="0" x2="700" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
               <line x1="1050" y1="0" x2="1050" y2="800" stroke="var(--border-hairline)" stroke-width="1"/>
 
-              <!-- Four Civic Nodes in Terracotta & Ochre (Zero scale CSS hover to avoid jitter) -->
+              <!-- Leader Connecting Lines (Animated on scroll to connect node to callout) -->
+              <path class="leader-line" id="leaderLine0" d="M380,420 L415,360 L450,360" stroke="var(--tungsten)" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" fill="none" />
+              <path class="leader-line" id="leaderLine1" d="M760,310 L795,245 L830,245" stroke="var(--tungsten)" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" fill="none" />
+              <path class="leader-line" id="leaderLine2" d="M680,680 L715,610 L750,610" stroke="var(--tungsten)" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" fill="none" />
+              <path class="leader-line" id="leaderLine3" d="M1080,480 L1035,420 L985,420" stroke="var(--tungsten)" stroke-width="1.5" stroke-dasharray="120" stroke-dashoffset="120" fill="none" />
+
+              <!-- Four Civic Nodes in Terracotta & Ochre with Living Sonar Radar Beacons -->
               <!-- Node 01: Tram Depot -->
               <g class="map-node is-active" id="mapNode0" data-node="0" transform="translate(380, 420)">
+                <circle class="radar-sonar sonar-ring-1" r="28" />
+                <circle class="radar-sonar sonar-ring-2" r="28" />
                 <circle class="radar-ring" r="32" />
                 <circle class="radar-core" r="8" fill="var(--tungsten)" />
                 <circle r="3" fill="#fdfcf9" />
@@ -1876,6 +2047,8 @@ img {
 
               <!-- Node 02: Municipal Baths -->
               <g class="map-node" id="mapNode1" data-node="1" transform="translate(760, 310)">
+                <circle class="radar-sonar sonar-ring-1" r="28" />
+                <circle class="radar-sonar sonar-ring-2" r="28" />
                 <circle class="radar-ring" r="32" />
                 <circle class="radar-core" r="8" fill="var(--tungsten)" />
                 <circle r="3" fill="#fdfcf9" />
@@ -1885,6 +2058,8 @@ img {
 
               <!-- Node 03: Night Market -->
               <g class="map-node" id="mapNode2" data-node="2" transform="translate(680, 680)">
+                <circle class="radar-sonar sonar-ring-1" r="28" />
+                <circle class="radar-sonar sonar-ring-2" r="28" />
                 <circle class="radar-ring" r="32" />
                 <circle class="radar-core" r="8" fill="var(--tungsten)" />
                 <circle r="3" fill="#fdfcf9" />
@@ -1894,6 +2069,8 @@ img {
 
               <!-- Node 04: Printing Works -->
               <g class="map-node" id="mapNode3" data-node="3" transform="translate(1080, 480)">
+                <circle class="radar-sonar sonar-ring-1" r="28" />
+                <circle class="radar-sonar sonar-ring-2" r="28" />
                 <circle class="radar-ring" r="32" />
                 <circle class="radar-core" r="8" fill="var(--tungsten)" />
                 <circle r="3" fill="#fdfcf9" />
@@ -1901,100 +2078,93 @@ img {
                 <text x="16" y="19" class="node-sub">COMMUNICATION · 35MM CINEMA</text>
               </g>
             </svg>
+
+            <!-- On-Map Floating Dossier Callouts (Opened sequentially by GSAP on scroll) -->
+            <!-- Callout 01: Tram Depot -->
+            <div class="map-callout-card" id="mapCallout0" data-callout="0" style="left: 32%; top: 38%;">
+              <div class="callout-header">
+                <span class="callout-tag">NODE 01 / 04 · TRANSIT</span>
+                <span class="callout-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h4 class="callout-title">01 / THE OLD TRAM DEPOT</h4>
+              <p class="callout-desc">
+                1912 transit maintenance hangar. Riveted steel trusses, concrete oil pits, visceral sub-bass resonance.
+              </p>
+              <div class="callout-telemetry">
+                <div class="tel-item"><span class="k">ACOUSTIC</span><span class="v">108 dB Sub-bass</span></div>
+                <div class="tel-item"><span class="k">CAPACITY</span><span class="v">800 Persons</span></div>
+                <div class="tel-item"><span class="k">HOURS</span><span class="v">21:00 — 05:30</span></div>
+              </div>
+              <a href="#venuesPin" class="callout-cta">
+                <span>INSPECT CHAMBER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Callout 02: Municipal Baths -->
+            <div class="map-callout-card" id="mapCallout1" data-callout="1" style="left: 59%; top: 22%;">
+              <div class="callout-header">
+                <span class="callout-tag">NODE 02 / 04 · RECREATION</span>
+                <span class="callout-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h4 class="callout-title">02 / THE MUNICIPAL BATHS</h4>
+              <p class="callout-desc">
+                Drained 1928 ceramic-tiled natatorium with dry mosaic wells. Cathedral for quadraphonic ambient diffusion.
+              </p>
+              <div class="callout-telemetry">
+                <div class="tel-item"><span class="k">ACOUSTIC</span><span class="v">7.2s Decay Reverb</span></div>
+                <div class="tel-item"><span class="k">CAPACITY</span><span class="v">450 Persons</span></div>
+                <div class="tel-item"><span class="k">HOURS</span><span class="v">20:30 — 05:00</span></div>
+              </div>
+              <a href="#venuesPin" class="callout-cta">
+                <span>INSPECT CHAMBER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Callout 03: Night Market -->
+            <div class="map-callout-card" id="mapCallout2" data-callout="2" style="left: 53%; top: 66%;">
+              <div class="callout-header">
+                <span class="callout-tag">NODE 03 / 04 · COMMERCE</span>
+                <span class="callout-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h4 class="callout-title">03 / THE NIGHT MARKET</h4>
+              <p class="callout-desc">
+                Iron-and-glass transit exchange hall. Continuous nocturnal vortex with regional food stalls and modular drones.
+              </p>
+              <div class="callout-telemetry">
+                <div class="tel-item"><span class="k">ACOUSTIC</span><span class="v">Wide Open Diffusion</span></div>
+                <div class="tel-item"><span class="k">CAPACITY</span><span class="v">1200 Persons</span></div>
+                <div class="tel-item"><span class="k">HOURS</span><span class="v">20:00 — 06:00</span></div>
+              </div>
+              <a href="#venuesPin" class="callout-cta">
+                <span>INSPECT CHAMBER</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- Callout 04: Printing Works -->
+            <div class="map-callout-card" id="mapCallout3" data-callout="3" style="left: 70%; top: 43%;">
+              <div class="callout-header">
+                <span class="callout-tag">NODE 04 / 04 · COMMUNICATION</span>
+                <span class="callout-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h4 class="callout-title">04 / THE OLD PRINTWORKS</h4>
+              <p class="callout-desc">
+                Former newspaper press warehouse with double-height voids, linotype bedplates, and dual 35mm projections.
+              </p>
+              <div class="callout-telemetry">
+                <div class="tel-item"><span class="k">ACOUSTIC</span><span class="v">Mechanical Damp</span></div>
+                <div class="tel-item"><span class="k">CAPACITY</span><span class="v">500 Persons</span></div>
+                <div class="tel-item"><span class="k">HOURS</span><span class="v">21:30 — 05:00</span></div>
+              </div>
+              <a href="#venuesPin" class="callout-cta">
+                <span>INSPECT CHAMBER</span>
+                <span>→</span>
+              </a>
+            </div>
+
           </div>
-
-          <!-- Right: Active Dossier Deck (Opened sequentially on scroll) -->
-          <aside class="atlas-dossier-deck" aria-label="Civic Space Dossiers">
-            
-            <!-- Card 01 -->
-            <div class="dossier-card is-active" id="dossierCard0" data-card="0">
-              <div class="dossier-card-tag">
-                <span class="tag-num">NODE 01 / 04</span>
-                <span class="tag-status">ACTIVATED</span>
-              </div>
-              <h3 class="dossier-card-title">THE OLD TRAM DEPOT</h3>
-              <p class="dossier-card-copy">
-                A monumental 1912 maintenance hangar with exposed steel riveted trusses, concrete oil pits, and transit track turnouts. Intimate crowd proximity meets visceral sub-bass resonance.
-              </p>
-              <div class="dossier-specs-mini">
-                <div><span>LAYER</span><strong>Transit Infrastructure</strong></div>
-                <div><span>CAPACITY</span><strong>800 Persons</strong></div>
-                <div><span>ACOUSTIC</span><strong>108 dB Sub-bass Peak</strong></div>
-                <div><span>HOURS</span><strong>21:00 — 05:30</strong></div>
-              </div>
-              <a href="#venuesPin" class="dossier-action-btn">
-                <span>INSPECT CHAMBER 01 DOSSIER</span>
-                <span>→</span>
-              </a>
-            </div>
-
-            <!-- Card 02 -->
-            <div class="dossier-card" id="dossierCard1" data-card="1">
-              <div class="dossier-card-tag">
-                <span class="tag-num">NODE 02 / 04</span>
-                <span class="tag-status">STANDBY</span>
-              </div>
-              <h3 class="dossier-card-title">THE MUNICIPAL BATHS</h3>
-              <p class="dossier-card-copy">
-                Drained 1928 ceramic-tiled hydrotherapy natatorium with barrel-vaulted skylights and dry mosaic diving wells. A cathedral for quadraphonic ambient diffusion and microtonal voice.
-              </p>
-              <div class="dossier-specs-mini">
-                <div><span>LAYER</span><strong>Civic Hydrotherapy</strong></div>
-                <div><span>CAPACITY</span><strong>450 Persons</strong></div>
-                <div><span>ACOUSTIC</span><strong>7.2s Ceramic Reverb</strong></div>
-                <div><span>HOURS</span><strong>20:30 — 05:00</strong></div>
-              </div>
-              <a href="#venuesPin" class="dossier-action-btn">
-                <span>INSPECT CHAMBER 02 DOSSIER</span>
-                <span>→</span>
-              </a>
-            </div>
-
-            <!-- Card 03 -->
-            <div class="dossier-card" id="dossierCard2" data-card="2">
-              <div class="dossier-card-tag">
-                <span class="tag-num">NODE 03 / 04</span>
-                <span class="tag-status">STANDBY</span>
-              </div>
-              <h3 class="dossier-card-title">THE NIGHT MARKET</h3>
-              <p class="dossier-card-copy">
-                A cavernous iron-and-glass transit exchange hall active continuously through dark hours. The social vortex hosting regional street kitchens, vinyl stalls, and modular drone installations.
-              </p>
-              <div class="dossier-specs-mini">
-                <div><span>LAYER</span><strong>Nocturnal Commerce</strong></div>
-                <div><span>CAPACITY</span><strong>1200 Persons</strong></div>
-                <div><span>ACOUSTIC</span><strong>Wide Open Dispersion</strong></div>
-                <div><span>HOURS</span><strong>20:00 — 06:00</strong></div>
-              </div>
-              <a href="#venuesPin" class="dossier-action-btn">
-                <span>INSPECT CHAMBER 03 DOSSIER</span>
-                <span>→</span>
-              </a>
-            </div>
-
-            <!-- Card 04 -->
-            <div class="dossier-card" id="dossierCard3" data-card="3">
-              <div class="dossier-card-tag">
-                <span class="tag-num">NODE 04 / 04</span>
-                <span class="tag-status">STANDBY</span>
-              </div>
-              <h3 class="dossier-card-title">THE OLD PRINTWORKS</h3>
-              <p class="dossier-card-copy">
-                A former newspaper press warehouse with double-height ceiling voids, heavy linotype cast-iron bedplates, and darkroom masonry. Dedicated to dual 35mm celluloid projections.
-              </p>
-              <div class="dossier-specs-mini">
-                <div><span>LAYER</span><strong>Print Communication</strong></div>
-                <div><span>CAPACITY</span><strong>500 Persons</strong></div>
-                <div><span>ACOUSTIC</span><strong>Dry Mechanical Damp</strong></div>
-                <div><span>HOURS</span><strong>21:30 — 05:00</strong></div>
-              </div>
-              <a href="#venuesPin" class="dossier-action-btn">
-                <span>INSPECT CHAMBER 04 DOSSIER</span>
-                <span>→</span>
-              </a>
-            </div>
-
-          </aside>
         </div>
 
       </div>
@@ -2288,137 +2458,196 @@ img {
         <section class="schedule-section" id="schedule" aria-label="Schedule Timetable">
           <div class="schedule-header">
             <div>
-              <span class="mono-label">CHRONOLOGICAL DISPATCH</span>
+              <span class="mono-label">CHRONOLOGICAL DISPATCH · RIVER &amp; RAIL</span>
               <h2 class="statement" style="margin-top: 8px;">NOCTURNAL TIMETABLE</h2>
             </div>
-            <div class="schedule-filter-tabs">
-              <button class="tab-btn active" id="day1Btn">FRI OCT 24</button>
-              <button class="tab-btn" id="day2Btn">SAT OCT 25</button>
+            <div class="schedule-filter-tabs" role="tablist">
+              <button class="tab-btn active" id="day1Btn" role="tab" aria-selected="true">
+                <span>FRI OCT 24</span>
+              </button>
+              <button class="tab-btn" id="day2Btn" role="tab" aria-selected="false">
+                <span>SAT OCT 25</span>
+              </button>
             </div>
           </div>
 
-          <div class="ledger-table">
+          <div class="ledger-table" id="scheduleLedger">
             <!-- Friday Slots -->
             <div class="ledger-row" data-day="1">
-              <span class="slot-time">22:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">22:30</span>
+              </div>
               <div>
                 <div class="slot-act">Kattner &amp; Siding Ensemble</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Analog Percussion &amp; Industrial Sub-Bass</div>
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">LIVE A/V</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Kattner &amp; Siding Ensemble">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="1">
-              <span class="slot-time">23:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">23:30</span>
+              </div>
               <div>
                 <div class="slot-act">Celluloid Dispersal</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Archival 35mm Dual-Screen Projection</div>
               </div>
               <span class="slot-venue">04 / PRINTING WORKS</span>
               <span class="slot-badge">35MM CINEMA</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Celluloid Dispersal">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="1">
-              <span class="slot-time">00:45</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">00:45</span>
+              </div>
               <div>
                 <div class="slot-act">Resonance Corridor</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Heavy Post-Punk &amp; Spring Reverb Trio</div>
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">CONCERT</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Resonance Corridor">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="1">
-              <span class="slot-time">02:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">02:30</span>
+              </div>
               <div>
                 <div class="slot-act">Null Hypothesis</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Modular Drift &amp; Spatial Feedback</div>
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">MODULAR</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Null Hypothesis">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="1">
-              <span class="slot-time">04:15</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">04:15</span>
+              </div>
               <div>
                 <div class="slot-act">Displaced Phase</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Dawn Sub-Bass Closing Improvisation</div>
               </div>
               <span class="slot-venue">01 / TRAM DEPOT</span>
               <span class="slot-badge">CLOSING</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Displaced Phase">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <!-- Saturday Slots -->
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">20:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">20:30</span>
+              </div>
               <div>
                 <div class="slot-act">Vapour Phase</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Ambient Hydro-Tape Loops &amp; Quad Phasing</div>
               </div>
               <span class="slot-venue">02 / MUNICIPAL BATHS</span>
               <span class="slot-badge">AMBIENT</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Vapour Phase">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">21:00</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">21:00</span>
+              </div>
               <div>
                 <div class="slot-act">Rotational Press Audio</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Mechanical Tape Loop Performance</div>
               </div>
               <span class="slot-venue">04 / PRINTING WORKS</span>
               <span class="slot-badge">TAPE LOOP</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Rotational Press Audio">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">23:15</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">23:15</span>
+              </div>
               <div>
                 <div class="slot-act">Market Drone Trio</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Acoustic Accordion &amp; Harmonium</div>
               </div>
               <span class="slot-venue">03 / NIGHT MARKET</span>
               <span class="slot-badge">DRONE</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Market Drone Trio">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">01:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">01:30</span>
+              </div>
               <div>
                 <div class="slot-act">Monotype Live Assembly</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Electro-Acoustic Typewriter Improvisation</div>
               </div>
               <span class="slot-venue">04 / PRINTING WORKS</span>
               <span class="slot-badge">ELECTRO-ACOUSTIC</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Monotype Live Assembly">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">03:30</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">03:30</span>
+              </div>
               <div>
                 <div class="slot-act">Submerged Tones</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Sine Wave &amp; Water Reflection Drift</div>
               </div>
               <span class="slot-venue">02 / MUNICIPAL BATHS</span>
               <span class="slot-badge">HYDRO-ACOUSTIC</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Submerged Tones">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
 
             <div class="ledger-row" data-day="2" style="display: none;">
-              <span class="slot-time">05:00</span>
+              <div class="slot-time-box">
+                <span class="slot-time-roll">05:00</span>
+              </div>
               <div>
                 <div class="slot-act">Dawn Chorus Group</div>
                 <div class="body-copy" style="font-size: 0.8125rem;">Morning Ambient Acoustic Welcome</div>
               </div>
               <span class="slot-venue">03 / NIGHT MARKET</span>
               <span class="slot-badge">DAWN GATHERING</span>
-              <button class="mono-label" data-open-modal style="text-align: right; color: var(--tungsten);">RESERVE →</button>
+              <button class="reserve-btn mono-label" data-open-modal aria-label="Reserve Dawn Chorus Group">
+                <span class="btn-text">RESERVE</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
           </div>
         </section>
@@ -2446,7 +2675,7 @@ img {
                 <h3 class="card-heading">EARLY ACCESS</h3>
                 <p class="body-copy">Early registrant allocation. Full 48-hour access to all 4 spaces, spatial acoustics, and 35mm cinema screenings.</p>
               </div>
-              <div class="annotation">CLAIM TIER 01 →</div>
+              <div class="annotation">CLAIM TIER 01 <span class="card-arrow" aria-hidden="true">→</span></div>
             </div>
 
             <!-- Tier 2 (Featured) -->
@@ -2459,7 +2688,7 @@ img {
                 <h3 class="card-heading">FULL ACCESS</h3>
                 <p class="body-copy">Standard festival pass. Complete unrestricted access to the entire 2-night nocturnal program across all 4 civic venues.</p>
               </div>
-              <div class="annotation">CLAIM TIER 02 →</div>
+              <div class="annotation">CLAIM TIER 02 <span class="card-arrow" aria-hidden="true">→</span></div>
             </div>
 
             <!-- Tier 3 -->
@@ -2472,7 +2701,7 @@ img {
                 <h3 class="card-heading">PATRON PASS</h3>
                 <p class="body-copy">Direct contribution to artist honorariums and historical site preservation. Includes archival festival poster and printed program.</p>
               </div>
-              <div class="annotation">CLAIM TIER 03 →</div>
+              <div class="annotation">CLAIM TIER 03 <span class="card-arrow" aria-hidden="true">→</span></div>
             </div>
           </div>
         </section>
@@ -2511,20 +2740,44 @@ img {
       <span class="mono-label" style="color: var(--tungsten);">PASS RESERVATION · DIRECT CREDENTIALS</span>
       <h3 class="card-heading" id="modalHeading" style="margin-top: 12px; margin-bottom: 24px;">SECURE PASS</h3>
 
-      <form id="checkoutForm" onsubmit="event.preventDefault(); alert('Pass registered! Digital credentials sent.'); document.getElementById('checkoutModal').classList.remove('open');">
+      <!-- Interactive Reservation Form -->
+      <form id="checkoutForm">
         <label for="attendeeName" class="mono-label" style="display: block; margin-bottom: 6px;">ATTENDEE FULL NAME</label>
-        <input type="text" id="attendeeName" class="text-field" placeholder="E.g. Elena Rostova" required />
+        <input type="text" id="attendeeName" class="text-field" placeholder="E.g. Elena Rostova" required autocomplete="name" />
 
-        <label for="attendeeEmail" class="mono-label" style="display: block; margin-bottom: 6px;">DISPATCH EMAIL ADDRESS</label>
-        <input type="email" id="attendeeEmail" class="text-field" placeholder="elena@example.com" required />
+        <label for="attendeeEmail" class="mono-label" style="display: block; margin-bottom: 6px; margin-top: 16px;">DISPATCH EMAIL ADDRESS</label>
+        <input type="email" id="attendeeEmail" class="text-field" placeholder="elena@example.com" required autocomplete="email" />
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
-          <span class="figure" style="font-size: 0.875rem;">PASS TIER: FULL ACCESS · €48</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; flex-wrap: wrap; gap: 12px;">
+          <span class="figure" id="modalTierPrice" style="font-size: 0.875rem;">PASS TIER: FULL ACCESS · €48</span>
           <button type="submit" class="button-solid" style="font-size: 1rem; padding: 0.65rem 1.25rem;">
             CONFIRM &amp; DISPATCH →
           </button>
         </div>
       </form>
+
+      <!-- Digital Receipt Confirmation View (Initially Hidden) -->
+      <div id="checkoutSuccessState" style="display: none;">
+        <div style="border: 2px dashed var(--tungsten); padding: 1.5rem; background: rgba(175, 58, 3, 0.03); border-radius: 4px; margin-top: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px; margin-bottom: 12px;">
+            <span class="mono-label" style="color: var(--tungsten);">PASSPORT STATUS: ISSUED</span>
+            <span class="mono-note" id="receiptSerial">OH-2026-8841</span>
+          </div>
+          <div style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; text-transform: uppercase; color: var(--text);">
+            CREDENTIALS CONFIRMED
+          </div>
+          <p class="body-copy" style="font-size: 0.8125rem; margin-top: 6px;">
+            Digital admission dispatch sent to <strong id="receiptEmail" style="color: var(--text);">attendee@example.com</strong>. Present digital QR docket at any of the four civic entrances.
+          </p>
+          <div style="margin-top: 14px; font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-muted); display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div>VALIDITY: 48-HOUR PASS</div>
+            <div>ACCESS: 4 MONUMENTS</div>
+          </div>
+        </div>
+        <button type="button" class="button-solid" id="receiptCloseBtn" style="width: 100%; margin-top: 20px; justify-content: center; text-align: center;">
+          RETURN TO DOSSIER [ESC]
+        </button>
+      </div>
     </div>
   </div>
 
@@ -2545,15 +2798,65 @@ img {
  * - Pinned 2.5D Atlas descent & zero-dead-scroll 4-chamber horizontal gallery
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  const lenis = initSmoothScroll();
-  initScrollProgress(lenis);
-  initTimecode(lenis);
-  initAmbientAudio();
-  initParticleButtons();
-  initScheduleSwitcher();
-  initModal();
-  initGSAPTimelines(lenis);
+let isBooted = false;
+
+function bootApp() {
+  if (isBooted) return;
+  isBooted = true;
+
+  // 1. GSAP & Plugins Pre-Registration (GSAP Best Practice: register before any usage)
+  if (typeof gsap !== 'undefined') {
+    if (typeof ScrollTrigger !== 'undefined') {
+      try {
+        gsap.registerPlugin(ScrollTrigger);
+      } catch (e) {
+        console.warn('[OFF HOURS] ScrollTrigger plugin registration warning:', e);
+      }
+    }
+    if (typeof CustomEase !== 'undefined') {
+      try {
+        gsap.registerPlugin(CustomEase);
+        CustomEase.create('animaxxing', 'M0,0 C0.16,1 0.3,1 1,1');
+      } catch (e) {
+        console.warn('[OFF HOURS] CustomEase plugin registration warning:', e);
+      }
+    }
+  } else {
+    console.warn('[OFF HOURS] GSAP library not found on window. If running offline, check CDN script tags.');
+  }
+
+  // 2. Isolated subsystem initialization (prevents single-module failures from blocking animations)
+  let lenis = null;
+  try {
+    lenis = initSmoothScroll();
+  } catch (err) {
+    console.warn('[OFF HOURS] Smooth scroll initialization failed, falling back to native scroll:', err);
+  }
+
+  try { initScrollProgress(lenis); } catch (err) { console.warn('[OFF HOURS] Scroll progress failed:', err); }
+  try { initTimecode(lenis); } catch (err) { console.warn('[OFF HOURS] Timecode failed:', err); }
+  try { initAmbientAudio(); } catch (err) { console.warn('[OFF HOURS] Ambient audio failed:', err); }
+  try { initParticleButtons(); } catch (err) { console.warn('[OFF HOURS] Particle buttons failed:', err); }
+  try { initScheduleSwitcher(); } catch (err) { console.warn('[OFF HOURS] Schedule switcher failed:', err); }
+  try { initCardTilt(); } catch (err) { console.warn('[OFF HOURS] Card tilt failed:', err); }
+  try { initModal(); } catch (err) { console.warn('[OFF HOURS] Modal failed:', err); }
+  try { initGSAPTimelines(lenis); } catch (err) { console.error('[OFF HOURS] GSAP timelines initialization failed:', err); }
+}
+
+// Resilient readyState bootstrap (runs immediately if document is already ready/interactive)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootApp);
+} else {
+  // DOM is already parsed (interactive or complete), boot immediately
+  bootApp();
+}
+
+// Extra safety fallback for late scripts or async execution
+window.addEventListener('load', () => {
+  bootApp();
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.refresh();
+  }
 });
 
 /* ==========================================================================
@@ -2997,10 +3300,15 @@ function initParticleButtons() {
    5. MASTER GSAP CHOREOGRAPHY (ANIMAXXING EDITORIAL TREATMENT)
    ========================================================================== */
 function initGSAPTimelines(lenis) {
-  if (typeof gsap === 'undefined') return;
+  if (typeof gsap === 'undefined') {
+    console.warn('[OFF HOURS] initGSAPTimelines skipped: gsap is undefined');
+    return;
+  }
 
   if (typeof CustomEase !== 'undefined') {
-    CustomEase.create('animaxxing', 'M0,0 C0.16,1 0.3,1 1,1');
+    try {
+      CustomEase.create('animaxxing', 'M0,0 C0.16,1 0.3,1 1,1');
+    } catch (_) {}
   }
 
   if (typeof ScrollTrigger !== 'undefined') {
@@ -3008,7 +3316,11 @@ function initGSAPTimelines(lenis) {
     if (document.fonts) {
       document.fonts.ready.then(() => ScrollTrigger.refresh());
     }
-    window.addEventListener('load', () => ScrollTrigger.refresh());
+    if (document.readyState === 'complete') {
+      ScrollTrigger.refresh();
+    } else {
+      window.addEventListener('load', () => ScrollTrigger.refresh());
+    }
 
     // Synchronize ScrollTrigger on chamber image completion to prevent dimension shift
     const chamberImgs = document.querySelectorAll('.media-parallax-img');
@@ -3115,79 +3427,132 @@ function initGSAPTimelines(lenis) {
     });
   }
 
-  // 5.6 Scene 02: Nocturnal Atlas — Progressive Scroll-Activated Waypoints (Zero Zoom, Zero Jitter)
+  // 5.6 Scene 02: Nocturnal Atlas — On-Map Scroll-Activated Waypoints & GSAP Popovers
   const atlasWrapper = document.getElementById('atlasPin');
   if (atlasWrapper && typeof ScrollTrigger !== 'undefined') {
     const navTabs = document.querySelectorAll('.atlas-nav-tab');
-    const mapNodes = document.querySelectorAll('.map-node');
-    const dossierCards = document.querySelectorAll('.dossier-card');
-    const nodeCounter = document.getElementById('atlasNodeCounter');
-    const fill = document.getElementById('atlasHudFill');
-    let currentActiveIdx = -1;
+    const mapNodes = [
+      document.getElementById('mapNode0'),
+      document.getElementById('mapNode1'),
+      document.getElementById('mapNode2'),
+      document.getElementById('mapNode3')
+    ];
+    const leaderLines = [
+      document.getElementById('leaderLine0'),
+      document.getElementById('leaderLine1'),
+      document.getElementById('leaderLine2'),
+      document.getElementById('leaderLine3')
+    ];
+    const calloutCards = [
+      document.getElementById('mapCallout0'),
+      document.getElementById('mapCallout1'),
+      document.getElementById('mapCallout2'),
+      document.getElementById('mapCallout3')
+    ];
 
-    function activateAtlasNode(index) {
-      if (index === currentActiveIdx || index < 0 || index > 3) return;
-      currentActiveIdx = index;
+    // Prepare leader lines with stroke-dashoffset for draw-in animation
+    leaderLines.forEach((line) => {
+      if (line) {
+        const len = line.getTotalLength ? line.getTotalLength() : 120;
+        gsap.set(line, { strokeDasharray: len, strokeDashoffset: len });
+      }
+    });
 
+    // Initial state: hide all callout cards
+    gsap.set(calloutCards, { autoAlpha: 0, scale: 0.85, y: 15 });
+
+    function updateHud(index) {
       navTabs.forEach((tab, i) => {
         const isActive = i === index;
         tab.classList.toggle('is-active', isActive);
         tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
       });
-
-      mapNodes.forEach((node, i) => {
-        node.classList.toggle('is-active', i === index);
-      });
-
-      dossierCards.forEach((card, i) => {
-        const isActive = i === index;
-        card.classList.toggle('is-active', isActive);
-        const tagStatus = card.querySelector('.tag-status');
-        if (tagStatus) {
-          tagStatus.textContent = isActive ? 'ACTIVATED' : (i < index ? 'LOGGED' : 'STANDBY');
-        }
-      });
-
-      if (nodeCounter) {
-        nodeCounter.textContent = `NODE 0${index + 1} / 04 ACTIVE`;
-      }
-      if (fill) {
-        fill.style.width = `${((index + 1) / 4) * 100}%`;
-      }
     }
 
-    // Set initial state
-    activateAtlasNode(0);
-
-    // Responsive ScrollTrigger: pin on desktop (min-width: 1025px), sequential scrub
     const mmAtlas = gsap.matchMedia();
+
     mmAtlas.add('(min-width: 1025px)', () => {
-      ScrollTrigger.create({
-        trigger: '#atlasPin',
-        start: 'top top',
-        end: 'bottom bottom',
-        pin: '.atlas-viewport',
-        scrub: 0.8,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          // Clean 4-segment scroll partitioning:
-          // [0.00 — 0.25): Node 0 (The Old Tram Depot)
-          // [0.25 — 0.50): Node 1 (The Municipal Baths)
-          // [0.50 — 0.75): Node 2 (The Night Market)
-          // [0.75 — 1.00]: Node 3 (The Old Printworks)
-          let idx = Math.floor(progress * 4);
-          if (idx > 3) idx = 3;
-          if (idx < 0) idx = 0;
-          activateAtlasNode(idx);
+      const atlasTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#atlasPin',
+          start: 'top top',
+          end: 'bottom bottom',
+          pin: '.atlas-viewport',
+          scrub: 0.8,
+          anticipatePin: 1
         }
       });
+
+      // River flow pulse
+      atlasTl.fromTo('#atlasRiverLine', 
+        { strokeDashoffset: 1400 }, 
+        { strokeDashoffset: 0, ease: 'none', duration: 4 }, 
+        0
+      );
+
+      // Waypoint 01: The Old Tram Depot (Scroll segment 0.2 - 0.8)
+      atlasTl
+        .call(() => updateHud(0), null, 0.2)
+        .to(mapNodes[0], { opacity: 1, duration: 0.2 }, 0.2)
+        .add(() => mapNodes[0]?.classList.add('is-active'), 0.2)
+        .to(leaderLines[0], { strokeDashoffset: 0, duration: 0.35, ease: 'power2.out' }, 0.25)
+        .to(calloutCards[0], { autoAlpha: 1, scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.4)' }, 0.3)
+        .add(() => calloutCards[0]?.classList.add('is-active'), 0.3);
+
+      // Waypoint 02: The Municipal Baths (Scroll segment 1.2 - 1.8)
+      atlasTl
+        .call(() => updateHud(1), null, 1.2)
+        .to(mapNodes[1], { opacity: 1, duration: 0.2 }, 1.2)
+        .add(() => mapNodes[1]?.classList.add('is-active'), 1.2)
+        .to(leaderLines[1], { strokeDashoffset: 0, duration: 0.35, ease: 'power2.out' }, 1.25)
+        .to(calloutCards[1], { autoAlpha: 1, scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.4)' }, 1.3)
+        .add(() => calloutCards[1]?.classList.add('is-active'), 1.3);
+
+      // Waypoint 03: The Night Market (Scroll segment 2.2 - 2.8)
+      atlasTl
+        .call(() => updateHud(2), null, 2.2)
+        .to(mapNodes[2], { opacity: 1, duration: 0.2 }, 2.2)
+        .add(() => mapNodes[2]?.classList.add('is-active'), 2.2)
+        .to(leaderLines[2], { strokeDashoffset: 0, duration: 0.35, ease: 'power2.out' }, 2.25)
+        .to(calloutCards[2], { autoAlpha: 1, scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.4)' }, 2.3)
+        .add(() => calloutCards[2]?.classList.add('is-active'), 2.3);
+
+      // Waypoint 04: The Old Printworks (Scroll segment 3.2 - 3.8)
+      atlasTl
+        .call(() => updateHud(3), null, 3.2)
+        .to(mapNodes[3], { opacity: 1, duration: 0.2 }, 3.2)
+        .add(() => mapNodes[3]?.classList.add('is-active'), 3.2)
+        .to(leaderLines[3], { strokeDashoffset: 0, duration: 0.35, ease: 'power2.out' }, 3.25)
+        .to(calloutCards[3], { autoAlpha: 1, scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.4)' }, 3.3)
+        .add(() => calloutCards[3]?.classList.add('is-active'), 3.3);
     });
 
-    // Mobile/tablet fallback: switch cards on scroll or tap
+    // Mobile / Tablet: show active card on tap/scroll
     mmAtlas.add('(max-width: 1024px)', () => {
+      function showMobileCallout(index) {
+        updateHud(index);
+        calloutCards.forEach((card, i) => {
+          if (card) {
+            const isActive = i === index;
+            card.classList.toggle('is-active', isActive);
+            gsap.to(card, { autoAlpha: isActive ? 1 : 0, scale: isActive ? 1 : 0.9, duration: 0.3 });
+          }
+        });
+        mapNodes.forEach((node, i) => {
+          if (node) node.classList.toggle('is-active', i === index);
+        });
+        leaderLines.forEach((line, i) => {
+          if (line) gsap.to(line, { strokeDashoffset: i === index ? 0 : 120, duration: 0.3 });
+        });
+      }
+
+      showMobileCallout(0);
+
       navTabs.forEach((tab, i) => {
-        tab.addEventListener('click', () => activateAtlasNode(i));
+        tab.addEventListener('click', () => showMobileCallout(i));
+      });
+      mapNodes.forEach((node, i) => {
+        if (node) node.addEventListener('click', () => showMobileCallout(i));
       });
     });
 
@@ -3195,10 +3560,7 @@ function initGSAPTimelines(lenis) {
     function scrollToAtlasWaypoint(targetIndex) {
       if (typeof ScrollTrigger === 'undefined') return;
       const totalScrollable = atlasWrapper.offsetHeight - window.innerHeight;
-      if (totalScrollable <= 0) {
-        activateAtlasNode(targetIndex);
-        return;
-      }
+      if (totalScrollable <= 0) return;
       const targetProgress = (targetIndex + 0.35) / 4;
       const targetY = atlasWrapper.offsetTop + (totalScrollable * targetProgress);
       if (lenis) {
@@ -3206,7 +3568,6 @@ function initGSAPTimelines(lenis) {
       } else {
         window.scrollTo({ top: targetY, behavior: 'smooth' });
       }
-      activateAtlasNode(targetIndex);
     }
 
     navTabs.forEach((tab, i) => {
@@ -3217,10 +3578,12 @@ function initGSAPTimelines(lenis) {
     });
 
     mapNodes.forEach((node, i) => {
-      node.addEventListener('click', (e) => {
-        e.preventDefault();
-        scrollToAtlasWaypoint(i);
-      });
+      if (node) {
+        node.addEventListener('click', (e) => {
+          e.preventDefault();
+          scrollToAtlasWaypoint(i);
+        });
+      }
     });
   }
 
@@ -3261,9 +3624,9 @@ function initGSAPTimelines(lenis) {
 
             gsap.fromTo(
               img,
-              { xPercent: 6, scale: 1.14 },
+              { xPercent: 16, scale: 1.2 },
               {
-                xPercent: -6,
+                xPercent: -16,
                 scale: 1.05,
                 ease: 'none',
                 scrollTrigger: {
@@ -3286,6 +3649,139 @@ function initGSAPTimelines(lenis) {
         start: 'top 85%'
       });
     });
+  }
+
+  // 5.8 Schedule Timetable Entrance Animation
+  const scheduleSection = document.getElementById('schedule');
+  if (scheduleSection && typeof ScrollTrigger !== 'undefined') {
+    const scheduleHeader = scheduleSection.querySelector('.schedule-header');
+    const day1Rows = scheduleSection.querySelectorAll('.ledger-row[data-day="1"]');
+    const day1TimeRolls = scheduleSection.querySelectorAll('.ledger-row[data-day="1"] .slot-time-roll');
+    const day1Acts = scheduleSection.querySelectorAll('.ledger-row[data-day="1"] .slot-act');
+    const day1Badges = scheduleSection.querySelectorAll('.ledger-row[data-day="1"] .slot-badge');
+    const day1Btns = scheduleSection.querySelectorAll('.ledger-row[data-day="1"] .reserve-btn');
+
+    const scheduleTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: scheduleSection,
+        start: 'top 75%',
+        once: true
+      }
+    });
+
+    if (scheduleHeader) {
+      scheduleTl.fromTo(scheduleHeader,
+        { autoAlpha: 0, y: 20 },
+        { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+      );
+    }
+
+    if (day1Rows.length > 0) {
+      scheduleTl.fromTo(day1Rows,
+        { autoAlpha: 0, y: 14 },
+        { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.045, ease: 'power3.out' },
+        '-=0.2'
+      );
+
+      // Split-flap departure-board odometer roll-up on timestamps
+      if (day1TimeRolls.length > 0) {
+        scheduleTl.fromTo(day1TimeRolls,
+          { yPercent: 120, autoAlpha: 0 },
+          { yPercent: 0, autoAlpha: 1, duration: 0.55, stagger: 0.045, ease: 'animaxxing' },
+          '<-0.35'
+        );
+      }
+
+      // Typographic reveal on acts
+      if (day1Acts.length > 0) {
+        scheduleTl.fromTo(day1Acts,
+          { x: -10, autoAlpha: 0 },
+          { x: 0, autoAlpha: 1, duration: 0.4, stagger: 0.045, ease: 'power2.out' },
+          '<-0.35'
+        );
+      }
+
+      // Rubber-stamp pop on session badges
+      if (day1Badges.length > 0) {
+        scheduleTl.fromTo(day1Badges,
+          { scale: 1.4, autoAlpha: 0 },
+          { scale: 1, autoAlpha: 1, duration: 0.45, stagger: 0.045, ease: 'back.out(2)' },
+          '<-0.3'
+        );
+      }
+
+      // Reserve CTA subtle slide
+      if (day1Btns.length > 0) {
+        scheduleTl.fromTo(day1Btns,
+          { x: 8, autoAlpha: 0 },
+          { x: 0, autoAlpha: 1, duration: 0.35, stagger: 0.045, ease: 'power2.out' },
+          '<-0.3'
+        );
+      }
+    }
+  }
+
+  // 5.9 Passes Dossier Entrance Animation
+  const passesSection = document.getElementById('passes');
+  if (passesSection && typeof ScrollTrigger !== 'undefined') {
+    const passesHeader = passesSection.querySelector('div:first-child');
+    const cards = passesSection.querySelectorAll('.card');
+
+    const passesTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: passesSection,
+        start: 'top 75%',
+        once: true
+      }
+    });
+
+    if (passesHeader) {
+      passesTl.fromTo(passesHeader,
+        { autoAlpha: 0, y: 22 },
+        { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+      );
+    }
+
+    if (cards.length > 0) {
+      passesTl.fromTo(cards,
+        { autoAlpha: 0, y: 32, scale: 0.96 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.12, ease: 'animaxxing' },
+        '-=0.25'
+      );
+    }
+  }
+
+  // 5.10 Dynamic Scroll Velocity Skew (High-Craft Kinetic Inertia)
+  if (typeof ScrollTrigger !== 'undefined' && !prefersReducedMotion()) {
+    const skewTargets = gsap.utils.toArray('.schedule-section, .card-grid, .hero-main-block');
+    if (skewTargets.length > 0) {
+      const clamp = gsap.utils.clamp(-2.5, 2.5);
+      const lean = { skew: 0 };
+      gsap.set(skewTargets, { skewY: 0, transformOrigin: '50% 50%', willChange: 'transform' });
+      const setSkew = gsap.quickSetter(skewTargets, 'skewY', 'deg');
+      let settle = null;
+
+      ScrollTrigger.create({
+        onUpdate: (self) => {
+          const velocity = self.getVelocity();
+          const targetSkew = clamp(velocity / -350);
+          if (Math.abs(targetSkew) <= Math.abs(lean.skew)) return;
+          lean.skew = targetSkew;
+          if (settle) settle.kill();
+          settle = gsap.to(lean, {
+            skew: 0,
+            duration: 0.75,
+            ease: 'power3.out',
+            onUpdate: () => setSkew(lean.skew),
+          });
+        },
+      });
+    }
+  }
+
+  // Force an immediate refresh so all pinned triggers compute accurate positions
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.refresh();
   }
 }
 
@@ -3349,7 +3845,11 @@ function runBlastOff(button, heading) {
 
   const blastTl = gsap.timeline({
     onComplete: () => {
-      if (modal) modal.classList.add('open');
+      if (window.openCheckoutModal) {
+        window.openCheckoutModal();
+      } else if (modal) {
+        modal.classList.add('open');
+      }
       setTimeout(() => {
         gsap.to(chars, { x: 0, y: 0, rotation: 0, scale: 1, autoAlpha: 1, duration: 0.8, ease: 'power3.out' });
         gsap.to(subheadWords, { x: 0, y: 0, rotation: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out' });
@@ -3414,39 +3914,104 @@ function initScheduleSwitcher() {
 
   if (!day1Btn || !day2Btn) return;
 
+  let isSwitching = false;
+
   day1Btn.addEventListener('click', () => {
+    if (day1Btn.classList.contains('active') || isSwitching) return;
     day1Btn.classList.add('active');
     day2Btn.classList.remove('active');
+    day1Btn.setAttribute('aria-selected', 'true');
+    day2Btn.setAttribute('aria-selected', 'false');
     filterRows('1');
   });
 
   day2Btn.addEventListener('click', () => {
+    if (day2Btn.classList.contains('active') || isSwitching) return;
     day2Btn.classList.add('active');
     day1Btn.classList.remove('active');
+    day2Btn.setAttribute('aria-selected', 'true');
+    day1Btn.setAttribute('aria-selected', 'false');
     filterRows('2');
   });
 
   function filterRows(day) {
-    if (typeof gsap === 'undefined') return;
+    if (typeof gsap === 'undefined') {
+      rows.forEach((row) => {
+        row.style.display = row.getAttribute('data-day') === day ? 'grid' : 'none';
+      });
+      return;
+    }
 
-    gsap.to(rows, {
+    isSwitching = true;
+    const currentRows = Array.from(rows).filter((r) => r.style.display !== 'none');
+    const incomingRows = Array.from(rows).filter((r) => r.getAttribute('data-day') === day);
+
+    // Mechanical departure board: outgoing rows flick up and fade
+    gsap.to(currentRows, {
+      y: -8,
       autoAlpha: 0,
-      y: 6,
-      duration: 0.15,
+      duration: 0.16,
       stagger: 0.02,
+      ease: 'power2.in',
       onComplete: () => {
-        rows.forEach((row) => {
-          const rowDay = row.getAttribute('data-day');
-          row.style.display = rowDay === day ? 'grid' : 'none';
+        currentRows.forEach((r) => { r.style.display = 'none'; });
+        incomingRows.forEach((r) => {
+          r.style.display = 'grid';
         });
-        gsap.to(rows, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.25,
-          stagger: 0.02,
-          ease: 'power2.out'
+
+        const timeRolls = incomingRows.map((r) => r.querySelector('.slot-time-roll')).filter(Boolean);
+        const acts = incomingRows.map((r) => r.querySelector('.slot-act')).filter(Boolean);
+        const badges = incomingRows.map((r) => r.querySelector('.slot-badge')).filter(Boolean);
+        const reserveBtns = incomingRows.map((r) => r.querySelector('.reserve-btn')).filter(Boolean);
+
+        const switchTl = gsap.timeline({
+          onComplete: () => {
+            isSwitching = false;
+            if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+          }
         });
-        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+
+        // Rows cascade in
+        switchTl.fromTo(incomingRows,
+          { y: 10, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.32, stagger: 0.035, ease: 'power3.out' }
+        );
+
+        // Odometer roll on incoming timestamps
+        if (timeRolls.length > 0) {
+          switchTl.fromTo(timeRolls,
+            { yPercent: 110, autoAlpha: 0 },
+            { yPercent: 0, autoAlpha: 1, duration: 0.45, stagger: 0.035, ease: 'animaxxing' },
+            0.04
+          );
+        }
+
+        // Typographic slide on incoming acts
+        if (acts.length > 0) {
+          switchTl.fromTo(acts,
+            { x: -6, autoAlpha: 0 },
+            { x: 0, autoAlpha: 1, duration: 0.35, stagger: 0.035, ease: 'power2.out' },
+            0.06
+          );
+        }
+
+        // Rubber-stamp pop on incoming badges
+        if (badges.length > 0) {
+          switchTl.fromTo(badges,
+            { scale: 1.3, autoAlpha: 0 },
+            { scale: 1, autoAlpha: 1, duration: 0.35, stagger: 0.035, ease: 'back.out(2)' },
+            0.08
+          );
+        }
+
+        // Reserve buttons slide
+        if (reserveBtns.length > 0) {
+          switchTl.fromTo(reserveBtns,
+            { x: 6, autoAlpha: 0 },
+            { x: 0, autoAlpha: 1, duration: 0.3, stagger: 0.035, ease: 'power2.out' },
+            0.08
+          );
+        }
       }
     });
   }
@@ -3456,24 +4021,224 @@ function initModal() {
   const modal = document.getElementById('checkoutModal');
   const closeBtn = document.getElementById('modalCloseBtn');
   const triggerBtns = document.querySelectorAll('[data-open-modal]');
+  const modalContent = modal ? modal.querySelector('.modal-content') : null;
+  const formElements = modalContent ? modalContent.querySelectorAll('.mono-label, .card-heading, label, input, button') : [];
+  const form = document.getElementById('checkoutForm');
+  const successState = document.getElementById('checkoutSuccessState');
+  const emailInput = document.getElementById('attendeeEmail');
+  const receiptEmail = document.getElementById('receiptEmail');
+  const receiptSerial = document.getElementById('receiptSerial');
+  const receiptCloseBtn = document.getElementById('receiptCloseBtn');
+  const modalTierPrice = document.getElementById('modalTierPrice');
 
-  if (!modal) return;
+  if (!modal || !modalContent) return;
+
+  let isOpen = false;
+  let activeTl = null;
+
+  function openModal(triggerElement) {
+    if (isOpen) return;
+    isOpen = true;
+
+    if (activeTl) activeTl.kill();
+
+    if (triggerElement && modalTierPrice) {
+      const card = triggerElement.closest ? triggerElement.closest('.card') : null;
+      if (card) {
+        const figure = card.querySelector('.figure');
+        const heading = card.querySelector('.card-heading');
+        if (figure && heading) {
+          modalTierPrice.textContent = `PASS TIER: ${heading.textContent.trim()} · ${figure.textContent.split('·')[0].trim()}`;
+        }
+      } else {
+        modalTierPrice.textContent = 'PASS TIER: FULL ACCESS · €48';
+      }
+    }
+
+    modal.classList.add('open');
+    modal.style.display = 'flex';
+    modal.style.pointerEvents = 'auto';
+
+    if (typeof gsap === 'undefined') {
+      modal.style.opacity = '1';
+      return;
+    }
+
+    activeTl = gsap.timeline();
+
+    // 1. Backdrop ink wash fade in
+    activeTl.fromTo(modal,
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.35, ease: 'power2.out' }
+    );
+
+    // 2. Broadsheet modal content panel elastic pop-in
+    activeTl.fromTo(modalContent,
+      { scale: 0.94, y: 18, autoAlpha: 0 },
+      { scale: 1, y: 0, autoAlpha: 1, duration: 0.45, ease: 'animaxxing' },
+      0.05
+    );
+
+    // 3. Staggered cascade of form inputs and elements
+    if (formElements.length > 0) {
+      activeTl.fromTo(formElements,
+        { autoAlpha: 0, y: 8 },
+        { autoAlpha: 1, y: 0, duration: 0.28, stagger: 0.03, ease: 'power2.out' },
+        0.15
+      );
+    }
+  }
+
+  function closeModal() {
+    if (!isOpen) return;
+    isOpen = false;
+
+    if (activeTl) activeTl.kill();
+
+    if (typeof gsap === 'undefined') {
+      modal.classList.remove('open');
+      modal.style.display = 'none';
+      modal.style.pointerEvents = 'none';
+      return;
+    }
+
+    activeTl = gsap.timeline({
+      onComplete: () => {
+        modal.classList.remove('open');
+        modal.style.display = 'none';
+        modal.style.pointerEvents = 'none';
+        // Reset form to ready state
+        if (form && successState) {
+          form.reset();
+          form.style.display = 'block';
+          gsap.set(form, { autoAlpha: 1, y: 0 });
+          successState.style.display = 'none';
+          gsap.set(successState, { autoAlpha: 0 });
+        }
+      }
+    });
+
+    activeTl.to(modalContent, {
+      scale: 0.95,
+      y: 10,
+      autoAlpha: 0,
+      duration: 0.22,
+      ease: 'power2.in'
+    });
+
+    activeTl.to(modal, {
+      autoAlpha: 0,
+      duration: 0.22,
+      ease: 'power2.in'
+    }, 0.04);
+  }
+
+  window.openCheckoutModal = openModal;
+  window.closeCheckoutModal = closeModal;
+
+  // Form submission: digital receipt confirmation
+  if (form && successState) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = emailInput && emailInput.value ? emailInput.value : 'elena@example.com';
+      if (receiptEmail) receiptEmail.textContent = email;
+      if (receiptSerial) {
+        receiptSerial.textContent = `OH-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      }
+
+      gsap.to(form, {
+        autoAlpha: 0,
+        y: -10,
+        duration: 0.22,
+        ease: 'power2.in',
+        onComplete: () => {
+          form.style.display = 'none';
+          successState.style.display = 'block';
+          gsap.fromTo(successState,
+            { autoAlpha: 0, scale: 0.96, y: 12 },
+            { autoAlpha: 1, scale: 1, y: 0, duration: 0.35, ease: 'back.out(1.4)' }
+          );
+        }
+      });
+    });
+
+    if (receiptCloseBtn) {
+      receiptCloseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeModal();
+      });
+    }
+  }
 
   triggerBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
+      // If hero blast-off button, it triggers blastOff animation first
+      if (btn.id === 'passCtaAction') return;
       e.preventDefault();
-      modal.classList.add('open');
+      openModal(btn);
     });
   });
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', () => modal.classList.remove('open'));
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal();
+    });
   }
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('open')) {
-      modal.classList.remove('open');
+  // Backdrop click dismisses modal
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
     }
+  });
+
+  // ESC key dismisses modal
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) {
+      closeModal();
+    }
+  });
+}
+
+function initCardTilt() {
+  if (typeof gsap === 'undefined' || prefersReducedMotion()) return;
+  const cards = document.querySelectorAll('.card');
+  if (cards.length === 0) return;
+
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  if (!isFinePointer) return;
+
+  cards.forEach((card) => {
+    gsap.set(card, { transformPerspective: 900 });
+    const rx = gsap.quickTo(card, 'rotationX', { duration: 0.35, ease: 'power2.out' });
+    const ry = gsap.quickTo(card, 'rotationY', { duration: 0.35, ease: 'power2.out' });
+
+    let rect = card.getBoundingClientRect();
+
+    card.addEventListener('pointerenter', (e) => {
+      if (e.pointerType === 'touch') return;
+      rect = card.getBoundingClientRect();
+    });
+
+    card.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      const px = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+      const py = Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height));
+      const maxTilt = 15;
+      ry((px - 0.5) * 2 * maxTilt);
+      rx((0.5 - py) * 2 * maxTilt);
+      card.style.setProperty('--pointer-x', `${(px * 100).toFixed(1)}%`);
+      card.style.setProperty('--pointer-y', `${(py * 100).toFixed(1)}%`);
+    });
+
+    card.addEventListener('pointerleave', (e) => {
+      if (e.pointerType === 'touch') return;
+      rx(0);
+      ry(0);
+      card.style.removeProperty('--pointer-x');
+      card.style.removeProperty('--pointer-y');
+    });
   });
 }
 

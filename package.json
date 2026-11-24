@@ -1,0 +1,20 @@
+{
+  "name": "off-hours-culture-festival",
+  "version": "1.0.0",
+  "description": "OFF HOURS — Independent Nocturnal Culture Festival Website",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node scripts/verify-highcraft.js",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "culture-festival",
+    "gsap",
+    "lenis",
+    "broadsheet",
+    "animaxxing"
+  ],
+  "author": "OFF HOURS Civic Arts",
+  "license": "MIT"
+}

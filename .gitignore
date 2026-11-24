@@ -4,3 +4,6 @@ Thumbs.db
 *.log
 .agents/
 skills-lock.json
+docs/
+state.json
+treatment.md
